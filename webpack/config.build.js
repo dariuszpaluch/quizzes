@@ -1,25 +1,10 @@
-const path = require('path');
-
 const Extract = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
-const CompressionPlugin = require('compression-webpack-plugin');
 
 const config = require('./config');
 
-const packageJSON = require(path.resolve(__dirname, '../package.json'));
-
-const publicPath = packageJSON.config.publicPath;
-
-function isExternal(module) {
-  var context = module.context;
-
-  if (typeof context !== 'string') {
-    return false;
-  }
-
-  return context.indexOf('node_modules') !== -1;
-}
+const publicPath = process.env.npm_package_config_public_path;
 
 module.exports = merge(config, {
   module: {
@@ -27,35 +12,23 @@ module.exports = merge(config, {
       {
         test: /\.js$/,
         use: ['babel-loader'],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.s?css$/,
         use: Extract.extract([
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ])
+          'sass-loader',
+        ]),
       }
-    ]
+    ],
   },
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
-    publicPath: publicPath
+    publicPath: publicPath,
   },
   plugins: [
-    new Extract('[name].[chunkhash].css'),
-    new Webpack.optimize.ModuleConcatenationPlugin(),
-    new Webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      minChunks: function(module) {
-        return isExternal(module);
-      }
-    }),
-    new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    new Extract('[hash].css'),
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new Webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -72,15 +45,8 @@ module.exports = merge(config, {
         properties: true,
         sequences: true,
         unused: true,
-        warnings: false
-      }
+        warnings: false,
+      },
     }),
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.(js|html|css)$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  ]
+  ],
 });

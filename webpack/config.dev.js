@@ -1,15 +1,11 @@
-const path = require('path');
-
 const Sync = require('browser-sync-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
 
 const config = require('./config');
 
-const packageJSON = require(path.resolve(__dirname, '../package.json'));
-
-const port = packageJSON.config.port;
-const publicPath = packageJSON.config.public_path;
+const port = process.env.npm_package_config_port;
+const publicPath = process.env.npm_package_config_public_path;
 
 module.exports = merge(config, {
   devtool: '#eval-source-map',
@@ -27,10 +23,10 @@ module.exports = merge(config, {
         test: /\.js?$/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           }
         ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.s?css$/,
@@ -38,25 +34,25 @@ module.exports = merge(config, {
           {
             loader: 'style-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             }
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             }
           },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             }
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             }
           }
         ]
@@ -64,9 +60,7 @@ module.exports = merge(config, {
     ]
   },
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
-    publicPath: 'http://localhost:' + port + publicPath
+    publicPath: 'http://localhost:' + port + publicPath,
   },
   plugins: [
     new Sync({
@@ -76,9 +70,9 @@ module.exports = merge(config, {
       open: false,
       port: parseInt(port),
       proxy: 'http://localhost:' + (parseInt(port) - 1) + publicPath,
-      ui: false
+      ui: false,
     }, {
-        reload: false
+        reload: false,
       }),
     new Webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
@@ -88,6 +82,6 @@ module.exports = merge(config, {
 
     new Webpack.NoEmitOnErrorsPlugin()
     // do not emit compiled assets that include errors
-  ]
+  ],
 
 });
