@@ -13,7 +13,7 @@
     "port": 8000,
     "public_path": "/"
   },
-  "author": "Dariusz Paluch  ",
+  "author": "Dariusz Paluch   ",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
