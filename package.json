@@ -10,7 +10,7 @@
   },
   "config": {
     "page_title": "Quizzes ",
-    "port": 8000,
+    "port": 4000,
     "public_path": "/"
   },
   "author": "Dariusz Paluch   ",
