@@ -40,19 +40,18 @@ module.exports = merge(config, {
     ]
   },
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: '[name].js',
     publicPath: publicPath
   },
   plugins: [
     new Extract('[name].[chunkhash].css'),
     new Webpack.optimize.ModuleConcatenationPlugin(),
-    new Webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      minChunks: function(module) {
-        return isExternal(module);
-      }
-    }),
+    // new Webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendors',
+    //   minChunks: function(module) {
+    //     return isExternal(module);
+    //   }
+    // }),
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
