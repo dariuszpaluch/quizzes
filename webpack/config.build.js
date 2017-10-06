@@ -40,7 +40,7 @@ module.exports = merge(config, {
     ]
   },
   output: {
-    filename: '[name].js',
+    // filename: '[name].js',
     publicPath: publicPath
   },
   plugins: [

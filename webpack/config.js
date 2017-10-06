@@ -47,7 +47,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       moment: 'moment'
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     // new FaviconsWebpackPlugin({
     //   prefix: './assets/favicon/',
     //   emitStats: true,
@@ -86,9 +86,9 @@ module.exports = {
       showErrors: true,
       template: path.resolve(__dirname, '../src/index.html')
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer'
-    }),
+    // new ScriptExtHtmlWebpackPlugin({
+    //   defaultAttribute: 'defer'
+    // }),
   ],
   resolve: {
     alias: {
