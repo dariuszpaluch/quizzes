@@ -9,7 +9,7 @@
     "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js"
   },
   "config": {
-    "page_title": "Quizzes",
+    "page_title": "Quizzes ",
     "port": 8000,
     "public_path": "/"
   },
