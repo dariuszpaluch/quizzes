@@ -25,10 +25,21 @@ module.exports = merge(config, {
     ],
   },
   output: {
-    publicPath: publicPath,
+    // filename: '[name].js',
+    publicPath: publicPath
   },
   plugins: [
-    new Extract('[hash].css'),
+    new Extract('[name].[chunkhash].css'),
+    new Webpack.optimize.ModuleConcatenationPlugin(),
+    // new Webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendors',
+    //   minChunks: function(module) {
+    //     return isExternal(module);
+    //   }
+    // }),
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new Webpack.optimize.UglifyJsPlugin({
       sourceMap: true,

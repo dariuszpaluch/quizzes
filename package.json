@@ -9,11 +9,11 @@
     "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js"
   },
   "config": {
-    "page_title": "Quizzes",
+    "page_title": "Quizzes ",
     "port": 8000,
     "public_path": "/"
   },
-  "author": "Dariusz Paluch",
+  "author": "Dariusz Paluch   ",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
@@ -40,11 +40,11 @@
     "autoprefixer": "^7.1.4",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2015-script": "^1.1.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",

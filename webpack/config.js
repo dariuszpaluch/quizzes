@@ -37,7 +37,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       moment: 'moment',
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     // new FaviconsWebpackPlugin({
     //   logo: '', //TODO add favicon path
     //   prefix: './assets/favicon/',
@@ -65,9 +65,11 @@ module.exports = {
         collapseWhitespace: true,
       },
       showErrors: true,
-      template: './src/index.html',
+      template: path.resolve(__dirname, '../src/index.html')
     }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /pl/)
+    // new ScriptExtHtmlWebpackPlugin({
+    //   defaultAttribute: 'defer'
+    // }),
   ],
   resolve: {
     alias: {
