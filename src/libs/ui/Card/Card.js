@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames';
-import Button from 'material-ui/Button';
+import MaterialCard from 'material-ui/Card';
 
-
-export default class Page extends Component {
+export default class Card extends Component {
   static propTypes = {
   };
 
@@ -20,12 +19,13 @@ export default class Page extends Component {
   }
 
   render() {
+    const {
+      children,
+      ...props,
+    } = this.props;
+
     return(
-      <div>
-        <Button>
-          Hello World
-        </Button>
-      </div>
+      <MaterialCard {...props}>{ children }</MaterialCard>
     );
   }
 }

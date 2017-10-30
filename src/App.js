@@ -6,6 +6,7 @@ import AppContainer from 'containers/AppContainer';
 import store from './store/store';
 
 import Page from 'modules/Page';
+import SignIn from 'modules/SignIn';
 
 export default class AppComponent extends Component {
 
@@ -15,7 +16,8 @@ export default class AppComponent extends Component {
         <BrowserRouter>
           <AppContainer>
             <Switch>
-              <Route path="/" component={ Page }/>
+              {/*<Route path="/" component={ Page }/>*/}
+              <Route exact path="/sign-in" component={ SignIn }/>
             </Switch>
           </AppContainer>
         </BrowserRouter>

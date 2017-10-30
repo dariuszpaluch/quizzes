@@ -1,3 +1,5 @@
+import './app_container.scss';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +15,7 @@ export default class AppContainer extends Component {
     } = this.props;
 
     return(
-      <div>
+      <div className="app-container">
         { children }
       </div>
     );
