@@ -11,7 +11,7 @@ import App from './App';
 const render = Component =>
   ReactDOM.render(
     <Component />,
-    document.body
+    document.getElementById("app"),
   );
 
 render(App);

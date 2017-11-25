@@ -1,31 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-
-import classnames from 'classnames';
-import MaterialCard from 'material-ui/Card';
+import React, {Component} from 'react';
+import MaterialCard, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 
 export default class Card extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     const {
       children,
+      title,
+      subheader,
+      actions,
       ...props,
     } = this.props;
 
-    return(
-      <MaterialCard {...props}>{ children }</MaterialCard>
+    return (
+      <MaterialCard {...props}>
+        {!!title || !! subheader ? <CardHeader
+          title={ title }
+          subheader={subheader}
+
+        /> : null}
+
+        <CardContent>
+          {children}
+        </CardContent>
+
+        {!!actions ? <CardActions>{actions}</CardActions> : null}
+      </MaterialCard>
     );
   }
 }

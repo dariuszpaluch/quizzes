@@ -1,33 +1,33 @@
 import './sign_in.scss';
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import classnames from 'classnames';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 
 class SignInForm extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
-    return(
-      <Card className="sign-in-form">
-        <form>
+    const {
+      onSubmit,
+      handleSubmit
+    } = this.props;
+
+    return (
+      <Card
+        className="sign-in-form"
+        title="Sign in">
+        <form onSubmit={ handleSubmit(onSubmit) }>
           <InputField
             name="login"
             label="login"
@@ -40,6 +40,7 @@ class SignInForm extends Component {
             className="password-input"
           />
           <Button
+            raised
             type="submit"
             color="primary"
             className="submit-button"

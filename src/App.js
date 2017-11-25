@@ -6,7 +6,7 @@ import AppContainer from 'containers/AppContainer';
 import store from './store/store';
 
 import Page from 'modules/Page';
-import SignIn from 'modules/SignIn';
+import SignIn from 'modules/Auth';
 
 export default class AppComponent extends Component {
 

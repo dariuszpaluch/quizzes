@@ -18,7 +18,6 @@ const renderInput = ({input, meta, ...restProps}) => {
   return (
     <Input
       {...input}
-      {...meta}
       {...restProps}
     />
   )
@@ -30,7 +29,6 @@ const InputField = ({...props}) => {
     <Field
       {...props}
       component={renderInput}
-      type="text"
     />
   )
 };

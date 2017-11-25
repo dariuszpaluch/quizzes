@@ -19,7 +19,7 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
-        token,
+        // token,
         ...header
       },
     }

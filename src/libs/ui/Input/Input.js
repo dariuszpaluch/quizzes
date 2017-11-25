@@ -26,8 +26,6 @@ export default class Input extends Component {
       ...props,
     } = this.props;
 
-    console.log(className);
-
     const classes = classnames("input", className);
     return(
       <MaterialTextField
