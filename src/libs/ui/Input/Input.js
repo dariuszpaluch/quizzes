@@ -1,37 +1,38 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
 
 import classnames from 'classnames';
 
 import MaterialTextField from 'material-ui/TextField';
 
 export default class Input extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     const {
       children,
       className,
+      error,
+      warning,
+      helperText,
       ...props,
     } = this.props;
 
     const classes = classnames("input", className);
-    return(
+    return (
       <MaterialTextField
-        className={ classes }
+        className={classes}
+        error={!!error}
+        helperText={helperText || error}
         {...props}
-      >{ children }</MaterialTextField>
+      >{children}</MaterialTextField>
     );
   }
 }
