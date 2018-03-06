@@ -10,17 +10,12 @@ import validate from './signInValidation';
 
 import {signIn} from '../../actions';
 import {connect} from 'react-redux';
+import { required } from 'utils/validations';
 
 class SignInForm extends Component {
   static propTypes = {};
 
   static defaultProps = {};
-
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   render() {
     const {
@@ -31,15 +26,17 @@ class SignInForm extends Component {
     return (
       <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
         <InputField
-          name="login"
-          label="E-mail"
           className="login-input"
+          name="login"
+          label="Login"
+          validate={[required]}
         />
         <InputField
+          className="password-input"
           name="password"
           label="Password"
           type="password"
-          className="password-input"
+          validate={[required]}
         />
         <Button
           raised

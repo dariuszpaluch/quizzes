@@ -5,7 +5,7 @@ import { SIGN_IN, SIGN_UP } from './actionTypes';
 
 export function signIn({ login, password}, resolve = null, reject = null) {
   const body = {
-    name: login,
+    login,
     password,
   };
 
@@ -21,13 +21,8 @@ export function signIn({ login, password}, resolve = null, reject = null) {
   };
 }
 
-export function signUp({login, password}, resolve, reject) {
-
-  const body = {
-    name: login,
-    password,
-  };
-
+export function signUp(body, resolve, reject) {
+  console.log(body);
   return dispatch => {
     return dispatchPromiseResult(dispatch, {
       actionType: SIGN_UP,

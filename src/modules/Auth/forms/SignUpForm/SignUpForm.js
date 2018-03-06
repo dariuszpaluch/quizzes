@@ -7,25 +7,19 @@ import InputField from 'libs/reduxFormFields/InputField/InputField';
 import Button from 'libs/ui/Button/Button';
 
 import validate from './signUpValidation';
-import {signIn, signUp} from 'modules/Auth/actions';
+import {signUp} from 'modules/Auth/actions';
 import {connect} from 'react-redux';
+import { email, required} from 'utils/validations';
+import { minPasswordLength } from './signUpValidation';
 
 class SignUpForm extends Component {
   static propTypes = {};
 
   static defaultProps = {};
 
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   onSubmit = (values) => {
-    console.log("123", values);
-
-    const {name, surname, email, password, repeatPassword} = values;
-    this.props.signUp({login: email, password});
+    const {login, firstName, surname, email, password} = values;
+    this.props.signUp({login, password, firstName, surname, email});
   };
 
   render() {
@@ -36,8 +30,13 @@ class SignUpForm extends Component {
     return (
       <form className="sign-up-form" onSubmit={handleSubmit(this.onSubmit)}>
         <InputField
-          name="name"
-          label="Name"
+          name="login"
+          label="Login"
+          validate={[required]}
+        />
+        <InputField
+          name="firstName"
+          label="FirstName"
         />
         <InputField
           name="surname"
@@ -47,16 +46,20 @@ class SignUpForm extends Component {
           name="email"
           label="E-mail"
           type="email"
+          validate={[required, email]}
+
         />
         <InputField
           name="password"
           label="Password"
           type="password"
+          validate={[required, minPasswordLength]}
         />
         <InputField
           name="repeatPassword"
           label="Repeat password"
           type="password"
+          validate={[required, minPasswordLength]}
         />
         <Button
           raised

@@ -30,7 +30,7 @@ export default class Input extends Component {
       <MaterialTextField
         className={classes}
         error={!!error}
-        helperText={helperText || error}
+        helperText={helperText || error || ''}
         {...props}
       >{children}</MaterialTextField>
     );
