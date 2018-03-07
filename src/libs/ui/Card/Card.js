@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import MaterialCard, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 
 export default class Card extends Component {
-  static propTypes = {};
+  static propTypes = {
+    title: PropTypes.string,
+    subheader: PropTypes.string,
+  };
 
-  static defaultProps = {};
-
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
+  static defaultProps = {
+    title: '',
+    subheader: '',
+  };
 
   render() {
     const {
@@ -28,11 +29,9 @@ export default class Card extends Component {
           subheader={subheader}
 
         /> : null}
-
         <CardContent>
           {children}
         </CardContent>
-
         {!!actions ? <CardActions>{actions}</CardActions> : null}
       </MaterialCard>
     );

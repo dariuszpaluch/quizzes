@@ -4,19 +4,19 @@ import { Provider } from 'react-redux';
 import AppContainer from 'containers/AppContainer';
 
 import store from './store/store';
-
-import Page from 'modules/Page';
 import Auth from 'modules/Auth';
+import Test from 'modules/Test/Test';
 
 export default class AppComponent extends Component {
 
   render() {
-    return(
-      <Provider store={ store }>
+    return (
+      <Provider store={store}>
         <BrowserRouter>
           <AppContainer>
             <Switch>
-              <Route path="/" component={ Auth }/>
+              <Route path="/test" component={Test} exact/>
+              <Route path="/" component={Auth} exact/>
             </Switch>
           </AppContainer>
         </BrowserRouter>

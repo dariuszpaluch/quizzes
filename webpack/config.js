@@ -84,6 +84,7 @@ module.exports = {
       consts:     path.resolve('./src/consts'),
       utils:      path.resolve('./src/utils'),
       config:     path.resolve('./src/config'),
+      sources:    path.resolve('./src/sources'),
     }
   }
 };

@@ -1,7 +1,7 @@
 import {createReducer} from 'utils/reducerUtils';
 
 import {SIGN_IN} from './actionTypes';
-import LocalStorageSource from 'src/sources/LocalStorageSource';
+import LocalStorageSource from 'sources/LocalStorageSource';
 
 function getInitState() {
   return {
@@ -10,15 +10,18 @@ function getInitState() {
 }
 
 function signInSuccess(authState, action) {
-  LocalStorageSource.setToken(action.token);
+  const token = action.data.token;
+  LocalStorageSource.setToken(token);
+
   return {
     ...authState,
-    token: action.data.token,
+    token,
   }
 }
 
 function removeToken(authState) {
   LocalStorageSource.deleteToken();
+
   return {
     ...authState,
     token: null,
