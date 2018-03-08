@@ -43,9 +43,6 @@ export default class Tabs extends Component {
       value,
     } = this.props;
 
-    console.log(findIndex(tabs, tab => tab.value === value));
-
-
     return findIndex(tabs, tab => tab.value === value);
   }
 

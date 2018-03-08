@@ -1,6 +1,7 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
 import customException from '../exceptions/CustomException';
+import LocalStorageSource from 'sources/LocalStorageSource';
 
 export default {
   get: fetch.bind(null, 'GET'),
@@ -10,7 +11,7 @@ export default {
   patch: fetch.bind(null, 'PATCH')
 };
 
-function fetch(method, url, { body, header, customResponseHandler, submissionError } = {}) {
+function fetch(method, url, { body, header, customResponseHandler, submissionError} = {}) {
 
   return isomorphicFetch(
     `${ url }`,
@@ -19,7 +20,7 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
-        // token,
+        'Authorization': LocalStorageSource.getToken(),
         ...header
       },
     }

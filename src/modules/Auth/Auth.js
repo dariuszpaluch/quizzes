@@ -47,8 +47,6 @@ class Auth extends Component {
     const {
       match
     } = this.props;
-    console.log(this.props.location);
-
 
     return (
       <Card

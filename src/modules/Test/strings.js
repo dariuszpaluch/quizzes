@@ -15,6 +15,7 @@ export default {
   HEADER: {
     EDIT: 'Question Edit',
     ADD: 'Add question',
+    QUESTIONS_LIST: 'Questions',
   },
   INPUTS,
   BUTTONS,

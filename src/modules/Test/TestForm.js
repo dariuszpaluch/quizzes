@@ -12,6 +12,7 @@ import STRINGS from './strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import AnswersForm from './components/AnswersForm'
+import {addTest} from "./actions";
 
 const MODES = {
   EDIT: 'EDIT',
@@ -29,6 +30,10 @@ class TestForm extends Component {
     mode: MODES.ADD,
   };
 
+  onSubmit = ({question, description, answers}) => {
+    return this.props.onSubmit({question, description, answers});
+  };
+
   render() {
     const {
       onSubmit,
@@ -41,7 +46,7 @@ class TestForm extends Component {
 
     return (
       <Card title={STRINGS.HEADER[mode]}>
-        <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="sign-in-form" onSubmit={handleSubmit(this.onSubmit)}>
           <InputField
             name='question'
             label={STRINGS.INPUTS.QUESTION}
@@ -76,8 +81,7 @@ TestForm = reduxForm({
 })(TestForm);
 
 const mapDispatchToProps = {
-  onSubmit: () => {
-  } //TODO implement onSubmit
+  onSubmit: addTest
 };
 
 export default connect(null, mapDispatchToProps)(TestForm);

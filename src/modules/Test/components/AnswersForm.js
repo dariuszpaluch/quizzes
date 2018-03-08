@@ -22,7 +22,7 @@ const renderItems = ({fields, meta: {error, submitFailed}}) => {
         return (
           <li key={index}>
             <InputField
-              name={`${name}`}
+              name={`${name}.label`}
               label={`${STRINGS.INPUTS.ANSWER} ${index + 1}`}
             />
             <IconButton
@@ -33,7 +33,11 @@ const renderItems = ({fields, meta: {error, submitFailed}}) => {
         );
       })}
       <Button
-        onClick={() => fields.push('')}
+        onClick={() => fields.push({
+          label: '',
+          id: '',
+          correct: false,
+        })}
       >{STRINGS.BUTTONS.ADD_ANSWER}</Button>
     </ul>
   );

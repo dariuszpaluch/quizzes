@@ -22,7 +22,6 @@ export function signIn({ login, password}, resolve = null, reject = null) {
 }
 
 export function signUp(body, resolve, reject) {
-  console.log(body);
   return dispatch => {
     return dispatchPromiseResult(dispatch, {
       actionType: SIGN_UP,
