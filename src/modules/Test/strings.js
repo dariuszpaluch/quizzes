@@ -3,7 +3,12 @@ export const INPUTS = {
   DESCRIPTION: "Description",
   HINTS: 'Hints',
   ANSWERS: 'Answers',
+  ANSWER: 'Answer',
   PUBLIC: 'Public',
+};
+
+export const BUTTONS = {
+  ADD_ANSWER: 'Add answer',
 };
 
 export default {
@@ -12,4 +17,5 @@ export default {
     ADD: 'Add question',
   },
   INPUTS,
+  BUTTONS,
 }

@@ -11,6 +11,7 @@ import { required } from 'utils/validations';
 import STRINGS from './strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
+import AnswersForm from './components/AnswersForm'
 
 const MODES = {
   EDIT: 'EDIT',
@@ -33,14 +34,13 @@ class TestForm extends Component {
       onSubmit,
       handleSubmit,
       mode,
+      pristine,
+      reset,
+      submitting
     } = this.props;
 
-
-    i
     return (
-      <Card
-        title={STRINGS.HEADER[mode]}
-      >
+      <Card title={STRINGS.HEADER[mode]}>
         <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
           <InputField
             name='question'
@@ -50,6 +50,9 @@ class TestForm extends Component {
           <InputField
             name='description'
             label={STRINGS.INPUTS.DESCRIPTION}
+          />
+          <AnswersForm
+            name="answers"
           />
           <Button
             type="submit"
@@ -67,6 +70,9 @@ const FORM_NAME = 'TestForm';
 
 TestForm = reduxForm({
   form: FORM_NAME,
+  initialValues: {
+    answers: ['']
+  },
 })(TestForm);
 
 const mapDispatchToProps = {

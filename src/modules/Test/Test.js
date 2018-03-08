@@ -6,10 +6,15 @@ import { Route } from 'react-router'
 class Test extends Component {
 
   render() {
+    console.log(this.props);
+    const {
+      match
+    } = this.props;
+
     return (
       <div>
-        <Route exact path='/:testId' component={(props) => {
-          console.log("TUTAJ");
+        <Route exact path={`${match.path}/:testId`} component={(props) => {
+
 
           return (
             <TestForm
@@ -19,7 +24,7 @@ class Test extends Component {
           );
         }}
         />
-        <Route exact path='/' component={TestForm}/>
+        <Route exact path={match.path} component={TestForm}/>
       </div>
     );
   }

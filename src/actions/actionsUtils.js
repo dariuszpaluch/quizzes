@@ -21,9 +21,7 @@ const receivedError = (actionType, payload, error, hash) => {
 };
 
 const dispatchResponse = (dispatch, resolve, actionType, payload, data, hash) => {
-  dispatch(receivedData(actionType, payload, data, hash));
-  if (resolve)
-    resolve(data);
+  return dispatch(receivedData(actionType, payload, data, hash));
 };
 
 export const dispatchPromiseResult = (dispatch, {
@@ -41,7 +39,7 @@ export const dispatchPromiseResult = (dispatch, {
     .then(
       response => {
         dispatchResponse(dispatch, resolve, actionType, payload, response, hash, toastr.resolve);
-
+        resolve && resolve(response);
       },
       error => {
 
