@@ -48,6 +48,9 @@ class Auth extends Component {
       match
     } = this.props;
 
+
+    console.log(this.props.location.pathname);
+    console.log(Auth.tabs)
     return (
       <Card
         className="sign-in-form">

@@ -9,6 +9,12 @@ export const INPUTS = {
 
 export const BUTTONS = {
   ADD_ANSWER: 'Add answer',
+  ADD_QUESTION: 'Add question',
+};
+
+export const MESSAGES = {
+  QUESTION_DELETE_SUCCESS: 'The question has been removed',
+  QUESTION_DELETE_FAILURE: 'Error occurred while deleting the question'
 };
 
 export default {
@@ -19,4 +25,5 @@ export default {
   },
   INPUTS,
   BUTTONS,
+  MESSAGES,
 }

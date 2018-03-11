@@ -20,6 +20,7 @@
     "es6-promise": "^4.1.1",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",
+    "isomorphic-fetch": "latest",
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.18",
     "material-ui-icons": "^1.0.0-beta.17",
@@ -31,14 +32,14 @@
     "react-helmet": "^5.2.0",
     "react-keydown": "^1.9.4",
     "react-redux": "^5.0.6",
+    "react-redux-toastr": "^7.2.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "typeface-roboto": "0.0.43",
-    "isomorphic-fetch": "latest"
+    "typeface-roboto": "0.0.43"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.4",

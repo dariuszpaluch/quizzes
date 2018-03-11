@@ -16,7 +16,7 @@ export default class AppComponent extends Component {
           <AppContainer>
             <Switch>
               <Route path="/test" component={Test}/>
-              <Route path="/" component={Auth} exact/>
+              <Route path="/" component={Auth}/>
             </Switch>
           </AppContainer>
         </BrowserRouter>

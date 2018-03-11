@@ -31,22 +31,18 @@ export const dispatchPromiseResult = (dispatch, {
   reject,
   hash,
   payload,
-  toastr = {},
 }) => {
   dispatch(firedAction(actionType, payload));
 
   return promise()
     .then(
       response => {
-        dispatchResponse(dispatch, resolve, actionType, payload, response, hash, toastr.resolve);
+        dispatchResponse(dispatch, resolve, actionType, payload, response, hash);
         resolve && resolve(response);
       },
       error => {
-
-        dispatch(receivedError(actionType, payload, error, hash, toastr.reject));
-
-        if (reject)
-          reject(error);
+        dispatch(receivedError(actionType, payload, error, hash));
+        reject && reject(error);
       }
     )
 };

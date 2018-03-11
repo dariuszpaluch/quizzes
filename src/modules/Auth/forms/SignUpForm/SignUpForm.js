@@ -62,7 +62,7 @@ class SignUpForm extends Component {
           validate={[required, minPasswordLength]}
         />
         <Button
-          raised
+          variant="raised"
           type="submit"
           color="primary"
           className="submit-button"

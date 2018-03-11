@@ -1,15 +1,33 @@
+import './table.scss';
+
 import React, {Component} from 'react';
-import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import PropTypes from 'prop-types';
+import MaterialTable, {TableBody, TableCell, TableHead, TableRow} from 'material-ui/Table';
+import Tab from "material-ui-icons/es/Tab";
+import IconButton from "../IconButton/IconButton";
+import RowActions from "libs/ui/Table/RowActions";
 
 class Table extends Component {
+  static propTypes = {
+    onClickEditRow: PropTypes.func,
+    onClickDeleteRow: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onClickEditRow: null,
+    onClickDeleteRow: null,
+  };
+
   render() {
     const {
       columns,
       rows,
+      onClickEditRow,
+      onClickDeleteRow,
     } = this.props;
 
     return (
-      <MaterialTable>
+      <MaterialTable className="table">
         <TableHead>
           <TableRow>
             {
@@ -21,6 +39,11 @@ class Table extends Component {
                 );
               })
             }
+            <RowActions
+              onDelete={onClickDeleteRow}
+              onEdit={onClickEditRow}
+              header
+            />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -29,7 +52,7 @@ class Table extends Component {
               return (
                 <TableRow key={row.id}>
                   {
-                    columns.map((column, index) => {
+                    columns.map(column => {
                       return (
                         <TableCell
                           key={column.id}
@@ -37,6 +60,11 @@ class Table extends Component {
                       )
                     })
                   }
+                  <RowActions
+                    row={row}
+                    onDelete={onClickDeleteRow}
+                    onEdit={onClickEditRow}
+                  />
                 </TableRow>
               )
             })

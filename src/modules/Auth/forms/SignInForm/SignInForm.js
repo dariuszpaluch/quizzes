@@ -11,20 +11,34 @@ import validate from './signInValidation';
 import {signIn} from '../../actions';
 import {connect} from 'react-redux';
 import { required } from 'utils/validations';
+import {toastr} from 'react-redux-toastr'
+
+import {SIGN_IN as STRINGS} from '../../strings'
 
 class SignInForm extends Component {
   static propTypes = {};
 
   static defaultProps = {};
 
+  signIn = (values) => {
+      this.props.signIn(values, this.onSignInSuccess, this.onSignInFailure);
+  };
+
+  onSignInSuccess = () => {
+    toastr.success(STRINGS.TITLE, 'Zostałeś zalogowany'); //TODO change to push history
+  };
+
+  onSignInFailure = () => {
+    toastr.error(STRINGS.TITLE, STRINGS.SIGN_IN_FAILURE);
+  };
+
   render() {
     const {
-      onSubmit,
       handleSubmit
     } = this.props;
 
     return (
-      <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="sign-in-form" onSubmit={handleSubmit(this.signIn)}>
         <InputField
           className="login-input"
           name="login"
@@ -39,7 +53,7 @@ class SignInForm extends Component {
           validate={[required]}
         />
         <Button
-          raised
+          variant="raised"
           type="submit"
           color="primary"
           className="submit-button"
@@ -57,7 +71,7 @@ SignInForm = reduxForm({
 })(SignInForm);
 
 const mapDispatchToProps = {
-  onSubmit: signIn,
+  signIn,
 };
 
 export default connect(null, mapDispatchToProps)(SignInForm);

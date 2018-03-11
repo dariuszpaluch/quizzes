@@ -17,7 +17,7 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
     `${ url }`,
     {
       method,
-      body: JSON.stringify(body),
+      body: body && JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': LocalStorageSource.getToken(),
@@ -37,7 +37,6 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
           throw new customException(result, response.status);
         }
       } else {
-
         return response.json();
       }
     }

@@ -14,9 +14,7 @@ export function signIn({ login, password}, resolve = null, reject = null) {
       actionType: SIGN_IN,
       promise: fetchAPI.post.bind(null, 'http://localhost:3000/authenticate', { body }),
       resolve,
-      reject: () => {
-        // toastr.error('Wystąpił problem z wyszukaniem segmentów')
-      }
+      reject,
     });
   };
 }

@@ -3,6 +3,7 @@ import TestForm from 'modules/Test/TestForm';
 
 import { Route } from 'react-router'
 import TestList from "./TestList";
+import EditTest from "modules/Test/EditTest";
 
 class Test extends Component {
 
@@ -15,15 +16,7 @@ class Test extends Component {
       <div>
         <Route exact path={`${match.path}`} component={TestList}/>
         <Route exact path={`${match.path}/add`} component={TestForm}/>
-        <Route exact path={`${match.path}/:testId`} component={(props) => {
-          return (
-            <TestForm
-              {...props}
-              mode={TestForm.MODES.EDIT}
-            />
-          );
-        }}
-        />
+        <Route exact path={`${match.path}/:questionId/edit`} component={EditTest}/>
       </div>
     );
   }
