@@ -8,3 +8,4 @@ _tmp/
 jsconfig.json
 typings/
 npm-debug.log.*
+package-lock.json
