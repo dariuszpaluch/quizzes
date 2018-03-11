@@ -5,7 +5,7 @@ import AppContainer from 'containers/AppContainer';
 
 import store from './store/store';
 import Auth from 'modules/Auth';
-import Test from 'modules/Test/Test';
+import Question from 'modules/Question/Question';
 
 export default class AppComponent extends Component {
 
@@ -15,7 +15,7 @@ export default class AppComponent extends Component {
         <BrowserRouter>
           <AppContainer>
             <Switch>
-              <Route path="/test" component={Test}/>
+              <Route path="/question" component={Question}/>
               <Route path="/" component={Auth}/>
             </Switch>
           </AppContainer>
