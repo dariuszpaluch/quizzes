@@ -34,12 +34,14 @@ const RowActions = (props) => {
     {
       icon: 'edit',
       onClick: onEdit,
-      visible: !!props.onEdit
+      visible: !!props.onEdit,
+      disabled: props.isDeleting,
     },
     {
       icon: 'delete',
       onClick: onDelete,
-      visible: !!props.onDelete
+      visible: !!props.onDelete,
+      loading: props.isDeleting,
     }
   ],{ visible: true }) ;
 

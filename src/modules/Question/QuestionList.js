@@ -10,7 +10,7 @@ import Table from "libs/ui/Table/Table";
 import Button from "../../libs/ui/Button/Button";
 import {deleteQuestion} from "modules/Question/actions";
 import {toastr} from 'react-redux-toastr'
-import {getQuestions, getQuestionsIds} from "modules/Question/getters";
+import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/getters";
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -18,7 +18,7 @@ class QuestionList extends Component {
   }
 
   getDataTable() {
-    const {questionsIds, questions} = this.props;
+    const {questionsIds, questions, questionsLoading} = this.props;
     const columns = [
       {
         id: 'index',
@@ -41,6 +41,7 @@ class QuestionList extends Component {
         index: index + 1,
         question,
         description,
+        isDeleting: questionsLoading[questionId],
       }
     });
 
@@ -78,6 +79,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     questions: getQuestions(state),
     questionsIds: getQuestionsIds(state),
+    questionsLoading: getQuestionsLoading(state),
   }
 };
 

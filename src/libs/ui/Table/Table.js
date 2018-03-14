@@ -64,6 +64,7 @@ class Table extends Component {
                     row={row}
                     onDelete={onClickDeleteRow}
                     onEdit={onClickEditRow}
+                    isDeleting={row.isDeleting}
                   />
                 </TableRow>
               )

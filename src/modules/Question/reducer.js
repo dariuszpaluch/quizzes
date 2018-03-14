@@ -23,7 +23,7 @@ function deleteQuestionSuccess(questionState, action) {
     ...questionState,
     questions: {
       ...questionState.questions,
-      byId: filter(questionState.questions.byId, question => question.id !== action.questionId)
+      allIds: filter(questionState.questions.allIds, questionId => questionId !== action.questionId)
     }
   }
 }
@@ -46,7 +46,7 @@ function fetchQuestionDetailsSuccess(questionState, action) {
   }
 }
 
-function setIsFetchingQuestion(questionState, questionId, isFetching = true) {
+function setIsLoadingQuestion(questionState, questionId, isFetching = true) {
   return updateObject(questionState,
     {
       questions: {
@@ -63,8 +63,10 @@ function setIsFetchingQuestion(questionState, questionId, isFetching = true) {
 export default createReducer(getInitState(), {
   [`${FETCH_QUESTIONS}_SUCCESS`]: fetchQuestionsSuccess,
   [`${DELETE_QUESTION}_SUCCESS`]: deleteQuestionSuccess,
+  [`${DELETE_QUESTION}_REQUEST`]: (questionState, action) =>
+    setIsLoadingQuestion(questionState, action.questionId),
   [`${FETCH_QUESTION}_REQUEST`]: (questionState, action) =>
-    setIsFetchingQuestion(questionState, action.questionId),
+    setIsLoadingQuestion(questionState, action.questionId),
   [`${FETCH_QUESTION}_SUCCESS`]: fetchQuestionDetailsSuccess,
 });
 
