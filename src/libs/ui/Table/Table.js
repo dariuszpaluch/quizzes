@@ -3,8 +3,6 @@ import './table.scss';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MaterialTable, {TableBody, TableCell, TableHead, TableRow} from 'material-ui/Table';
-import Tab from "material-ui-icons/es/Tab";
-import IconButton from "../IconButton/IconButton";
 import RowActions from "libs/ui/Table/RowActions";
 
 class Table extends Component {
