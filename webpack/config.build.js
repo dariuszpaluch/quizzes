@@ -1,6 +1,7 @@
 const Extract = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const config = require('./config');
 
@@ -25,7 +26,8 @@ module.exports = merge(config, {
     ],
   },
   output: {
-    // filename: '[name].js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].chunk.js',
     publicPath: publicPath
   },
   plugins: [

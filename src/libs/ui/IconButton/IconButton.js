@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import MaterialTextField from 'material-ui/TextField';
 import MaterialIconButton from 'material-ui/IconButton';
-import Icon from "material-ui/es/Icon/Icon";
+import Icon from "material-ui/Icon/Icon";
 export default class IconButton extends Component {
   static propTypes = {
     icon: PropTypes.string.isRequired,
