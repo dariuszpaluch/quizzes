@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const config = require('./config');
 
-const publicPath = process.env.npm_package_config_public_path;
+const publicPath = process.env.PUBLIC_URL || process.env.npm_package_config_public_path;
 
 module.exports = merge(config, {
   module: {
