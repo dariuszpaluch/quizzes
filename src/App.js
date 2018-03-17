@@ -6,6 +6,7 @@ import AppContainer from 'containers/AppContainer';
 import store from './store/store';
 import Auth from 'modules/Auth';
 import Question from 'modules/Question/Question';
+import MainLayout from 'modules/MainLayout/MainLayout';
 
 export default class AppComponent extends Component {
 
@@ -15,8 +16,10 @@ export default class AppComponent extends Component {
         <BrowserRouter>
           <AppContainer>
             <Switch>
-              <Route path="/question" component={Question}/>
-              <Route path="/" component={Auth}/>
+              <MainLayout>
+                <Route path="/question" component={Question}/>
+                <Route path="/" component={Auth}/>
+              </MainLayout>
             </Switch>
           </AppContainer>
         </BrowserRouter>

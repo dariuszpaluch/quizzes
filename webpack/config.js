@@ -5,10 +5,6 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const Html = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-console.log("DAREK");
-console.log(process.env);
-console.log("PALUCH");
-
 module.exports = {
   context: path.resolve('./'),
   entry: [

@@ -1,0 +1,58 @@
+@import '~styles/mixins';
+
+$drawer-width: 230px;
+
+.main-layout {
+  flex-grow: 1;
+  height: 100%;
+  min-height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  .app-bar {
+    position: absolute;
+    margin-left: $drawer-width;
+  }
+
+  .content {
+    margin: 70px auto 0 auto;
+  }
+  .mobile {
+    background-color: red;
+  }
+
+  @include mdScreen {
+    .app-bar {
+      width: calc(100% - #{$drawer-width});
+
+      .nav-icon {
+        display: none;
+      }
+    }
+  }
+
+}
+
+.menu-drawer {
+  &.mobile-drawer {}
+
+  &.permament-drawer {
+    width: $drawer-width;
+    display: none;
+    background-color: white;
+  }
+
+  .menu-drawer-content {
+    width: $drawer-width;
+  }
+
+
+  @include mdScreen {
+    &.permament-drawer {
+      display: block;
+    }
+  }
+}
