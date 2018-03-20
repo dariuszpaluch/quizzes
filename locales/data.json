@@ -1,0 +1,10 @@
+{
+  "en": {
+    "question.list.addQuestion": "Add question",
+    "question.list.header": "Questions"
+  },
+  "pl": {
+    "question.list.addQuestion": "__question.list.addQuestion__",
+    "question.list.header": "__question.list.header__"
+  }
+}
