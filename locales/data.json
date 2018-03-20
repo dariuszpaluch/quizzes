@@ -1,10 +1,14 @@
 {
   "en": {
+    "question": "Question",
+    "question.description.table.header.cell": "Description",
     "question.list.addQuestion": "Add question",
     "question.list.header": "Questions"
   },
   "pl": {
+    "question": "__question__",
+    "question.description.table.header.cell": "__question.description.table.header.cell__",
     "question.list.addQuestion": "__question.list.addQuestion__",
-    "question.list.header": "__question.list.header__"
+    "question.list.header": "Pytania"
   }
 }

@@ -20,19 +20,15 @@ class QuestionList extends Component {
   }
 
   getDataTable() {
-    const {questionsIds, questions, questionsLoading} = this.props;
+    const {questionsIds, questions, questionsLoading, intl} = this.props;
     const columns = [
       {
-        id: 'index',
-        content: 'Index'
-      },
-      {
         id: 'question',
-        content: 'Question',
+        content: intl.formatMessage(messages.QUESTION_TABLE_CELL),
       },
       {
         id: 'description',
-        content: 'Description',
+        content: intl.formatMessage(messages.QUESTION_DESCRIPTION_TABLE_CELL)
       },
     ];
 

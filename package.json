@@ -7,7 +7,7 @@
     "clean": "rimraf *.log",
     "dev": "npm run clean && webpack-dev-server --config webpack/config.dev.js",
     "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
-    "update-locales": "npm run clean && npm run build && node intl/makeLocalesJson.js"
+    "update-locales": "npm run clean && npm run build && node intl/updateLocales.js"
   },
   "config": {
     "page_title": "Quizzes",

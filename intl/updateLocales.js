@@ -36,7 +36,7 @@ for(let messageKey in defaultMessages) {
 const updatedData = {
   en: {
     ...defaultMessages,
-    ...(data.en || {}),
+    ...(filterKeys(data.en || {}, Object.keys(defaultMessages))),
   }
 };
 
@@ -44,9 +44,19 @@ for(let languageKey in data) {
   if(!updatedData.hasOwnProperty(languageKey)) {
     updatedData[languageKey] = {
       ...anotherLanguageTemplate,
-      ...(data[languageKey] || {}),
+      ...filterKeys(data[languageKey] || {}, Object.keys(defaultMessages)),
     }
   }
+}
+
+function filterKeys(object, keys) {
+  const result = {};
+  for(let key in object) {
+    if(keys.indexOf(key) > -1) {
+      result[key] = object[key];
+    }
+  }
+  return result;
 }
 
 function isObject(variable) {
