@@ -37,7 +37,9 @@ $drawer-width: 230px;
 }
 
 .menu-drawer {
-  &.mobile-drawer {}
+  &.mobile-drawer {
+    width: 100vw;
+  }
 
   &.permament-drawer {
     width: $drawer-width;

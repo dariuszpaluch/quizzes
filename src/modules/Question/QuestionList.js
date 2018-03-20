@@ -11,6 +11,8 @@ import Button from "../../libs/ui/Button/Button";
 import {deleteQuestion} from "modules/Question/actions";
 import {toastr} from 'react-redux-toastr'
 import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/getters";
+import {injectIntl} from 'react-intl'
+import messages from './messages';
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -61,15 +63,17 @@ class QuestionList extends Component {
 
   render() {
     const {columns, rows} = this.getDataTable();
+    const { intl } = this.props;
+
     return (
-      <Card title={STRINGS.HEADER.QUESTIONS_LIST}>
+      <Card title={intl.formatMessage(messages.questionListHeader)}>
         <Table
           columns={columns}
           rows={rows}
           onClickEditRow={(row) => this.props.history.push(`/question/${row.id}/edit`)}
           onClickDeleteRow={this.onDeleteQuestion}
         />
-        <Button onClick={() => this.props.history.push(`/question/add`)}>{STRINGS.BUTTONS.ADD_QUESTION}</Button>
+        <Button onClick={() => this.props.history.push(`/question/add`)}>{intl.formatMessage(messages.ADD_QUESTION)}</Button>
       </Card>
     )
   }
@@ -88,4 +92,4 @@ const mapDispatchToProps = {
   deleteQuestion,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionList))

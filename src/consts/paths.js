@@ -1,4 +1,5 @@
 const paths = {
+  INDEX: '/',
   QUESTIONS: '/question',
   TESTS: '/tests',
   SETTINGS: '/settings',

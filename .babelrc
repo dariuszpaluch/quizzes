@@ -18,7 +18,14 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-class-properties"
+    "transform-class-properties",
+    [
+      "react-intl",
+      {
+        "messagesDir": "./build/messages",
+        "enforceDescriptions": false
+      }
+    ]
   ],
   "env": {
     "development": {

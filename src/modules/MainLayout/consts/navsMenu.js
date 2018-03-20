@@ -17,7 +17,6 @@ const navsMenu = [
     label: 'Questions',
     icon: icons.questions,
     path: paths.QUESTIONS,
-    disabled: true,
   },
   {
     label: 'Settings',
