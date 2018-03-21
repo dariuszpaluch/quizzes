@@ -1,14 +1,26 @@
 {
   "en": {
+    "cancel": "Cancel",
     "question": "Question",
     "question.description.table.header.cell": "Description",
     "question.list.addQuestion": "Add question",
-    "question.list.header": "Questions"
+    "question.list.header": "Questions",
+    "save": "Save",
+    "test.header.add.mode": "Add test",
+    "test.header.edit.mode": "Edition of the test",
+    "test.input.description": "Description",
+    "test.input.name": "Name of the test"
   },
   "pl": {
-    "question": "__question__",
-    "question.description.table.header.cell": "__question.description.table.header.cell__",
-    "question.list.addQuestion": "__question.list.addQuestion__",
-    "question.list.header": "Pytania"
+    "cancel": "Anuluj",
+    "question": "Pytanie",
+    "question.description.table.header.cell": "Opis pytania",
+    "question.list.addQuestion": "Dodaj pytanie",
+    "question.list.header": "Pytania",
+    "save": "Zapisz",
+    "test.header.add.mode": "Dodawanie testu",
+    "test.header.edit.mode": "Edycja testu",
+    "test.input.description": "Opis",
+    "test.input.name": "Nazwa testu"
   }
 }

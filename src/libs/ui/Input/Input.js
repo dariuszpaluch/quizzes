@@ -1,3 +1,5 @@
+import './input.scss';
+
 import React, {Component} from 'react';
 
 import classnames from 'classnames';
@@ -25,7 +27,9 @@ export default class Input extends Component {
       ...props,
     } = this.props;
 
-    const classes = classnames("input", className);
+    const classes = classnames('material-ui-input', className, {
+      'have-error': !!error,
+    });
     return (
       <MaterialTextField
         className={classes}

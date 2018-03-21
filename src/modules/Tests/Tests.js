@@ -13,6 +13,7 @@ class Test extends Component {
     return (
       <div>
         <Route path={`${match.path}/add`} component={TestForm}/>
+        <Route path={`${match.path}/quizzId:/edit`} component={(props) => <TestForm mode={TestForm.modes.EDIT} {...props} />}/>
       </div>
     );
   }

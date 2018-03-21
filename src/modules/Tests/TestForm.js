@@ -1,3 +1,5 @@
+import './tests.scss';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,10 +10,13 @@ import values from 'lodash/values';
 import pick from 'lodash/pick';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
-import { required } from 'utils/validations';
-
+import { required, minLength } from 'utils/validations';
+const quizNameMinLength = minLength(10);
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
+import messages from './messages';
+import {injectIntl} from 'react-intl'
+import globalMessages from "utils/globalMessages";
 
 const MODES = {
   EDIT: 'EDIT',
@@ -19,7 +24,7 @@ const MODES = {
 };
 
 class TestForm extends Component {
-  static MODES = MODES;
+  static modes = MODES;
 
   static propTypes = {
     mode: PropTypes.oneOf(values(MODES))
@@ -31,29 +36,33 @@ class TestForm extends Component {
 
   onSubmit = () => {
 
-  }
+  };
 
   render() {
     const {
       handleSubmit,
+      intl,
+      mode
     } = this.props;
 
     return (
-      <Card>
-        <form className="sign-in-form" onSubmit={handleSubmit(this.onSubmit)}>
+      <Card
+        className="tests-form"
+        title={intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE)}
+      >
+        <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
           <InputField
             name='name'
-            label={'name'}
-            validate={[required]}
+            label={intl.formatMessage(messages.TEST_INPUT_NAME)}
+            validate={[required, quizNameMinLength]}
           />
           <InputField
             name='description'
-            label={'description'}
+            label={intl.formatMessage(messages.TEST_INPUT_DESCRIPTION)}
           />
           <Button
             type="submit"
-          >Submit
-          </Button>
+          >{intl.formatMessage(globalMessages.SAVE)}</Button>
         </form>
       </Card>
     );
@@ -81,4 +90,4 @@ const mapDispatchToProps = {
   // onSubmit: addQuestion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestForm);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestForm));

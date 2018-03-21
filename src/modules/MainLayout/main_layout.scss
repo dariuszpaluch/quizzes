@@ -18,13 +18,17 @@ $drawer-width: 230px;
   }
 
   .content {
-    margin: 70px auto 0 auto;
+    margin: 70px 0 0 0;
+    width: 100%;
   }
   .mobile {
     background-color: red;
   }
 
   @include mdScreen {
+    .content {
+      margin: 70px auto 0 auto;
+    }
     .app-bar {
       width: calc(100% - #{$drawer-width});
 
