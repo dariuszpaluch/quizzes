@@ -8,7 +8,9 @@ const icons = {
   user: 'person',
   password: 'lock',
   ARROW_DOWN: 'keyboard_arrow_down',
-  ARROW_UP: 'keyboard_arrow_up'
+  ARROW_UP: 'keyboard_arrow_up',
+  ARROW_LEFT: 'keyboard_arrow_left',
+  ARROW_RIGHT: 'keyboard_arrow_right'
 };
 
 export default icons;

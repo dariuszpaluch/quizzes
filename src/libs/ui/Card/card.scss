@@ -1,0 +1,12 @@
+@import '~styles/variables';
+
+.card {
+  .card-header {
+    text-align: center;
+    padding: $container-padding;
+  }
+
+  .card-content {
+    padding-top: 0;
+  }
+}

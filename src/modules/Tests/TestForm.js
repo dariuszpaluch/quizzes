@@ -3,31 +3,30 @@ import './tests.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {Field, getFormValues, reduxForm, getFormSyncErrors} from 'redux-form';
+import { Field, getFormValues, reduxForm, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 
 import values from 'lodash/values';
-import pick from 'lodash/pick';
-import filter from 'lodash/filter';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import { required, minLength } from 'utils/validations';
-const quizNameMinLength = minLength(10);
+
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import messages from './messages';
-import {injectIntl} from 'react-intl'
-import globalMessages from "utils/globalMessages";
-import QuestionList from "modules/Question/QuestionList";
-import { FieldArray } from 'redux-form';
-import SimpleQuestionlist from "modules/Question/components/SimpleQuestionList";
-import Question from "modules/Question/Question";
-import {addTest} from "modules/Tests/actions";  // ES6
+import { injectIntl } from 'react-intl'
+import globalMessages from 'utils/globalMessages';
+import QuestionList from 'modules/Question/QuestionList';
+import Typography from 'libs/ui/Typography';
+
+import { addTest } from 'modules/Tests/actions';  // ES6
 
 const MODES = {
   EDIT: 'EDIT',
   ADD: 'ADD',
 };
+
+const quizNameMinLength = minLength(5);
 
 class TestForm extends Component {
   static modes = MODES;
@@ -44,12 +43,21 @@ class TestForm extends Component {
     this.props.onSubmit(values);
   };
 
-  renderQuestionsList = ({input: {value, onChange},  meta: { touched, error, warning }, selectedIds}) => {
+  renderQuestionsList = ({
+                           input: { value, onChange },
+                           meta: { touched, error, warning },
+                           selectedIds,
+                           label
+                         }) => {
     return (
-      <QuestionList
-        selectedIds={value}
-        onChangeSelect={onChange}
-      />
+      <div>
+        <Typography variant="display1">{label}</Typography>
+        <QuestionList
+          selectedIds={value}
+          onChangeSelect={onChange}
+        />
+      </div>
+
     );
   };
 
@@ -78,6 +86,7 @@ class TestForm extends Component {
           <Field
             name='questionsIds'
             component={this.renderQuestionsList}
+            label={intl.formatMessage(messages.TEST_INPUT_QUESTIONS)}
           />
           <Button
             type="submit"
@@ -101,9 +110,8 @@ TestForm = reduxForm({
   },
 })(TestForm);
 
-const mapStateToProps = (state, ownProps  ) => {
-  return {
-  };
+const mapStateToProps = (state, ownProps) => {
+  return {};
 };
 
 const mapDispatchToProps = {

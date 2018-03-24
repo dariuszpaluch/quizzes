@@ -9,7 +9,8 @@
     "test.header.add.mode": "Add test",
     "test.header.edit.mode": "Edition of the test",
     "test.input.description": "Description",
-    "test.input.name": "Name of the test"
+    "test.input.name": "Name of the test",
+    "test.input.questions": "Questions"
   },
   "pl": {
     "cancel": "Anuluj",
@@ -21,6 +22,7 @@
     "test.header.add.mode": "Dodawanie testu",
     "test.header.edit.mode": "Edycja testu",
     "test.input.description": "Opis",
-    "test.input.name": "Nazwa testu"
+    "test.input.name": "Nazwa testu",
+    "test.input.questions": "Pytania"
   }
 }

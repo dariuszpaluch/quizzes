@@ -16,7 +16,11 @@ const messages = defineMessages({
   TEST_HEADER_ADD_MODE: {
     id: 'test.header.add.mode',
     defaultMessage: 'Add test',
-  }
+  },
+  TEST_INPUT_QUESTIONS: {
+    id:'test.input.questions',
+    defaultMessage: 'Questions',
+  },
 });
 
 export default messages;
