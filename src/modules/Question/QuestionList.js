@@ -13,6 +13,7 @@ import {toastr} from 'react-redux-toastr'
 import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/getters";
 import {injectIntl} from 'react-intl'
 import messages from './messages';
+import SimpleQuestionlist from "modules/Question/components/SimpleQuestionList";
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -58,20 +59,28 @@ class QuestionList extends Component {
 
 
   render() {
-    const {columns, rows} = this.getDataTable();
+    // const {columns, rows, questions, questionsIds} = this.getDataTable();
     const { intl } = this.props;
+    const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
 
-    return (
-      <Card title={intl.formatMessage(messages.questionListHeader)}>
-        <Table
-          columns={columns}
-          rows={rows}
-          onClickEditRow={(row) => this.props.history.push(`/question/${row.id}/edit`)}
-          onClickDeleteRow={this.onDeleteQuestion}
-        />
-        <Button onClick={() => this.props.history.push(`/question/add`)}>{intl.formatMessage(messages.ADD_QUESTION)}</Button>
-      </Card>
-    )
+    return <SimpleQuestionlist
+      onChangeSelect={onChangeSelect}
+      selectedIds={selectedIds}
+      questions={questions}
+      questionsIds={questionsIds}
+    />;
+    //
+    // return (
+    //   <Card title={intl.formatMessage(messages.questionListHeader)}>
+    //     <Table
+    //       columns={columns}
+    //       rows={rows}
+    //       onClickEditRow={(row) => this.props.history.push(`/question/${row.id}/edit`)}
+    //       onClickDeleteRow={this.onDeleteQuestion}
+    //     />
+    //     <Button onClick={() => this.props.history.push(`/question/add`)}>{intl.formatMessage(messages.ADD_QUESTION)}</Button>
+    //   </Card>
+    // )
   }
 }
 

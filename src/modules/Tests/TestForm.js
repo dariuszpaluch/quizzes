@@ -3,11 +3,12 @@ import './tests.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { reduxForm } from 'redux-form';
+import {Field, getFormValues, reduxForm, getFormSyncErrors} from 'redux-form';
 import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 import pick from 'lodash/pick';
+import filter from 'lodash/filter';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import { required, minLength } from 'utils/validations';
@@ -17,6 +18,11 @@ import Card from 'libs/ui/Card/Card';
 import messages from './messages';
 import {injectIntl} from 'react-intl'
 import globalMessages from "utils/globalMessages";
+import QuestionList from "modules/Question/QuestionList";
+import { FieldArray } from 'redux-form';
+import SimpleQuestionlist from "modules/Question/components/SimpleQuestionList";
+import Question from "modules/Question/Question";
+import {addTest} from "modules/Tests/actions";  // ES6
 
 const MODES = {
   EDIT: 'EDIT',
@@ -34,15 +40,24 @@ class TestForm extends Component {
     mode: MODES.ADD,
   };
 
-  onSubmit = () => {
+  onSubmit = (values) => {
+    this.props.onSubmit(values);
+  };
 
+  renderQuestionsList = ({input: {value, onChange},  meta: { touched, error, warning }, selectedIds}) => {
+    return (
+      <QuestionList
+        selectedIds={value}
+        onChangeSelect={onChange}
+      />
+    );
   };
 
   render() {
     const {
       handleSubmit,
       intl,
-      mode
+      mode,
     } = this.props;
 
     return (
@@ -59,6 +74,10 @@ class TestForm extends Component {
           <InputField
             name='description'
             label={intl.formatMessage(messages.TEST_INPUT_DESCRIPTION)}
+          />
+          <Field
+            name='questionsIds'
+            component={this.renderQuestionsList}
           />
           <Button
             type="submit"
@@ -78,16 +97,17 @@ TestForm = reduxForm({
   initialValues: {
     name: '',
     description: '',
+    questionsIds: [],
   },
 })(TestForm);
 
-const mapStateToProps = (state, ownProps ) => {
+const mapStateToProps = (state, ownProps  ) => {
   return {
   };
 };
 
 const mapDispatchToProps = {
-  // onSubmit: addQuestion
+  onSubmit: addTest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestForm));

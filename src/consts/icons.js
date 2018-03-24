@@ -6,7 +6,9 @@ const icons = {
   settings: 'settings',
   logout: 'exit_to_app',
   user: 'person',
-  password: 'lock'
+  password: 'lock',
+  ARROW_DOWN: 'keyboard_arrow_down',
+  ARROW_UP: 'keyboard_arrow_up'
 };
 
 export default icons;
