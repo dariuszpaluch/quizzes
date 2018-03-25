@@ -1,6 +1,7 @@
 @import '~styles/mixins';
 
 $drawer-width: 230px;
+$app-bar-height: 65px;
 
 .main-layout {
   flex-grow: 1;
@@ -17,8 +18,9 @@ $drawer-width: 230px;
   }
 
   .content {
-    margin: 70px 0 0 0;
+    margin: $app-bar-height 0 0 0;
     width: 100%;
+    min-height: calc(100vh - #{$app-bar-height});
   }
   .mobile {
     background-color: red;
@@ -26,7 +28,7 @@ $drawer-width: 230px;
 
   @include mdScreen {
     .content {
-      margin: 70px auto 0 auto;
+      margin: $app-bar-height auto 0 auto;
     }
     .app-bar {
       width: calc(100% - #{$drawer-width});

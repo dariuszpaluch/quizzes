@@ -14,8 +14,6 @@ class EditQuestion extends Component {
     this.props.fetchQuestion(questionId);
   }
 
-
-
   render() {
     const { loading, question } = this.props;
 
