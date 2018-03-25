@@ -36,11 +36,9 @@ export default class AppComponent extends Component {
           <BrowserRouter>
             <AppContainer>
               <Switch>
-                <MainLayout>
-                  <Route path={paths.TESTS} component={Tests}/>
-                  <Route path={paths.QUESTIONS} component={Question}/>
-                  <Route exact path={paths.INDEX} component={Auth}/>
-                </MainLayout>
+                <Route path={paths.TESTS} component={Tests}/>
+                <Route path={paths.QUESTIONS} component={Question}/>
+                <Route exact path={paths.INDEX} component={Auth}/>
               </Switch>
             </AppContainer>
           </BrowserRouter>

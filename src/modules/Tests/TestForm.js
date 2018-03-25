@@ -13,13 +13,16 @@ import { required, minLength } from 'utils/validations';
 
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
-import messages from './messages';
+import messages from './utils/messages';
 import { injectIntl } from 'react-intl'
 import globalMessages from 'utils/globalMessages';
-import QuestionList from 'modules/Question/QuestionList';
+import QuestionList from './smarts/QuestionList';
 import Typography from 'libs/ui/Typography';
 
-import { addTest } from 'modules/Tests/actions';  // ES6
+import { addTest } from 'modules/Tests/utils/actions';
+import ChipList from 'libs/ui/ChipList/ChipList';
+import MainLayout from 'modules/MainLayout/MainLayout';
+import icons from 'consts/icons';  // ES6
 
 const MODES = {
   EDIT: 'EDIT',
@@ -38,6 +41,15 @@ class TestForm extends Component {
   static defaultProps = {
     mode: MODES.ADD,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.customAppBarButton = {
+      onClick: this.onClickGoBack,
+      icon: icons.ARROW_BACK,
+    };
+  }
 
   onSubmit = (values) => {
     this.props.onSubmit(values);
@@ -61,6 +73,10 @@ class TestForm extends Component {
     );
   };
 
+  onClickGoBack = () => {
+    this.props.history.push('/tests');
+  };
+
   render() {
     const {
       handleSubmit,
@@ -68,31 +84,36 @@ class TestForm extends Component {
       mode,
     } = this.props;
 
+    const pageTitle = intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE);
     return (
-      <Card
-        className="tests-form"
-        title={intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE)}
+      <MainLayout
+        appBarTittle={pageTitle}
+        customAppBarButton={this.customAppBarButton}
       >
-        <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
-          <InputField
-            name='name'
-            label={intl.formatMessage(messages.TEST_INPUT_NAME)}
-            validate={[required, quizNameMinLength]}
-          />
-          <InputField
-            name='description'
-            label={intl.formatMessage(messages.TEST_INPUT_DESCRIPTION)}
-          />
-          <Field
-            name='questionsIds'
-            component={this.renderQuestionsList}
-            label={intl.formatMessage(messages.TEST_INPUT_QUESTIONS)}
-          />
-          <Button
-            type="submit"
-          >{intl.formatMessage(globalMessages.SAVE)}</Button>
-        </form>
-      </Card>
+        <Card
+          className="tests-form"
+        >
+          <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
+            <InputField
+              name='name'
+              label={intl.formatMessage(messages.TEST_INPUT_NAME)}
+              validate={[required, quizNameMinLength]}
+            />
+            <InputField
+              name='description'
+              label={intl.formatMessage(messages.TEST_INPUT_DESCRIPTION)}
+            />
+            <Field
+              name='questionsIds'
+              component={this.renderQuestionsList}
+              label={intl.formatMessage(messages.TEST_INPUT_QUESTIONS)}
+            />
+            <Button
+              type="submit"
+            >{intl.formatMessage(globalMessages.SAVE)}</Button>
+          </form>
+        </Card>
+      </MainLayout>
     );
   }
 

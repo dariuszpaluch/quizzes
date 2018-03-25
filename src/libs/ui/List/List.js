@@ -9,7 +9,7 @@ import icons from 'consts/icons';
 
 import Collapse from 'material-ui/transitions/Collapse';
 import MaterialList, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import filter from 'lodash/filter';
 
@@ -52,6 +52,8 @@ export default class List extends Component {
   };
 
   onChangeSelect = (rowId, checked) => {
+    console.log(rowId, checked);
+
     const newValue = checked ?
       [...this.props.selectedRowsIds, rowId]
       : filter(this.props.selectedRowsIds, _rowId => _rowId !== rowId);
@@ -82,7 +84,7 @@ export default class List extends Component {
               {this.props.onChangeSelect && (
                 <Checkbox
                   checked={selected}
-                  onClick={this.onChangeSelect.bind(null, row.id, !selected)}
+                  onChange={this.onChangeSelect.bind(null, row.id)}
                 />
               )}
               <ListItemText inset primary={row.label}/>

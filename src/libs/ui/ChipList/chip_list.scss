@@ -1,0 +1,10 @@
+$space-between-items: 5px;
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: $space-between-items $space-between-items/2;
+  > div {
+    margin: $space-between-items/2;
+  }
+}

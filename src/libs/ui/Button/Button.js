@@ -6,12 +6,12 @@ import MaterialButton from 'material-ui/Button';
 export default class Button extends Component {
   static propTypes = {
     variant: PropTypes.oneOf(['flat', 'raised', 'fab']),
-    color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary'])
+    color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
   };
 
   static defaultProps = {
     variant: 'raised',
-    color: 'primary'
+    color: 'primary',
   };
 
   render() {
@@ -19,6 +19,7 @@ export default class Button extends Component {
       children,
       variant,
       color,
+      onClick,
       ...props,
     } = this.props;
 
@@ -26,6 +27,7 @@ export default class Button extends Component {
       <MaterialButton
         variant={variant}
         color={color}
+        onClick={onClick}
         {...props}
       >{children}</MaterialButton>
     );

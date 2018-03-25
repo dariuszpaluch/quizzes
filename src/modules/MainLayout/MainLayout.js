@@ -1,6 +1,7 @@
 import './main_layout.scss';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -9,11 +10,22 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 import Menu from './Menu';
 import navsMenu from './consts/navsMenu';
+import Icon from 'libs/ui/Icon/Icon';
 
 class MainLayout extends Component {
-  static propTypes = {};
+  static propTypes = {
+    showAppBar: PropTypes.bool,
+    appBarTittle: PropTypes.string,
+    customAppBarButton: PropTypes.shape({
+      icon: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  };
 
-  static defaultProps = {};
+  static defaultProps = {
+    showAppBar: true,
+    appBarTittle: '',
+  };
 
   state = {
     mobileOpen: false,
@@ -23,24 +35,37 @@ class MainLayout extends Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
+  renderAppBar() {
+    const { showAppBar, appBarTittle, customAppBarButton } = this.props;
+
+    if (!showAppBar)
+      return null;
+
+    console.log(customAppBarButton);
+
+    return (
+      <AppBar className='app-bar'>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={customAppBarButton ? customAppBarButton.onClick : this.handleDrawerToggle}
+            className="nav-icon"
+          >
+            {customAppBarButton ? <Icon bold icon={customAppBarButton.icon}/> : <MenuIcon/>}
+          </IconButton>
+          <h2>{appBarTittle}</h2>
+        </Toolbar>
+      </AppBar>
+    )
+  }
+
   render() {
     const { children } = this.props;
 
     return (
       <div className="main-layout">
-        <AppBar className='app-bar'>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerToggle}
-              className="nav-icon"
-            >
-              <MenuIcon/>
-            </IconButton>
-            <h2>Quizess</h2>
-          </Toolbar>
-        </AppBar>
+        {this.renderAppBar()}
         <Menu
           mobileOpen={this.state.mobileOpen}
           handleDrawerToggle={this.handleDrawerToggle}

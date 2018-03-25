@@ -1,12 +1,17 @@
 @import '~styles/variables';
 
 .card {
+  &.center-header {
+    .card-header {
+      text-align: center;
+    }
+  }
+
   .card-header {
-    text-align: center;
     padding: $container-padding;
   }
 
-  .card-content {
+  &.with-header .card-content {
     padding-top: 0;
   }
 }

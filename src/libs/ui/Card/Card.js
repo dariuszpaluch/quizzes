@@ -9,19 +9,21 @@ import IconButton from 'libs/ui/IconButton/IconButton';
 
 export default class Card extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    subheader: PropTypes.string,
+    title: PropTypes.any,
+    subheader: PropTypes.any,
     className: PropTypes.string,
     headerAction: PropTypes.shape({
       icon: PropTypes.string,
       onClick: PropTypes.func,
-    })
+    }),
+    centerHeader: PropTypes.bool,
   };
 
   static defaultProps = {
     title: '',
     subheader: '',
     className: '',
+    centerHeader: false,
   };
 
   renderHeaderAction() {
@@ -61,10 +63,16 @@ export default class Card extends Component {
       children,
       actions,
       headerAction,
+      centerHeader,
+      title,
+      subheader,
       ...props,
     } = this.props;
 
-    const classes = classnames(className, 'card');
+    const classes = classnames(className, 'card', {
+      'center-header': centerHeader,
+      'with-header': title || subheader,
+    });
 
     return (
       <MaterialCard

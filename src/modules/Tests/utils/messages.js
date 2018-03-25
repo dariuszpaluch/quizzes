@@ -21,6 +21,10 @@ const messages = defineMessages({
     id:'test.input.questions',
     defaultMessage: 'Questions',
   },
+  TESTS_LIST_HEADER: {
+    id: 'test.list.header',
+    defaultMessage: 'Tests'
+  }
 });
 
 export default messages;

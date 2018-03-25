@@ -63,12 +63,14 @@ class QuestionList extends Component {
     const { intl } = this.props;
     const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
 
-    return <SimpleQuestionlist
+    return (
+      <SimpleQuestionlist
       onChangeSelect={onChangeSelect}
       selectedIds={selectedIds}
       questions={questions}
       questionsIds={questionsIds}
-    />;
+    />
+    );
     //
     // return (
     //   <Card title={intl.formatMessage(messages.questionListHeader)}>

@@ -10,7 +10,9 @@ const icons = {
   ARROW_DOWN: 'keyboard_arrow_down',
   ARROW_UP: 'keyboard_arrow_up',
   ARROW_LEFT: 'keyboard_arrow_left',
-  ARROW_RIGHT: 'keyboard_arrow_right'
+  ARROW_RIGHT: 'keyboard_arrow_right',
+  ADD: 'add',
+  ARROW_BACK: 'arrow_back'
 };
 
 export default icons;
