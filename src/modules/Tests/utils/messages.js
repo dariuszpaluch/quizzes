@@ -24,6 +24,10 @@ const messages = defineMessages({
   TESTS_LIST_HEADER: {
     id: 'test.list.header',
     defaultMessage: 'Tests'
+  },
+  TEST_DETAIL_HEADER: {
+    id: 'test.detail.header',
+    defaultMessage: 'Test: {name}'
   }
 });
 

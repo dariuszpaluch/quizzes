@@ -16,7 +16,7 @@ import icons from 'consts/icons';
 import Icon from 'libs/ui/Icon/Icon';
 import FloatButton from 'libs/ui/FloatButton/FloatButton';
 import MainLayout from 'modules/MainLayout/MainLayout';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class TestList extends Component {
   static propTypes = {};
@@ -34,12 +34,8 @@ class TestList extends Component {
   }
 
   onClickAddTest = () => {
-    console.log(this.props);
-
     this.props.history.push(`${this.props.location.pathname}/add`);
   };
-
-
 
   render() {
     const { intl, tests, testsIds } = this.props;
@@ -53,10 +49,15 @@ class TestList extends Component {
           const test = tests[testId];
 
           return (
-            <TestDescriptionCard
+            <Link
               key={test.id || index}
-              test={test}
-            />
+              to={`/tests/${testId}`}
+            >
+              <TestDescriptionCard
+                test={test}
+              />
+            </Link>
+
           )
         })}
         <FloatButton icon={icons.ADD} onClick={this.onClickAddTest}/>

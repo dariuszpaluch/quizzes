@@ -2,10 +2,11 @@ import './tests.scss';
 
 import React, { Component } from 'react';
 
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router-dom';
+
 import TestForm from "modules/Tests/TestForm";
 import TestList from 'modules/Tests/TestList';
-import MainLayout from 'modules/MainLayout/MainLayout';
+import TestDetail from 'modules/Tests/TestDetail';
 
 class Test extends Component {
 
@@ -14,14 +15,13 @@ class Test extends Component {
       match
     } = this.props;
 
-    const routes = [
-
-    ];
-    return [
-      <Route key='tests' exact path={`${match.path}/`} component={TestList}/>,
-      <Route key='tests-add' path={`${match.path}/add`} component={TestForm}/>,
-      <Route key='test-edit' path={`${match.path}/quizzId:/edit`} component={(props) => <TestForm mode={TestForm.modes.EDIT} {...props} />}/>,
-    ];
+    return (
+      <Switch>
+        <Route key='tests' exact path={`${match.path}/`} component={TestList}/>,
+        <Route key='tests-add' exact path={`${match.path}/add`} component={TestForm}/>,
+        <Route key='test-edit' path={`${match.path}/:testId`} component={TestDetail}/>,
+      </Switch>
+    );
   }
 }
 

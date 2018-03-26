@@ -36,7 +36,6 @@ class TestDescriptionCard extends Component {
         title={name}
         subheader={created && <FormattedDate value={created} />}
       >
-
       </Card>
     );
   }

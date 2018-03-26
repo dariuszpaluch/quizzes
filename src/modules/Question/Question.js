@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import QuestionForm from 'modules/Question/QuestionForm';
 
-import { Route } from 'react-router'
+import { Route } from 'react-router-dom'
 import QuestionList from "./QuestionList";
 import EditQuestion from "modules/Question/EditQuestion";
 
