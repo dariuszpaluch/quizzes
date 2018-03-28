@@ -10,14 +10,14 @@ import MainLayout from 'modules/MainLayout/MainLayout';
 import Tests from "modules/Tests/Tests";
 import paths from "consts/paths";
 
+import localeData from '../locales/data.json';
+import MakeTest from 'modules/MakeTest/MakeTest';
+
 import {addLocaleData, IntlProvider} from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import pl from 'react-intl/locale-data/pl';
 
 addLocaleData([...en, ...pl]);
-
-import localeData from '../locales/data.json';
-
 
 export default class AppComponent extends Component {
 
@@ -36,9 +36,10 @@ export default class AppComponent extends Component {
           <BrowserRouter>
             <AppContainer>
               <Switch>
+                <Route exact path={paths.INDEX} component={Auth}/>
+                <Route path={paths.MAKE_TEST} component={MakeTest}/>
                 <Route path={paths.TESTS} component={Tests}/>
                 <Route path={paths.QUESTIONS} component={Question}/>
-                <Route exact path={paths.INDEX} component={Auth}/>
               </Switch>
             </AppContainer>
           </BrowserRouter>

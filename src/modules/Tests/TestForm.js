@@ -22,7 +22,8 @@ import Typography from 'libs/ui/Typography';
 import { addTest } from 'modules/Tests/utils/actions';
 import ChipList from 'libs/ui/ChipList/ChipList';
 import MainLayout from 'modules/MainLayout/MainLayout';
-import icons from 'consts/icons';  // ES6
+import icons from 'consts/icons';
+import paths from 'consts/paths';  // ES6
 
 const MODES = {
   EDIT: 'EDIT',
@@ -45,9 +46,16 @@ class TestForm extends Component {
   constructor(props) {
     super(props);
 
-    this.customAppBarButton = {
-      onClick: this.onClickGoBack,
-      icon: icons.ARROW_BACK,
+    this.appBarButtons = {
+      left: {
+        onClick: this.onClickGoBack,
+        icon: icons.ARROW_BACK,
+      },
+      right: {
+        onClick: this.onClickGoBack,
+        icon: icons.DONE,
+      }
+
     };
   }
 
@@ -74,7 +82,7 @@ class TestForm extends Component {
   };
 
   onClickGoBack = () => {
-    this.props.history.push('/tests');
+    this.props.history.push(paths.TESTS);
   };
 
   render() {
@@ -84,16 +92,18 @@ class TestForm extends Component {
       mode,
     } = this.props;
 
+    const submit = handleSubmit(this.onSubmit);
     const pageTitle = intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE);
+
     return (
       <MainLayout
         appBarTittle={pageTitle}
-        customAppBarButton={this.customAppBarButton}
+        appBarButtons={this.appBarButtons}
       >
         <Card
           className="tests-form"
         >
-          <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
+          <form className="test-form" onSubmit={submit}>
             <InputField
               name='name'
               label={intl.formatMessage(messages.TEST_INPUT_NAME)}

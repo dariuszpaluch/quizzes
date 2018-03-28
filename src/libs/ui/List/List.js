@@ -12,6 +12,7 @@ import MaterialList, { ListItem, ListItemSecondaryAction, ListItemText } from 'm
 import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import filter from 'lodash/filter';
+import noop from 'lodash/noop';
 
 export default class List extends Component {
   static propTypes = {
@@ -25,6 +26,7 @@ export default class List extends Component {
     })),
     selectedRowsIds: PropTypes.arrayOf(PropTypes.string),
     onChangeSelect: PropTypes.func,
+    selectOnClick: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -32,6 +34,7 @@ export default class List extends Component {
     onChangeSelect: null,
     rowsIds: {},
     rows: [],
+    selectOnClick: false,
   };
 
   constructor(props) {
@@ -66,6 +69,7 @@ export default class List extends Component {
       selectedRowsIds,
       rowsIds,
       rows,
+      selectOnClick
     } = this.props;
 
     const classes = classnames('list');
@@ -80,11 +84,14 @@ export default class List extends Component {
           return [
             <ListItem
               key={`${row.id}-item`}
+              button={selectOnClick}
+              onClick={selectOnClick ? this.onChangeSelect.bind(null, row.id, !selected) : null}
             >
               {this.props.onChangeSelect && (
                 <Checkbox
+                  tabIndex={selectOnClick ? -1 : null}
                   checked={selected}
-                  onChange={this.onChangeSelect.bind(null, row.id)}
+                  onChange={!selectOnClick ? this.onChangeSelect.bind(null, row.id) : noop}
                 />
               )}
               <ListItemText inset primary={row.label}/>

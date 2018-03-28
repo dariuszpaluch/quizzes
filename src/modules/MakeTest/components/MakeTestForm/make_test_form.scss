@@ -1,0 +1,18 @@
+$stepper-height: 50px;
+
+.make-test-form {
+  .test-stepper-wrapper {
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    .test-stepper {
+      padding: 0;
+
+      button {
+        min-height: $stepper-height;
+      }
+    }
+  }
+
+}

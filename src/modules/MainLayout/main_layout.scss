@@ -1,7 +1,7 @@
 @import '~styles/mixins';
 
 $drawer-width: 230px;
-$app-bar-height: 65px;
+$app-bar-height: 50px;
 
 .main-layout {
   flex-grow: 1;
@@ -14,10 +14,32 @@ $app-bar-height: 65px;
   width: 100%;
 
   .app-bar {
-    margin-left: $drawer-width;
+    display: flex;
+    align-items: stretch;
+
+    .toolbar {
+      min-height: $app-bar-height;
+      height: 100%;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      .page-tittle {
+        font-weight: normal;
+        font-size: 1.2rem;
+        margin: auto 0;
+      }
+      button {
+        margin: 0;
+        height: $app-bar-height;
+      }
+      .left-content {
+        display: flex;
+      }
+    }
   }
 
   .content {
+    position: relative;
     margin: $app-bar-height 0 0 0;
     width: 100%;
     min-height: calc(100vh - #{$app-bar-height});
@@ -44,6 +66,23 @@ $app-bar-height: 65px;
 .menu-drawer {
   &.mobile-drawer {
     width: 100vw;
+
+    nav {
+      width: 100vw;
+
+      .nav-header-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    .nav-close-icon {
+      position: absolute;
+      right: 0;
+      padding: 10px;
+      top: 0;
+      z-index: 2;
+    }
+
   }
 
   &.permament-drawer {

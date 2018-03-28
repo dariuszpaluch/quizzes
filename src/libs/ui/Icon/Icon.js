@@ -11,11 +11,13 @@ const propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string.isRequired,
   bold: PropTypes.bool,
+  size: PropTypes.number,
 };
 
 const defaultProps = {
   className: null,
   bold: false,
+  size: 20,
 };
 
 

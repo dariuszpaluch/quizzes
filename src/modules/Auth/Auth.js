@@ -51,6 +51,8 @@ class Auth extends Component {
     return (
       <Card
         className="sign-in-form">
+        <span>darek</span>
+
         <Tabs
           tabs={Auth.tabs}
           value={this.props.location.pathname}

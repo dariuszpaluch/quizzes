@@ -12,6 +12,9 @@ module.exports = {
     path.resolve(__dirname, '../src/styles/index.scss'),
     path.resolve(__dirname, '../src/index.js')
   ],
+  stats: {
+    children: false
+  },
   module: {
     rules: [
       {

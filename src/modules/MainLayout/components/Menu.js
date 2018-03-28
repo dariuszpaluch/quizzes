@@ -7,6 +7,8 @@ import Drawer from 'material-ui/Drawer';
 import Icon from 'material-ui/Icon';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import IconButton from 'libs/ui/IconButton/IconButton';
+import icons from 'consts/icons';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -17,7 +19,8 @@ export default class Menu extends Component {
       label: PropTypes.string.isRequired,
       icon: PropTypes.string,
       path: PropTypes.string,
-    }))
+    })),
+    title: PropTypes.string,
   };
 
   static defaultProps = {
@@ -42,14 +45,24 @@ export default class Menu extends Component {
   }
 
   renderMenuContent() {
-    return (
+    const { handleDrawerToggle, title } = this.props;
+
+    return [
+      <IconButton
+        key="nav-close-icon"
+        className="nav-close-icon"
+        icon={icons.CLOSE}
+        onClick={handleDrawerToggle}
+        iconSize={25}
+      />,
       <List
+        key='nav-list'
         component="nav"
-        subheader={<ListSubheader component="div">Menu</ListSubheader>}
+        subheader={<ListSubheader component="div" className="nav-header-title">{title}</ListSubheader>}
       >
         {this.renderMenuItems()}
-      </List>
-    );
+      </List>,
+    ];
   }
 
   render() {

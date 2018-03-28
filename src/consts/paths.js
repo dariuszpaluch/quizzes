@@ -1,5 +1,6 @@
 const paths = {
   INDEX: '/',
+  MAKE_TEST: '/make-test/:testId',
   QUESTIONS: '/question',
   TESTS: '/tests',
   SETTINGS: '/settings',

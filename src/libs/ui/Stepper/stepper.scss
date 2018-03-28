@@ -1,0 +1,27 @@
+$space-between-items: 20px;
+
+.stepper {
+  position: relative;
+
+  button {
+    .icon {
+      min-width: 30px;
+    }
+    &.prev-button {
+      padding: 0 $space-between-items 0 10px;
+
+    }
+    &.next-button {
+      padding: 0 10px 0 $space-between-items;
+
+    }
+  }
+
+  .stepper-label {
+    font-size: 11px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

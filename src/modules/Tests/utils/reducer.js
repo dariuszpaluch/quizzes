@@ -35,5 +35,3 @@ export default createReducer(getInitState(), {
   [`${GET_TESTS}_SUCCESS`]: getTestsSuccess,
   [`${GET_TEST}_SUCCESS`]: getTestSuccess,
 });
-
-export const getToken = (state) => state.auth.token;

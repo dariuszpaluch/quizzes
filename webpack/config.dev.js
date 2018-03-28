@@ -11,7 +11,11 @@ module.exports = merge(config, {
   devtool: '#eval-source-map',
   devServer: {
     contentBase: 'build',
-    historyApiFallback: true,
+    disableHostCheck: true,
+    headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true" },
+    historyApiFallback: {
+      disableDotRule: true
+    },
     hot: true,
     inline: true,
     port: parseInt(port) - 1,
@@ -60,9 +64,15 @@ module.exports = merge(config, {
     ]
   },
   output: {
-    publicPath: 'http://localhost:' + port + publicPath,
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
+    publicPath: publicPath,
   },
+
   plugins: [
+    new Webpack.DefinePlugin({
+      'WEBPACK_API_URL': JSON.stringify('http://192.168.0.11:3000')
+    }),
     new Sync({
       host: 'localhost',
       logLevel: 'silent',

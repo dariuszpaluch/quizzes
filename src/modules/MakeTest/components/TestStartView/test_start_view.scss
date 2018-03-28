@@ -1,0 +1,14 @@
+.test-start-view {
+  min-height: 100vh;
+
+  .test-description {
+    > p > label:after {
+      content: ':';
+      padding-right: 3px;
+    }
+  }
+
+  .start-test-button {
+    width: 100%;
+  }
+}

@@ -17,6 +17,7 @@ export default class Card extends Component {
       onClick: PropTypes.func,
     }),
     centerHeader: PropTypes.bool,
+    actions: PropTypes.element,
   };
 
   static defaultProps = {
@@ -24,6 +25,7 @@ export default class Card extends Component {
     subheader: '',
     className: '',
     centerHeader: false,
+    actions: null,
   };
 
   renderHeaderAction() {
