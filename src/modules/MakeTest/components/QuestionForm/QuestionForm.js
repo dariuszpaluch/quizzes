@@ -29,6 +29,7 @@ export default class QuestionForm extends Component {
 
     return (
       <div className="answers-options">
+
         <List
           selectedRowsIds={this.props.value}
           rowsIds={_answers.allIds}

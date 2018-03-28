@@ -1,6 +1,8 @@
-$stepper-height: 50px;
+$stepper-height: 70px;
 
 .make-test-form {
+  min-height: 100vh;
+
   .test-stepper-wrapper {
     position: fixed;
     width: 100vw;

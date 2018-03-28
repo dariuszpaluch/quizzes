@@ -77,9 +77,6 @@ class MakeTestForm extends Component {
       />
     );
   }
-  renderStepperLabel() {
-
-  }
 
   render() {
     const { intl, testName, questionsIds } = this.props;
@@ -90,6 +87,7 @@ class MakeTestForm extends Component {
       <Card
         className="make-test-form"
         title={testName}
+        centerHeader
       >
         {this.renderQuestion()}
         <Paper className="test-stepper-wrapper">
