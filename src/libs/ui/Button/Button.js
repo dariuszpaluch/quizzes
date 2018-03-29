@@ -31,6 +31,7 @@ export default class Button extends Component {
       <MaterialButton
         variant={variant}
         onClick={!disabled ? onClick : noop}
+        disabled={disabled}
         {...props}
       >{children}</MaterialButton>
     );

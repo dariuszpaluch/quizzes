@@ -26,6 +26,7 @@
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.37",
     "material-ui-icons": "^1.0.0-beta.36",
+    "nuka-carousel": "^4.0.1",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "raw-loader": "^0.5.1",
@@ -38,10 +39,12 @@
     "react-redux-toastr": "^7.2.3",
     "react-router-dom": "^4.2.2",
     "react-swipe": "^5.1.1",
+    "react-swipeable": "^4.2.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
+    "swipe-js-iso": "^2.0.4",
     "typeface-roboto": "0.0.43"
   },
   "devDependencies": {

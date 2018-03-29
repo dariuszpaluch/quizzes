@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 
-import { fetchTestToBeCompleted, saveTestAnswers } from 'modules/MakeTest/utils/actions';
+import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer } from 'modules/MakeTest/utils/actions';
 import TestStartView from 'modules/MakeTest/components/TestStartView/TestStartView';
 import {
   getIsFetching, getQuestions, getQuestionsIds, getTestAnswers,
@@ -58,6 +58,10 @@ class MakeTest extends Component {
     );
   }
 
+  onChangeAnswer = (questionId, answers) => {
+    this.props.onChangeQuestionAnswer(questionId, answers);
+  };
+
   renderContent() {
     if (!this.state.started)
       return this.renderStartView();
@@ -70,6 +74,7 @@ class MakeTest extends Component {
         questions={questions}
         testName={testDescription.name}
         values={answers}
+        onChangeQuestionAnswer={this.onChangeAnswer}
       />
     );
   }
@@ -103,6 +108,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
   fetchTestToBeCompleted,
   saveTestAnswers,
+  onChangeQuestionAnswer: setQuestionAnswer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakeTest);

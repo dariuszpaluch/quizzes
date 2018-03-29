@@ -1,8 +1,13 @@
 $stepper-height: 70px;
 
 .make-test-form {
-  min-height: 100vh;
+  //min-height: 100vh;
 
+  padding: 0;
+
+  > .card-content {
+    padding: 0;
+  }
   .test-stepper-wrapper {
     position: fixed;
     width: 100vw;
@@ -17,4 +22,13 @@ $stepper-height: 70px;
     }
   }
 
+}
+
+//hack to work
+.mobile-streams-list {
+  & > div > div {
+    float: left;
+    position: relative;
+    transition-property: transform;
+  }
 }
