@@ -1,4 +1,7 @@
-export const required = value => (value ? undefined : 'This field is required')
+import messages from 'modules/_forms/messages';
+
+export const required = value => (value ? undefined : messages.VALIDATION_INPUT_REQUIRED);
+
 export const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 export const minLength = min => value =>

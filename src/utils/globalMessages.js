@@ -16,6 +16,10 @@ const globalMessages = defineMessages({
   PREV: {
     id: 'Prev',
     defaultMessage: 'Prev'
+  },
+  LOGOUT: {
+    id: 'LOGOUT',
+    defaultMessage: 'Logout'
   }
 });
 

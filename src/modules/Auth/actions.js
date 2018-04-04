@@ -1,7 +1,11 @@
-import {dispatchPromiseResult} from 'actions/actionsUtils';
+import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 
-import { SIGN_IN, SIGN_UP } from './actionTypes';
+import {
+  SIGN_IN,
+  SIGN_UP,
+  LOGOUT
+} from './actionTypes';
 import { API_URL } from 'src/settings';
 
 export function signIn({ login, password}, resolve = null, reject = null) {
@@ -33,3 +37,6 @@ export function signUp(body, resolve, reject) {
   };
 }
 
+export function logout() {
+ return storeAction(LOGOUT)
+}

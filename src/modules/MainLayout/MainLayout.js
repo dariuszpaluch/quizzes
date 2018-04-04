@@ -2,6 +2,7 @@ import './main_layout.scss';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -10,9 +11,12 @@ import IconButton from 'libs/ui/IconButton/IconButton';
 import Menu from './components/Menu';
 import icons from 'consts/icons';
 import { injectIntl } from 'react-intl';
-import messages from 'modules/MainLayout/consts/messages';
 import paths from 'consts/paths';
-import { pagesTitles } from 'utils/globalMessages';
+import globalMessages, { pagesTitles } from 'utils/globalMessages';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from 'modules/Auth/actions';
+import messages from 'modules/MainLayout/consts/messages';
 
 const buttonPropTypes = PropTypes.shape({
   icon: PropTypes.string,
@@ -27,12 +31,14 @@ class MainLayout extends Component {
     appBarButtons: PropTypes.shape({
       left: buttonPropTypes,
       right: buttonPropTypes,
-    })
+    }),
+    hideMenu: PropTypes.bool,
   };
 
   static defaultProps = {
     showAppBar: true,
     appBarTittle: 'Quizzes',
+    hideMenu: false,
   };
 
   state = {
@@ -66,33 +72,45 @@ class MainLayout extends Component {
         icon: icons.settings,
         path: paths.SETTINGS,
         disabled: true,
+      },
+      {
+        label: intl.formatMessage(globalMessages.LOGOUT),
+        icon: icons.logout,
+        onClick: this.logout
       }
     ];
   }
+
+  logout = () => {
+    const { history } = this.props;
+
+    history.push(paths.INDEX);
+  };
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
   renderAppBar() {
-    const { showAppBar, appBarTittle, appBarButtons } = this.props;
+    const { showAppBar, appBarTittle, appBarButtons, hideMenu } = this.props;
 
     if (!showAppBar)
       return null;
 
     const leftButton = appBarButtons && appBarButtons.left;
     const rightButton = appBarButtons && appBarButtons.right;
+    const showLeftButton = !hideMenu || leftButton;
 
     return (
-      <AppBar className='app-bar'>
+      <AppBar className={classnames('app-bar', { 'without-left-button': !showLeftButton})}>
         <Toolbar className="toolbar">
           <div className="left-content">
-            <IconButton
+            {showLeftButton ? <IconButton
               color="inherit"
               onClick={leftButton ? leftButton.onClick : this.handleDrawerToggle}
               icon={leftButton ? leftButton.icon : icons.MENU}
               className="nav-icon"
-            />
+            /> : null}
             <div className="page-tittle">{appBarTittle}</div>
           </div>
           {rightButton ?
@@ -108,20 +126,27 @@ class MainLayout extends Component {
     )
   }
 
+  renderMenu() {
+    const { intl } = this.props;
+
+    return (
+      <Menu
+        mobileOpen={this.state.mobileOpen}
+        handleDrawerToggle={this.handleDrawerToggle}
+        items={this.navsMenu}
+        title={intl.formatMessage(messages.DRAWER_MENU_HEADER_TITLE)}
+      />
+    );
+  }
+
   render() {
-    const { children,intl } = this.props;
+    const { children, hideMenu } = this.props;
 
     return (
       <div className="main-layout">
         {this.renderAppBar()}
-        <Menu
-          mobileOpen={this.state.mobileOpen}
-          handleDrawerToggle={this.handleDrawerToggle}
-          items={this.navsMenu}
-          title={intl.formatMessage(messages.DRAWER_MENU_HEADER_TITLE)}
-        />
+        {!hideMenu && this.renderMenu()}
         <main className="content">
-          <div/>
           {children}
         </main>
       </div>
@@ -129,4 +154,8 @@ class MainLayout extends Component {
   }
 }
 
-export default injectIntl(MainLayout);
+const mapDispatchToProps = {
+  logout
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(injectIntl(MainLayout)));

@@ -36,6 +36,12 @@ $app-bar-height: 50px;
         display: flex;
       }
     }
+
+    &.without-left-button {
+      .page-tittle {
+        padding-left: 48px;
+      }
+    }
   }
 
   .content {
@@ -43,6 +49,11 @@ $app-bar-height: 50px;
     margin: $app-bar-height 0 0 0;
     width: 100%;
     min-height: calc(100vh - #{$app-bar-height});
+    display: flex;
+
+    > div {
+      width: 100%;
+    }
   }
   .mobile {
     background-color: red;

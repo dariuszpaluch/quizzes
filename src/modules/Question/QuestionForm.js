@@ -8,7 +8,7 @@ import values from 'lodash/values';
 import pick from 'lodash/pick';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
-import { required } from 'utils/validations';
+import { required } from 'modules/_forms/validations';
 
 import STRINGS from './strings';
 import Button from 'libs/ui/Button/Button';

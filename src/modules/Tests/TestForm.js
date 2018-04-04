@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import values from 'lodash/values';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
-import { required, minLength } from 'utils/validations';
+import { required, minLength } from 'modules/_forms/validations';
 
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
@@ -46,13 +46,15 @@ class TestForm extends Component {
   constructor(props) {
     super(props);
 
+    this.submit = props.handleSubmit(this.onSubmit);
+
     this.appBarButtons = {
       left: {
         onClick: this.onClickGoBack,
         icon: icons.ARROW_BACK,
       },
       right: {
-        onClick: this.onClickGoBack,
+        onClick: props.handleSubmit(this.submit),
         icon: icons.DONE,
       }
 
@@ -60,7 +62,7 @@ class TestForm extends Component {
   }
 
   onSubmit = (values) => {
-    this.props.onSubmit(values);
+    this.props.onSubmit(values, this.onClickGoBack);
   };
 
   renderQuestionsList = ({
@@ -92,7 +94,6 @@ class TestForm extends Component {
       mode,
     } = this.props;
 
-    const submit = handleSubmit(this.onSubmit);
     const pageTitle = intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE);
 
     return (
@@ -103,7 +104,7 @@ class TestForm extends Component {
         <Card
           className="tests-form"
         >
-          <form className="test-form" onSubmit={submit}>
+          <form className="test-form" onSubmit={this.submit}>
             <InputField
               name='name'
               label={intl.formatMessage(messages.TEST_INPUT_NAME)}

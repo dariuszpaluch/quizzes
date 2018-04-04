@@ -71,7 +71,7 @@ module.exports = merge(config, {
 
   plugins: [
     new Webpack.DefinePlugin({
-      'WEBPACK_API_URL': JSON.stringify('http://192.168.0.11:3000')
+      'WEBPACK_API_URL': JSON.stringify('http://localhost:3000')
     }),
     new Sync({
       host: 'localhost',

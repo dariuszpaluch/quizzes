@@ -1,6 +1,6 @@
 import {createReducer} from 'utils/reducerUtils';
 
-import {SIGN_IN} from './actionTypes';
+import {SIGN_IN, LOGOUT} from './actionTypes';
 import LocalStorageSource from 'sources/LocalStorageSource';
 
 function getInitState() {
@@ -28,10 +28,16 @@ function removeToken(authState) {
   }
 }
 
+function logout() {
+  LocalStorageSource.deleteToken();
+  return getInitState();
+}
+
 export default createReducer(getInitState(), {
   [`${SIGN_IN}_SUCCESS`]: signInSuccess,
   [`${SIGN_IN}_REQUEST`]: removeToken,
   [`${SIGN_IN}_FAILURE`]: removeToken,
+  [LOGOUT]: logout,
 });
 
 export const getToken = (state) => state.auth.token;

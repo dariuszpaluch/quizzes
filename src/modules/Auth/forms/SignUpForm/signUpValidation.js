@@ -1,4 +1,4 @@
-import { minLength } from 'utils/validations';
+import { minLength } from 'modules/_forms/validations';
 
 const MIN_PASSWORD_LENGTH = 8;
 export default function validation(values) {

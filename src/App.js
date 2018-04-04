@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import {Provider} from 'react-redux';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux';
 import AppContainer from 'containers/AppContainer';
 
 import store from './store/store';
 import Auth from 'modules/Auth';
 import Question from 'modules/Question/Question';
-import MainLayout from 'modules/MainLayout/MainLayout';
-import Tests from "modules/Tests/Tests";
-import paths from "consts/paths";
+import Tests from 'modules/Tests/Tests';
+import Dashboard from 'modules/Dashboard/Dashboard';
+
+import paths from 'consts/paths';
 
 import localeData from '../locales/data.json';
 import MakeTest from 'modules/MakeTest/MakeTest';
 
-import {addLocaleData, IntlProvider} from 'react-intl';
+import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import pl from 'react-intl/locale-data/pl';
 
@@ -36,10 +37,11 @@ export default class AppComponent extends Component {
           <BrowserRouter>
             <AppContainer>
               <Switch>
-                <Route exact path={paths.INDEX} component={Auth}/>
+                <Route path={paths.DASHBOARD} component={Dashboard}/>
                 <Route path={paths.MAKE_TEST} component={MakeTest}/>
                 <Route path={paths.TESTS} component={Tests}/>
                 <Route path={paths.QUESTIONS} component={Question}/>
+                <Route path={paths.INDEX} component={Auth}/>
               </Switch>
             </AppContainer>
           </BrowserRouter>

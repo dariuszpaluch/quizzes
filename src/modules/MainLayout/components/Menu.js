@@ -32,7 +32,11 @@ export default class Menu extends Component {
   renderMenuItems() {
     return this.props.items.map((item, index) => {
       const content = (
-        <ListItem button disabled={item.disabled}>
+        <ListItem
+          button
+          disabled={item.disabled}
+          onClick={item.onClick}
+        >
           {item.icon && <ListItemIcon><Icon>{item.icon}</Icon></ListItemIcon>}
           <ListItemText inset primary={item.label}/>
         </ListItem>
