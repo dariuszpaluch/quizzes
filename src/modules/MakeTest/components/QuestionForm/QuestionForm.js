@@ -8,6 +8,7 @@ import Checkbox from 'libs/ui/Checkbox/Checkbox';
 import Typography from 'libs/ui/Typography/Typography';
 import List from 'libs/ui/List/List';
 import normalizeList from 'utils/normalizeList';
+import Sticky from 'react-stickynode';
 
 export default class QuestionForm extends Component {
   static propTypes = {
@@ -36,6 +37,7 @@ export default class QuestionForm extends Component {
           rows={_answers.byId}
           onChangeSelect={this.props.onChange}
           selectOnClick
+          selectedClass="answer-selected"
         />
         {
 
@@ -68,9 +70,9 @@ export default class QuestionForm extends Component {
       <div
         className={classes}
       >
-        <div>
-          {question.question}
-          {description}
+        <div className="question-description" >
+          <Typography variant="headline" className="question">{question.question}</Typography>
+          <Typography variant="caption" className="description">{description}</Typography>
         </div>
         {this.renderAnswers(question.answers)}
       </div>

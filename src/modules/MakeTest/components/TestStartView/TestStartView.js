@@ -32,8 +32,6 @@ class TestStartView extends Component {
 
     const classes = classnames('test-start-view', className);
 
-    console.log(testDescription);
-
     const { description, name, created } = testDescription;
 
 

@@ -3,10 +3,7 @@ import isArray from 'lodash/isArray';
 const intlWrapValidation = (intl, validationFunc) => (...args) => {
   const resultMessage = validationFunc(...args);
 
-  console.log("TUTAJ", intl, args, resultMessage);
-  console.log(resultMessage && resultMessage.id);
   if(resultMessage && resultMessage.id) {
-    console.log("RETURN");
     return intl.formatMessage(resultMessage)
   }
 

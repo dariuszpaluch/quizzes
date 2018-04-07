@@ -41,8 +41,6 @@ export const dispatchPromiseResult = (dispatch, {
         resolve && resolve(response);
       },
       error => {
-        console.log(error);
-
         dispatch(receivedError(actionType, payload, error, hash));
         reject && reject(error);
       }

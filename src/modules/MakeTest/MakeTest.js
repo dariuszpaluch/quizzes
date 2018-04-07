@@ -80,10 +80,10 @@ class MakeTest extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, testDescription } = this.props;
 
     return (
-      <MainLayout>
+      <MainLayout appBarTittle={testDescription && testDescription.name}>
         {loading ? <Loading center/> : this.renderContent()}
       </MainLayout>
 

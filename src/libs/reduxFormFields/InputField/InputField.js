@@ -26,8 +26,6 @@ const renderInput = ({input,  meta: { touched, error, warning }, ...restProps}) 
 };
 
 const InputField = ({...props}) => {
-
-  console.log("validate", props.validate);
   return (
     <Field
       {...props}

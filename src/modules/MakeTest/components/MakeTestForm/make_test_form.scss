@@ -1,3 +1,5 @@
+@import '~styles/variables';
+
 $stepper-height: 70px;
 
 .make-test-form {
@@ -5,10 +7,14 @@ $stepper-height: 70px;
 
   padding: 0;
 
-  > .card-content {
+  > div.card-content {
     padding: 0;
+    height: 100%;
+    margin-bottom: $stepper-height;
   }
+
   .test-stepper-wrapper {
+    height: $stepper-height;
     position: fixed;
     width: 100vw;
     left: 0;
@@ -26,9 +32,15 @@ $stepper-height: 70px;
 
 //hack to work
 .mobile-streams-list {
-  & > div > div {
-    float: left;
-    position: relative;
-    transition-property: transform;
+  height: 100%;
+  margin-bottom: $stepper-height;
+  > div {
+    display: flex;
+    height: 100%;
+
+    > div {
+      position: relative;
+      transition-property: transform;
+    }
   }
 }

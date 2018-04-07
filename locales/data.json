@@ -56,7 +56,7 @@
     "make-test.created-test": "Data utworzenia",
     "make-test.description-test": "Opis testu",
     "make-test.numberOfQuestions": "Liczba pytań",
-    "make-test.question-stepper-label": "__make-test.question-stepper-label__",
+    "make-test.question-stepper-label": "Pytanie {step} z {numberOfQuestions}",
     "make-test.start-test.button": "Rozpocznij test",
     "password": "Hasło",
     "question": "Pytanie",

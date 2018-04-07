@@ -27,6 +27,7 @@ export default class List extends Component {
     selectedRowsIds: PropTypes.arrayOf(PropTypes.string),
     onChangeSelect: PropTypes.func,
     selectOnClick: PropTypes.bool,
+    selectedClass: PropTypes.string,
   };
 
   static defaultProps = {
@@ -35,6 +36,7 @@ export default class List extends Component {
     rowsIds: {},
     rows: [],
     selectOnClick: false,
+    selectedClass: '',
   };
 
   constructor(props) {
@@ -55,8 +57,6 @@ export default class List extends Component {
   };
 
   onChangeSelect = (rowId, checked) => {
-    console.log(rowId, checked);
-
     const newValue = checked ?
       [...this.props.selectedRowsIds, rowId]
       : filter(this.props.selectedRowsIds, _rowId => _rowId !== rowId);
@@ -69,7 +69,8 @@ export default class List extends Component {
       selectedRowsIds,
       rowsIds,
       rows,
-      selectOnClick
+      selectOnClick,
+      selectedClass,
     } = this.props;
 
     const classes = classnames('list');
@@ -83,6 +84,9 @@ export default class List extends Component {
 
           return [
             <ListItem
+              className={classnames({
+                [selectedClass]: selected,
+              })}
               key={`${row.id}-item`}
               button={selectOnClick}
               onClick={selectOnClick ? this.onChangeSelect.bind(null, row.id, !selected) : null}
