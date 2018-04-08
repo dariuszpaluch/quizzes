@@ -66,7 +66,7 @@ const Stepper = ({
             size="small"
             variant='flat'
             onClick={onPrev}
-            disabled={disabledPrev || !activeStep}
+            disabled={disabledPrev}
           ><Icon className="prev-icon" icon={icons.ARROW_LEFT} size={25}/>{prevLabel}</Button>
         }
         nextButton={
@@ -75,7 +75,7 @@ const Stepper = ({
             size="small"
             variant='flat'
             onClick={onNext}
-            disabled={disabledNext || activeStep === steps - 1}
+            disabled={disabledNext}
           >{nextLabel}<Icon icon={icons.ARROW_RIGHT} size={25}/></Button>
         }
       />

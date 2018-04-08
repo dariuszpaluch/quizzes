@@ -40,7 +40,7 @@ class MakeTestForm extends Component {
   }
 
   changeStep(activeStep) {
-    if(activeStep !== this.state.activeStep) {
+    if (activeStep !== this.state.activeStep) {
       this.setState({
         activeStep
       }, () => {
@@ -78,7 +78,7 @@ class MakeTestForm extends Component {
   onTransitionEnd = (index) => {
     const { values, questionsIds } = this.props;
 
-    if(index > this.state.activeStep && !size(values[questionsIds[index - 1]]) ) {
+    if (index > this.state.activeStep && !size(values[questionsIds[index - 1]])) {
       this.swipeList.prev();
     }
     else {
@@ -105,8 +105,8 @@ class MakeTestForm extends Component {
     });
   }
 
-  render() {
-    const { intl, testName, questionsIds, values } = this.props;
+  renderStepper() {
+    const { intl, testName, questionsIds, values, onFinish } = this.props;
     const { activeStep } = this.state;
 
     const questionId = this.getActiveQuestionId();
@@ -114,6 +114,31 @@ class MakeTestForm extends Component {
     const questionIsValid = !!size(values[questionId]);
 
     const numberOfSteps = size(questionsIds);
+
+    const nextLabelMessage = activeStep === numberOfSteps - 1 ? messages.FINISH_TEST : globalMessages.NEXT;
+
+    return (
+      <Paper className="test-stepper-wrapper">
+        <Stepper
+          className="test-stepper"
+          activeStep={activeStep}
+          steps={numberOfSteps}
+          onNext={activeStep < numberOfSteps - 1 ? this.onGoNext : onFinish}
+          onPrev={this.onGoPrev}
+          disabledNext={activeStep >= numberOfSteps || !questionIsValid}
+          disabledPrev={!activeStep}
+          nextLabel={intl.formatMessage(nextLabelMessage)}
+          prevLabel={intl.formatMessage(globalMessages.PREV)}
+          stepLabel={intl.formatMessage(messages.QUESTION_STEPPER_LABEL, {
+            step: activeStep + 1,
+            numberOfQuestions: numberOfSteps,
+          })}
+        />
+      </Paper>
+    )
+  }
+
+  render() {
     return (
       <Card
         className="make-test-form"
@@ -131,24 +156,7 @@ class MakeTestForm extends Component {
         >
           {this.renderQuestion()}
         </ReactSwipe>
-
-        <Paper className="test-stepper-wrapper">
-          <Stepper
-            className="test-stepper"
-            activeStep={activeStep}
-            steps={numberOfSteps}
-            onNext={this.onGoNext}
-            onPrev={this.onGoPrev}
-            disabledNext={activeStep > numberOfSteps - 1 || !questionIsValid}
-            disabledPrev={!activeStep}
-            nextLabel={intl.formatMessage(globalMessages.NEXT)}
-            prevLabel={intl.formatMessage(globalMessages.PREV)}
-            stepLabel={intl.formatMessage(messages.QUESTION_STEPPER_LABEL, {
-              step: activeStep + 1,
-              numberOfQuestions: numberOfSteps,
-            })}
-          />
-        </Paper>
+        {this.renderStepper()}
       </Card>
 
     );

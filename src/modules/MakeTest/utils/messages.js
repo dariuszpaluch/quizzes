@@ -20,6 +20,26 @@ const messages = defineMessages({
   QUESTION_STEPPER_LABEL : {
     id: 'make-test.question-stepper-label',
     defaultMessage: 'Question { step } of { numberOfQuestions}'
+  },
+  TEST_SUMMARY: {
+    id: 'make-test.test-summary',
+    defaultMessage: 'Test summary',
+  },
+  FINISH_TEST: {
+    id: 'make-test.finish-test',
+    defaultMessage: 'Finish test',
+  },
+  RETURN_TO_TEST: {
+    id: 'make-test.return-to-test',
+    defaultMessage: 'Return to test',
+  },
+  TEST_SAVE_SUCCESS_TOASTR: {
+    id: 'make-test.test-save-success',
+    defaultMessage: 'Test saved success'
+  },
+  TEST_SAVE_FAILURE_TOASTR: {
+    id: 'make-test.test-save-failure',
+    defaultMessage: 'Test save failure',
   }
 });
 

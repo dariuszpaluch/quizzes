@@ -79,23 +79,25 @@ export default class List extends Component {
       <MaterialList className={classes}>
         {rowsIds.map(rowId => {
           const row = rows[rowId];
-          const open = this.state.openItems[row.id];
-          const selected = selectedRowsIds.indexOf(row.id) > -1;
+          const open = this.state.openItems[rowId];
+          const selected = selectedRowsIds.indexOf(rowId) > -1;
+
+          console.log(this.state.openItems, open);
 
           return [
             <ListItem
               className={classnames({
                 [selectedClass]: selected,
               })}
-              key={`${row.id}-item`}
+              key={`${rowId}-item`}
               button={selectOnClick}
-              onClick={selectOnClick ? this.onChangeSelect.bind(null, row.id, !selected) : null}
+              onClick={selectOnClick ? this.onChangeSelect.bind(null, rowId, !selected) : null}
             >
               {this.props.onChangeSelect && (
                 <Checkbox
                   tabIndex={selectOnClick ? -1 : null}
                   checked={selected}
-                  onChange={!selectOnClick ? this.onChangeSelect.bind(null, row.id) : noop}
+                  onChange={!selectOnClick ? this.onChangeSelect.bind(null, rowId) : noop}
                 />
               )}
               <ListItemText inset primary={row.label}/>
@@ -103,7 +105,7 @@ export default class List extends Component {
                 row.children ?
                   <IconButton
                     icon={open ? icons.ARROW_UP : icons.ARROW_DOWN}
-                    onClick={this.onToggleItemCollapse.bind(null, row.id)}
+                    onClick={this.onToggleItemCollapse.bind(null, rowId)}
                   />
                   : null
               }
@@ -111,7 +113,7 @@ export default class List extends Component {
 
             row.children ?
               <Collapse
-                key={`${row.id}-item-children`}
+                key={`${rowId}-item-children`}
                 in={open}
                 timeout="auto"
                 unmountOnExit

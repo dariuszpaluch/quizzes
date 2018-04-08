@@ -16,6 +16,7 @@ const icons = {
   DONE: 'done',
   MENU: 'menu',
   CLOSE: 'close',
+  SAVE: 'save',
 };
 
 export default icons;

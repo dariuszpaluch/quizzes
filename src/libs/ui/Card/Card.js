@@ -17,7 +17,10 @@ export default class Card extends Component {
       onClick: PropTypes.func,
     }),
     centerHeader: PropTypes.bool,
-    actions: PropTypes.element,
+    actions: PropTypes.any,
+    contentClass: PropTypes.string,
+    actionsClass: PropTypes.string,
+    headerClass: PropTypes.string,
   };
 
   static defaultProps = {
@@ -26,6 +29,9 @@ export default class Card extends Component {
     className: '',
     centerHeader: false,
     actions: null,
+    contentClass: '',
+    actionsClass: '',
+    headerClass: '',
   };
 
   renderHeaderAction() {
@@ -43,6 +49,7 @@ export default class Card extends Component {
     const {
       title,
       subheader,
+      headerClass,
     } = this.props;
 
     if(!title && !subheader) {
@@ -51,7 +58,7 @@ export default class Card extends Component {
 
     return (
       <CardHeader
-        className="card-header"
+        className={classnames("card-header", headerClass)}
         title={ title }
         subheader={subheader}
         action={this.renderHeaderAction()}
@@ -68,6 +75,9 @@ export default class Card extends Component {
       centerHeader,
       title,
       subheader,
+      contentClass,
+      actionsClass,
+      headerClass,
       ...props,
     } = this.props;
 
@@ -82,10 +92,10 @@ export default class Card extends Component {
         {...props}
       >
         {this.renderHeader()}
-        <CardContent className="card-content">
+        <CardContent className={ classnames("card-content", contentClass)}>
           {children}
         </CardContent>
-        {!!actions ? <CardActions>{actions}</CardActions> : null}
+        {!!actions ? <CardActions className={actionsClass}>{actions}</CardActions> : null}
       </MaterialCard>
     );
   }

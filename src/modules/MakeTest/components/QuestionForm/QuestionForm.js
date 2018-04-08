@@ -30,7 +30,6 @@ export default class QuestionForm extends Component {
 
     return (
       <div className="answers-options">
-
         <List
           selectedRowsIds={this.props.value}
           rowsIds={_answers.allIds}
@@ -39,22 +38,6 @@ export default class QuestionForm extends Component {
           selectOnClick
           selectedClass="answer-selected"
         />
-        {
-
-          // answers.map((answer, index) => {
-          //   return (
-          //     <div
-          //       key={answer.id || index}
-          //       className="answer-option"
-          //     >
-          //       <Checkbox
-          //         onChange={() => {
-          //         }}/>
-          //       <Typography variant="display1">{answer.label}</Typography>
-          //     </div>
-          //   );
-          // })
-        }
       </div>
     );
   }
