@@ -2,7 +2,7 @@ import {createReducer, updateObject} from 'utils/reducerUtils';
 import filter from 'lodash/filter';
 
 import { FETCH_QUESTIONS, DELETE_QUESTION } from './actionTypes';
-import {FETCH_QUESTION} from "modules/Question/actionTypes";
+import {FETCH_QUESTION} from "modules/Question/utils/actionTypes";
 import normalizeList from "utils/normalizeList";
 
 function getInitState() {

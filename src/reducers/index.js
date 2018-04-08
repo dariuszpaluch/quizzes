@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 
 import {reducer as FormReducer} from 'redux-form';
 import AuthReducer from 'modules/Auth/reducer';
-import QuestionsReducer from 'modules/Question/reducer';
+import QuestionsReducer from 'modules/Question/utils/reducer';
 import TestsReducer from 'modules/Tests/utils/reducer';
 import MakeTestReducer from 'modules/MakeTest/utils/reducer';
 

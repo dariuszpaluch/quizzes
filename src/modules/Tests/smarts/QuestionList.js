@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchQuestions } from 'modules/Question/actions';
+import { fetchQuestions } from 'modules/Question/utils/actions';
 
 
-import { deleteQuestion } from 'modules/Question/actions';
-import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/getters';
+import { deleteQuestion } from 'modules/Question/utils/actions';
+import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
 import { injectIntl } from 'react-intl'
 import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
 import ChipList from 'libs/ui/ChipList';

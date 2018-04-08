@@ -1,7 +1,7 @@
 import {dispatchPromiseResult} from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 import {ADD_QUESTION, FETCH_QUESTIONS, DELETE_QUESTION} from './actionTypes';
-import {FETCH_QUESTION} from "modules/Question/actionTypes";
+import {FETCH_QUESTION} from "modules/Question/utils/actionTypes";
 import { API_URL } from 'src/settings';
 
 export function addQuestion({question, description, answers}, resolve = null, reject = null) {

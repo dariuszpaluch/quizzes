@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {withRouter} from "react-router-dom";
-import {fetchQuestion} from "modules/Question/actions";
+import {fetchQuestion} from "modules/Question/utils/actions";
 import QuestionForm from "modules/Question/QuestionForm";
-import {getQuestion, getQuestionLoading} from "modules/Question/getters";
+import {getQuestion, getQuestionLoading} from "modules/Question/utils/getters";
 
 class EditQuestion extends Component {
   componentWillMount() {

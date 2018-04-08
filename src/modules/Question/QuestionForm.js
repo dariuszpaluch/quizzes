@@ -10,11 +10,11 @@ import pick from 'lodash/pick';
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import { required } from 'modules/_forms/validations';
 
-import STRINGS from './strings';
+import STRINGS from './utils/strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import AnswersForm from './components/AnswersForm'
-import {addQuestion} from "./actions";
+import {addQuestion} from "./utils/actions";
 
 const MODES = {
   EDIT: 'EDIT',

@@ -5,7 +5,7 @@ import {FieldArray} from 'redux-form';
 import InputField from "libs/reduxFormFields/InputField";
 import Button from "../../../libs/ui/Button/Button";  // ES6
 
-import STRINGS  from '../strings';
+import STRINGS  from '../utils/strings';
 import IconButton from "../../../libs/ui/IconButton/IconButton";
 const propTypes = {
   className: PropTypes.string,

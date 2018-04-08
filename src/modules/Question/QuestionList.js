@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {fetchQuestions} from './actions';
+import {fetchQuestions} from './utils/actions';
 
 
 import Card from 'libs/ui/Card';
-import STRINGS from './strings';
+import STRINGS from './utils/strings';
 import Table from "libs/ui/Table/Table";
 import Button from "../../libs/ui/Button/Button";
-import {deleteQuestion} from "modules/Question/actions";
+import {deleteQuestion} from "modules/Question/utils/actions";
 import {toastr} from 'react-redux-toastr'
-import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/getters";
+import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/utils/getters";
 import {injectIntl} from 'react-intl'
-import messages from './messages';
+import messages from './utils/messages';
 import SimpleQuestionlist from "modules/Question/components/SimpleQuestionList";
 
 class QuestionList extends Component {
