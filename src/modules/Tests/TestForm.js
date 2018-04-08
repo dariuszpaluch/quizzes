@@ -107,17 +107,17 @@ class TestForm extends Component {
           <form className="test-form" onSubmit={this.submit}>
             <InputField
               name='name'
-              label={intl.formatMessage(messages.TEST_INPUT_NAME)}
+              label={intl.formatMessage(messages.TEST_NAME)}
               validate={[required, quizNameMinLength]}
             />
             <InputField
               name='description'
-              label={intl.formatMessage(messages.TEST_INPUT_DESCRIPTION)}
+              label={intl.formatMessage(messages.TEST_DESCRIPTION)}
             />
             <Field
               name='questionsIds'
               component={this.renderQuestionsList}
-              label={intl.formatMessage(messages.TEST_INPUT_QUESTIONS)}
+              label={intl.formatMessage(messages.TEST_QUESTIONS)}
             />
             <Button
               type="submit"

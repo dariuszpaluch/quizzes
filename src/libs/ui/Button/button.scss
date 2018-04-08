@@ -1,5 +1,13 @@
-.button {
-  > .icon-button {
-    margin: 0 5px;
+button.button {
+  > span {
+    display: flex;
+
+    > .icon-button {
+      margin: 0 5px;
+    }
   }
+
+  &.reverse > span {
+    flex-direction: row-reverse;
+  };
 }

@@ -3,6 +3,7 @@ import {createReducer, updateObject} from 'utils/reducerUtils';
 import { FETCH_TEST_TO_BE_COMPLETED } from './actionTypes';
 import normalizeList from 'utils/normalizeList';
 import { SET_QUESTION_ANSWER } from 'modules/MakeTest/utils/actionTypes';
+import omit from 'lodash/omit';
 
 function getInitState() {
   return {
@@ -21,7 +22,7 @@ function fetchTestToBeCompletedSuccess(state, action) {
 
   return updateObject(state, {
     testData: {
-      ...test,
+      ...omit(test, 'questions'),
       created: test.created && new Date(test.created),
     },
     questions: normalizeList(test.questions),

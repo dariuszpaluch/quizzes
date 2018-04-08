@@ -1,6 +1,6 @@
 import {createReducer, updateObject} from 'utils/reducerUtils';
 
-import { GET_TESTS, GET_TEST } from './actionTypes';
+import { GET_TESTS, GET_TEST, GET_TEST_DETAILS } from './actionTypes';
 import normalizeList from "utils/normalizeList";
 
 function getInitState() {
@@ -17,7 +17,7 @@ function getTestsSuccess(state, action) {
   return updateObject(state, { testsList: normalizeList(action.data) })
 }
 
-function getTestSuccess(state, action) {
+function getTestDetailsSuccess(state, action) {
   const test = action.data;
 
   return updateObject(state, {
@@ -33,5 +33,5 @@ function getTestSuccess(state, action) {
 
 export default createReducer(getInitState(), {
   [`${GET_TESTS}_SUCCESS`]: getTestsSuccess,
-  [`${GET_TEST}_SUCCESS`]: getTestSuccess,
+  [`${GET_TEST_DETAILS}_SUCCESS`]: getTestDetailsSuccess,
 });

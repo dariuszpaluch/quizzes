@@ -14,6 +14,7 @@ export default class Button extends Component {
     color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
     disabled: PropTypes.bool,
     icon: PropTypes.string,
+    reverse: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -21,6 +22,7 @@ export default class Button extends Component {
     color: 'default',
     disabled: false,
     icon: '',
+    reverse: false,
   };
 
   render() {
@@ -31,13 +33,17 @@ export default class Button extends Component {
       disabled,
       icon,
       className,
+      reverse,
       ...props,
     } = this.props;
 
+    const classes = classnames('button', {
+      reverse,
+    },className);
 
     return (
       <MaterialButton
-        className={classnames('button', className)}
+        className={classes}
         variant={variant}
         onClick={!disabled ? onClick : noop}
         disabled={disabled}

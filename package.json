@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "copy-to-clipboard": "^3.0.8",
     "es6-promise": "^4.1.1",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",

@@ -1,11 +1,11 @@
 import {defineMessages} from "react-intl";
 
 const messages = defineMessages({
-  TEST_INPUT_NAME: {
+  TEST_NAME: {
     id:'test.input.name',
-    defaultMessage: 'Name of the test',
+    defaultMessage: 'Name',
   },
-  TEST_INPUT_DESCRIPTION: {
+  TEST_DESCRIPTION: {
     id: 'test.input.description',
     defaultMessage: 'Description',
   },
@@ -17,7 +17,7 @@ const messages = defineMessages({
     id: 'test.header.add.mode',
     defaultMessage: 'Add test',
   },
-  TEST_INPUT_QUESTIONS: {
+  TEST_QUESTIONS: {
     id:'test.input.questions',
     defaultMessage: 'Questions',
   },
@@ -28,6 +28,14 @@ const messages = defineMessages({
   TEST_DETAIL_HEADER: {
     id: 'test.detail.header',
     defaultMessage: 'Test: {name}'
+  },
+  TEST_DETAIL_SHARE_TEST_BY_URL: {
+    id: 'test.detail.share-test',
+    defaultMessage: 'Share test by url'
+  },
+  TEST_URL_COPIED_TO_CLIPBOARD: {
+    id: 'test-url-copied-to-clipboard',
+    defaultMessage: 'Test url has been copied to the clipboard',
   }
 });
 

@@ -29,9 +29,11 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
       if (customResponseHandler) return response;
 
       if (response.status >= 400) {
+
         if (submissionError) {
           return response.json().then((err) => submissionError(err));
         } else {
+
           const result = await response.json();
           console.error(result, response.status);
           throw new customException(result, response.status);
