@@ -6,7 +6,7 @@ import forEach from 'lodash/forEach';
 
 import filter from "lodash/filter";
 
-import List from 'libs/ui/List';
+// import List from 'libs/ui/List';
 
 class SimpleQuestionlist extends Component {
   static propTypes = {
@@ -74,6 +74,8 @@ class SimpleQuestionlist extends Component {
       questions,
       selectedIds,
     } = this.props;
+
+    return null;
 
     return (
       <List
