@@ -1,11 +1,12 @@
+
 const paths = {
-  INDEX: '/',
-  DASHBOARD: '/dashboard',
-  MAKE_TEST: '/make-test/:testId',
-  QUESTIONS: '/question',
-  TESTS: '/tests',
-  SETTINGS: '/settings',
-  TESTS_RESULTS: '/tests-results',
+  INDEX: `${PUBLIC_PATH}`,
+  DASHBOARD: `${PUBLIC_PATH}/dashboard`,
+  MAKE_TEST: `${PUBLIC_PATH}/make-test/:testId`,
+  QUESTIONS: `${PUBLIC_PATH}/question`,
+  TESTS: `${PUBLIC_PATH}/tests`,
+  SETTINGS: `${PUBLIC_PATH}/settings`,
+  TESTS_RESULTS: `${PUBLIC_PATH}/tests-results`,
 };
 
 export default paths;
