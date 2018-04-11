@@ -49,6 +49,7 @@ class TestDetail extends Component {
       <MainLayout
         appBarTittle={intl.formatMessage(messages.TEST_DETAIL_HEADER, { name: test.name})}
         appBarButtons={this.appBarButtons}
+
       >
         <Card>
         </Card>
