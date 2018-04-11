@@ -15,6 +15,7 @@ import MainLayout from 'modules/MainLayout/MainLayout';
 import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import classnames from 'classnames';
+import paths from 'consts/paths';
 
 
 class Auth extends Component {
@@ -30,13 +31,13 @@ class Auth extends Component {
     this.tabs = [
       {
         label: props.intl.formatMessage(messages.SIGN_IN),
-        value: '/sign-in',
-        path: '/sign-in'
+        value: paths.SIGN_IN,
+        path: paths.SIGN_IN,
       },
       {
         label: props.intl.formatMessage(messages.SIGN_UP),
-        value: '/sign-up',
-        path: '/sign-up'
+        value: paths.SIGN_UP,
+        path: paths.SIGN_UP,
       }
     ];
 
