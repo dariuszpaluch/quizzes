@@ -43,7 +43,8 @@ module.exports = merge(config, {
     //   }
     // }),
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),
     }),
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new Webpack.optimize.UglifyJsPlugin({
