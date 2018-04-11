@@ -7,6 +7,9 @@ const config = require('./config');
 
 const publicPath = process.env.PUBLIC_URL || process.env.npm_package_config_public_path;
 
+
+console.log(publicPath, "PUBLIC PATH");
+
 module.exports = merge(config, {
   module: {
     rules: [
