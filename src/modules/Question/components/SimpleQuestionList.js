@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 import forEach from 'lodash/forEach';
 
-import Collapse from 'material-ui/transitions/Collapse';
-import Checkbox from 'material-ui/Checkbox';
-import IconButton from "libs/ui/IconButton/IconButton";
-import icons from "consts/icons";
 import filter from "lodash/filter";
 
 import List from 'libs/ui/List';

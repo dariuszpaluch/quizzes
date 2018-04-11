@@ -5,8 +5,10 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const Html = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+const packageJSON = require(path.resolve(__dirname, '../package.json'));
+
 module.exports = {
-  context: path.resolve('./'),
+  context: path.resolve(__dirname, '../'),
   entry: [
     'babel-polyfill',
     path.resolve(__dirname, '../src/styles/index.scss'),
@@ -31,11 +33,11 @@ module.exports = {
   },
   output: {
     filename: '[hash].js',
-    path: path.resolve('./build'),
+    path: path.resolve(__dirname, '../build')
   },
   plugins: [
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify(require("../package.json").version),
+      VERSION: JSON.stringify(packageJSON.version),
     }),
     new webpack.ProvidePlugin({
       moment: 'moment',
@@ -76,19 +78,19 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      actions:    path.resolve('./src/actions'),
-      assets:     path.resolve('./assets'),
-      styles:     path.resolve('./src/styles'),
-      components: path.resolve('./src/components'),
-      containers: path.resolve('./src/containers'),
-      reducers:   path.resolve('./src/reducers'),
-      libs:       path.resolve('./src/libs'),
-      modules:    path.resolve('./src/modules'),
-      consts:     path.resolve('./src/consts'),
-      utils:      path.resolve('./src/utils'),
-      config:     path.resolve('./src/config'),
-      sources:    path.resolve('./src/sources'),
-      src:        path.resolve('src'),
+      actions:    path.resolve(__dirname, '../src/actions'),
+      assets:     path.resolve(__dirname,'../assets'),
+      styles:     path.resolve(__dirname,'../src/styles'),
+      components: path.resolve(__dirname,'../src/components'),
+      containers: path.resolve(__dirname,'../src/containers'),
+      reducers:   path.resolve(__dirname,'../src/reducers'),
+      libs:       path.resolve(__dirname,'../src/libs'),
+      modules:    path.resolve(__dirname,'../src/modules'),
+      consts:     path.resolve(__dirname,'../src/consts'),
+      utils:      path.resolve(__dirname,'../src/utils'),
+      config:     path.resolve(__dirname,'../src/config'),
+      sources:    path.resolve(__dirname,'../src/sources'),
+      src:        path.resolve(__dirname,'../src'),
     }
   }
 };
