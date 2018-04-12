@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { Route, Switch, withRouter } from 'react-router-dom'
 
-
 import Tabs from 'libs/ui/Tabs';
 import Card from 'libs/ui/Card/Card';
 
@@ -16,7 +15,6 @@ import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import classnames from 'classnames';
 import paths from 'consts/paths';
-
 
 class Auth extends Component {
   static propTypes = {};
@@ -53,17 +51,17 @@ class Auth extends Component {
       match
     } = this.props;
 
-
-    console.log(this.props, this.props.location.pathname, this.tabs);
-
     return (
       <MainLayout hideMenu>
-        <div className={classnames('auth','row')}  style={{ width: '100%' }}>
+        <div
+          className={classnames('auth','row')}
+          style={{ width: '100%' }}
+        >
           <div className="col-xs-12">
             <Card>
               <Tabs
                 tabs={this.tabs}
-                value={this.props.match.url}
+                value={match.url}
                 onChange={this.onChangeTab}
                 indicatorColor="primary"
                 textColor="primary"
@@ -82,7 +80,7 @@ class Auth extends Component {
                 />
                 <Route
                   exact
-                  path={paths.SIGN_IN}
+                  path={paths.SIGN_UP}
                   component={SignInForm}
                 />
               </Switch>
