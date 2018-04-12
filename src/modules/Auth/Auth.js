@@ -53,6 +53,9 @@ class Auth extends Component {
       match
     } = this.props;
 
+
+    console.log(this.props, this.props.location.pathname, this.tabs);
+
     return (
       <MainLayout hideMenu>
         <div className={classnames('auth','row')}  style={{ width: '100%' }}>
