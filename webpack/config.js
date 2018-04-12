@@ -6,6 +6,7 @@ const Html = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
+const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -32,12 +33,12 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[hash].js',
-    path: path.resolve(__dirname, '../build')
+    path: path.resolve(__dirname, '../build'),
   },
   plugins: [
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(packageJSON.version),
+      PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
     }),
     new webpack.ProvidePlugin({
       moment: 'moment',
@@ -78,19 +79,19 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      actions:    path.resolve(__dirname, '../src/actions'),
-      assets:     path.resolve(__dirname,'../assets'),
-      styles:     path.resolve(__dirname,'../src/styles'),
-      components: path.resolve(__dirname,'../src/components'),
-      containers: path.resolve(__dirname,'../src/containers'),
-      reducers:   path.resolve(__dirname,'../src/reducers'),
-      libs:       path.resolve(__dirname,'../src/libs'),
-      modules:    path.resolve(__dirname,'../src/modules'),
-      consts:     path.resolve(__dirname,'../src/consts'),
-      utils:      path.resolve(__dirname,'../src/utils'),
-      config:     path.resolve(__dirname,'../src/config'),
-      sources:    path.resolve(__dirname,'../src/sources'),
-      src:        path.resolve(__dirname,'../src'),
+      actions: path.resolve(__dirname, '../src/actions'),
+      assets: path.resolve(__dirname, '../assets'),
+      styles: path.resolve(__dirname, '../src/styles'),
+      components: path.resolve(__dirname, '../src/components'),
+      containers: path.resolve(__dirname, '../src/containers'),
+      reducers: path.resolve(__dirname, '../src/reducers'),
+      libs: path.resolve(__dirname, '../src/libs'),
+      modules: path.resolve(__dirname, '../src/modules'),
+      consts: path.resolve(__dirname, '../src/consts'),
+      utils: path.resolve(__dirname, '../src/utils'),
+      config: path.resolve(__dirname, '../src/config'),
+      sources: path.resolve(__dirname, '../src/sources'),
+      src: path.resolve(__dirname, '../src'),
     }
   }
 };

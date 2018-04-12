@@ -1,3 +1,5 @@
+const path = require('path');
+
 const Extract = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
@@ -5,10 +7,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const config = require('./config');
 
-const PUBLIC_PATH = process.env.PUBLIC_URL || process.env.npm_package_config_public_path;
 
-
-console.log(PUBLIC_PATH, "PUBLIC PATH");
+const packageJSON = require(path.resolve(__dirname, '../package.json'));
+const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 
 module.exports = merge(config, {
   module: {
@@ -31,7 +32,7 @@ module.exports = merge(config, {
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
-    publicPath: PUBLIC_PATH
+    publicPath: PUBLIC_PATH,
   },
   plugins: [
     new Extract('[name].[chunkhash].css'),
@@ -45,7 +46,6 @@ module.exports = merge(config, {
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),
-      PUBLIC_PATH,
     }),
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new Webpack.optimize.UglifyJsPlugin({

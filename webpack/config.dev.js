@@ -1,25 +1,32 @@
+const path = require('path');
+
 const Sync = require('browser-sync-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
 
 const config = require('./config');
 
-const port = process.env.npm_package_config_port;
-const publicPath = process.env.npm_package_config_public_path;
 
+const packageJSON = require(path.resolve(__dirname, '../package.json'));
+const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
+const port = packageJSON.config.port;
+console.log("TUTAJ", __dirname, path.resolve(__dirname, '../src/index.js'));
+
+
+console.log(PUBLIC_PATH)
 module.exports = merge(config, {
   devtool: '#eval-source-map',
   devServer: {
     contentBase: 'build',
+    hot: true,
+    inline: true,
+    port: parseInt(port) - 1,
+    host: '0.0.0.0',
     disableHostCheck: true,
     headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true" },
     historyApiFallback: {
       disableDotRule: true
-    },
-    hot: true,
-    inline: true,
-    port: parseInt(port) - 1,
-    host: '0.0.0.0'
+    }
   },
   module: {
     rules: [
@@ -66,20 +73,21 @@ module.exports = merge(config, {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
-    publicPath: publicPath,
+    publicPath: PUBLIC_PATH,
   },
 
   plugins: [
     new Webpack.DefinePlugin({
-      'WEBPACK_API_URL': JSON.stringify('http://localhost:3000')
+      'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),
     }),
     new Sync({
       host: 'localhost',
       logLevel: 'silent',
       notify: false,
       open: false,
+      ghostMode: false,
       port: parseInt(port),
-      proxy: 'http://localhost:' + (parseInt(port) - 1) + publicPath,
+      proxy: 'http://localhost:' + (parseInt(port) - 1) + PUBLIC_PATH,
       ui: false,
     }, {
         reload: false,
@@ -90,8 +98,12 @@ module.exports = merge(config, {
     new Webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
 
-    new Webpack.NoEmitOnErrorsPlugin()
+    new Webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors
+
+    new Webpack.LoaderOptionsPlugin({
+      debug: true
+    })
   ],
 
 });
