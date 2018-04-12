@@ -63,7 +63,7 @@ class Auth extends Component {
             <Card>
               <Tabs
                 tabs={this.tabs}
-                value={this.props.match.path}
+                value={this.props.match.url}
                 onChange={this.onChangeTab}
                 indicatorColor="primary"
                 textColor="primary"
@@ -72,17 +72,17 @@ class Auth extends Component {
               <Switch>
                 <Route
                   exact
-                  path={`${ match.url}sign-up`}
+                  path={paths.SIGN_UP}
                   component={SignUpForm}
                 />
                 <Route
                   exact
-                  path={`${ match.url}`}
+                  path={paths.SIGN_IN}
                   component={SignInForm}
                 />
                 <Route
                   exact
-                  path={`${ match.url}sign-in`}
+                  path={paths.SIGN_IN}
                   component={SignInForm}
                 />
               </Switch>
