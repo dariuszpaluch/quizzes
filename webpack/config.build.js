@@ -50,6 +50,7 @@ module.exports = merge(config, {
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new Webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
+
       compress: {
         booleans: true,
         collapse_vars: true,
