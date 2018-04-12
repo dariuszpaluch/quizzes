@@ -72,7 +72,7 @@ class Auth extends Component {
               <Switch>
                 <Route
                   exact
-                  path={paths.SIGN_UP}
+                  path={paths.INDEX}
                   component={SignUpForm}
                 />
                 <Route
