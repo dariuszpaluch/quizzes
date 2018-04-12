@@ -63,7 +63,7 @@ class Auth extends Component {
             <Card>
               <Tabs
                 tabs={this.tabs}
-                value={this.props.location.pathname}
+                value={this.props.match.path}
                 onChange={this.onChangeTab}
                 indicatorColor="primary"
                 textColor="primary"
