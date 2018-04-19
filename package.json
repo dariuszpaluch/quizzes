@@ -13,7 +13,8 @@
   "config": {
     "page_title": "Quizzes",
     "port": 5000,
-    "public_path": "/"
+    "public_path": "/",
+    "api_url": "localhost:8000"
   },
   "author": "Dariusz Paluch",
   "license": "ISC",

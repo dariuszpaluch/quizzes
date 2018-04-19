@@ -8,6 +8,8 @@ const webpack = require('webpack');
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 
+const API_URL = process.env.API_URL || packageJSON.config.api_url;
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: [
@@ -39,6 +41,7 @@ module.exports = {
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(packageJSON.version),
       PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
+      WEBPACK_API_URL: JSON.stringify(API_URL),
     }),
     new webpack.ProvidePlugin({
       moment: 'moment',
