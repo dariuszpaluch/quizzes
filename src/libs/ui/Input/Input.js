@@ -31,8 +31,6 @@ export default class Input extends Component {
       'have-error': !!error,
     });
 
-    console.log(helperText, error);
-
     return (
       <MaterialTextField
         className={classes}

@@ -10,10 +10,7 @@ const config = require('./config');
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 const port = packageJSON.config.port;
-console.log("TUTAJ", __dirname, path.resolve(__dirname, '../src/index.js'));
 
-
-console.log(PUBLIC_PATH)
 module.exports = merge(config, {
   devtool: '#eval-source-map',
   devServer: {

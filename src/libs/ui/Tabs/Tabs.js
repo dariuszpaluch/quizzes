@@ -45,8 +45,6 @@ export default class Tabs extends Component {
     } = this.props;
 
     return findIndex(tabs, ({ value: tabValue }) => {
-      console.log(value, tabValue);
-
       if(isArray(tabValue)) {
         return tabValue.indexOf(value) > -1;
       }
@@ -71,8 +69,6 @@ export default class Tabs extends Component {
       tabs,
       ...props,
     } = this.props;
-
-    console.log(this.getSelectedIndex() );
 
     return (
       <MaterialTabs

@@ -20,12 +20,9 @@ let defaultMessages = globSync(filePattern)
     }
   })
   .reduce((collection, file) => {
-    descriptors = file.fileContent;
-    console.log(file.filename)
+    const descriptors = file.fileContent;
     descriptors.forEach(({id, defaultMessage}) => {
       if (collection.hasOwnProperty(id)) {
-        // console.error(`Duplicate message id: ${id}`);
-        console.log(id,);
         throw new Error(`Duplicate message id: ${id} in file ${file.filename}`);
       }
       collection[id] = defaultMessage;

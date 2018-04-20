@@ -4,8 +4,6 @@ const intlWrapValidationItem
   = (intl, validationFunc) => (...args) => {
   const resultMessage = validationFunc(...args);
 
-  console.log('tutaj', resultMessage);
-
   if(!resultMessage)
     return resultMessage;
 

@@ -82,8 +82,6 @@ export default class List extends Component {
           const open = this.state.openItems[rowId];
           const selected = selectedRowsIds.indexOf(rowId) > -1;
 
-          console.log(this.state.openItems, open);
-
           return [
             <ListItem
               className={classnames({
