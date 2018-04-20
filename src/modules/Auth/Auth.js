@@ -14,7 +14,7 @@ import MainLayout from 'modules/MainLayout/MainLayout';
 import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import classnames from 'classnames';
-import paths from 'consts/paths';
+import { authPaths } from 'consts/paths';
 
 class Auth extends Component {
   static propTypes = {};
@@ -26,16 +26,18 @@ class Auth extends Component {
 
     this.state = {};
 
+    const { match } = props;
+
     this.tabs = [
       {
         label: props.intl.formatMessage(messages.SIGN_IN),
-        value: paths.SIGN_IN,
-        path: paths.SIGN_IN,
+        value: `${match.url}${authPaths.SIGN_IN}`,
+        path: `${match.url}${authPaths.SIGN_IN}`,
       },
       {
         label: props.intl.formatMessage(messages.SIGN_UP),
-        value: paths.SIGN_UP,
-        path: paths.SIGN_UP,
+        value: `${match.url}${authPaths.SIGN_UP}`,
+        path: `${match.url}${authPaths.SIGN_UP}`,
       }
     ];
 
@@ -70,18 +72,18 @@ class Auth extends Component {
               <Switch>
                 <Route
                   exact
-                  path={paths.INDEX}
+                  path={match.url}
+                  component={SignInForm}
+                />
+                <Route
+                  exact
+                  path={`${match.url}${authPaths.SIGN_IN}`}
+                  component={SignInForm}
+                />
+                <Route
+                  exact
+                  path={`${match.url}${authPaths.SIGN_UP}`}
                   component={SignUpForm}
-                />
-                <Route
-                  exact
-                  path={paths.SIGN_IN}
-                  component={SignInForm}
-                />
-                <Route
-                  exact
-                  path={paths.SIGN_UP}
-                  component={SignInForm}
                 />
               </Switch>
             </Card>
