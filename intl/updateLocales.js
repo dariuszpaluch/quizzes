@@ -7,13 +7,26 @@ const outputDir = './locales/';
 const localesFileName = 'data.json';
 
 let defaultMessages = globSync(filePattern)
-  .map((filename) => fs.readFileSync(filename, 'utf8'))
-  .map((file) => JSON.parse(file))
-  .reduce((collection, descriptors) => {
+  .map((filename) => {
+    return {
+      fileContent: fs.readFileSync(filename, 'utf8'),
+      filename: `${__dirname}${filename}`
+    }
+  })
+  .map(file => {
+    return {
+      ...file,
+      fileContent: JSON.parse(file.fileContent)
+    }
+  })
+  .reduce((collection, file) => {
+    descriptors = file.fileContent;
+    console.log(file.filename)
     descriptors.forEach(({id, defaultMessage}) => {
       if (collection.hasOwnProperty(id)) {
         // console.error(`Duplicate message id: ${id}`);
-        throw new Error(`Duplicate message id: ${id}`);
+        console.log(id,);
+        throw new Error(`Duplicate message id: ${id} in file ${file.filename}`);
       }
       collection[id] = defaultMessage;
     });
@@ -30,15 +43,12 @@ data = fs.existsSync(localesDataPath) ? JSON.parse(fs.readFileSync(localesDataPa
 const anotherLanguageTemplate = {};
 for(let messageKey in defaultMessages) {
   if(defaultMessages.hasOwnProperty(messageKey)) {
-    anotherLanguageTemplate[messageKey] = `__${messageKey}__`;
+    anotherLanguageTemplate[messageKey] = `__${data.en[messageKey]}__`;
   }
 }
 
 const updatedData = {
-  en: {
-    ...defaultMessages,
-    ...(filterKeys(data.en || {}, Object.keys(defaultMessages))),
-  }
+  en: filterKeys(data.en || {}, Object.keys(defaultMessages))
 };
 
 for(let languageKey in data) {

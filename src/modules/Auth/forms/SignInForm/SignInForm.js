@@ -36,10 +36,10 @@ class SignInForm extends Component {
 
   onSignInSuccess = () => {
     const { intl, history } = this.props;
-    const content = intl.formatMessage(toastrMessages.TOASTR_SIGN_IN_SUCCESS);
-    const title = intl.formatMessage(messages.SIGN_IN);
+    // const content = intl.formatMessage(toastrMessages.TOASTR_SIGN_IN_SUCCESS);
+    // const title = intl.formatMessage(messages.SIGN_IN);
 
-    toastr.success(content, title);
+    // toastr.success(content, title);
     history.push(paths.DASHBOARD);
   };
 

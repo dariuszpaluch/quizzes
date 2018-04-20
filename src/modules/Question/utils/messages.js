@@ -2,7 +2,7 @@ import {defineMessages} from "react-intl";
 
 const messages = defineMessages({
   QUESTION_TABLE_CELL: {
-    id: 'question',
+    id: 'question.table.header.cell',
     defaultMessage: 'Question',
   },
   QUESTION_DESCRIPTION_TABLE_CELL: {

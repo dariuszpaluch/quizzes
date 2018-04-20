@@ -52,7 +52,6 @@ class QuestionForm extends Component {
           <InputField
             name='question'
             label={STRINGS.INPUTS.QUESTION}
-            validate={[required]}
           />
           <InputField
             name='description'

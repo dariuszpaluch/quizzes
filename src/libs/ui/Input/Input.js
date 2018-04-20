@@ -30,11 +30,14 @@ export default class Input extends Component {
     const classes = classnames('material-ui-input', className, {
       'have-error': !!error,
     });
+
+    console.log(helperText, error);
+
     return (
       <MaterialTextField
         className={classes}
         error={!!error}
-        helperText={helperText || error || ''}
+        helperText={helperText || error || undefined}
         {...props}
       >{children}</MaterialTextField>
     );

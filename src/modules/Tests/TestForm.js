@@ -25,6 +25,8 @@ import MainLayout from 'modules/MainLayout/MainLayout';
 import icons from 'consts/icons';
 import paths from 'consts/paths';  // ES6
 
+import intlWrapValidation from 'modules/_forms/intlWrapValidation';
+
 const MODES = {
   EDIT: 'EDIT',
   ADD: 'ADD',
@@ -47,6 +49,9 @@ class TestForm extends Component {
     super(props);
 
     this.submit = props.handleSubmit(this.onSubmit);
+    this.validations = {
+      testName: intlWrapValidation(props.intl, [required, quizNameMinLength]),
+    };
 
     this.appBarButtons = {
       left: {
@@ -66,11 +71,11 @@ class TestForm extends Component {
   };
 
   renderQuestionsList = ({
-                           input: { value, onChange },
-                           meta: { touched, error, warning },
-                           selectedIds,
-                           label
-                         }) => {
+     input: { value, onChange },
+     meta: { touched, error, warning },
+     selectedIds,
+     label
+    }) => {
     return (
       <div>
         <Typography variant="display1">{label}</Typography>
@@ -104,21 +109,21 @@ class TestForm extends Component {
         <Card
           className="tests-form"
         >
-          <form className="test-form" onSubmit={this.submit}>
+          <form className="test-form" onSubmit={handleSubmit(this.submit)}>
             <InputField
               name='name'
               label={intl.formatMessage(messages.TEST_NAME)}
-              validate={[required, quizNameMinLength]}
+              validate={this.validations.testName}
             />
             <InputField
               name='description'
               label={intl.formatMessage(messages.TEST_DESCRIPTION)}
             />
-            <Field
-              name='questionsIds'
-              component={this.renderQuestionsList}
-              label={intl.formatMessage(messages.TEST_QUESTIONS)}
-            />
+            {/*<Field*/}
+              {/*name='questionsIds'*/}
+              {/*component={this.renderQuestionsList}*/}
+              {/*label={intl.formatMessage(messages.TEST_QUESTIONS)}*/}
+            {/*/>*/}
             <Button
               type="submit"
             >{intl.formatMessage(globalMessages.SAVE)}</Button>
