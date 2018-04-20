@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import MaterialTabs, {Tab} from 'material-ui/Tabs';
 
 import findIndex from 'lodash/findIndex';
+import isArray from 'lodash/isArray';
 
 export default class Tabs extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ export default class Tabs extends Component {
     tabs: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
       })
     )
   };
@@ -43,7 +44,15 @@ export default class Tabs extends Component {
       value,
     } = this.props;
 
-    return findIndex(tabs, tab => tab.value === value);
+    return findIndex(tabs, ({ value: tabValue }) => {
+      console.log(value, tabValue);
+
+      if(isArray(tabValue)) {
+        return tabValue.indexOf(value) > -1;
+      }
+
+      return tabValue === value;
+    });
   }
 
   onChange = (event, value) => {
@@ -62,6 +71,8 @@ export default class Tabs extends Component {
       tabs,
       ...props,
     } = this.props;
+
+    console.log(this.getSelectedIndex() );
 
     return (
       <MaterialTabs

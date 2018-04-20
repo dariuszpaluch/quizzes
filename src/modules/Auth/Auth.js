@@ -31,7 +31,7 @@ class Auth extends Component {
     this.tabs = [
       {
         label: props.intl.formatMessage(messages.SIGN_IN),
-        value: `${match.url}${authPaths.SIGN_IN}`,
+        value: [match.url, `${match.url}${authPaths.SIGN_IN}`],
         path: `${match.url}${authPaths.SIGN_IN}`,
       },
       {
@@ -50,20 +50,18 @@ class Auth extends Component {
 
   render() {
     const {
-      match
+      match,
+      location
     } = this.props;
 
     return (
       <MainLayout hideMenu>
-        <div
-          className={classnames('auth','row')}
-          style={{ width: '100%' }}
-        >
+        <div className={classnames('auth','row')}>
           <div className="col-xs-12">
             <Card>
               <Tabs
                 tabs={this.tabs}
-                value={match.url}
+                value={location.pathname}
                 onChange={this.onChangeTab}
                 indicatorColor="primary"
                 textColor="primary"
