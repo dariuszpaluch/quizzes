@@ -1,7 +1,12 @@
+@import './colors';
+
 $sm-screen-min-width: 48rem; //672px
 $md-screen-min-width: 64rem; //868px
 $lg-screen-min-width: 75rem; //1050px
 $xl-screen-min-width: 100rem; //1400px
 
 $container-padding: 1rem;
-$container-margin: 1rem
+$container-margin: 1rem;
+$container-radius: 5px;
+$container-border: 1px solid $border-color;
+$container-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);

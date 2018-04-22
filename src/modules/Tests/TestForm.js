@@ -67,7 +67,7 @@ class TestForm extends Component {
   }
 
   onSubmit = (values) => {
-    this.props.onSubmit(values, this.onClickGoBack);
+    this.props.submit(values, this.onClickGoBack);
   };
 
   renderQuestionsList = ({
@@ -119,11 +119,11 @@ class TestForm extends Component {
               name='description'
               label={intl.formatMessage(messages.TEST_DESCRIPTION)}
             />
-            {/*<Field*/}
-              {/*name='questionsIds'*/}
-              {/*component={this.renderQuestionsList}*/}
-              {/*label={intl.formatMessage(messages.TEST_QUESTIONS)}*/}
-            {/*/>*/}
+            <Field
+              name='questionsIds'
+              component={this.renderQuestionsList}
+              label={intl.formatMessage(messages.TEST_QUESTIONS)}
+            />
             <Button
               type="submit"
             >{intl.formatMessage(globalMessages.SAVE)}</Button>

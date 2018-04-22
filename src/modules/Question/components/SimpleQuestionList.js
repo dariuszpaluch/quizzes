@@ -75,8 +75,6 @@ class SimpleQuestionlist extends Component {
       selectedIds,
     } = this.props;
 
-    return null;
-
     return (
       <List
         rowsIds={questionsIds}

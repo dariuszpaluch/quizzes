@@ -14,4 +14,9 @@ export const authPaths = {
   SIGN_UP: `sign-up`,
 };
 
+export const questionPaths = {
+  ADD_QUESTION: `/add`,
+  EDIT_QUESTION: `/:questionId/edit`
+};
+
 export default paths;

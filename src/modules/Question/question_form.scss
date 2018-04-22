@@ -1,0 +1,18 @@
+@import '~styles/colors';
+@import '~styles/variables';
+
+.question-form {
+  > div {
+    width: 100%;
+  }
+    .list-field {
+      padding: 0;
+
+      &.selected {
+        border-radius: $container-radius;
+        background-color: rgba($success-color, 0.8);
+        border-color: darken($success-color, 15%);
+
+      }
+    }
+}

@@ -9,13 +9,17 @@ const messages = defineMessages({
     id: 'question.description.table.header.cell',
     defaultMessage: 'Description',
   },
-  questionListHeader: {
+  QUESTION_LIST_HEADER: {
     id: 'question.list.header',
     defaultMessage: 'Questions',
   },
   ADD_QUESTION: {
     id: 'question.list.addQuestion',
     defaultMessage: 'Add question',
+  },
+  ADD_ANSWER: {
+    id: 'question.add-answer',
+    defaultMessage: 'Add answer',
   }
 });
 

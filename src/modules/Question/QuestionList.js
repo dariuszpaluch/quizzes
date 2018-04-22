@@ -1,19 +1,24 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {fetchQuestions} from './utils/actions';
+import { fetchQuestions } from './utils/actions';
 
 
 import Card from 'libs/ui/Card';
 import STRINGS from './utils/strings';
-import Table from "libs/ui/Table/Table";
-import Button from "../../libs/ui/Button/Button";
-import {deleteQuestion} from "modules/Question/utils/actions";
-import {toastr} from 'react-redux-toastr'
-import {getQuestions, getQuestionsIds, getQuestionsLoading} from "modules/Question/utils/getters";
-import {injectIntl} from 'react-intl'
+import Table from 'libs/ui/Table/Table';
+import Button from '../../libs/ui/Button/Button';
+import { deleteQuestion } from 'modules/Question/utils/actions';
+import { toastr } from 'react-redux-toastr'
+import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
+import { injectIntl } from 'react-intl'
 import messages from './utils/messages';
-import SimpleQuestionlist from "modules/Question/components/SimpleQuestionList";
+import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
+import icons from 'consts/icons';
+import FloatButton from 'libs/ui/FloatButton/FloatButton';
+import parsePath from 'utils/parsePath';
+import paths, { questionPaths } from 'consts/paths';
+import { withRouter } from 'react-router-dom';
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -21,7 +26,7 @@ class QuestionList extends Component {
   }
 
   getDataTable() {
-    const {questionsIds, questions, questionsLoading, intl} = this.props;
+    const { questionsIds, questions, questionsLoading, intl } = this.props;
     const columns = [
       {
         id: 'question',
@@ -34,7 +39,7 @@ class QuestionList extends Component {
     ];
 
     const rows = questionsIds.map((questionId, index) => {
-      const { question, description} = questions[questionId];
+      const { question, description } = questions[questionId];
       return {
         id: questionId,
         index: index + 1,
@@ -51,27 +56,38 @@ class QuestionList extends Component {
   }
 
   onDeleteQuestion = (questionId) => {
-    const onSuccess = () => {toastr.success(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_SUCCESS)};
-    const onFailure = () => {toastr.error(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_FAILURE)};
+    const onSuccess = () => {
+      toastr.success(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_SUCCESS)
+    };
+    const onFailure = () => {
+      toastr.error(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_FAILURE)
+    };
 
     this.props.deleteQuestion(questionId, onSuccess, onFailure)
   };
 
+  onClickAddTest = () => {
+    this.props.history.push(`${paths.QUESTIONS}${questionPaths.ADD_QUESTION}`)
+  };
 
   render() {
-    // const {columns, rows, questions, questionsIds} = this.getDataTable();
     const { intl } = this.props;
     const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
 
     return (
-      <SimpleQuestionlist
-      onChangeSelect={onChangeSelect}
-      selectedIds={selectedIds}
-      questions={questions}
-      questionsIds={questionsIds}
-    />
+      <div className="question-list">
+
+        <SimpleQuestionlist
+          onChangeSelect={onChangeSelect}
+          selectedIds={selectedIds}
+          questions={questions}
+          questionsIds={questionsIds}
+        />
+        <FloatButton icon={icons.ADD} onClick={this.onClickAddTest}/>
+      </div>
+
     );
-    //
+
     // return (
     //   <Card title={intl.formatMessage(messages.questionListHeader)}>
     //     <Table
@@ -99,4 +115,4 @@ const mapDispatchToProps = {
   deleteQuestion,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionList))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(QuestionList)))

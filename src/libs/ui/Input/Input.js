@@ -17,6 +17,10 @@ export default class Input extends Component {
     this.state = {};
   }
 
+  onChange = (event) => {
+    this.props.onChange(event.target.value);
+  };
+
   render() {
     const {
       children,
@@ -33,10 +37,11 @@ export default class Input extends Component {
 
     return (
       <MaterialTextField
+        {...props}
         className={classes}
         error={!!error}
         helperText={helperText || error || undefined}
-        {...props}
+        onChange={this.onChange}
       >{children}</MaterialTextField>
     );
   }

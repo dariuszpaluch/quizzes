@@ -1,13 +1,16 @@
+import './question_form.scss';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { reduxForm } from 'redux-form';
+import { FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 import pick from 'lodash/pick';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
+import ListFields from 'libs/reduxFormFields/ListFields/ListFields';
 import { required } from 'modules/_forms/validations';
 
 import STRINGS from './utils/strings';
@@ -15,6 +18,12 @@ import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import AnswersForm from './components/AnswersForm'
 import {addQuestion} from "./utils/actions";
+import globalMessages from 'utils/globalMessages';
+import { injectIntl } from 'react-intl';
+import messages from 'modules/Question/utils/messages';
+import MainLayout from 'modules/MainLayout/MainLayout';
+import icons from 'consts/icons';
+import paths from 'consts/paths';
 
 const MODES = {
   EDIT: 'EDIT',
@@ -32,40 +41,68 @@ class QuestionForm extends Component {
     mode: MODES.ADD,
   };
 
-  onSubmit = ({question, description, answers}) => {
-    return this.props.onSubmit({question, description, answers});
+  constructor(props) {
+    super(props);
+
+    this.appBarButtons = {
+      left: {
+        onClick: this.goBack,
+        icon: icons.ARROW_BACK,
+      },
+      right: {
+        onClick: props.handleSubmit(this.submit),
+        icon: icons.DONE,
+      }
+    };
+  }
+
+  goBack = () => {
+    this.props.history.push(paths.QUESTIONS);
+  };
+
+  submit = ({question, description, answers}) => {
+    return this.props.onSubmit({question, description, answers}).then(this.goBack);
   };
 
   render() {
     const {
-      onSubmit,
       handleSubmit,
       mode,
       pristine,
       reset,
-      submitting
+      submitting,
+      intl,
     } = this.props;
 
     return (
-      <Card title={STRINGS.HEADER[mode]}>
-        <form className="sign-in-form" onSubmit={handleSubmit(this.onSubmit)}>
-          <InputField
-            name='question'
-            label={STRINGS.INPUTS.QUESTION}
-          />
-          <InputField
-            name='description'
-            label={STRINGS.INPUTS.DESCRIPTION}
-          />
-          <AnswersForm
-            name="answers"
-          />
-          <Button
-            type="submit"
-          >Submit
-          </Button>
-        </form>
-      </Card>
+      <MainLayout
+        appBarTittle={intl.formatMessage(messages.QUESTION_LIST_HEADER)}
+        appBarButtons={this.appBarButtons}
+      >
+        <Card title={STRINGS.HEADER[mode]}>
+          <form className="question-form" onSubmit={handleSubmit(this.submit)}>
+            <InputField
+              name='question'
+              label={STRINGS.INPUTS.QUESTION}
+            />
+            <InputField
+              name='description'
+              label={STRINGS.INPUTS.DESCRIPTION}
+            />
+            <FieldArray
+              name="answers"
+              component={ListFields}
+              className="answer-list"
+              inputPlaceholder="Answer"
+              addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
+            />
+            <Button
+              type="submit"
+              color="primary"
+            >{intl.formatMessage(globalMessages.SAVE)}</Button>
+          </form>
+        </Card>
+      </MainLayout>
     );
   }
 
@@ -87,7 +124,7 @@ QuestionForm = reduxForm({
 
 const mapStateToProps = (state, ownProps ) => {
   return {
-    initialValues: pick(ownProps.question, ['question', 'description', 'answers']) || { answers: ['']},
+    initialValues: pick(ownProps.question, ['question', 'description', 'answers']) || { answers: [{label: ''}]},
   };
 };
 
@@ -95,4 +132,4 @@ const mapDispatchToProps = {
   onSubmit: addQuestion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionForm);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionForm));
