@@ -18,6 +18,8 @@ const icons = {
   CLOSE: 'close',
   SAVE: 'save',
   SHARE: 'share',
+  EDIT: 'edit',
+  DELETE: 'delete',
 };
 
 export default icons;

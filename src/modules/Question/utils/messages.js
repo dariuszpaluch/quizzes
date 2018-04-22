@@ -20,6 +20,14 @@ const messages = defineMessages({
   ADD_ANSWER: {
     id: 'question.add-answer',
     defaultMessage: 'Add answer',
+  },
+  NO_DESCRIPTION: {
+    id: 'question.empty-description',
+    defaultMessage: 'No description'
+  },
+  ANSWERS: {
+    id: 'question.answers',
+    defaultMessage: 'Answers'
   }
 });
 

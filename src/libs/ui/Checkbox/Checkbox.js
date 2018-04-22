@@ -11,7 +11,7 @@ export default class Checkbox extends Component {
     className: PropTypes.string,
     checked: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
-    color: PropTypes.oneOf(['primary', 'secondary'])
+    color: PropTypes.oneOf(['primary', 'secondary', 'default'])
   };
 
   static defaultProps = {
@@ -27,9 +27,11 @@ export default class Checkbox extends Component {
   };
 
   render() {
-    const { className, checked, primary, ...props } = this.props;
+    const { className, checked, primary, disabled, onChange, ...props } = this.props;
 
-    const classes = classnames("checkbox", className,);
+    const classes = classnames("checkbox", {
+      disabled,
+    }, className,);
 
     return(
       <MaterialCheckbox
@@ -37,6 +39,7 @@ export default class Checkbox extends Component {
         checked={checked}
         onClick={this.onClick}
         color={primary}
+        disabled={disabled}
         {...props}
       />
     );

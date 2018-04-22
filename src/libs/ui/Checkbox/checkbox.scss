@@ -1,3 +1,5 @@
 .checkbox {
-
+  &.disabled {
+    opacity: 0.5;
+  }
 }

@@ -108,6 +108,11 @@ class TestForm extends Component {
       >
         <Card
           className="tests-form"
+          actions={(
+            <Button
+              type="submit"
+            >{intl.formatMessage(globalMessages.SAVE)}</Button>
+          )}
         >
           <form className="test-form" onSubmit={handleSubmit(this.submit)}>
             <InputField
@@ -124,9 +129,7 @@ class TestForm extends Component {
               component={this.renderQuestionsList}
               label={intl.formatMessage(messages.TEST_QUESTIONS)}
             />
-            <Button
-              type="submit"
-            >{intl.formatMessage(globalMessages.SAVE)}</Button>
+
           </form>
         </Card>
       </MainLayout>

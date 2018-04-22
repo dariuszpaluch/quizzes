@@ -1,5 +1,33 @@
-.list {
+@import '~styles/variables';
+
+$item-height: 45px;
+
+ul.list {
+  border-bottom: $container-border;
+  padding: 0;
+
   > li {
-    padding: 0;
+    height: $item-height;
+    display: flex;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+
+    &.have-children {
+      padding-right: 0;
+    }
+    &:not(:first-child) {
+      border-top: $container-border
+    }
+
+    > div {
+      padding: 0 !important;
+      margin: auto 0;
+    }
+
+    > button{
+      height: 100%;
+    }
   }
+
 }

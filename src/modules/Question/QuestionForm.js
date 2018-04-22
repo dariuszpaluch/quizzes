@@ -16,7 +16,6 @@ import { required } from 'modules/_forms/validations';
 import STRINGS from './utils/strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
-import AnswersForm from './components/AnswersForm'
 import {addQuestion} from "./utils/actions";
 import globalMessages from 'utils/globalMessages';
 import { injectIntl } from 'react-intl';
@@ -61,7 +60,14 @@ class QuestionForm extends Component {
   };
 
   submit = ({question, description, answers}) => {
-    return this.props.onSubmit({question, description, answers}).then(this.goBack);
+    const _answers = answers.map(answer => {
+      return {
+        label: answer.label,
+        correct: answer.select,
+      }
+    });
+
+    return this.props.onSubmit({question, description, answers: _answers}).then(this.goBack);
   };
 
   render() {

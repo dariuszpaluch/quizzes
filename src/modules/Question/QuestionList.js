@@ -19,6 +19,7 @@ import FloatButton from 'libs/ui/FloatButton/FloatButton';
 import parsePath from 'utils/parsePath';
 import paths, { questionPaths } from 'consts/paths';
 import { withRouter } from 'react-router-dom';
+import MainLayout from 'modules/MainLayout/MainLayout';
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -66,8 +67,14 @@ class QuestionList extends Component {
     this.props.deleteQuestion(questionId, onSuccess, onFailure)
   };
 
-  onClickAddTest = () => {
+  onClickAddQuestion = () => {
     this.props.history.push(`${paths.QUESTIONS}${questionPaths.ADD_QUESTION}`)
+  };
+
+  goEditQuestion = (questionId) => {
+    const { history, match, intl, } = this.props;
+
+    history.push(parsePath(`${match.url}${questionPaths.EDIT_QUESTION}`, {questionId}));
   };
 
   render() {
@@ -75,17 +82,21 @@ class QuestionList extends Component {
     const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
 
     return (
-      <div className="question-list">
-
-        <SimpleQuestionlist
-          onChangeSelect={onChangeSelect}
-          selectedIds={selectedIds}
-          questions={questions}
-          questionsIds={questionsIds}
-        />
-        <FloatButton icon={icons.ADD} onClick={this.onClickAddTest}/>
-      </div>
-
+      <MainLayout
+        appBarTittle={intl.formatMessage(messages.QUESTION_LIST_HEADER)}
+      >
+        <Card>
+          <SimpleQuestionlist
+            onChangeSelect={onChangeSelect}
+            selectedIds={selectedIds}
+            questions={questions}
+            questionsIds={questionsIds}
+            onEdit={this.goEditQuestion}
+            onDelete={this.onDeleteQuestion}
+          />
+        </Card>
+        <FloatButton icon={icons.ADD} onClick={this.onClickAddQuestion}/>
+      </MainLayout>
     );
 
     // return (

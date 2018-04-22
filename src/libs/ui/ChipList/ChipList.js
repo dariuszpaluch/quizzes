@@ -1,12 +1,15 @@
 import './chip_list.scss';
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames';
 
 import filter from 'lodash/filter';
 import Chip from 'libs/ui/Chip';
+import size from 'lodash/size';
 
 export default class ChipList extends Component {
   static propTypes = {
@@ -23,6 +26,12 @@ export default class ChipList extends Component {
     className: '',
   };
 
+  componentWillReceiveProps(nextProps) {
+    if(this.ref && size(nextProps.chips) > size(this.props.chips)) {
+      ReactDOM.findDOMNode(this).scrollTop = 0
+    }
+  }
+
   render() {
     const {
       className,
@@ -32,7 +41,10 @@ export default class ChipList extends Component {
     const classes = classnames(className, 'chip-list');
 
     return (
-      <div className={classes}>
+      <div
+        className={classes}
+        ref={(ref) => this.ref = ref}
+      >
         { chips.map(chip => (
           <Chip
             key={chip.id}

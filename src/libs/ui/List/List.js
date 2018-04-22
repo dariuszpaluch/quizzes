@@ -71,9 +71,10 @@ export default class List extends Component {
       rows,
       selectOnClick,
       selectedClass,
+      className,
     } = this.props;
 
-    const classes = classnames('list');
+    const classes = classnames('list', className);
 
     return (
       <MaterialList className={classes}>
@@ -86,6 +87,7 @@ export default class List extends Component {
             <ListItem
               className={classnames({
                 [selectedClass]: selected,
+                'have-children': !!row.children,
               })}
               key={`${rowId}-item`}
               button={selectOnClick}

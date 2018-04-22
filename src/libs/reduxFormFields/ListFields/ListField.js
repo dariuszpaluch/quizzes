@@ -7,6 +7,7 @@ import Checkbox from 'libs/ui/Checkbox/Checkbox';
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import Input from 'libs/ui/Input/Input';
+import size from 'lodash/size';
 
 const propTypes = {
   className: PropTypes.string,
@@ -19,8 +20,6 @@ const defaultProps = {
 const ListField =  ({input,  meta: { touched, error, warning }, inputPlaceholder, className, index, onRemove,  ...restProps, }) => {
 
   const classes = classnames(className);
-
-  console.log(input);
 
   const onChange = (label) => {
     input.onChange({
@@ -57,6 +56,7 @@ const ListField =  ({input,  meta: { touched, error, warning }, inputPlaceholder
         disableRipple
         onChange={onSelect}
         color="default"
+        disabled={!input.value.select && !size(input.value.label)}
       />
       <Input
         {...input}

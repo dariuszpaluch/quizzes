@@ -20,6 +20,14 @@ const globalMessages = defineMessages({
   LOGOUT: {
     id: 'LOGOUT',
     defaultMessage: 'Logout'
+  },
+  EDIT: {
+    id: 'edit',
+    defaultMessage: 'Edit'
+  },
+  DELETE: {
+    id: 'delete',
+    defaultMessage: 'Delete'
   }
 });
 

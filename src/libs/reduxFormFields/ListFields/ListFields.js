@@ -36,16 +36,16 @@ const ListFields = ({
 }) => {
   const classes = classnames('list-fields', className);
 
-  const canAddRow = () => !size(fields) || size(fields.get(0).label);
+  // const canAddRow = () => !size(fields) || size(fields.get(0).label);
   const addField = () => {
 
-    if(canAddRow()){
+    // if(canAddRow()){
       fields.insert(0, {
         label: '',
         id: '',
         correct: false,
       })
-    }
+    // }
   };
 
   const removeField = (index) => {
@@ -62,8 +62,6 @@ const ListFields = ({
     })
   };
 
-  console.log(fields);
-
   return (
     <MaterialList className={classes}>
       <Button
@@ -71,8 +69,6 @@ const ListFields = ({
         onClick={addField}
       ><Icon icon={icons.ADD}/>{addButtonLabel || 'Add'}</Button>
       {fields.map((name, index) => {
-
-        console.log(name);
 
         return (
           <Field

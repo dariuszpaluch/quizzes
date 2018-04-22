@@ -6,13 +6,16 @@
     display: flex;
     height: 55px;
     margin-bottom: 5px;
+    background-color: $background-primary-color;
+    border-radius: $container-radius;
+    overflow: hidden;
 
     > span, > div:not(.list-field-input), > button {
       height: 100%;
     }
 
     .list-field-input {
-      padding: 0 5px !important;
+      padding: 0 15px !important;
       margin: auto 0;
 
       > div:before {

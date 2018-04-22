@@ -10,6 +10,7 @@ import { injectIntl } from 'react-intl'
 import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
 import ChipList from 'libs/ui/ChipList';
 import filter from 'lodash/filter';
+import reverse from 'lodash/reverse';
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -27,20 +28,20 @@ class QuestionList extends Component {
     const { intl } = this.props;
     const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
 
-    const chips = selectedIds.map(questionId => {
+    const chips = reverse(selectedIds.map(questionId => {
       const question = questions[questionId];
       return {
         label: question.question,
         id: question.id,
       };
-    });
+    }));
 
     return (
-      <div>
+      <div className="test-question-list">
         <ChipList
+          className="selected-question-chips"
           onDeleteChip={this.onDeleteChip}
           chips={chips}
-
         />
         <SimpleQuestionlist
           onChangeSelect={onChangeSelect}

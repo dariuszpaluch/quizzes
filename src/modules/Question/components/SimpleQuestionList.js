@@ -1,3 +1,5 @@
+import './question_list.scss'
+
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -7,6 +9,17 @@ import forEach from 'lodash/forEach';
 import filter from "lodash/filter";
 
 import List from 'libs/ui/List/List';
+import Card from 'libs/ui/Card/Card';
+import Typography from 'libs/ui/Typography/Typography';
+import messages from 'modules/Question/utils/messages';
+import { injectIntl } from 'react-intl';
+import IconButton from 'libs/ui/IconButton/IconButton';
+import parsePath from 'utils/parsePath';
+import { questionPaths } from 'consts/paths';
+import icons from 'consts/icons';
+import Button from 'libs/ui/Button/Button';
+import globalMessages from 'utils/globalMessages';
+import Icon from 'libs/ui/Icon/Icon';
 
 class SimpleQuestionlist extends Component {
   static propTypes = {
@@ -61,11 +74,44 @@ class SimpleQuestionlist extends Component {
       rows[questionId] = {
         ...question,
         label: question.question,
-        children: <span>{question.description}</span>
+        children: this.renderQuestionDetails(question, questionId),
       }
     });
 
     return rows;
+  }
+
+
+
+  renderQuestionDetails({description, answers, hints}, questionId) {
+    const { intl, onEdit, onDelete } = this.props;
+
+    return (
+      <div className="question-details">
+        <Typography variant="Title">Opis: {description || intl.formatMessage(messages.NO_DESCRIPTION)}</Typography>
+        <Typography variant="Subheading">{intl.formatMessage(messages.ANSWERS)}:</Typography>
+        <ul className="answers">
+          {answers.map(({correct, label}, index) => (
+            <li
+              key={index}
+              className={classnames({correct})}
+            >{label}</li>
+          ))}
+        </ul>
+        { onEdit || onDelete ? this.renderQuestionActions(questionId, onEdit, onDelete) : null}
+      </div>
+    );
+  }
+
+  renderQuestionActions(questionId, onEdit, onDelete) {
+    const { intl } = this.props;
+
+    return (
+      <div className="question-actions">
+        { onEdit && <Button  color="primary" onClick={onEdit.bind(null, questionId)}><Icon icon={icons.EDIT} />{intl.formatMessage(globalMessages.EDIT)}</Button> }
+        { onDelete && <Button  color="secondary" onClick={onDelete.bind(null, questionId)}><Icon icon={icons.DELETE} />{intl.formatMessage(globalMessages.DELETE)}</Button> }
+      </div>
+    );
   }
 
   render() {
@@ -77,13 +123,14 @@ class SimpleQuestionlist extends Component {
 
     return (
       <List
+        className="question-list"
         rowsIds={questionsIds}
         rows={this.prepareQuestionsRows(questions)}
         selectedRowsIds={selectedIds}
         onChangeSelect={this.props.onChangeSelect}
       />
-    );
+  );
   }
 }
 
-export default SimpleQuestionlist;
+export default injectIntl(SimpleQuestionlist);

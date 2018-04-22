@@ -1,0 +1,31 @@
+@import '~styles/variables';
+
+.question-list {
+  width: 100%;
+
+  .question-details {
+    padding: 0 $container-padding $container-padding $container-padding;
+
+    ul.answers {
+      list-style: none;
+      padding: 0;
+      margin: 0 $container-margin;
+
+      li{
+        padding: $container-padding / 2;
+
+        &.correct {
+          background-color: $success-color;
+          color: white;
+        }
+
+      }
+    }
+
+    .question-actions {
+      padding-top: $container-padding / 2;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
