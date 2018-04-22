@@ -62,6 +62,8 @@ const ListFields = ({
     })
   };
 
+  const fieldsSize = size(fields);
+
   return (
     <MaterialList className={classes}>
       <Button
@@ -72,39 +74,15 @@ const ListFields = ({
 
         return (
           <Field
-            key={`${name}.${index}`}
+            key={fieldsSize - index}
             name={`${name}`}
             placeholder={inputPlaceholder}
             component={ListField}
             onRemove={removeField}
             index={index}
+            autoFocus={index === 0}
           />
         );
-        //
-        // return (
-        //   <ListItem
-        //     key={index}
-        //     dense
-        //     button
-        //     onClick={selectField.bind(null, index)}
-        //   >
-        //     <Checkbox
-        //       checked={false}
-        //       tabIndex={-1}
-        //       disableRipple
-        //       onChange={() => {}}
-        //     />
-        //     <InputField
-        //       name={`${name}.label`}
-        //       placeholder={inputPlaceholder}
-        //     />
-        //     <IconButton
-        //       className="remove-item-button"
-        //       icon="clear"
-        //       onClick={removeField.bind(null, index)}
-        //     />
-        //   </ListItem>
-        // );
       })}
 
     </MaterialList>

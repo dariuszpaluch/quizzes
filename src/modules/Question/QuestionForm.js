@@ -90,6 +90,7 @@ class QuestionForm extends Component {
             <InputField
               name='question'
               label={STRINGS.INPUTS.QUESTION}
+              autoFocus
             />
             <InputField
               name='description'

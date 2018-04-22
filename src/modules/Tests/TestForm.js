@@ -119,6 +119,7 @@ class TestForm extends Component {
               name='name'
               label={intl.formatMessage(messages.TEST_NAME)}
               validate={this.validations.testName}
+              autoFocus
             />
             <InputField
               name='description'

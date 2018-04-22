@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames';
@@ -17,65 +17,77 @@ const defaultProps = {
   className: null,
 };
 
-const ListField =  ({input,  meta: { touched, error, warning }, inputPlaceholder, className, index, onRemove,  ...restProps, }) => {
-
-  const classes = classnames(className);
-
-  const onChange = (label) => {
+class ListField extends Component {
+  onChange = (label) => {
+    const { input } = this.props;
     input.onChange({
       ...input.value,
       label,
     })
   };
 
-  const onSelect = () => {
+  onSelect = () => {
+    const { input } = this.props;
+
     input.onChange({
       ...input.value,
       select: !input.value.select,
     })
   };
 
-  const onBlur = () => {
+  onBlur = () => {
+    const { input } = this.props;
+
     input.onBlur(input.value);
   };
 
-  const _onRemove = () => {
+   onRemove = () => {
+     const { onRemove, index} = this.props;
+
     onRemove(index);
   };
 
-  return (
-    <ListItem
-      dense
-      className={classnames('list-field', {
-        'selected': input.value.select,
-      })}
-    >
-      <Checkbox
-        className="list-item-checkbox"
-        checked={input.value.select}
-        disableRipple
-        onChange={onSelect}
-        color="default"
-        disabled={!input.value.select && !size(input.value.label)}
-      />
-      <Input
-        {...input}
-        {...restProps}
-        className="list-field-input"
-        value={input.value.label}
-        onChange={onChange}
-        error={touched && error}
-        warning={touched && warning}
-        onBlur={onBlur}
-      />
-      <IconButton
-        className="remove-item-button"
-        icon="clear"
-        onClick={_onRemove}
-      />
-    </ListItem>
-  )
-};
+  render() {
+    const {input,  meta: { touched, error, warning }, inputPlaceholder, className, index, onRemove, autoFocus,  ...restProps, } = this.props;
+    const classes = classnames(className);
+
+    return (
+      <ListItem
+        dense
+        className={classnames('list-field', {
+          'selected': input.value.select,
+        })}
+      >
+        <Checkbox
+          className="list-item-checkbox"
+          checked={input.value.select}
+          disableRipple
+          onChange={this.onSelect}
+          color="default"
+          disabled={!input.value.select && !size(input.value.label)}
+          onBlur={this.onBlur}
+        />
+        <Input
+          {...input}
+          {...restProps}
+          ref={(ref) => this.inputRef = ref}
+          className="list-field-input"
+          value={input.value.label}
+          onChange={this.onChange}
+          error={touched && error}
+          warning={touched && warning}
+          onBlur={this.onBlur}
+          autoFocus={autoFocus}
+        />
+        <IconButton
+          className="remove-item-button"
+          icon="clear"
+          onClick={this.onRemove}
+        />
+      </ListItem>
+    );
+  }
+}
 
 ListField.propTypes = propTypes;
 ListField.defaultProps = defaultProps;

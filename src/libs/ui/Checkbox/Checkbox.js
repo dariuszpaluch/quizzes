@@ -20,14 +20,12 @@ export default class Checkbox extends Component {
     color: 'primary',
   };
 
-  onClick = () => {
-    const { checked } = this.props;
-
-    this.props.onChange(!checked);
+  onChange = (event, checked) => {
+    this.props.onChange(event.target.checked);
   };
 
   render() {
-    const { className, checked, primary, disabled, onChange, ...props } = this.props;
+    const { className, checked, color, disabled, onChange, ...props } = this.props;
 
     const classes = classnames("checkbox", {
       disabled,
@@ -35,12 +33,12 @@ export default class Checkbox extends Component {
 
     return(
       <MaterialCheckbox
+        {...props}
         className={classes}
         checked={checked}
-        onClick={this.onClick}
-        color={primary}
+        onChange={this.onChange}
+        color={color}
         disabled={disabled}
-        {...props}
       />
     );
   }

@@ -21,6 +21,11 @@ export default class Input extends Component {
     this.props.onChange(event.target.value);
   };
 
+  focus = () => {
+    console.log('focus');
+    this.ref && this.ref.focus();
+  };
+
   render() {
     const {
       children,
@@ -38,6 +43,7 @@ export default class Input extends Component {
     return (
       <MaterialTextField
         {...props}
+        ref={(ref) => this.ref = ref}
         className={classes}
         error={!!error}
         helperText={helperText || error || undefined}
