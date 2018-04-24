@@ -40,7 +40,7 @@ data = fs.existsSync(localesDataPath) ? JSON.parse(fs.readFileSync(localesDataPa
 const anotherLanguageTemplate = {};
 for(let messageKey in defaultMessages) {
   if(defaultMessages.hasOwnProperty(messageKey)) {
-    anotherLanguageTemplate[messageKey] = `__${data.en[messageKey]}__`;
+    anotherLanguageTemplate[messageKey] = `__${defaultMessages[messageKey] || messageKey}__`;
   }
 }
 

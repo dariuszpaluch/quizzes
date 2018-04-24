@@ -40,6 +40,10 @@ const messages = defineMessages({
   TEST_SAVE_FAILURE_TOASTR: {
     id: 'make-test.test-save-failure',
     defaultMessage: 'Test save failure',
+  },
+  TEST_SUMMARY_HEADER: {
+    id: 'make-test.test-result-header',
+    defaultMessage: 'Test result',
   }
 });
 

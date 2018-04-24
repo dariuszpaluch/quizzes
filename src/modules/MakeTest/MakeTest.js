@@ -18,6 +18,7 @@ import TestSummary from 'modules/MakeTest/components/TestSummary/TestSummary';
 import messages from 'modules/MakeTest/utils/messages';
 import paths from 'consts/paths';
 import { injectIntl } from 'react-intl';
+import TestResult from 'modules/MakeTest/components/TestResult/TestResult';
 
 const STATES = {
   START: 0,
@@ -56,20 +57,26 @@ class MakeTest extends Component {
   };
 
   finishTest = () => {
-    this.changeViewState(STATES.SUMMARY);
+    this.onSave();
   };
 
   onSave = () => {
     const { history, intl, answers, testId } = this.props;
 
-    const onSuccess = () => {
+    const onSuccess = (data) => {
+      this.setState({
+        questionsWithCorrect: data.questions,
+        result: data.result,
+      });
+
       toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
-      history.push(paths.DASHBOARD);
+      this.changeViewState(STATES.SUMMARY);
     };
 
     const onFailure = () => {
       toastr.error(intl.formatMessage(messages.TEST_SAVE_FAILURE_TOASTR))
     };
+
     this.props.saveTestAnswers(testId, answers, onSuccess, onFailure);
   };
 
@@ -120,14 +127,30 @@ class MakeTest extends Component {
     )
   }
 
+  renderTestResult() {
+
+    const { questionsWithCorrect, result} = this.state;
+    const { answers } = this.props;
+
+    return (
+      <TestResult
+        questions={questionsWithCorrect}
+        result={result}
+        answers={answers}
+      />
+    )
+  }
+
   renderContent() {
     switch (this.state.viewState) {
       case STATES.START:
         return this.renderStartView();
       case STATES.ANSWER:
         return this.renderTestForm();
-      case STATES.SUMMARY:
-        return this.renderTestSummary();
+      case STATES.SUMMARY: {
+        return this.renderTestResult();
+      }
+        // return this.renderTestSummary();
     }
   }
 
