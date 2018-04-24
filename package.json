@@ -26,7 +26,7 @@
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "latest",
     "lodash": "^4.17.4",
-    "material-ui": "^1.0.0-beta.37",
+    "material-ui": "^1.0.0-beta.43",
     "material-ui-icons": "^1.0.0-beta.36",
     "nuka-carousel": "^4.0.1",
     "prop-types": "^15.5.10",

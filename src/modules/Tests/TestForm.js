@@ -3,13 +3,13 @@ import './tests.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Field, getFormValues, reduxForm, getFormSyncErrors } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
-import { required, minLength } from 'modules/_forms/validations';
+import { minLength, required } from 'modules/_forms/validations';
 
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
@@ -20,12 +20,11 @@ import QuestionList from './smarts/QuestionList';
 import Typography from 'libs/ui/Typography';
 
 import { addTest } from 'modules/Tests/utils/actions';
-import ChipList from 'libs/ui/ChipList/ChipList';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import icons from 'consts/icons';
-import paths from 'consts/paths';  // ES6
-
+import paths from 'consts/paths'; // ES6
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
+import { withRouter } from 'react-router-dom';
 
 const MODES = {
   EDIT: 'EDIT',
@@ -48,7 +47,6 @@ class TestForm extends Component {
   constructor(props) {
     super(props);
 
-    this.submit = props.handleSubmit(this.onSubmit);
     this.validations = {
       testName: intlWrapValidation(props.intl, [required, quizNameMinLength]),
     };
@@ -59,7 +57,7 @@ class TestForm extends Component {
         icon: icons.ARROW_BACK,
       },
       right: {
-        onClick: props.handleSubmit(this.submit),
+        onClick: props.handleSubmit(this.onSubmit),
         icon: icons.DONE,
       }
 
@@ -67,7 +65,7 @@ class TestForm extends Component {
   }
 
   onSubmit = (values) => {
-    this.props.submit(values, this.onClickGoBack);
+    this.props.onSubmit(values, this.onClickGoBack);
   };
 
   renderQuestionsList = ({
@@ -75,7 +73,7 @@ class TestForm extends Component {
      meta: { touched, error, warning },
      selectedIds,
      label
-    }) => {
+   }) => {
     return (
       <div>
         <Typography variant="display1">{label}</Typography>
@@ -94,9 +92,9 @@ class TestForm extends Component {
 
   render() {
     const {
-      handleSubmit,
       intl,
       mode,
+      handleSubmit
     } = this.props;
 
     const pageTitle = intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE);
@@ -106,15 +104,16 @@ class TestForm extends Component {
         appBarTittle={pageTitle}
         appBarButtons={this.appBarButtons}
       >
-        <Card
-          className="tests-form"
-          actions={(
-            <Button
-              type="submit"
-            >{intl.formatMessage(globalMessages.SAVE)}</Button>
-          )}
-        >
-          <form className="test-form" onSubmit={handleSubmit(this.submit)}>
+        <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
+
+          <Card
+            className="tests-form"
+            actions={(
+              <Button
+                type="submit"
+              >{intl.formatMessage(globalMessages.SAVE)}</Button>
+            )}
+          >
             <InputField
               name='name'
               label={intl.formatMessage(messages.TEST_NAME)}
@@ -131,8 +130,8 @@ class TestForm extends Component {
               label={intl.formatMessage(messages.TEST_QUESTIONS)}
             />
 
-          </form>
-        </Card>
+          </Card>
+        </form>
       </MainLayout>
     );
   }
@@ -159,4 +158,4 @@ const mapDispatchToProps = {
   onSubmit: addTest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));

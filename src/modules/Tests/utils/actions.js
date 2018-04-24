@@ -10,8 +10,10 @@ export function addTest({ name, description, questionsIds}, resolve = null, reje
     questions: questionsIds,
   };
 
+  console.log(body);
+
   return dispatch => {
-    return dispatchPromiseResult(dispatch, {
+    dispatchPromiseResult(dispatch, {
       actionType: ADD_TEST,
       promise: fetchAPI.post.bind(null, `${API_URL}/tests`, {body}),
       resolve,

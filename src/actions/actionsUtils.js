@@ -40,6 +40,7 @@ export const dispatchPromiseResult = (dispatch, {
         dispatchResponse(dispatch, resolve, actionType, payload, response, hash);
         resolve && resolve(response);
       },
+
       error => {
         dispatch(receivedError(actionType, payload, error, hash));
         reject && reject(error);

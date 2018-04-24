@@ -70,7 +70,6 @@ class ListField extends Component {
         <Input
           {...input}
           {...restProps}
-          ref={(ref) => this.inputRef = ref}
           className="list-field-input"
           value={input.value.label}
           onChange={this.onChange}
