@@ -11,7 +11,7 @@ import Icon from '../Icon/Icon';
 export default class IconButton extends Component {
   static propTypes = {
     icon: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     iconSize: PropTypes.number,
   };
 

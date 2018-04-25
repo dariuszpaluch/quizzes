@@ -44,6 +44,10 @@ const messages = defineMessages({
   TEST_SUMMARY_HEADER: {
     id: 'make-test.test-result-header',
     defaultMessage: 'Test result',
+  },
+  TEST_RATING: {
+    id: 'make-test.test-rating',
+    defaultMessage: 'Rating'
   }
 });
 

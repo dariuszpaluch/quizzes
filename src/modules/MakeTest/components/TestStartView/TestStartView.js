@@ -7,6 +7,7 @@ import Button from 'libs/ui/Button/Button';
 import messages from 'modules/MakeTest/utils/messages';
 import { injectIntl } from 'react-intl';
 import Card from 'libs/ui/Card/Card';
+import StarRating from 'libs/ui/StarRating/StarRating';
 
 class TestStartView extends Component {
   static propTypes = {
@@ -32,7 +33,7 @@ class TestStartView extends Component {
 
     const classes = classnames('test-start-view', className);
 
-    const { description, name, created } = testDescription;
+    const { description, name, created, meta } = testDescription;
 
 
     const _descriptionItems = [
@@ -47,6 +48,11 @@ class TestStartView extends Component {
       {
         intlMessage: messages.CREATED_TEST_DATE,
         value: intl.formatDate(created),
+      },
+      {
+        intlMessage: messages.TEST_RATING,
+        // value: meta && meta.rating,
+        value: meta && meta.rating && (<StarRating rating={meta.rating} disabled/>),
       }
     ];
 
@@ -59,10 +65,10 @@ class TestStartView extends Component {
         <div className="test-description">
           {_descriptionItems.map(({intlMessage, value}, index) => {
             return (
-              <p key={index}>
+              <div key={index}>
                 <label>{intl.formatMessage(intlMessage)}</label>
-                <span>{value}</span>
-              </p>
+                <div>{value}</div>
+              </div>
             );
           })}
         </div>

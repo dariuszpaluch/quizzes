@@ -11,12 +11,16 @@ export default class StarRating extends Component {
     size: PropTypes.number,
     maxRating: PropTypes.number,
     showLabel: PropTypes.bool,
+    rating: PropTypes.number,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
     maxRating: 5,
     size: 25,
     showLabel: true,
+    rating: null,
+    disabled: false,
   };
 
   constructor(props) {
@@ -37,7 +41,7 @@ export default class StarRating extends Component {
   };
 
   renderStar = (starIndex, selected, hover) => {
-    const { onChange, size } = this.props;
+    const { onChange, size, disabled } = this.props;
 
     return (
 
@@ -49,7 +53,8 @@ export default class StarRating extends Component {
         key={starIndex}
         icon={icons.STAR}
         iconSize={size}
-        onClick={onChange.bind(null, starIndex + 1)}
+        disabled={disabled}
+        onClick={onChange && onChange.bind(null, starIndex + 1)}
         onMouseEnter={this.onMouseEnter.bind(null, starIndex, true)}
         onMouseLeave={this.onMouseEnter.bind(null, starIndex, false)}
       />
