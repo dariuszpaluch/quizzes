@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { injectIntl } from 'react-intl';
 import Card from 'libs/ui/Card/Card';
 import messages from 'modules/MakeTest/utils/messages';
+import StarRating from 'libs/ui/StarRating/StarRating';
 
 class TestResult extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ class TestResult extends Component {
   }
 
   render() {
-    const { className, intl, result } = this.props;
+    const { className, intl, result, changeTestRating, testRating } = this.props;
 
     const classes = classnames(className);
 
@@ -29,7 +30,8 @@ class TestResult extends Component {
         className={classes}
         title={intl.formatMessage(messages.TEST_SUMMARY_HEADER)}
       >
-
+        Oceń test:
+        <StarRating rating={testRating} onChange={changeTestRating}/>
         WYNIK : {result}
       </Card>
     );

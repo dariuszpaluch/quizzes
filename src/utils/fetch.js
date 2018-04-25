@@ -2,6 +2,7 @@ import isomorphicFetch from 'isomorphic-fetch';
 
 import customException from '../exceptions/CustomException';
 import LocalStorageSource from 'sources/LocalStorageSource';
+import size from 'lodash/size';
 
 export default {
   get: fetch.bind(null, 'GET'),
@@ -10,6 +11,19 @@ export default {
   delete: fetch.bind(null, 'DELETE'),
   patch: fetch.bind(null, 'PATCH')
 };
+
+const getResponse = (response ) => {
+  const contentType = response.headers.get("content-type");
+
+  console.log('darek', contentType);
+
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    return response.json();
+  } else {
+    return response.text();
+  }
+};
+
 
 function fetch(method, url, { body, header, customResponseHandler, submissionError} = {}) {
 
@@ -29,17 +43,16 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
       if (customResponseHandler) return response;
 
       if (response.status >= 400) {
-
-        if (submissionError) {
+        if(submissionError) {
           return response.json().then((err) => submissionError(err));
         } else {
-
           const result = await response.json();
-          console.error(result, response.status);
+
           throw new customException(result, response.status);
         }
       } else {
-        return response.json();
+
+        return getResponse(response);
       }
     }
   );

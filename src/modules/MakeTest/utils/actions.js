@@ -2,7 +2,7 @@ import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 import { API_URL } from 'src/settings';
 
-import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER, SET_QUESTION_RATE } from 'modules/MakeTest/utils/actionTypes';
+import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER, SET_QUESTION_RATE, SET_TEST_RATING } from 'modules/MakeTest/utils/actionTypes';
 
 export function fetchTestToBeCompleted(testId, resolve, reject) {
   return dispatch => {
@@ -43,3 +43,21 @@ export function onChangeQuestionRate(questionId, rating) {
     rating,
   })
 }
+
+// export const changeTestRating = (testRating) => storeAction(CHANGE_TEST_RATING, null, { testRating });
+export const changeTestRating = (testId, testRating) => {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: SET_TEST_RATING,
+      promise: fetchAPI.put.bind(null, `${API_URL}/tests/${testId}/rating`, {
+        body: {
+          rating: testRating,
+        }
+      }),
+      payload: {
+        testRating,
+      }
+    });
+  }
+}
+

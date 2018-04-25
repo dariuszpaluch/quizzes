@@ -5,11 +5,11 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import {toastr} from 'react-redux-toastr'
 
-import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer, onChangeQuestionRate } from 'modules/MakeTest/utils/actions';
+import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer, onChangeQuestionRate, changeTestRating } from 'modules/MakeTest/utils/actions';
 import TestStartView from 'modules/MakeTest/components/TestStartView/TestStartView';
 import {
   getIsFetching, getQuestions, getQuestionsIds, getTestAnswers,
-  getTestDescription, getQuestionRating,
+  getTestDescription, getQuestionRating, getTestRating
 } from 'modules/MakeTest/utils/getters';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import Loading from 'libs/ui/Loading/Loading';
@@ -84,6 +84,12 @@ class MakeTest extends Component {
     this.props.onChangeQuestionAnswer(questionId, answers);
   };
 
+  changeTestRating = (testRating) => {
+    const { testId } = this.props;
+
+    this.props.changeTestRating(testId, testRating);
+  };
+
   renderStartView() {
     const { questionsIds, testDescription } = this.props;
 
@@ -131,13 +137,15 @@ class MakeTest extends Component {
   renderTestResult() {
 
     const { questionsWithCorrect, result} = this.state;
-    const { answers } = this.props;
+    const { answers, testRating } = this.props;
 
     return (
       <TestResult
         questions={questionsWithCorrect}
         result={result}
         answers={answers}
+        changeTestRating={this.changeTestRating}
+        testRating={testRating}
       />
     )
   }
@@ -179,6 +187,7 @@ const mapStateToProps = (state, ownProps) => {
     loading: getIsFetching(state) || !testDescription,
     answers: getTestAnswers(state),
     questionsRating: getQuestionRating(state),
+    testRating: getTestRating(state),
   }
 };
 
@@ -186,7 +195,8 @@ const mapDispatchToProps = {
   fetchTestToBeCompleted,
   saveTestAnswers,
   onChangeQuestionAnswer: setQuestionAnswer,
-  onChangeQuestionRate
+  onChangeQuestionRate,
+  changeTestRating,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MakeTest));
