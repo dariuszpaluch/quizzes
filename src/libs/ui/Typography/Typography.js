@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import MaterialTypography from 'material-ui/Typography'
 const propTypes = {
   className: PropTypes.string,
+  variant: PropTypes.oneOf(['display4', 'display3', 'display2', 'display1', 'headline', 'title', 'subheading', 'body2', 'body1', 'caption', 'button'])
 };
 
 const defaultProps = {

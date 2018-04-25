@@ -2,7 +2,7 @@ import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 import { API_URL } from 'src/settings';
 
-import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER } from 'modules/MakeTest/utils/actionTypes';
+import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER, SET_QUESTION_RATE } from 'modules/MakeTest/utils/actionTypes';
 
 export function fetchTestToBeCompleted(testId, resolve, reject) {
   return dispatch => {
@@ -35,4 +35,11 @@ export function saveTestAnswers(testId, answers, resolve, reject) {
       reject,
     });
   }
+}
+
+export function onChangeQuestionRate(questionId, rating) {
+  return storeAction(SET_QUESTION_RATE, null, {
+    questionId,
+    rating,
+  })
 }

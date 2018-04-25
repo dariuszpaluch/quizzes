@@ -3,12 +3,13 @@ import './question_form.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import classnames from 'classnames';
-import Card from 'libs/ui/Card/Card';
-import Checkbox from 'libs/ui/Checkbox/Checkbox';
+
 import Typography from 'libs/ui/Typography/Typography';
 import List from 'libs/ui/List/List';
 import normalizeList from 'utils/normalizeList';
-import Sticky from 'react-stickynode';
+import StarRating from 'libs/ui/StarRating/StarRating';
+
+
 
 export default class QuestionForm extends Component {
   static propTypes = {
@@ -43,11 +44,11 @@ export default class QuestionForm extends Component {
   }
 
   render() {
-    const { className, question } = this.props;
+    const { className, question, onChangeQuestionRate, rating } = this.props;
 
     const classes = classnames('question-form', className);
 
-    const { description, hints, answers } = question;
+    const { description, hints, answers,  } = question;
 
     return (
       <div
@@ -56,6 +57,7 @@ export default class QuestionForm extends Component {
         <div className="question-description" >
           <Typography variant="headline" className="question">{question.question}</Typography>
           <Typography variant="caption" className="description">{description}</Typography>
+          <StarRating rating={rating} onChange={onChangeQuestionRate}/>
         </div>
         {this.renderAnswers(question.answers)}
       </div>

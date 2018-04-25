@@ -21,7 +21,7 @@ const defaultProps = {
 };
 
 
-const Icon = ({ className, icon, size, bold }) => {
+const Icon = ({ className, icon, size, bold,...restProps }) => {
 
   const classes = classnames('icon', {
     'bolded': bold,
@@ -29,6 +29,7 @@ const Icon = ({ className, icon, size, bold }) => {
 
   return (
     <MaterialIcon
+      {...restProps}
       className={classes}
       style={{fontSize: size}}
     >{icon}</MaterialIcon>

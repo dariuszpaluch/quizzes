@@ -5,11 +5,11 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import {toastr} from 'react-redux-toastr'
 
-import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer } from 'modules/MakeTest/utils/actions';
+import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer, onChangeQuestionRate } from 'modules/MakeTest/utils/actions';
 import TestStartView from 'modules/MakeTest/components/TestStartView/TestStartView';
 import {
   getIsFetching, getQuestions, getQuestionsIds, getTestAnswers,
-  getTestDescription
+  getTestDescription, getQuestionRating,
 } from 'modules/MakeTest/utils/getters';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import Loading from 'libs/ui/Loading/Loading';
@@ -83,7 +83,6 @@ class MakeTest extends Component {
   onChangeAnswer = (questionId, answers) => {
     this.props.onChangeQuestionAnswer(questionId, answers);
   };
-  questionsIds;
 
   renderStartView() {
     const { questionsIds, testDescription } = this.props;
@@ -98,7 +97,7 @@ class MakeTest extends Component {
   }
 
   renderTestForm() {
-    const { questionsIds, questions, testDescription, answers } = this.props;
+    const { questionsIds, questions, testDescription, answers, questionsRating } = this.props;
 
     return (
       <MakeTestForm
@@ -107,7 +106,9 @@ class MakeTest extends Component {
         testName={testDescription.name}
         values={answers}
         onChangeQuestionAnswer={this.onChangeAnswer}
+        onChangeQuestionRate={this.props.onChangeQuestionRate}
         onFinish={this.finishTest}
+        rating={questionsRating}
       />
     );
   }
@@ -177,6 +178,7 @@ const mapStateToProps = (state, ownProps) => {
     questions: getQuestions(state),
     loading: getIsFetching(state) || !testDescription,
     answers: getTestAnswers(state),
+    questionsRating: getQuestionRating(state),
   }
 };
 
@@ -184,6 +186,7 @@ const mapDispatchToProps = {
   fetchTestToBeCompleted,
   saveTestAnswers,
   onChangeQuestionAnswer: setQuestionAnswer,
+  onChangeQuestionRate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MakeTest));

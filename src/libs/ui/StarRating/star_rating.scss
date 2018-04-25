@@ -1,0 +1,30 @@
+$selected-color: #FDD835;
+$height: 40px;
+
+.star-rating {
+  display: flex;
+
+  .star {
+    height: $height;
+    width: 30px;
+
+    &:hover{
+      color: $selected-color !important;
+
+      > span > span {
+        font-size: 30px !important;
+      }
+    }
+
+    &.hover{
+      color: rgba($selected-color, 0.6);
+    }
+
+
+
+    &.selected {
+      color: $selected-color;
+    }
+
+  }
+}

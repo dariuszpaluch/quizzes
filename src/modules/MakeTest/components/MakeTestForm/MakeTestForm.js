@@ -75,6 +75,12 @@ class MakeTestForm extends Component {
     this.props.onChangeQuestionAnswer(questionId, answer);
   };
 
+  onChangeQuestionRate = (rating) => {
+    const questionId = this.getActiveQuestionId();
+
+    this.props.onChangeQuestionRate(questionId, rating);
+  };
+
   onTransitionEnd = (index) => {
     const { values, questionsIds } = this.props;
 
@@ -87,7 +93,7 @@ class MakeTestForm extends Component {
   };
 
   renderQuestion() {
-    const { questions, values, questionsIds } = this.props;
+    const { questions, values, questionsIds, rating } = this.props;
 
     const questionsForms = [];
 
@@ -100,6 +106,8 @@ class MakeTestForm extends Component {
           question={question}
           onChange={this.onChangeQuestionAnswer}
           value={values[questionId]}
+          onChangeQuestionRate={this.onChangeQuestionRate}
+          rating={rating[questionId]}
         />
       );
     });

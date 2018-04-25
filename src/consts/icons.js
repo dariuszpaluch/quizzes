@@ -20,6 +20,8 @@ const icons = {
   SHARE: 'share',
   EDIT: 'edit',
   DELETE: 'delete',
+  STAR_BORDER: 'start_border',
+  STAR: 'star'
 };
 
 export default icons;

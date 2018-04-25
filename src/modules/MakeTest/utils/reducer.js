@@ -2,7 +2,7 @@ import {createReducer, updateObject} from 'utils/reducerUtils';
 
 import { FETCH_TEST_TO_BE_COMPLETED } from './actionTypes';
 import normalizeList from 'utils/normalizeList';
-import { SET_QUESTION_ANSWER } from 'modules/MakeTest/utils/actionTypes';
+import { SET_QUESTION_ANSWER, SET_QUESTION_RATE } from 'modules/MakeTest/utils/actionTypes';
 import omit from 'lodash/omit';
 
 function getInitState() {
@@ -14,6 +14,7 @@ function getInitState() {
     },
     fetching: false,
     answers: {},
+    questionRating: {},
   };
 }
 
@@ -54,9 +55,21 @@ function setQuestionAnswer(state, action) {
   })
 }
 
+const setQuestionRate = (state, action) => {
+  const { questionId, rating } = action.data;
+
+  return {
+    ...state,
+    questionRating: {
+      [questionId]: rating,
+    }
+  }
+};
+
 export default createReducer(getInitState(), {
   [`${FETCH_TEST_TO_BE_COMPLETED}_REQUEST`]: fetchTestToBeCompletedRequest,
   [`${FETCH_TEST_TO_BE_COMPLETED}_SUCCESS`]: fetchTestToBeCompletedSuccess,
   [`${FETCH_TEST_TO_BE_COMPLETED}_FAILURE`]: fetchTestToBeCompletedFailure,
   [SET_QUESTION_ANSWER]: setQuestionAnswer,
+  [SET_QUESTION_RATE]: setQuestionRate,
 });
