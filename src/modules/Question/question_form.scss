@@ -2,17 +2,13 @@
 @import '~styles/variables';
 
 .question-form {
-  > div {
-    width: 100%;
-  }
-    .list-field {
-      padding: 0;
+  .list-field {
+    padding: 0;
 
-      &.selected {
-        border-radius: $container-radius;
-        background-color: rgba($success-color, 0.8);
-        border-color: darken($success-color, 15%);
-
-      }
+    &.selected {
+      border-radius: $container-radius;
+      background-color: rgba($success-color, 0.8);
+      border-color: darken($success-color, 15%);
     }
+  }
 }

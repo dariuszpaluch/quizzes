@@ -6,14 +6,54 @@ import { getAppBarTitle } from './utils/getters';
 import { isUserLoggedIn } from 'modules/Auth/reducer';
 import { withRouter } from 'react-router-dom';
 
+import MainLayoutContext from './MainLayoutContext';
+
 class SmartMainLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: 'Quizzes',
+      appBarActions: {}
+    };
+  }
+
+  setTitle = title => {
+    this.setState({ title });
+  };
+
+  setAppBarActions = appBarActions => {
+    this.setState({ appBarActions });
+  };
+
+  restoreDefaultAppBar = () => {
+    this.setState({
+      title: undefined,
+      appBarActions: {}
+    });
+  };
+
   render() {
-    const { title, userLoggedIn, children } = this.props;
+    const { userLoggedIn, children } = this.props;
+    const { title, appBarActions } = this.state;
 
     return (
-      <MainLayout appBarTittle={title} hideMenu={!userLoggedIn}>
-        {children}
-      </MainLayout>
+      <div>
+        <MainLayout
+          appBarTittle={title}
+          appBarButtons={appBarActions}
+          hideMenu={!userLoggedIn}
+        >
+          <MainLayoutContext.Provider
+            value={{
+              setTitle: this.setTitle,
+              setAppBarActions: this.setAppBarActions,
+              restoreDefaultAppBar: this.restoreDefaultAppBar
+            }}
+          >
+            {children}
+          </MainLayoutContext.Provider>
+        </MainLayout>
+      </div>
     );
   }
 }

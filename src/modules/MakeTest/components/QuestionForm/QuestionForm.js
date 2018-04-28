@@ -1,7 +1,7 @@
 import './question_form.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import Typography from 'libs/ui/Typography/Typography';
@@ -9,13 +9,11 @@ import List from 'libs/ui/List/List';
 import normalizeList from 'utils/normalizeList';
 import StarRating from 'libs/ui/StarRating/StarRating';
 
-
-
 export default class QuestionForm extends Component {
   static propTypes = {
     question: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.array,
+    value: PropTypes.array
   };
 
   static defaultProps = {};
@@ -48,16 +46,18 @@ export default class QuestionForm extends Component {
 
     const classes = classnames('question-form', className);
 
-    const { description, hints, answers,  } = question;
+    const { description, hints, answers } = question;
 
     return (
-      <div
-        className={classes}
-      >
-        <div className="question-description" >
-          <Typography variant="headline" className="question">{question.question}</Typography>
-          <Typography variant="caption" className="description">{description}</Typography>
-          <StarRating rating={rating} onChange={onChangeQuestionRate}/>
+      <div className={classes}>
+        <div className="question-description">
+          <Typography variant="headline" className="question">
+            {question.question}
+          </Typography>
+          <Typography variant="caption" className="description">
+            {description}
+          </Typography>
+          <StarRating rating={rating} onChange={onChangeQuestionRate} />
         </div>
         {this.renderAnswers(question.answers)}
       </div>

@@ -16,7 +16,7 @@ import { required } from 'modules/_forms/validations';
 import STRINGS from './utils/strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
-import {addQuestion} from "./utils/actions";
+import { addQuestion } from './utils/actions';
 import globalMessages from 'utils/globalMessages';
 import { injectIntl } from 'react-intl';
 import messages from 'modules/Question/utils/messages';
@@ -24,9 +24,14 @@ import MainLayout from 'modules/MainLayout/MainLayout';
 import icons from 'consts/icons';
 import paths from 'consts/paths';
 
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
+
+import { setAppBarButtons } from 'modules/MainLayout/utils/actions';
+import classnames from 'classnames';
+
 const MODES = {
   EDIT: 'EDIT',
-  ADD: 'ADD',
+  ADD: 'ADD'
 };
 
 class QuestionForm extends Component {
@@ -37,83 +42,108 @@ class QuestionForm extends Component {
   };
 
   static defaultProps = {
-    mode: MODES.ADD,
+    mode: MODES.ADD
   };
 
   constructor(props) {
     super(props);
 
+    this.onSubmit = props.handleSubmit(this.submit);
+
     this.appBarButtons = {
       left: {
         onClick: this.goBack,
-        icon: icons.ARROW_BACK,
+        icon: icons.ARROW_BACK
       },
       right: {
-        onClick: props.handleSubmit(this.submit),
-        icon: icons.DONE,
+        onClick: this.onSubmit,
+        icon: icons.DONE
       }
     };
+  }
+
+  componentDidMount() {
+    const { intl, mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { setTitle, setAppBarActions } = mainLayoutContext;
+
+      setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
+      setAppBarActions(this.appBarButtons);
+    }
+  }
+
+  componentWillUnmount() {
+    const { mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { restoreDefaultAppBar } = mainLayoutContext;
+
+      restoreDefaultAppBar();
+    }
   }
 
   goBack = () => {
     this.props.history.push(paths.QUESTIONS);
   };
 
-  submit = ({question, description, answers}) => {
+  submit = ({ question, description, answers }) => {
     const _answers = answers.map(answer => {
       return {
         label: answer.label,
-        correct: answer.select,
-      }
+        correct: answer.select
+      };
     });
 
-    return this.props.onSubmit({question, description, answers: _answers}).then(this.goBack);
+    return this.props
+      .saveQuestion({ question, description, answers: _answers })
+      .then(this.goBack);
   };
 
-  render() {
-    const {
-      handleSubmit,
-      mode,
-      pristine,
-      reset,
-      submitting,
-      intl,
-    } = this.props;
-
+  renderActions() {
+    const { intl, submitting } = this.props;
     return (
-      <MainLayout
-        appBarTittle={intl.formatMessage(messages.QUESTION_LIST_HEADER)}
-        appBarButtons={this.appBarButtons}
-      >
-        <Card title={STRINGS.HEADER[mode]}>
-          <form className="question-form" onSubmit={handleSubmit(this.submit)}>
-            <InputField
-              name='question'
-              label={STRINGS.INPUTS.QUESTION}
-              autoFocus
-            />
-            <InputField
-              name='description'
-              label={STRINGS.INPUTS.DESCRIPTION}
-            />
-            <FieldArray
-              name="answers"
-              component={ListFields}
-              className="answer-list"
-              inputPlaceholder="Answer"
-              addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
-            />
-            <Button
-              type="submit"
-              color="primary"
-            >{intl.formatMessage(globalMessages.SAVE)}</Button>
-          </form>
-        </Card>
-      </MainLayout>
+      <Button type="submit" color="primary" loader={submitting}>
+        {intl.formatMessage(globalMessages.SAVE)}
+      </Button>
     );
   }
 
+  render() {
+    const { handleSubmit, submitting, intl } = this.props;
 
+    return (
+      <Card className="question-form">
+        <form onSubmit={this.onSubmit}>
+          <div className="row">
+            <div className="col-xs-12">
+              <InputField
+                className="col-xs-12"
+                name="question"
+                label={STRINGS.INPUTS.QUESTION}
+                autoFocus
+              />
+            </div>
+            <div className="col-xs-12">
+              <InputField
+                className="col-xs-12"
+                name="description"
+                label={STRINGS.INPUTS.DESCRIPTION}
+              />
+            </div>
+            <div className="col-xs-12">
+              <FieldArray
+                name="answers"
+                component={ListFields}
+                className={classnames('answer-list', 'col-xs-12')}
+                inputPlaceholder="Answer"
+                addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
+              />
+            </div>
+          </div>
+          <div className="col-xs-12">{this.renderActions()}</div>
+        </form>
+      </Card>
+    );
+  }
 }
 
 const FORM_NAME = 'QuestionForm';
@@ -122,21 +152,31 @@ QuestionForm = reduxForm({
   form: FORM_NAME,
   initialValues: {
     question: '',
-    answers: [{
-      correct:false,
-      label: '',
-    }]
-  },
+    answers: [
+      {
+        correct: false,
+        label: ''
+      }
+    ]
+  }
 })(QuestionForm);
 
-const mapStateToProps = (state, ownProps ) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    initialValues: pick(ownProps.question, ['question', 'description', 'answers']) || { answers: [{label: ''}]},
+    initialValues: pick(ownProps.question, [
+      'question',
+      'description',
+      'answers'
+    ]) || { answers: [{ label: '' }] }
   };
 };
 
 const mapDispatchToProps = {
-  onSubmit: addQuestion
+  saveQuestion: addQuestion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionForm));
+QuestionForm = connect(mapStateToProps, mapDispatchToProps)(
+  injectIntl(QuestionForm)
+);
+
+export default MainLayoutContextWrapper(QuestionForm);

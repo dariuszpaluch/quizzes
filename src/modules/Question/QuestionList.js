@@ -76,6 +76,7 @@ class QuestionList extends Component {
           onEdit={this.goEditQuestion}
           onDelete={this.onDeleteQuestion}
         />
+        <FloatButton icon={icons.ADD} onClick={this.onClickAddQuestion} />
       </Card>
     );
   }

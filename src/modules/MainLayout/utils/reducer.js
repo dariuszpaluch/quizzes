@@ -1,9 +1,9 @@
-import { SET_APP_BAR_TITLE } from './actionsTypes'
+import { SET_APP_BAR_TITLE } from './actionsTypes';
 
 import { createReducer } from 'utils/reducerUtils';
 
 const getInitState = () => ({
-  title: 'Quizzes',
+  title: 'Quizzes'
 });
 
 export default createReducer(getInitState(), {

@@ -1,6 +1,6 @@
 import './input.scss';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import classnames from 'classnames';
 
@@ -17,7 +17,7 @@ export default class Input extends Component {
     this.state = {};
   }
 
-  onChange = (event) => {
+  onChange = event => {
     this.props.onChange(event.target.value);
   };
 
@@ -28,11 +28,11 @@ export default class Input extends Component {
       error,
       warning,
       helperText,
-      ...props,
+      ...props
     } = this.props;
 
     const classes = classnames('material-ui-input', className, {
-      'have-error': !!error,
+      'have-error': !!error
     });
 
     return (
@@ -42,7 +42,9 @@ export default class Input extends Component {
         error={!!error}
         helperText={helperText || error || undefined}
         onChange={this.onChange}
-      >{children}</MaterialTextField>
+      >
+        {children}
+      </MaterialTextField>
     );
   }
 }

@@ -1,10 +1,14 @@
 import './card.scss';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import MaterialCard, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
+import MaterialCard, {
+  CardActions,
+  CardContent,
+  CardHeader
+} from 'material-ui/Card';
 import IconButton from 'libs/ui/IconButton/IconButton';
 
 export default class Card extends Component {
@@ -14,13 +18,13 @@ export default class Card extends Component {
     className: PropTypes.string,
     headerAction: PropTypes.shape({
       icon: PropTypes.string,
-      onClick: PropTypes.func,
+      onClick: PropTypes.func
     }),
     centerHeader: PropTypes.bool,
     actions: PropTypes.any,
     contentClass: PropTypes.string,
     actionsClass: PropTypes.string,
-    headerClass: PropTypes.string,
+    headerClass: PropTypes.string
   };
 
   static defaultProps = {
@@ -31,35 +35,30 @@ export default class Card extends Component {
     actions: null,
     contentClass: '',
     actionsClass: '',
-    headerClass: '',
+    headerClass: ''
   };
 
   renderHeaderAction() {
-    const {
-      headerAction,
-    } = this.props;
+    const { headerAction } = this.props;
 
-    if(!headerAction)
-      return null;
+    if (!headerAction) return null;
 
-    return <IconButton icon={headerAction.icon} onClick={headerAction.onClick}/>
+    return (
+      <IconButton icon={headerAction.icon} onClick={headerAction.onClick} />
+    );
   }
 
   renderHeader() {
-    const {
-      title,
-      subheader,
-      headerClass,
-    } = this.props;
+    const { title, subheader, headerClass } = this.props;
 
-    if(!title && !subheader) {
-      return null
+    if (!title && !subheader) {
+      return null;
     }
 
     return (
       <CardHeader
-        className={classnames("card-header", headerClass)}
-        title={ title }
+        className={classnames('card-header', headerClass)}
+        title={title}
         subheader={subheader}
         action={this.renderHeaderAction()}
       />
@@ -78,24 +77,25 @@ export default class Card extends Component {
       contentClass,
       actionsClass,
       headerClass,
-      ...props,
+      ...props
     } = this.props;
 
     const classes = classnames(className, 'card', {
       'center-header': centerHeader,
-      'with-header': title || subheader,
+      'with-header': title || subheader
     });
 
     return (
-      <MaterialCard
-        className={classes}
-        {...props}
-      >
+      <MaterialCard className={classes} {...props}>
         {this.renderHeader()}
-        <CardContent className={ classnames("card-content", contentClass)}>
+        <CardContent className={classnames('card-content', contentClass)}>
           {children}
         </CardContent>
-        {!!actions ? <CardActions className={actionsClass}>{actions}</CardActions> : null}
+        {!!actions ? (
+          <CardActions className={classnames('card-actions', actionsClass)}>
+            {actions}
+          </CardActions>
+        ) : null}
       </MaterialCard>
     );
   }

@@ -1,1 +1,2 @@
 export const SET_APP_BAR_TITLE = 'SET_APP_BAR_TITLE';
+export const SET_APP_BAR_ACTION = 'SET_APP_BAR_ACTION';

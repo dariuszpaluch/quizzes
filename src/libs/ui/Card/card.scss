@@ -1,6 +1,10 @@
 @import '~styles/variables';
 
 .card {
+  .card-content {
+    padding: 0;
+  }
+
   &.center-header {
     .card-header {
       text-align: center;
@@ -15,5 +19,11 @@
     padding-top: 0;
   }
 
-
+  .card-actions {
+    padding: 0;
+    > div,
+    button {
+      width: 100%;
+    }
+  }
 }
