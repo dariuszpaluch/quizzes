@@ -4,7 +4,8 @@ import React from 'react';
 const MainLayoutContext = React.createContext({
   setTitle: () => {},
   setAppBarActions: () => {},
-  restoreDefaultAppBar: () => {}
+  restoreDefaultAppBar: () => {},
+  setOnSearch: () => {}
 });
 
 export default MainLayoutContext;

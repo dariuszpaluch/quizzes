@@ -1,4 +1,5 @@
 @import '~styles/mixins';
+@import '~styles/colors';
 
 $drawer-width: 230px;
 $app-bar-height: 50px;
@@ -25,6 +26,7 @@ $app-bar-height: 50px;
       display: flex;
       justify-content: space-between;
       .page-tittle {
+        padding-left: 10px;
         font-weight: normal;
         font-size: 1.2rem;
         margin: auto 0;

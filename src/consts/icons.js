@@ -21,7 +21,8 @@ const icons = {
   EDIT: 'edit',
   DELETE: 'delete',
   STAR_BORDER: 'start_border',
-  STAR: 'star'
+  STAR: 'star',
+  SEARCH: 'search'
 };
 
 export default icons;

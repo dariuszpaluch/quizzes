@@ -1,0 +1,36 @@
+@import '~styles/colors';
+
+.search-input-plug {
+  width: 50px;
+}
+.search-input {
+  position: absolute;
+  top: 0;
+
+  color: white;
+  fill: white;
+  background-color: lighten($primary-color, 5%);
+  transition: transform 1s;
+  width: calc(100% - 50px);
+  right: calc(-100% + 100px);
+
+  &.expanded {
+    transform: translateX(calc(-100% + 50px));
+  }
+
+  > button {
+    width: 50px;
+  }
+  .search-value-input {
+    color: white;
+    font-weight: normal;
+    width: calc(100% - 100px);
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    input {
+    }
+  }
+}

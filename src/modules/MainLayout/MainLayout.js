@@ -17,6 +17,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from 'modules/Auth/actions';
 import messages from 'modules/MainLayout/consts/messages';
+import { Input } from 'material-ui';
+import * as ReactDOM from 'react-dom';
+import AppBarSearch from 'modules/MainLayout/components/AppBarSearch/AppBarSearch';
 
 const buttonPropTypes = PropTypes.shape({
   icon: PropTypes.string,
@@ -32,23 +35,26 @@ class MainLayout extends Component {
       left: buttonPropTypes,
       right: buttonPropTypes
     }),
-    hideMenu: PropTypes.bool
+    hideMenu: PropTypes.bool,
+    onSearch: PropTypes.func
   };
 
   static defaultProps = {
     showAppBar: true,
     appBarTittle: 'Quizzes',
-    hideMenu: false
-  };
-
-  state = {
-    mobileOpen: false
+    hideMenu: false,
+    onSearch: undefined
   };
 
   constructor(props) {
     super(props);
 
     const intl = props.intl;
+
+    this.state = {
+      mobileOpen: false,
+      expandSearch: false
+    };
 
     this.navsMenu = [
       {
@@ -93,13 +99,44 @@ class MainLayout extends Component {
     }));
   };
 
+  onToogleSearch = () => {
+    if (this.state.expandSearch) {
+      const node = ReactDOM.findDOMNode(this.searchInput).firstChild;
+      node.focus();
+    }
+
+    this.setState((prevState, prevProps) => ({
+      expandSearch: !prevState.expandSearch
+    }));
+  };
+
+  renderRightAppBarAction() {
+    const { appBarButtons, onSearch } = this.props;
+    const rightButton = appBarButtons && appBarButtons.right;
+
+    if (true) {
+      return <AppBarSearch onChange={onSearch} />;
+    }
+
+    if (rightButton)
+      return (
+        <IconButton
+          color="inherit"
+          onClick={rightButton.onClick}
+          className="nav-icon"
+          icon={rightButton.icon}
+          iconSize={20}
+        />
+      );
+  }
+
   renderAppBar() {
     const { showAppBar, appBarTittle, appBarButtons, hideMenu } = this.props;
 
     if (!showAppBar) return null;
 
     const leftButton = appBarButtons && appBarButtons.left;
-    const rightButton = appBarButtons && appBarButtons.right;
+
     const showLeftButton = !hideMenu || leftButton;
 
     return (
@@ -122,15 +159,7 @@ class MainLayout extends Component {
             ) : null}
             <div className="page-tittle">{appBarTittle}</div>
           </div>
-          {rightButton ? (
-            <IconButton
-              color="inherit"
-              onClick={rightButton.onClick}
-              className="nav-icon"
-              icon={rightButton.icon}
-              iconSize={20}
-            />
-          ) : null}
+          {this.renderRightAppBarAction()}
         </Toolbar>
       </AppBar>
     );

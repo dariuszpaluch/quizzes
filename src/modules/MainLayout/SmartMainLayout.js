@@ -13,7 +13,8 @@ class SmartMainLayout extends Component {
     super(props);
     this.state = {
       title: 'Quizzes',
-      appBarActions: {}
+      appBarActions: {},
+      onSearch: undefined
     };
   }
 
@@ -25,16 +26,23 @@ class SmartMainLayout extends Component {
     this.setState({ appBarActions });
   };
 
+  setOnSearch = searchCallBack => {
+    this.setState({
+      onSearch: searchCallBack
+    });
+  };
+
   restoreDefaultAppBar = () => {
     this.setState({
       title: undefined,
-      appBarActions: {}
+      appBarActions: {},
+      onSearch: undefined
     });
   };
 
   render() {
     const { userLoggedIn, children } = this.props;
-    const { title, appBarActions } = this.state;
+    const { title, appBarActions, onSearch } = this.state;
 
     return (
       <div>
@@ -42,12 +50,14 @@ class SmartMainLayout extends Component {
           appBarTittle={title}
           appBarButtons={appBarActions}
           hideMenu={!userLoggedIn}
+          search={onSearch}
         >
           <MainLayoutContext.Provider
             value={{
               setTitle: this.setTitle,
               setAppBarActions: this.setAppBarActions,
-              restoreDefaultAppBar: this.restoreDefaultAppBar
+              restoreDefaultAppBar: this.restoreDefaultAppBar,
+              onSearch: this.setOnSearch
             }}
           >
             {children}

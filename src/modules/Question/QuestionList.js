@@ -24,6 +24,7 @@ import parsePath from 'utils/parsePath';
 import paths, { questionPaths } from 'consts/paths';
 import { withRouter } from 'react-router-dom';
 import MainLayout from 'modules/MainLayout/MainLayout';
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
 class QuestionList extends Component {
   componentWillMount() {
@@ -96,6 +97,8 @@ const mapDispatchToProps = {
   setAppBarTitle
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+QuestionList = connect(mapStateToProps, mapDispatchToProps)(
   withRouter(injectIntl(QuestionList))
 );
+
+export default MainLayoutContextWrapper(QuestionList);

@@ -14,7 +14,7 @@ import { minLength, required } from 'modules/_forms/validations';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import messages from './utils/messages';
-import { injectIntl } from 'react-intl'
+import { injectIntl } from 'react-intl';
 import globalMessages from 'utils/globalMessages';
 import QuestionList from './smarts/QuestionList';
 import Typography from 'libs/ui/Typography';
@@ -28,7 +28,7 @@ import { withRouter } from 'react-router-dom';
 
 const MODES = {
   EDIT: 'EDIT',
-  ADD: 'ADD',
+  ADD: 'ADD'
 };
 
 const quizNameMinLength = minLength(5);
@@ -41,48 +41,43 @@ class TestForm extends Component {
   };
 
   static defaultProps = {
-    mode: MODES.ADD,
+    mode: MODES.ADD
   };
 
   constructor(props) {
     super(props);
 
     this.validations = {
-      testName: intlWrapValidation(props.intl, [required, quizNameMinLength]),
+      testName: intlWrapValidation(props.intl, [required, quizNameMinLength])
     };
 
     this.appBarButtons = {
       left: {
         onClick: this.onClickGoBack,
-        icon: icons.ARROW_BACK,
+        icon: icons.ARROW_BACK
       },
       right: {
         onClick: props.handleSubmit(this.onSubmit),
-        icon: icons.DONE,
+        icon: icons.DONE
       }
-
     };
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     this.props.onSubmit(values, this.onClickGoBack);
   };
 
   renderQuestionsList = ({
-     input: { value, onChange },
-     meta: { touched, error, warning },
-     selectedIds,
-     label
-   }) => {
+    input: { value, onChange },
+    meta: { touched, error, warning },
+    selectedIds,
+    label
+  }) => {
     return (
       <div>
         <Typography variant="display1">{label}</Typography>
-        <QuestionList
-          selectedIds={value}
-          onChangeSelect={onChange}
-        />
+        <QuestionList selectedIds={value} onChangeSelect={onChange} />
       </div>
-
     );
   };
 
@@ -91,52 +86,45 @@ class TestForm extends Component {
   };
 
   render() {
-    const {
-      intl,
-      mode,
-      handleSubmit
-    } = this.props;
+    const { intl, mode, handleSubmit } = this.props;
 
-    const pageTitle = intl.formatMessage(mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE);
+    const pageTitle = intl.formatMessage(
+      mode === MODES.ADD
+        ? messages.TEST_HEADER_ADD_MODE
+        : messages.TEST_HEADER_EDIT_MODE
+    );
 
     return (
-      <MainLayout
-        appBarTittle={pageTitle}
-        appBarButtons={this.appBarButtons}
-      >
+      <MainLayout appBarTittle={pageTitle} appBarButtons={this.appBarButtons}>
         <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
-
           <Card
             className="tests-form"
-            actions={(
-              <Button
-                type="submit"
-              >{intl.formatMessage(globalMessages.SAVE)}</Button>
-            )}
+            actions={
+              <Button type="submit">
+                {intl.formatMessage(globalMessages.SAVE)}
+              </Button>
+            }
           >
             <InputField
-              name='name'
+              name="name"
               label={intl.formatMessage(messages.TEST_NAME)}
               validate={this.validations.testName}
               autoFocus
             />
             <InputField
-              name='description'
+              name="description"
               label={intl.formatMessage(messages.TEST_DESCRIPTION)}
             />
             <Field
-              name='questionsIds'
+              name="questionsIds"
               component={this.renderQuestionsList}
               label={intl.formatMessage(messages.TEST_QUESTIONS)}
             />
-
           </Card>
         </form>
       </MainLayout>
     );
   }
-
-
 }
 
 const FORM_NAME = 'TestForm';
@@ -146,8 +134,8 @@ TestForm = reduxForm({
   initialValues: {
     name: '',
     description: '',
-    questionsIds: [],
-  },
+    questionsIds: []
+  }
 })(TestForm);
 
 const mapStateToProps = (state, ownProps) => {
@@ -158,4 +146,6 @@ const mapDispatchToProps = {
   onSubmit: addTest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(injectIntl(TestForm))
+);
