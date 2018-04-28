@@ -1,12 +1,12 @@
-import './question_list.scss'
+import './question_list.scss';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import forEach from 'lodash/forEach';
 
-import filter from "lodash/filter";
+import filter from 'lodash/filter';
 
 import List from 'libs/ui/List/List';
 import Card from 'libs/ui/Card/Card';
@@ -24,15 +24,17 @@ import Icon from 'libs/ui/Icon/Icon';
 class SimpleQuestionlist extends Component {
   static propTypes = {
     className: PropTypes.string,
-    questionsIds: PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.number, PropTypes.string
-    ])),
-    questions: PropTypes.objectOf(PropTypes.shape({
-      question: PropTypes.string,
-      description: PropTypes.string,
-    })),
+    questionsIds: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    ),
+    questions: PropTypes.objectOf(
+      PropTypes.shape({
+        question: PropTypes.string,
+        description: PropTypes.string
+      })
+    ),
     selectedIds: PropTypes.arrayOf(PropTypes.string),
-    onChangeSelect: PropTypes.func,
+    onChangeSelect: PropTypes.func
   };
 
   static defaultProps = {
@@ -40,7 +42,7 @@ class SimpleQuestionlist extends Component {
     questionsIds: [],
     questions: {},
     onChangeSelect: null,
-    selectedIds: [],
+    selectedIds: []
   };
 
   constructor(props) {
@@ -48,22 +50,25 @@ class SimpleQuestionlist extends Component {
 
     this.state = {
       openQuestions: {}
-    }
+    };
   }
 
-  onToggleQuestionCollapse = (questionId) => {
+  onToggleQuestionCollapse = questionId => {
     this.setState({
       openQuestions: {
         ...this.state.openQuestions,
         [questionId]: !this.state.openQuestions[questionId]
       }
-    })
+    });
   };
 
   onChangeSelect = (questionId, checked) => {
-    const newValue = checked ?
-      [...this.props.selectedIds, questionId]
-      : filter(this.props.selectedIds, _questionId => _questionId !== questionId);
+    const newValue = checked
+      ? [...this.props.selectedIds, questionId]
+      : filter(
+          this.props.selectedIds,
+          _questionId => _questionId !== questionId
+        );
 
     this.props.onChangeSelect(newValue);
   };
@@ -74,31 +79,34 @@ class SimpleQuestionlist extends Component {
       rows[questionId] = {
         ...question,
         label: question.question,
-        children: this.renderQuestionDetails(question, questionId),
-      }
+        children: this.renderQuestionDetails(question, questionId)
+      };
     });
 
     return rows;
   }
 
-
-
-  renderQuestionDetails({description, answers, hints}, questionId) {
+  renderQuestionDetails({ description, answers, hints }, questionId) {
     const { intl, onEdit, onDelete } = this.props;
 
     return (
       <div className="question-details">
-        <Typography variant="Title">Opis: {description || intl.formatMessage(messages.NO_DESCRIPTION)}</Typography>
-        <Typography variant="Subheading">{intl.formatMessage(messages.ANSWERS)}:</Typography>
+        <Typography variant="subheading">
+          Opis: {description || intl.formatMessage(messages.NO_DESCRIPTION)}
+        </Typography>
+        <Typography variant="subheading">
+          {intl.formatMessage(messages.ANSWERS)}:
+        </Typography>
         <ul className="answers">
-          {answers.map(({correct, label}, index) => (
-            <li
-              key={index}
-              className={classnames({correct})}
-            >{label}</li>
+          {answers.map(({ correct, label }, index) => (
+            <li key={index} className={classnames({ correct })}>
+              {label}
+            </li>
           ))}
         </ul>
-        { onEdit || onDelete ? this.renderQuestionActions(questionId, onEdit, onDelete) : null}
+        {onEdit || onDelete
+          ? this.renderQuestionActions(questionId, onEdit, onDelete)
+          : null}
       </div>
     );
   }
@@ -108,18 +116,24 @@ class SimpleQuestionlist extends Component {
 
     return (
       <div className="question-actions">
-        { onEdit && <Button  color="primary" onClick={onEdit.bind(null, questionId)}><Icon icon={icons.EDIT} />{intl.formatMessage(globalMessages.EDIT)}</Button> }
-        { onDelete && <Button  color="secondary" onClick={onDelete.bind(null, questionId)}><Icon icon={icons.DELETE} />{intl.formatMessage(globalMessages.DELETE)}</Button> }
+        {onEdit && (
+          <Button color="primary" onClick={onEdit.bind(null, questionId)}>
+            <Icon icon={icons.EDIT} />
+            {intl.formatMessage(globalMessages.EDIT)}
+          </Button>
+        )}
+        {onDelete && (
+          <Button color="secondary" onClick={onDelete.bind(null, questionId)}>
+            <Icon icon={icons.DELETE} />
+            {intl.formatMessage(globalMessages.DELETE)}
+          </Button>
+        )}
       </div>
     );
   }
 
   render() {
-    const {
-      questionsIds,
-      questions,
-      selectedIds,
-    } = this.props;
+    const { questionsIds, questions, selectedIds } = this.props;
 
     return (
       <List
@@ -129,7 +143,7 @@ class SimpleQuestionlist extends Component {
         selectedRowsIds={selectedIds}
         onChangeSelect={this.props.onChangeSelect}
       />
-  );
+    );
   }
 }
 

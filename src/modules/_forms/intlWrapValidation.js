@@ -1,18 +1,18 @@
 import isArray from 'lodash/isArray';
 
-const intlWrapValidationItem
-  = (intl, validationFunc) => (...args) => {
+const intlWrapValidationItem = (intl, validationFunc) => (...args) => {
   const resultMessage = validationFunc(...args);
 
-  if(!resultMessage)
-    return resultMessage;
+  console.log('resultMessage', resultMessage);
 
-  if(resultMessage.message) {
+  if (!resultMessage) return resultMessage;
+
+  if (resultMessage.message) {
     return intl.formatMessage(resultMessage.message, resultMessage.values);
   }
 
-  if(resultMessage.id) {
-    return intl.formatMessage(resultMessage)
+  if (resultMessage.id) {
+    return intl.formatMessage(resultMessage);
   }
 
   return resultMessage;
@@ -23,8 +23,7 @@ const intlWrapValidationsArray = (intl, validationFuns = []) => {
 };
 
 export default function intlWrapValidation(intl, validation) {
-  return isArray(validation) ?
-    intlWrapValidationsArray(intl, validation)
-    : intlWrapValidationItem(intl, validation)
+  return isArray(validation)
+    ? intlWrapValidationsArray(intl, validation)
+    : intlWrapValidationItem(intl, validation);
 }
-

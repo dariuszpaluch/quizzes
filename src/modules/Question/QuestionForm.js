@@ -28,6 +28,8 @@ import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
 import { setAppBarButtons } from 'modules/MainLayout/utils/actions';
 import classnames from 'classnames';
+import intlWrapValidation from 'modules/_forms/intlWrapValidation';
+import { arrayMinSize } from 'modules/_forms/validations';
 
 const MODES = {
   EDIT: 'EDIT',
@@ -50,6 +52,11 @@ class QuestionForm extends Component {
 
     this.onSubmit = props.handleSubmit(this.submit);
 
+    this.answersValidation = intlWrapValidation(
+      props.intl,
+      arrayMinSize(2, item => item.label)
+    );
+
     this.appBarButtons = {
       left: {
         onClick: this.goBack,
@@ -57,19 +64,14 @@ class QuestionForm extends Component {
       },
       right: {
         onClick: this.onSubmit,
-        icon: icons.DONE
+        icon: icons.DONE,
+        loading: props.submitting
       }
     };
   }
 
   componentDidMount() {
-    const { intl, mainLayoutContext } = this.props;
-    if (!!mainLayoutContext) {
-      const { setTitle, setAppBarActions } = mainLayoutContext;
-
-      setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
-      setAppBarActions(this.appBarButtons);
-    }
+    this.updateAppBar();
   }
 
   componentWillUnmount() {
@@ -78,6 +80,16 @@ class QuestionForm extends Component {
       const { restoreDefaultAppBar } = mainLayoutContext;
 
       restoreDefaultAppBar();
+    }
+  }
+
+  updateAppBar() {
+    const { intl, mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { setTitle, setAppBarActions } = mainLayoutContext;
+
+      setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
+      setAppBarActions(this.appBarButtons);
     }
   }
 
@@ -101,7 +113,7 @@ class QuestionForm extends Component {
   renderActions() {
     const { intl, submitting } = this.props;
     return (
-      <Button type="submit" color="primary" loader={submitting}>
+      <Button type="submit" color="primary" loading={submitting}>
         {intl.formatMessage(globalMessages.SAVE)}
       </Button>
     );
@@ -136,6 +148,7 @@ class QuestionForm extends Component {
                 className={classnames('answer-list', 'col-xs-12')}
                 inputPlaceholder="Answer"
                 addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
+                validate={this.answersValidation}
               />
             </div>
           </div>

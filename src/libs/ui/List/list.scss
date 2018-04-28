@@ -6,18 +6,26 @@ ul.list {
   border-bottom: $container-border;
   padding: 0;
 
-  > li {
+  > .list-item {
     height: $item-height;
     display: flex;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0;
+    box-sizing: border-box;
+    > div > h3 {
+      font-weight: 500;
+    }
 
     &.have-children {
       padding-right: 0;
     }
     &:not(:first-child) {
-      border-top: $container-border
+      border-top: $container-border;
+    }
+
+    &.clickable {
+      cursor: pointer;
     }
 
     > div {
@@ -25,9 +33,8 @@ ul.list {
       margin: auto 0;
     }
 
-    > button{
+    > button {
       height: 100%;
     }
   }
-
 }
