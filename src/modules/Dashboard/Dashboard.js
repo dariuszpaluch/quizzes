@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Card from 'libs/ui/Card/Card';
-import MainLayout from 'modules/MainLayout/MainLayout';
 
 class Dashboard extends Component {
   static propTypes = {};
@@ -16,21 +15,12 @@ class Dashboard extends Component {
   }
 
   render() {
-    return (
-      <MainLayout>
-        <Card
-          title="Dashboard"
-        >
-
-        </Card>
-      </MainLayout>
-
-    );
+    return <Card title="Dashboard" />;
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return {};
 };
 
 const mapDispatchToProps = {};

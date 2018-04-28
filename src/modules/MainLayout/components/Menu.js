@@ -14,37 +14,64 @@ export default class Menu extends Component {
   static propTypes = {
     mobileOpen: PropTypes.bool,
     handleDrawerToggle: PropTypes.func,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      disabled: PropTypes.bool,
-      label: PropTypes.string.isRequired,
-      icon: PropTypes.string,
-      path: PropTypes.string,
-    })),
-    title: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        disabled: PropTypes.bool,
+        label: PropTypes.string.isRequired,
+        icon: PropTypes.string,
+        path: PropTypes.string
+      })
+    ),
+    title: PropTypes.string
   };
 
   static defaultProps = {
     mobileOpen: false,
     items: [],
-    handleDrawerToggle: null,
+    handleDrawerToggle: null
+  };
+
+  closeMenuAfterClick = action => () => {
+    const { handleDrawerToggle } = this.props;
+
+    action && action();
+    handleDrawerToggle && handleDrawerToggle();
   };
 
   renderMenuItems() {
-    return this.props.items.map((item, index) => {
+    const { path, items, handleDrawerToggle } = this.props;
+
+    return items.map((item, index) => {
+      const active = item.path === path;
+
       const content = (
         <ListItem
+          key={index}
+          className={classnames('menu-list-item', {
+            active
+          })}
           button
           disabled={item.disabled}
-          onClick={item.onClick}
+          onClick={
+            active ? handleDrawerToggle : this.closeMenuAfterClick(item.onClick)
+          }
         >
-          {item.icon && <ListItemIcon><Icon>{item.icon}</Icon></ListItemIcon>}
-          <ListItemText inset primary={item.label}/>
+          {item.icon && (
+            <ListItemIcon>
+              <Icon>{item.icon}</Icon>
+            </ListItemIcon>
+          )}
+          <ListItemText inset primary={item.label} />
         </ListItem>
       );
 
-      return item.path && !item.disabled ?
-        <Link to={item.path} key={index}>{content}</Link>
-        : <span key={index}>{content}</span>
+      return item.path && !item.disabled ? (
+        <Link to={item.path} key={index}>
+          {content}
+        </Link>
+      ) : (
+        <span key={index}>{content}</span>
+      );
     });
   }
 
@@ -60,12 +87,16 @@ export default class Menu extends Component {
         iconSize={25}
       />,
       <List
-        key='nav-list'
+        key="nav-list"
         component="nav"
-        subheader={<ListSubheader component="div" className="nav-header-title">{title}</ListSubheader>}
+        subheader={
+          <ListSubheader component="div" className="nav-header-title">
+            {title}
+          </ListSubheader>
+        }
       >
         {this.renderMenuItems()}
-      </List>,
+      </List>
     ];
   }
 
@@ -80,7 +111,7 @@ export default class Menu extends Component {
         onClose={handleDrawerToggle}
         className={classnames('menu-drawer', 'mobile-drawer')}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true // Better open performance on mobile.
         }}
       >
         {this.renderMenuContent()}
@@ -96,6 +127,6 @@ export default class Menu extends Component {
           {this.renderMenuContent()}
         </Drawer>
       )
-    ]
+    ];
   }
 }

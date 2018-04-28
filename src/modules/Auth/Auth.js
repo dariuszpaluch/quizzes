@@ -55,39 +55,37 @@ class Auth extends Component {
     } = this.props;
 
     return (
-      <MainLayout hideMenu>
-        <div className={classnames('auth','row')}>
-          <div className="col-xs-12">
-            <Card>
-              <Tabs
-                tabs={this.tabs}
-                value={location.pathname}
-                onChange={this.onChangeTab}
-                indicatorColor="primary"
-                textColor="primary"
-                fullWidth
+      <div className={classnames('auth','row')}>
+        <div className="col-xs-12">
+          <Card>
+            <Tabs
+              tabs={this.tabs}
+              value={location.pathname}
+              onChange={this.onChangeTab}
+              indicatorColor="primary"
+              textColor="primary"
+              fullWidth
+            />
+            <Switch>
+              <Route
+                exact
+                path={match.url}
+                component={SignInForm}
               />
-              <Switch>
-                <Route
-                  exact
-                  path={match.url}
-                  component={SignInForm}
-                />
-                <Route
-                  exact
-                  path={`${match.url}${authPaths.SIGN_IN}`}
-                  component={SignInForm}
-                />
-                <Route
-                  exact
-                  path={`${match.url}${authPaths.SIGN_UP}`}
-                  component={SignUpForm}
-                />
-              </Switch>
-            </Card>
-          </div>
+              <Route
+                exact
+                path={`${match.url}${authPaths.SIGN_IN}`}
+                component={SignInForm}
+              />
+              <Route
+                exact
+                path={`${match.url}${authPaths.SIGN_UP}`}
+                component={SignUpForm}
+              />
+            </Switch>
+          </Card>
         </div>
-      </MainLayout>
+      </div>
     );
   }
 }

@@ -1,11 +1,11 @@
-import {createReducer} from 'utils/reducerUtils';
+import { createReducer } from 'utils/reducerUtils';
 
-import {SIGN_IN, LOGOUT} from './actionTypes';
+import { SIGN_IN, LOGOUT } from './actionTypes';
 import LocalStorageSource from 'sources/LocalStorageSource';
 
 function getInitState() {
   return {
-    token: null,
+    token: LocalStorageSource.getToken()
   };
 }
 
@@ -15,8 +15,8 @@ function signInSuccess(authState, action) {
 
   return {
     ...authState,
-    token,
-  }
+    token
+  };
 }
 
 function removeToken(authState) {
@@ -24,8 +24,8 @@ function removeToken(authState) {
 
   return {
     ...authState,
-    token: null,
-  }
+    token: null
+  };
 }
 
 function logout() {
@@ -37,7 +37,8 @@ export default createReducer(getInitState(), {
   [`${SIGN_IN}_SUCCESS`]: signInSuccess,
   [`${SIGN_IN}_REQUEST`]: removeToken,
   [`${SIGN_IN}_FAILURE`]: removeToken,
-  [LOGOUT]: logout,
+  [LOGOUT]: logout
 });
 
-export const getToken = (state) => state.auth.token;
+export const getToken = state => state.auth.token;
+export const isUserLoggedIn = state => !!state.auth.token;
