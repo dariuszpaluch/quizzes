@@ -11,4 +11,13 @@
       border-color: darken($success-color, 15%);
     }
   }
+
+  button[type='submit'] {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+.question-list {
+  padding-bottom: 50px;
 }

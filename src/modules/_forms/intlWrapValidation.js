@@ -3,8 +3,6 @@ import isArray from 'lodash/isArray';
 const intlWrapValidationItem = (intl, validationFunc) => (...args) => {
   const resultMessage = validationFunc(...args);
 
-  console.log('resultMessage', resultMessage);
-
   if (!resultMessage) return resultMessage;
 
   if (resultMessage.message) {

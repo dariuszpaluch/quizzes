@@ -45,25 +45,23 @@ class SmartMainLayout extends Component {
     const { title, appBarActions, onSearch } = this.state;
 
     return (
-      <div>
-        <MainLayout
-          appBarTittle={title}
-          appBarButtons={appBarActions}
-          hideMenu={!userLoggedIn}
-          search={onSearch}
+      <MainLayout
+        appBarTittle={title}
+        appBarButtons={appBarActions}
+        hideMenu={!userLoggedIn}
+        onSearch={onSearch}
+      >
+        <MainLayoutContext.Provider
+          value={{
+            setTitle: this.setTitle,
+            setAppBarActions: this.setAppBarActions,
+            restoreDefaultAppBar: this.restoreDefaultAppBar,
+            onSearch: this.setOnSearch
+          }}
         >
-          <MainLayoutContext.Provider
-            value={{
-              setTitle: this.setTitle,
-              setAppBarActions: this.setAppBarActions,
-              restoreDefaultAppBar: this.restoreDefaultAppBar,
-              onSearch: this.setOnSearch
-            }}
-          >
-            {children}
-          </MainLayoutContext.Provider>
-        </MainLayout>
-      </div>
+          {children}
+        </MainLayoutContext.Provider>
+      </MainLayout>
     );
   }
 }

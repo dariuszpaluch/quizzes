@@ -1,12 +1,14 @@
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {withRouter} from "react-router-dom";
-import {fetchQuestion} from "modules/Question/utils/actions";
-import QuestionForm from "modules/Question/QuestionForm";
-import {getQuestion, getQuestionLoading} from "modules/Question/utils/getters";
+import { withRouter } from 'react-router-dom';
+import { fetchQuestion } from 'modules/Question/utils/actions';
+import QuestionForm, { MODES } from 'modules/Question/QuestionForm';
+import {
+  getQuestion,
+  getQuestionLoading
+} from 'modules/Question/utils/getters';
 
 class EditQuestion extends Component {
   componentWillMount() {
@@ -17,15 +19,9 @@ class EditQuestion extends Component {
   render() {
     const { loading, question } = this.props;
 
-    if(loading)
-      return <div>loading</div>;
+    if (loading) return <div>loading</div>;
 
-    return (
-      <QuestionForm
-        mode={QuestionForm.MODES.EDIT}
-        question={question}
-      />
-    );
+    return <QuestionForm mode={MODES.EDIT} question={question} />;
   }
 }
 
@@ -35,12 +31,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     question: getQuestion(state, questionId),
     questionId,
-    loading: getQuestionLoading(state, questionId),
-  }
+    loading: getQuestionLoading(state, questionId)
+  };
 };
 
 const mapDispatchToProps = {
   fetchQuestion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditQuestion));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(EditQuestion)
+);

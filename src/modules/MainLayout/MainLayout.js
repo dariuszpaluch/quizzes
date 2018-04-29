@@ -99,22 +99,11 @@ class MainLayout extends Component {
     }));
   };
 
-  onToogleSearch = () => {
-    if (this.state.expandSearch) {
-      const node = ReactDOM.findDOMNode(this.searchInput).firstChild;
-      node.focus();
-    }
-
-    this.setState((prevState, prevProps) => ({
-      expandSearch: !prevState.expandSearch
-    }));
-  };
-
   renderRightAppBarAction() {
     const { appBarButtons, onSearch } = this.props;
     const rightButton = appBarButtons && appBarButtons.right;
 
-    if (true) {
+    if (onSearch) {
       return <AppBarSearch onChange={onSearch} />;
     }
 

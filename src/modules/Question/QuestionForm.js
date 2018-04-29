@@ -30,15 +30,14 @@ import { setAppBarButtons } from 'modules/MainLayout/utils/actions';
 import classnames from 'classnames';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { arrayMinSize } from 'modules/_forms/validations';
+import { withRouter } from 'react-router-dom';
 
-const MODES = {
+export const MODES = {
   EDIT: 'EDIT',
   ADD: 'ADD'
 };
 
 class QuestionForm extends Component {
-  static MODES = MODES;
-
   static propTypes = {
     mode: PropTypes.oneOf(values(MODES))
   };
@@ -188,8 +187,8 @@ const mapDispatchToProps = {
   saveQuestion: addQuestion
 };
 
-QuestionForm = connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(QuestionForm)
+QuestionForm = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionForm))
 );
 
 export default MainLayoutContextWrapper(QuestionForm);

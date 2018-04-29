@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 import forEach from 'lodash/forEach';
 
-import filter from 'lodash/filter';
-
 import List from 'libs/ui/List/List';
 import Card from 'libs/ui/Card/Card';
 import Typography from 'libs/ui/Typography/Typography';
@@ -20,6 +18,9 @@ import icons from 'consts/icons';
 import Button from 'libs/ui/Button/Button';
 import globalMessages from 'utils/globalMessages';
 import Icon from 'libs/ui/Icon/Icon';
+import stringInclude from 'utils/stringInclude';
+
+import filter from 'lodash/filter';
 
 class SimpleQuestionlist extends Component {
   static propTypes = {
@@ -27,14 +28,10 @@ class SimpleQuestionlist extends Component {
     questionsIds: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ),
-    questions: PropTypes.objectOf(
-      PropTypes.shape({
-        question: PropTypes.string,
-        description: PropTypes.string
-      })
-    ),
+    questions: PropTypes.objectOf(PropTypes.object),
     selectedIds: PropTypes.arrayOf(PropTypes.string),
-    onChangeSelect: PropTypes.func
+    onChangeSelect: PropTypes.func,
+    filterQuery: PropTypes.string
   };
 
   static defaultProps = {
@@ -42,7 +39,8 @@ class SimpleQuestionlist extends Component {
     questionsIds: [],
     questions: {},
     onChangeSelect: null,
-    selectedIds: []
+    selectedIds: [],
+    filterQuery: ''
   };
 
   constructor(props) {
@@ -98,11 +96,12 @@ class SimpleQuestionlist extends Component {
           {intl.formatMessage(messages.ANSWERS)}:
         </Typography>
         <ul className="answers">
-          {answers.map(({ correct, label }, index) => (
-            <li key={index} className={classnames({ correct })}>
-              {label}
-            </li>
-          ))}
+          {answers &&
+            answers.map(({ correct, label }, index) => (
+              <li key={index} className={classnames({ correct })}>
+                {label}
+              </li>
+            ))}
         </ul>
         {onEdit || onDelete
           ? this.renderQuestionActions(questionId, onEdit, onDelete)
@@ -133,12 +132,18 @@ class SimpleQuestionlist extends Component {
   }
 
   render() {
-    const { questionsIds, questions, selectedIds } = this.props;
+    const { questionsIds, questions, selectedIds, filterQuery } = this.props;
+
+    let _questionsIds = questionsIds;
+    if (filterQuery)
+      _questionsIds = filter(questionsIds, questionId =>
+        stringInclude(questions[questionId].question, filterQuery)
+      );
 
     return (
       <List
         className="question-list"
-        rowsIds={questionsIds}
+        rowsIds={_questionsIds}
         rows={this.prepareQuestionsRows(questions)}
         selectedRowsIds={selectedIds}
         onChangeSelect={this.props.onChangeSelect}

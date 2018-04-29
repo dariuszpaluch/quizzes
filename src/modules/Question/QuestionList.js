@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { fetchQuestions } from './utils/actions';
 
 import Card from 'libs/ui/Card';
 import STRINGS from './utils/strings';
-import Table from 'libs/ui/Table/Table';
-import Button from '../../libs/ui/Button/Button';
 import { deleteQuestion } from 'modules/Question/utils/actions';
 import { toastr } from 'react-redux-toastr';
 import { setAppBarTitle } from 'modules/MainLayout/utils/actions';
@@ -23,16 +20,54 @@ import FloatButton from 'libs/ui/FloatButton/FloatButton';
 import parsePath from 'utils/parsePath';
 import paths, { questionPaths } from 'consts/paths';
 import { withRouter } from 'react-router-dom';
-import MainLayout from 'modules/MainLayout/MainLayout';
 import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
+import filter from 'lodash/filter';
+import stringInclude from 'utils/stringInclude';
+
 class QuestionList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionsQuery: null
+    };
+  }
+
   componentWillMount() {
     const { intl } = this.props;
     this.props.setAppBarTitle(
       intl.formatMessage(messages.QUESTION_LIST_HEADER)
     );
     this.props.fetchQuestions();
+  }
+
+  componentDidMount() {
+    this.updateAppBar();
+  }
+
+  componentWillUnmount() {
+    const { mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { restoreDefaultAppBar } = mainLayoutContext;
+
+      restoreDefaultAppBar();
+    }
+  }
+
+  onChangeFilter = query => {
+    this.setState({
+      questionsQuery: query
+    });
+  };
+
+  updateAppBar() {
+    const { intl, mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { setTitle, onSearch } = mainLayoutContext;
+
+      setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
+      onSearch(this.onChangeFilter);
+    }
   }
 
   onDeleteQuestion = questionId => {
@@ -66,9 +101,10 @@ class QuestionList extends Component {
 
   render() {
     const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
+    const { questionsQuery } = this.state;
 
     return (
-      <Card>
+      <Card className="question-list">
         <SimpleQuestionlist
           onChangeSelect={onChangeSelect}
           selectedIds={selectedIds}
@@ -76,6 +112,7 @@ class QuestionList extends Component {
           questionsIds={questionsIds}
           onEdit={this.goEditQuestion}
           onDelete={this.onDeleteQuestion}
+          filterQuery={questionsQuery}
         />
         <FloatButton icon={icons.ADD} onClick={this.onClickAddQuestion} />
       </Card>

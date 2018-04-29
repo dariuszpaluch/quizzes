@@ -9,8 +9,6 @@ export function addQuestion(
   resolve = null,
   reject = null
 ) {
-  console.log('tutaj');
-
   const body = {
     question,
     description,

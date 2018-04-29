@@ -8,10 +8,19 @@ import IconButton from 'libs/ui/IconButton/IconButton';
 import { Input } from 'material-ui';
 import ReactDOM from 'react-dom';
 
-export default class AppBarSearch extends Component {
-  static propTypes = {};
+import { Keys } from 'react-keydown';
+const { ESC } = Keys; // optionally get key codes from Keys lib to check against later
 
-  static defaultProps = {};
+export default class AppBarSearch extends Component {
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string
+  };
+
+  static defaultProps = {
+    placeholder: 'Search'
+  };
 
   constructor(props) {
     super(props);
@@ -24,21 +33,39 @@ export default class AppBarSearch extends Component {
   onExpandSearch = () => {
     const node = ReactDOM.findDOMNode(this.searchInputRef).firstChild;
     node.focus();
-
+    node.value = '';
     this.setState({
       expandSearch: true
     });
+  };
+
+  onInputKeyPress = event => {
+    event = event || window.event;
+
+    if (
+      event.key === 'Escape' ||
+      event.key === 'Esc' ||
+      event.keyCode === ESC
+    ) {
+      this.onFoldSearch();
+    }
   };
 
   onFoldSearch = () => {
     this.setState({
       expandSearch: false
     });
-    onChange('');
+    this.props.onChange('');
+    const node = ReactDOM.findDOMNode(this.searchInputRef).firstChild;
+    node.value = '';
+  };
+
+  onChange = event => {
+    this.props.onChange(event.target.value);
   };
 
   render() {
-    const { className, onChange } = this.props;
+    const { className, value, placeholder } = this.props;
     const { expandSearch } = this.state;
 
     const classes = classnames(className);
@@ -58,13 +85,14 @@ export default class AppBarSearch extends Component {
             onClick={!expandSearch ? this.onExpandSearch : this.onFoldSearch}
           />
           <Input
+            value={value}
             ref={input => {
               this.searchInputRef = input;
             }}
             className="search-value-input"
-            onChange={onChange}
-            placeholder="search"
-            type="search"
+            onChange={this.onChange}
+            placeholder={placeholder}
+            onKeyDown={this.onInputKeyPress}
           />
           <IconButton
             color="inherit"

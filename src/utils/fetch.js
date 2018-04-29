@@ -12,48 +12,42 @@ export default {
   patch: fetch.bind(null, 'PATCH')
 };
 
-const getResponse = (response ) => {
-  const contentType = response.headers.get("content-type");
+const getResponse = response => {
+  const contentType = response.headers.get('content-type');
 
-  console.log('darek', contentType);
-
-  if (contentType && contentType.indexOf("application/json") !== -1) {
+  if (contentType && contentType.indexOf('application/json') !== -1) {
     return response.json();
   } else {
     return response.text();
   }
 };
 
-
-function fetch(method, url, { body, header, customResponseHandler, submissionError} = {}) {
-
-  return isomorphicFetch(
-    `${ url }`,
-    {
-      method,
-      body: body && JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': LocalStorageSource.getToken(),
-        ...header
-      },
+function fetch(
+  method,
+  url,
+  { body, header, customResponseHandler, submissionError } = {}
+) {
+  return isomorphicFetch(`${url}`, {
+    method,
+    body: body && JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: LocalStorageSource.getToken(),
+      ...header
     }
-  ).then(
-    async (response) => {
-      if (customResponseHandler) return response;
+  }).then(async response => {
+    if (customResponseHandler) return response;
 
-      if (response.status >= 400) {
-        if(submissionError) {
-          return response.json().then((err) => submissionError(err));
-        } else {
-          const result = await response.json();
-
-          throw new customException(result, response.status);
-        }
+    if (response.status >= 400) {
+      if (submissionError) {
+        return response.json().then(err => submissionError(err));
       } else {
+        const result = await response.json();
 
-        return getResponse(response);
+        throw new customException(result, response.status);
       }
+    } else {
+      return getResponse(response);
     }
-  );
+  });
 }
