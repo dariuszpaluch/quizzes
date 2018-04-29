@@ -11,7 +11,7 @@ import pick from 'lodash/pick';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import ListFields from 'libs/reduxFormFields/ListFields/ListFields';
-import { required } from 'modules/_forms/validations';
+import { minLength, required } from 'modules/_forms/validations';
 
 import STRINGS from './utils/strings';
 import Button from 'libs/ui/Button/Button';
@@ -51,10 +51,13 @@ class QuestionForm extends Component {
 
     this.onSubmit = props.handleSubmit(this.submit);
 
-    this.answersValidation = intlWrapValidation(
-      props.intl,
-      arrayMinSize(2, item => item.label)
-    );
+    this.validations = {
+      question: intlWrapValidation(props.intl, [required, minLength(5)]),
+      answersValidation: intlWrapValidation(
+        props.intl,
+        arrayMinSize(2, item => item.label)
+      )
+    };
 
     this.appBarButtons = {
       left: {
@@ -131,6 +134,7 @@ class QuestionForm extends Component {
                 name="question"
                 label={STRINGS.INPUTS.QUESTION}
                 autoFocus
+                validate={this.validations.question}
               />
             </div>
             <div className="col-xs-12">
@@ -147,7 +151,7 @@ class QuestionForm extends Component {
                 className={classnames('answer-list', 'col-xs-12')}
                 inputPlaceholder="Answer"
                 addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
-                validate={this.answersValidation}
+                validate={this.validations.answersValidation}
               />
             </div>
           </div>
@@ -161,25 +165,16 @@ class QuestionForm extends Component {
 const FORM_NAME = 'QuestionForm';
 
 QuestionForm = reduxForm({
-  form: FORM_NAME,
-  initialValues: {
-    question: '',
-    answers: [
-      {
-        correct: false,
-        label: ''
-      }
-    ]
-  }
+  form: FORM_NAME
 })(QuestionForm);
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    initialValues: pick(ownProps.question, [
-      'question',
-      'description',
-      'answers'
-    ]) || { answers: [{ label: '' }] }
+    initialValues: (ownProps.question &&
+      pick(ownProps.question, ['question', 'description', 'answers'])) || {
+      question: '',
+      answers: [{ label: '' }]
+    }
   };
 };
 

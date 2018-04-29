@@ -4,13 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
-import STRINGS from 'modules/Question/utils/strings';
 import Button from 'libs/ui/Button/Button';
 import MaterialList, { ListItem } from 'material-ui/List/index';
-import InputField from 'libs/reduxFormFields/InputField/InputField';
-import IconButton from 'libs/ui/IconButton/IconButton';
-import Typography from 'libs/ui/Typography/Typography';
-import Checkbox from 'libs/ui/Checkbox/Checkbox';
 import { Field, Fields } from 'redux-form';
 
 import ListField from './ListField';
@@ -29,15 +24,13 @@ const defaultProps = {
 
 const ListFields = ({
   fields,
-  meta: { dirty, error, warning },
+  meta: { dirty, error, warning, submitFailed },
   className,
   inputPlaceholder,
   inputValid,
   addButtonLabel
 }) => {
   const classes = classnames('list-fields', className);
-
-  // const canAddRow = () => !size(fields) || size(fields.get(0).label);
   const addField = () => {
     // if (canAddRow()) {
     fields.insert(0, {
@@ -70,7 +63,11 @@ const ListFields = ({
         <Icon icon={icons.ADD} />
         {addButtonLabel || 'Add'}
       </Button>
-      {error && dirty ? <FormLabel error>{error}</FormLabel> : null}
+
+      {error && (dirty || submitFailed) ? (
+        <FormLabel error>{error}</FormLabel>
+      ) : null}
+
       {fields.map((name, index) => {
         return (
           <Field
@@ -80,7 +77,7 @@ const ListFields = ({
             component={ListField}
             onRemove={removeField}
             index={index}
-            autoFocus={index === 0}
+            autoFocus={dirty && index === 0}
           />
         );
       })}

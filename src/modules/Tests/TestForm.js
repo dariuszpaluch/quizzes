@@ -34,8 +34,6 @@ const MODES = {
 const quizNameMinLength = minLength(5);
 
 class TestForm extends Component {
-  static modes = MODES;
-
   static propTypes = {
     mode: PropTypes.oneOf(values(MODES))
   };
