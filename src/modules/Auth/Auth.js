@@ -64,33 +64,30 @@ class Auth extends Component {
     const { match, location } = this.props;
 
     return (
-      <div className={classnames('auth', 'row')}>
-        <div className="col-xs-12">
-          <Card>
-            <Tabs
-              tabs={this.tabs}
-              value={location.pathname}
-              onChange={this.onChangeTab}
-              indicatorColor="primary"
-              textColor="primary"
-              fullWidth
-            />
-            <Switch>
-              <Route exact path={match.url} component={SignInForm} />
-              <Route
-                exact
-                path={`${match.url}${authPaths.SIGN_IN}`}
-                component={SignInForm}
-              />
-              <Route
-                exact
-                path={`${match.url}${authPaths.SIGN_UP}`}
-                component={SignUpForm}
-              />
-            </Switch>
-          </Card>
-        </div>
-      </div>
+      <Card className="auth">
+        <Tabs
+          className="auth-tabs"
+          tabs={this.tabs}
+          value={location.pathname}
+          onChange={this.onChangeTab}
+          indicatorColor="primary"
+          textColor="primary"
+          fullWidth
+        />
+        <Switch>
+          <Route exact path={match.url} component={SignInForm} />
+          <Route
+            exact
+            path={`${match.url}${authPaths.SIGN_IN}`}
+            component={SignInForm}
+          />
+          <Route
+            exact
+            path={`${match.url}${authPaths.SIGN_UP}`}
+            component={SignUpForm}
+          />
+        </Switch>
+      </Card>
     );
   }
 }

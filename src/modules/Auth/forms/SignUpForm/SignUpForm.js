@@ -28,27 +28,27 @@ class SignUpForm extends Component {
     const { intl } = props;
 
     this.validations = {};
-    forEach({
-      login: required,
-      firstName: required,
-      surname: required,
-      email: [required, email],
-      password: [required, minPasswordLength]
-    }, (inputValidations, inputKey) => {
-      this.validations[inputKey] = intlWrapValidation(intl, inputValidations);
-    });
+    forEach(
+      {
+        login: required,
+        firstName: required,
+        surname: required,
+        email: [required, email],
+        password: [required, minPasswordLength]
+      },
+      (inputValidations, inputKey) => {
+        this.validations[inputKey] = intlWrapValidation(intl, inputValidations);
+      }
+    );
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { login, firstName, surname, email, password } = values;
     this.props.signUp({ login, password, firstName, surname, email });
   };
 
   render() {
-    const {
-      handleSubmit,
-      intl,
-    } = this.props;
+    const { handleSubmit, intl } = this.props;
 
     return (
       <form className="sign-up-form" onSubmit={handleSubmit(this.onSubmit)}>
@@ -90,7 +90,9 @@ class SignUpForm extends Component {
           type="submit"
           color="primary"
           className="submit-button"
-        >{intl.formatMessage(messages.SIGN_UP)}</Button>
+        >
+          {intl.formatMessage(messages.SIGN_UP)}
+        </Button>
       </form>
     );
   }
@@ -100,11 +102,11 @@ const FORM_NAME = 'signUp';
 
 SignUpForm = reduxForm({
   form: FORM_NAME,
-  validate,
+  validate
 })(SignUpForm);
 
 const mapDispatchToProps = {
-  signUp,
+  signUp
 };
 
 export default connect(null, mapDispatchToProps)(injectIntl(SignUpForm));
