@@ -19,6 +19,7 @@ import messages, { toastrMessages } from 'modules/Auth/utils/messages';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
 import paths from 'consts/paths';
+import SocialMediaLoginButtons from 'modules/Auth/components/SocialMediaLoginButtons';
 class SignInForm extends Component {
   static propTypes = {};
 
@@ -75,16 +76,8 @@ class SignInForm extends Component {
         >
           {intl.formatMessage(messages.SIGN_IN)}
         </Button>
-        <a
-          href={`https://localhost:3000/auth/facebook?returnUrl=${encodeURIComponent(
-            returnUrl
-          )}`}
-        >
-          <Button className="facebook-login">
-            <i className="fa fa-facebook-official" />
-            <span>Zaloguj sie przez fb</span>
-          </Button>
-        </a>
+
+        <SocialMediaLoginButtons />
       </form>
     );
   }

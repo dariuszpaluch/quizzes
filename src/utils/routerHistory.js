@@ -1,14 +1,16 @@
 import forEach from 'lodash/forEach';
 import qs from 'query-string';
 
-export function getQueryFromHistory(history) {
-  const query = qs.parse(history.location.search) || {};
+export function parseQuery(query) {
+  const result = qs.parse(query, {
+    ignoreQueryPrefix: true
+  });
 
   forEach(query, (value, key) => {
-    if(!isNaN(value)) {
-      query[key] = parseInt(value);
+    if (!isNaN(value)) {
+      result[key] = parseInt(value);
     }
   });
 
-  return query;
+  return result;
 }

@@ -1,9 +1,9 @@
-import {defineMessages} from "react-intl";
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   SIGN_IN: {
     id: 'sign-in',
-    defaultMessage: 'Sign in',
+    defaultMessage: 'Sign in'
   },
   SIGN_UP: {
     id: 'sign-up',
@@ -11,35 +11,42 @@ const messages = defineMessages({
   },
   LOGIN: {
     id: 'login',
-    defaultMessage: 'Login',
+    defaultMessage: 'Login'
   },
   PASSWORD: {
     id: 'password',
-    defaultMessage : 'Password',
+    defaultMessage: 'Password'
   },
   REPEAT_PASSWORD: {
     id: 'repeat-password',
-    defaultMessage: 'Repeat password',
+    defaultMessage: 'Repeat password'
   },
   FIRST_NAME: {
     id: 'first-name',
-    defaultMessage: 'First name',
+    defaultMessage: 'First name'
   },
   SURNAME: {
     id: 'surname',
-    defaultMessage: 'Surname',
+    defaultMessage: 'Surname'
   },
   EMAIL: {
     id: 'email',
-    defaultMessage: 'E-mail',
+    defaultMessage: 'E-mail'
   },
+  LOGIN_WITH_FACEBOOK: {
+    id: 'login-with-facebook',
+    defaultMessage: 'Login with Facebook'
+  },
+  LOGIN_WITH_GOOGLE: {
+    id: 'login-with-google',
+    defaultMessage: 'Login with Google'
+  }
 });
 
 export const toastrMessages = defineMessages({
   TOASTR_SIGN_IN_SUCCESS: {
     id: 'toastr.sign-in-success',
-    defaultMessage: 'Sign in success',
-  },
+    defaultMessage: 'Sign in success'
+  }
 });
 export default messages;
-

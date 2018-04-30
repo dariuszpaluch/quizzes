@@ -15,8 +15,9 @@ import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import classnames from 'classnames';
 import { authPaths } from 'consts/paths';
-import qs from 'qs';
 import paths from 'consts/paths';
+
+import { parseQuery } from 'utils/routerHistory';
 
 class Auth extends Component {
   static propTypes = {};
@@ -45,11 +46,8 @@ class Auth extends Component {
   }
 
   componentDidMount() {
-    const { intl, history } = this.props;
-
-    const query = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true
-    });
+    const { history, location } = this.props;
+    const query = parseQuery(location.search);
 
     if (query.token) {
       this.props.signInByQuerytoken(query.token);
