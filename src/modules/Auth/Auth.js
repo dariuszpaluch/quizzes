@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Tabs from 'libs/ui/Tabs';
 import Card from 'libs/ui/Card/Card';
 
-import { signIn } from './actions';
+import { signIn, signInByQuerytoken } from './actions';
 
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
@@ -15,6 +15,8 @@ import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import classnames from 'classnames';
 import { authPaths } from 'consts/paths';
+import qs from 'qs';
+import paths from 'consts/paths';
 
 class Auth extends Component {
   static propTypes = {};
@@ -32,30 +34,39 @@ class Auth extends Component {
       {
         label: props.intl.formatMessage(messages.SIGN_IN),
         value: [match.url, `${match.url}${authPaths.SIGN_IN}`],
-        path: `${match.url}${authPaths.SIGN_IN}`,
+        path: `${match.url}${authPaths.SIGN_IN}`
       },
       {
         label: props.intl.formatMessage(messages.SIGN_UP),
         value: `${match.url}${authPaths.SIGN_UP}`,
-        path: `${match.url}${authPaths.SIGN_UP}`,
+        path: `${match.url}${authPaths.SIGN_UP}`
       }
     ];
-
   }
 
-  onChangeTab = (selectedOption) => {
+  componentDidMount() {
+    const { intl, history } = this.props;
+
+    const query = qs.parse(this.props.location.search, {
+      ignoreQueryPrefix: true
+    });
+
+    if (query.token) {
+      this.props.signInByQuerytoken(query.token);
+      history.push(paths.DASHBOARD);
+    }
+  }
+
+  onChangeTab = selectedOption => {
     if (selectedOption && selectedOption.path)
-      this.props.history.push(selectedOption.path)
+      this.props.history.push(selectedOption.path);
   };
 
   render() {
-    const {
-      match,
-      location
-    } = this.props;
+    const { match, location } = this.props;
 
     return (
-      <div className={classnames('auth','row')}>
+      <div className={classnames('auth', 'row')}>
         <div className="col-xs-12">
           <Card>
             <Tabs
@@ -67,11 +78,7 @@ class Auth extends Component {
               fullWidth
             />
             <Switch>
-              <Route
-                exact
-                path={match.url}
-                component={SignInForm}
-              />
+              <Route exact path={match.url} component={SignInForm} />
               <Route
                 exact
                 path={`${match.url}${authPaths.SIGN_IN}`}
@@ -92,6 +99,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = {
   signIn,
+  signInByQuerytoken
 };
 
 export default connect(null, mapDispatchToProps)(withRouter(injectIntl(Auth)));

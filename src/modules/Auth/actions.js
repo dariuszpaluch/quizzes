@@ -1,17 +1,13 @@
 import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 
-import {
-  SIGN_IN,
-  SIGN_UP,
-  LOGOUT
-} from './actionTypes';
+import { SIGN_IN, SIGN_UP, LOGOUT } from './actionTypes';
 import { API_URL } from 'src/settings';
 
-export function signIn({ login, password}, resolve = null, reject = null) {
+export function signIn({ login, password }, resolve = null, reject = null) {
   const body = {
     login,
-    password,
+    password
   };
 
   return dispatch => {
@@ -19,7 +15,7 @@ export function signIn({ login, password}, resolve = null, reject = null) {
       actionType: SIGN_IN,
       promise: fetchAPI.post.bind(null, `${API_URL}/authenticate`, { body }),
       resolve,
-      reject,
+      reject
     });
   };
 }
@@ -37,6 +33,16 @@ export function signUp(body, resolve, reject) {
   };
 }
 
+export function signInByQuerytoken(token) {
+  return storeAction(
+    `${SIGN_IN}_SUCCESS`,
+    {},
+    {
+      token
+    }
+  );
+}
+
 export function logout() {
- return storeAction(LOGOUT)
+  return storeAction(LOGOUT);
 }

@@ -6,15 +6,17 @@
   "scripts": {
     "clean": "rimraf *.log build/*",
     "dev": "npm run clean && webpack-dev-server --config webpack/config.dev.js",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
+    "build":
+      "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
     "update-locales": "node intl/updateLocales.js",
-    "update-locales-with-build": "npm run clean && npm run build && node intl/updateLocales.js"
+    "update-locales-with-build":
+      "npm run clean && npm run build && node intl/updateLocales.js"
   },
   "config": {
     "page_title": "Quizzes",
     "port": 5000,
     "public_path": "/",
-    "api_url": "http://localhost:3000"
+    "api_url": "https://localhost:3000"
   },
   "author": "Dariusz Paluch",
   "license": "ISC",
@@ -30,7 +32,8 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "nuka-carousel": "^4.0.1",
     "prop-types": "^15.5.10",
-    "query-string": "^5.0.0",
+    "qs": "^6.5.1",
+    "query-string": "^5.1.1",
     "raw-loader": "^0.5.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

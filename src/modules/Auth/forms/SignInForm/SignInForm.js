@@ -1,22 +1,22 @@
 import './sign_in.scss';
 import '../style.scss';
 
-import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import Button from 'libs/ui/Button/Button';
 
 import validate from './signInValidation';
 
-import {signIn} from '../../actions';
-import {connect} from 'react-redux';
+import { signIn } from '../../actions';
+import { connect } from 'react-redux';
 import { required } from 'modules/_forms/validations';
-import {toastr} from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 
-import {SIGN_IN as STRINGS} from '../../strings'
+import { SIGN_IN as STRINGS } from '../../strings';
 import { injectIntl } from 'react-intl';
 import messages, { toastrMessages } from 'modules/Auth/utils/messages';
-import intlWrapValidation from 'modules/_forms/intlWrapValidation'
+import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
 import paths from 'consts/paths';
 class SignInForm extends Component {
@@ -30,8 +30,8 @@ class SignInForm extends Component {
     this.requiredValidation = intlWrapValidation(props.intl, required);
   }
 
-  signIn = (values) => {
-      this.props.signIn(values, this.onSignInSuccess, this.onSignInFailure);
+  signIn = values => {
+    this.props.signIn(values, this.onSignInSuccess, this.onSignInFailure);
   };
 
   onSignInSuccess = () => {
@@ -48,10 +48,9 @@ class SignInForm extends Component {
   };
 
   render() {
-    const {
-      handleSubmit,
-      intl
-    } = this.props;
+    const { handleSubmit, intl, location } = this.props;
+
+    const returnUrl = window.document.location.href + location.search;
 
     return (
       <form className="sign-in-form" onSubmit={handleSubmit(this.signIn)}>
@@ -73,7 +72,19 @@ class SignInForm extends Component {
           type="submit"
           color="primary"
           className="submit-button"
-        >{intl.formatMessage(messages.SIGN_IN)}</Button>
+        >
+          {intl.formatMessage(messages.SIGN_IN)}
+        </Button>
+        <a
+          href={`https://localhost:3000/auth/facebook?returnUrl=${encodeURIComponent(
+            returnUrl
+          )}`}
+        >
+          <Button className="facebook-login">
+            <i className="fa fa-facebook-official" />
+            <span>Zaloguj sie przez fb</span>
+          </Button>
+        </a>
       </form>
     );
   }
@@ -83,11 +94,13 @@ const FORM_NAME = 'signIn';
 
 SignInForm = reduxForm({
   form: FORM_NAME,
-  validate,
+  validate
 })(SignInForm);
 
 const mapDispatchToProps = {
-  signIn,
+  signIn
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(injectIntl(SignInForm)));
+export default connect(null, mapDispatchToProps)(
+  withRouter(injectIntl(SignInForm))
+);
