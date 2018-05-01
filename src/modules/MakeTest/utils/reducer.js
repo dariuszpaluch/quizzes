@@ -1,58 +1,71 @@
-import {createReducer, updateObject} from 'utils/reducerUtils';
+import { createReducer, updateObject } from 'utils/reducerUtils';
 
 import { FETCH_TEST_TO_BE_COMPLETED } from './actionTypes';
 import normalizeList from 'utils/normalizeList';
-import { SET_QUESTION_ANSWER, SET_QUESTION_RATE, SET_TEST_RATING } from 'modules/MakeTest/utils/actionTypes';
+import {
+  SET_QUESTION_ANSWER,
+  SET_QUESTION_RATE,
+  SET_TEST_RATING
+} from 'modules/MakeTest/utils/actionTypes';
 import omit from 'lodash/omit';
+import map from 'lodash/map';
+import randomizeArray from 'modules/MakeTest/utils/randomizeArray';
 
 function getInitState() {
   return {
     testData: null,
     questions: {
       byId: {},
-      allIds: [],
+      allIds: []
     },
     fetching: false,
     answers: {},
-    questionRating: {},
+    questionRating: {}
   };
 }
 
 function fetchTestToBeCompletedSuccess(state, action) {
   const test = action.data;
 
+  const questions = map(test.questions, question => {
+    return {
+      ...question,
+      answers: randomizeArray(question.answers)
+    };
+  });
+
   return updateObject(state, {
     testData: {
       ...omit(test, 'questions'),
-      created: test.created && new Date(test.created),
+      created: test.created && new Date(test.created)
     },
-    questions: normalizeList(test.questions),
-    fetching: false,
-  })
+    questions: normalizeList(questions),
+    fetching: false
+  });
 }
 
 function fetchTestToBeCompletedFailure(state) {
   return updateObject(state, {
-    ... getInitState(),
-    fetching: false,
-  })
+    ...getInitState(),
+    fetching: false
+  });
 }
-function fetchTestToBeCompletedRequest(state,) {
+function fetchTestToBeCompletedRequest(state) {
   return updateObject(state, {
-    ... getInitState(),
-    fetching: true,
-  })
+    ...getInitState(),
+    fetching: true
+  });
 }
 
 function setQuestionAnswer(state, action) {
-  const {questionId, answer} = action.data;
+  const { questionId, answer } = action.data;
 
   return updateObject(state, {
     answers: {
       ...state.answers,
-      [questionId]: answer,
+      [questionId]: answer
     }
-  })
+  });
 }
 
 const setQuestionRate = (state, action) => {
@@ -61,14 +74,14 @@ const setQuestionRate = (state, action) => {
   return {
     ...state,
     questionRating: {
-      [questionId]: rating,
+      [questionId]: rating
     }
-  }
+  };
 };
 
 const changeTestRating = (state, action) => ({
-    ...state,
-    testRating: action.testRating,
+  ...state,
+  testRating: action.testRating
 });
 
 export default createReducer(getInitState(), {
@@ -77,5 +90,5 @@ export default createReducer(getInitState(), {
   [`${FETCH_TEST_TO_BE_COMPLETED}_FAILURE`]: fetchTestToBeCompletedFailure,
   [SET_QUESTION_ANSWER]: setQuestionAnswer,
   [SET_QUESTION_RATE]: setQuestionRate,
-  [`${SET_TEST_RATING}_SUCCESS`]: changeTestRating,
+  [`${SET_TEST_RATING}_SUCCESS`]: changeTestRating
 });

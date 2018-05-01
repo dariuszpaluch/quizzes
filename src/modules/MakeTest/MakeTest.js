@@ -31,6 +31,7 @@ import paths from 'consts/paths';
 import { injectIntl } from 'react-intl';
 import TestResult from 'modules/MakeTest/components/TestResult/TestResult';
 import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
+import randomizeArray from 'modules/MakeTest/utils/randomizeArray';
 
 const STATES = {
   START: 0,
