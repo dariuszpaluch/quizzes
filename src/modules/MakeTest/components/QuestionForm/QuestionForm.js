@@ -36,6 +36,7 @@ export default class QuestionForm extends Component {
           onChangeSelect={this.props.onChange}
           selectOnClick
           selectedClass="answer-selected"
+          selectOnAllContent
         />
       </div>
     );

@@ -51,13 +51,14 @@ class TestDetail extends Component {
   updateAppBar(props) {
     const { intl, mainLayoutContext, test } = props || this.props;
     if (!!mainLayoutContext) {
-      const { setTitle, onSearch, setAppBarActions } = mainLayoutContext;
+      const { setAppBarData } = mainLayoutContext;
 
-      setTitle(
-        intl.formatMessage(messages.TEST_DETAIL_HEADER, { name: test.name })
-      );
-      onSearch(undefined);
-      setAppBarActions(this.appBarButtons);
+      setAppBarData({
+        title: intl.formatMessage(messages.TEST_DETAIL_HEADER, {
+          name: test.name
+        }),
+        appBarActions: this.appBarButtons
+      });
     }
   }
 

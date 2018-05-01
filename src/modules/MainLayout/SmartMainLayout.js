@@ -40,6 +40,14 @@ class SmartMainLayout extends Component {
     });
   };
 
+  setAppBarData = ({ title, appBarActions, onSearch }) => {
+    this.setState({
+      title,
+      appBarActions,
+      onSearch
+    });
+  };
+
   render() {
     const { userLoggedIn, children } = this.props;
     const { title, appBarActions, onSearch } = this.state;
@@ -56,7 +64,8 @@ class SmartMainLayout extends Component {
             setTitle: this.setTitle,
             setAppBarActions: this.setAppBarActions,
             restoreDefaultAppBar: this.restoreDefaultAppBar,
-            onSearch: this.setOnSearch
+            onSearch: this.setOnSearch,
+            setAppBarData: this.setAppBarData
           }}
         >
           {children}

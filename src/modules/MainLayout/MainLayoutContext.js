@@ -5,7 +5,8 @@ const MainLayoutContext = React.createContext({
   setTitle: () => {},
   setAppBarActions: () => {},
   restoreDefaultAppBar: () => {},
-  setOnSearch: () => {}
+  setOnSearch: () => {},
+  setAppBarData: () => {}
 });
 
 export default MainLayoutContext;

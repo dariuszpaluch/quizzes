@@ -78,6 +78,7 @@ export default class List extends Component {
       rows,
       selectOnClick,
       selectedClass,
+      selectOnAllContent,
       className
     } = this.props;
 
@@ -106,8 +107,14 @@ export default class List extends Component {
                 clickable: !!onClick && !this.props.onChangeSelect
               })}
               key={`${rowId}-item`}
-              button={!!onClick && !this.props.onChangeSelect}
-              onClick={!this.props.onChangeSelect ? onClick : undefined}
+              button={
+                !!onClick && (!this.props.onChangeSelect || selectOnAllContent)
+              }
+              onClick={
+                !this.props.onChangeSelect || selectOnAllContent
+                  ? onClick
+                  : undefined
+              }
             >
               {this.props.onChangeSelect && (
                 <Checkbox

@@ -3,13 +3,24 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import {toastr} from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 
-import { fetchTestToBeCompleted, saveTestAnswers, setQuestionAnswer, onChangeQuestionRate, changeTestRating } from 'modules/MakeTest/utils/actions';
+import {
+  fetchTestToBeCompleted,
+  saveTestAnswers,
+  setQuestionAnswer,
+  onChangeQuestionRate,
+  changeTestRating
+} from 'modules/MakeTest/utils/actions';
 import TestStartView from 'modules/MakeTest/components/TestStartView/TestStartView';
 import {
-  getIsFetching, getQuestions, getQuestionsIds, getTestAnswers,
-  getTestDescription, getQuestionRating, getTestRating
+  getIsFetching,
+  getQuestions,
+  getQuestionsIds,
+  getTestAnswers,
+  getTestDescription,
+  getQuestionRating,
+  getTestRating
 } from 'modules/MakeTest/utils/getters';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import Loading from 'libs/ui/Loading/Loading';
@@ -19,11 +30,12 @@ import messages from 'modules/MakeTest/utils/messages';
 import paths from 'consts/paths';
 import { injectIntl } from 'react-intl';
 import TestResult from 'modules/MakeTest/components/TestResult/TestResult';
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
 const STATES = {
   START: 0,
   ANSWER: 1,
-  SUMMARY: 2,
+  SUMMARY: 2
 };
 
 class MakeTest extends Component {
@@ -35,21 +47,39 @@ class MakeTest extends Component {
     super(props);
 
     this.state = {
-      viewState: STATES.START,
+      viewState: STATES.START
     };
-  }
-
-  componentWillReceiveProps() {
   }
 
   componentWillMount() {
     this.props.fetchTestToBeCompleted(this.props.testId);
   }
 
-  changeViewState = (viewState) => {
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    if (this.props.testDescription.name !== nextProps.testDescription.name) {
+      this.updateAppBar(nextProps);
+    }
+  }
+
+  componentDidMount() {
+    this.updateAppBar();
+  }
+
+  updateAppBar(props) {
+    const { mainLayoutContext, testDescription } = props || this.props;
+    if (!!mainLayoutContext) {
+      const { setAppBarData } = mainLayoutContext;
+
+      setAppBarData({
+        title: testDescription && testDescription.name
+      });
+    }
+  }
+
+  changeViewState = viewState => {
     this.setState({
-      viewState,
-    })
+      viewState
+    });
   };
 
   startTest = () => {
@@ -63,10 +93,10 @@ class MakeTest extends Component {
   onSave = () => {
     const { history, intl, answers, testId } = this.props;
 
-    const onSuccess = (data) => {
+    const onSuccess = data => {
       this.setState({
         questionsWithCorrect: data.questions,
-        result: data.result,
+        result: data.result
       });
 
       toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
@@ -74,7 +104,7 @@ class MakeTest extends Component {
     };
 
     const onFailure = () => {
-      toastr.error(intl.formatMessage(messages.TEST_SAVE_FAILURE_TOASTR))
+      toastr.error(intl.formatMessage(messages.TEST_SAVE_FAILURE_TOASTR));
     };
 
     this.props.saveTestAnswers(testId, answers, onSuccess, onFailure);
@@ -84,7 +114,7 @@ class MakeTest extends Component {
     this.props.onChangeQuestionAnswer(questionId, answers);
   };
 
-  changeTestRating = (testRating) => {
+  changeTestRating = testRating => {
     const { testId } = this.props;
 
     this.props.changeTestRating(testId, testRating);
@@ -103,7 +133,13 @@ class MakeTest extends Component {
   }
 
   renderTestForm() {
-    const { questionsIds, questions, testDescription, answers, questionsRating } = this.props;
+    const {
+      questionsIds,
+      questions,
+      testDescription,
+      answers,
+      questionsRating
+    } = this.props;
 
     return (
       <MakeTestForm
@@ -131,12 +167,11 @@ class MakeTest extends Component {
         onSave={this.onSave}
         onBackToTest={this.changeViewState.bind(null, STATES.ANSWER)}
       />
-    )
+    );
   }
 
   renderTestResult() {
-
-    const { questionsWithCorrect, result} = this.state;
+    const { questionsWithCorrect, result } = this.state;
     const { answers, testRating } = this.props;
 
     return (
@@ -147,7 +182,7 @@ class MakeTest extends Component {
         changeTestRating={this.changeTestRating}
         testRating={testRating}
       />
-    )
+    );
   }
 
   renderContent() {
@@ -159,26 +194,21 @@ class MakeTest extends Component {
       case STATES.SUMMARY: {
         return this.renderTestResult();
       }
-        // return this.renderTestSummary();
+      // return this.renderTestSummary();
     }
   }
 
   render() {
     const { loading, testDescription } = this.props;
 
-    return (
-      <MainLayout appBarTittle={testDescription && testDescription.name}>
-        {loading ? <Loading center/> : this.renderContent()}
-      </MainLayout>
-
-    );
+    return loading ? <Loading center /> : this.renderContent();
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const testId = ownProps.match.params.testId;
 
-  const testDescription = getTestDescription(state);
+  const testDescription = getTestDescription(state) || {};
   return {
     testId,
     testDescription,
@@ -187,8 +217,8 @@ const mapStateToProps = (state, ownProps) => {
     loading: getIsFetching(state) || !testDescription,
     answers: getTestAnswers(state),
     questionsRating: getQuestionRating(state),
-    testRating: getTestRating(state),
-  }
+    testRating: getTestRating(state)
+  };
 };
 
 const mapDispatchToProps = {
@@ -196,7 +226,9 @@ const mapDispatchToProps = {
   saveTestAnswers,
   onChangeQuestionAnswer: setQuestionAnswer,
   onChangeQuestionRate,
-  changeTestRating,
+  changeTestRating
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MakeTest));
+MakeTest = connect(mapStateToProps, mapDispatchToProps)(injectIntl(MakeTest));
+
+export default MainLayoutContextWrapper(MakeTest);

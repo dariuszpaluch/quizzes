@@ -42,10 +42,11 @@ class TestList extends Component {
   updateAppBar() {
     const { intl, mainLayoutContext } = this.props;
     if (!!mainLayoutContext) {
-      const { setTitle, onSearch } = mainLayoutContext;
-
-      setTitle(intl.formatMessage(messages.TESTS_LIST_HEADER));
-      onSearch(this.onChangeFilter);
+      const { setAppBarData } = mainLayoutContext;
+      setAppBarData({
+        title: intl.formatMessage(messages.TESTS_LIST_HEADER),
+        onSearch: this.onChangeFilter
+      });
     }
   }
 
