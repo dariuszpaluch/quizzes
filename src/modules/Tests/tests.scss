@@ -1,14 +1,13 @@
 @import '~styles/mixins';
 @import '~styles/variables';
 
-.tests-form {
-  min-height: 100%;
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+form.test-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-  button[type=submit] {
+  button[type='submit'] {
+    margin-top: 20px;
     width: 100%;
   }
 
@@ -17,14 +16,13 @@
   }
 }
 
-.test-question-list  {
+.test-question-list {
   > ul {
     border-top: $container-border;
     > li {
       padding: 0;
     }
   }
-
 
   .selected-question-chips {
     max-height: 60px;

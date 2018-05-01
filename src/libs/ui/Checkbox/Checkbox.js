@@ -1,7 +1,7 @@
 import './checkbox.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import MaterialCheckbox from 'material-ui/Checkbox';
@@ -17,21 +17,32 @@ export default class Checkbox extends Component {
   static defaultProps = {
     className: '',
     checked: false,
-    color: 'primary',
+    color: 'primary'
   };
 
   onChange = (event, checked) => {
-    this.props.onChange(event.target.checked);
+    this.props.onChange(checked);
   };
 
   render() {
-    const { className, checked, color, disabled, onChange, ...props } = this.props;
-
-    const classes = classnames("checkbox", {
+    const {
+      className,
+      checked,
+      color,
       disabled,
-    }, className,);
+      onChange,
+      ...props
+    } = this.props;
 
-    return(
+    const classes = classnames(
+      'checkbox',
+      {
+        disabled
+      },
+      className
+    );
+
+    return (
       <MaterialCheckbox
         {...props}
         className={classes}

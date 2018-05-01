@@ -92,35 +92,32 @@ class TestForm extends Component {
         : messages.TEST_HEADER_EDIT_MODE
     );
 
+    {
+      /*<MainLayout appBarTittle={pageTitle} appBarButtons={this.appBarButtons}>*/
+    }
     return (
-      <MainLayout appBarTittle={pageTitle} appBarButtons={this.appBarButtons}>
+      <Card>
         <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
-          <Card
-            className="tests-form"
-            actions={
-              <Button type="submit">
-                {intl.formatMessage(globalMessages.SAVE)}
-              </Button>
-            }
-          >
-            <InputField
-              name="name"
-              label={intl.formatMessage(messages.TEST_NAME)}
-              validate={this.validations.testName}
-              autoFocus
-            />
-            <InputField
-              name="description"
-              label={intl.formatMessage(messages.TEST_DESCRIPTION)}
-            />
-            <Field
-              name="questionsIds"
-              component={this.renderQuestionsList}
-              label={intl.formatMessage(messages.TEST_QUESTIONS)}
-            />
-          </Card>
+          <InputField
+            name="name"
+            label={intl.formatMessage(messages.TEST_NAME)}
+            validate={this.validations.testName}
+            autoFocus
+          />
+          <InputField
+            name="description"
+            label={intl.formatMessage(messages.TEST_DESCRIPTION)}
+          />
+          <Field
+            name="questionsIds"
+            component={this.renderQuestionsList}
+            label={intl.formatMessage(messages.TEST_QUESTIONS)}
+          />
+          <Button type="submit">
+            {intl.formatMessage(globalMessages.SAVE)}
+          </Button>
         </form>
-      </MainLayout>
+      </Card>
     );
   }
 }

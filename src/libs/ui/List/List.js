@@ -63,7 +63,7 @@ export default class List extends Component {
     });
   };
 
-  onChangeSelect = (rowId, checked) => {
+  onChangeSelect = (rowId, checked, event) => {
     const newValue = checked
       ? [...this.props.selectedRowsIds, rowId]
       : filter(this.props.selectedRowsIds, _rowId => _rowId !== rowId);
@@ -103,15 +103,14 @@ export default class List extends Component {
               className={classnames('list-item', {
                 [selectedClass]: selected,
                 'have-children': !!row.children,
-                clickable: !!onClick
+                clickable: !!onClick && !this.props.onChangeSelect
               })}
               key={`${rowId}-item`}
-              button={!!onClick}
-              onClick={onClick}
+              button={!!onClick && !this.props.onChangeSelect}
+              onClick={!this.props.onChangeSelect ? onClick : undefined}
             >
               {this.props.onChangeSelect && (
                 <Checkbox
-                  tabIndex={selectOnClick ? -1 : null}
                   checked={selected}
                   onChange={
                     !selectOnClick

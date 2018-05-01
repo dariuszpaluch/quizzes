@@ -45,15 +45,6 @@ class QuestionList extends Component {
     this.updateAppBar();
   }
 
-  componentWillUnmount() {
-    const { mainLayoutContext } = this.props;
-    if (!!mainLayoutContext) {
-      const { restoreDefaultAppBar } = mainLayoutContext;
-
-      restoreDefaultAppBar();
-    }
-  }
-
   onChangeFilter = query => {
     this.setState({
       questionsQuery: query

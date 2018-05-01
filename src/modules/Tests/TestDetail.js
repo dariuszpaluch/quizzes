@@ -9,25 +9,28 @@ import { getTestDetail } from 'modules/Tests/utils/actions';
 import Card from 'libs/ui/Card/Card';
 import icons from 'consts/icons';
 import paths from 'consts/paths';
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
+import Button from 'libs/ui/Button/Button';
+import copy from 'copy-to-clipboard';
+import parsePath from 'utils/parsePath';
+import { withRouter } from 'react-router-dom';
+import { toastr } from 'react-redux-toastr';
 
 class TestDetail extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
 
     this.appBarButtons = {
       left: {
         onClick: this.onClickGoBack,
-        icon: icons.ARROW_BACK,
-      },
+        icon: icons.ARROW_BACK
+      }
     };
   }
 
@@ -35,26 +38,58 @@ class TestDetail extends Component {
     this.props.getTestDetail(this.props.testId);
   }
 
+  componentDidMount() {
+    this.updateAppBar();
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    if (this.props.test.name !== nextProps.test.name) {
+      this.updateAppBar(nextProps);
+    }
+  }
+
+  updateAppBar(props) {
+    const { intl, mainLayoutContext, test } = props || this.props;
+    if (!!mainLayoutContext) {
+      const { setTitle, onSearch, setAppBarActions } = mainLayoutContext;
+
+      setTitle(
+        intl.formatMessage(messages.TEST_DETAIL_HEADER, { name: test.name })
+      );
+      onSearch(undefined);
+      setAppBarActions(this.appBarButtons);
+    }
+  }
+
   onClickGoBack = () => {
     this.props.history.push(paths.TESTS);
   };
 
+  copyTestUrlToClipboard = () => {
+    const { test, location, intl } = this.props;
+
+    let hosturl = window.location.href;
+    hosturl = hosturl.replace(location.pathname, '');
+    const makeTestUrl =
+      hosturl + parsePath(paths.MAKE_TEST, { testId: test.id });
+
+    copy(makeTestUrl);
+    toastr.success(
+      intl.formatMessage(messages.TEST_DETAIL_HEADER, { name: test.name }),
+      intl.formatMessage(messages.TEST_URL_COPIED_TO_CLIPBOARD)
+    );
+  };
+
   render() {
-    const {
-      intl,
-      test,
-    } = this.props;
+    const { intl, test } = this.props;
 
-    return(
-      <MainLayout
-        appBarTittle={intl.formatMessage(messages.TEST_DETAIL_HEADER, { name: test.name})}
-        appBarButtons={this.appBarButtons}
-
-      >
-        <Card>
-        </Card>
-      </MainLayout>
-  );
+    return (
+      <Card>
+        <Button icon={icons.SHARE} onClick={this.copyTestUrlToClipboard}>
+          {intl.formatMessage(messages.TEST_DETAIL_SHARE_TEST_BY_URL)}
+        </Button>
+      </Card>
+    );
   }
 }
 
@@ -63,12 +98,16 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     test: getTest(state, testId) || {},
-    testId,
-  }
+    testId
+  };
 };
 
 const mapDispatchToProps = {
   getTestDetail
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestDetail));
+TestDetail = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestDetail))
+);
+
+export default MainLayoutContextWrapper(TestDetail);

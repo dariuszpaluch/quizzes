@@ -132,6 +132,14 @@ class SimpleQuestionlist extends Component {
     );
   }
 
+  renderInfoLabel(content) {
+    return (
+      <Typography className="information-label" variant="display1">
+        {content}
+      </Typography>
+    );
+  }
+
   render() {
     const {
       questionsIds,
@@ -142,10 +150,8 @@ class SimpleQuestionlist extends Component {
     } = this.props;
 
     if (!size(questionsIds))
-      return (
-        <Typography variant="display1">
-          {intl.formatMessage(messages.NO_QUESTION_INFORMATION)}
-        </Typography>
+      return this.renderInfoLabel(
+        intl.formatMessage(messages.NO_QUESTION_INFORMATION)
       );
 
     let _questionsIds = questionsIds;
@@ -155,12 +161,10 @@ class SimpleQuestionlist extends Component {
       );
 
     if (filterQuery && !size(_questionsIds))
-      return (
-        <Typography variant="display1">
-          {intl.formatMessage(messages.NO_MATCHING_QUESTION_TO_QUERY, {
-            query: filterQuery
-          })}
-        </Typography>
+      return this.renderInfoLabel(
+        intl.formatMessage(messages.NO_MATCHING_QUESTION_TO_QUERY, {
+          query: filterQuery
+        })
       );
 
     return (
