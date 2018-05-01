@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import forEach from 'lodash/forEach';
+import size from 'lodash/size';
 
 import List from 'libs/ui/List/List';
 import Card from 'libs/ui/Card/Card';
@@ -132,12 +133,34 @@ class SimpleQuestionlist extends Component {
   }
 
   render() {
-    const { questionsIds, questions, selectedIds, filterQuery } = this.props;
+    const {
+      questionsIds,
+      questions,
+      selectedIds,
+      filterQuery,
+      intl
+    } = this.props;
+
+    if (!size(questionsIds))
+      return (
+        <Typography variant="display1">
+          {intl.formatMessage(messages.NO_QUESTION_INFORMATION)}
+        </Typography>
+      );
 
     let _questionsIds = questionsIds;
     if (filterQuery)
       _questionsIds = filter(questionsIds, questionId =>
         stringInclude(questions[questionId].question, filterQuery)
+      );
+
+    if (filterQuery && !size(_questionsIds))
+      return (
+        <Typography variant="display1">
+          {intl.formatMessage(messages.NO_MATCHING_QUESTION_TO_QUERY, {
+            query: filterQuery
+          })}
+        </Typography>
       );
 
     return (

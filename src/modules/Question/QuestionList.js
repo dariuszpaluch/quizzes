@@ -104,7 +104,7 @@ class QuestionList extends Component {
     const { questionsQuery } = this.state;
 
     return (
-      <Card className="question-list">
+      <Card className="question-list" noSpace>
         <SimpleQuestionlist
           onChangeSelect={onChangeSelect}
           selectedIds={selectedIds}

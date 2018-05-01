@@ -28,6 +28,22 @@ const messages = defineMessages({
   ANSWERS: {
     id: 'question.answers',
     defaultMessage: 'Answers'
+  },
+  NO_QUESTION_INFORMATION: {
+    id: 'question.no-question',
+    defaultMessage: 'No questions'
+  },
+  NO_MATCHING_QUESTION_TO_QUERY: {
+    id: 'question.no-matching-question-to-query',
+    defaultMessage: 'No matching questions to query: {query}'
+  },
+  QUESTION_INPUT_LABEL: {
+    id: 'question.question-input-label',
+    defaultMessage: 'Question'
+  },
+  QUESTION_DESCRIPTION_INPUT_LABEL: {
+    id: 'question.question-description-input-label',
+    defaultMessage: 'Description of question'
   }
 });
 

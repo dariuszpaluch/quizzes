@@ -1,7 +1,10 @@
 @import '~styles/variables';
 
 .card {
-  .card-content {
+  &.no-content-space {
+    .card-content {
+      padding: 0;
+    }
   }
 
   &.center-header {

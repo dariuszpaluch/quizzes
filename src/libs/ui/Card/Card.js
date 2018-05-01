@@ -24,7 +24,8 @@ export default class Card extends Component {
     actions: PropTypes.any,
     contentClass: PropTypes.string,
     actionsClass: PropTypes.string,
-    headerClass: PropTypes.string
+    headerClass: PropTypes.string,
+    noSpace: PropTypes.bool
   };
 
   static defaultProps = {
@@ -77,12 +78,14 @@ export default class Card extends Component {
       contentClass,
       actionsClass,
       headerClass,
+      noSpace,
       ...props
     } = this.props;
 
     const classes = classnames(className, 'card', {
       'center-header': centerHeader,
-      'with-header': title || subheader
+      'with-header': title || subheader,
+      'no-content-space': noSpace
     });
 
     return (

@@ -8,12 +8,12 @@ import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 import pick from 'lodash/pick';
+import map from 'lodash/map';
 
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import ListFields from 'libs/reduxFormFields/ListFields/ListFields';
 import { minLength, required } from 'modules/_forms/validations';
 
-import STRINGS from './utils/strings';
 import Button from 'libs/ui/Button/Button';
 import Card from 'libs/ui/Card/Card';
 import { addQuestion } from './utils/actions';
@@ -132,7 +132,7 @@ class QuestionForm extends Component {
               <InputField
                 className="col-xs-12"
                 name="question"
-                label={STRINGS.INPUTS.QUESTION}
+                label={intl.formatMessage(messages.QUESTION_INPUT_LABEL)}
                 autoFocus
                 validate={this.validations.question}
               />
@@ -141,7 +141,9 @@ class QuestionForm extends Component {
               <InputField
                 className="col-xs-12"
                 name="description"
-                label={STRINGS.INPUTS.DESCRIPTION}
+                label={intl.formatMessage(
+                  messages.QUESTION_DESCRIPTION_INPUT_LABEL
+                )}
               />
             </div>
             <div className="col-xs-12">
@@ -168,13 +170,24 @@ QuestionForm = reduxForm({
   form: FORM_NAME
 })(QuestionForm);
 
+const INIT_DATA = {
+  question: '',
+  answers: [{ label: '' }]
+};
+
 const mapStateToProps = (state, ownProps) => {
+  const data = ownProps.question && {
+    ...pick(ownProps.question, ['question', 'description', 'answers'])
+  };
+
+  if (data)
+    data.answers = map(data.answers, answer => ({
+      ...answer,
+      select: answer.correct
+    }));
+
   return {
-    initialValues: (ownProps.question &&
-      pick(ownProps.question, ['question', 'description', 'answers'])) || {
-      question: '',
-      answers: [{ label: '' }]
-    }
+    initialValues: data || INIT_DATA
   };
 };
 

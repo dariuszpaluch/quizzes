@@ -17,6 +17,7 @@ import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import filter from 'lodash/filter';
 import noop from 'lodash/noop';
+import size from 'lodash/size';
 
 export default class List extends Component {
   static propTypes = {
@@ -81,6 +82,8 @@ export default class List extends Component {
     } = this.props;
 
     const classes = classnames('list', className);
+
+    if (!size(rows)) return null;
 
     return (
       <MaterialList className={classes}>
