@@ -138,12 +138,14 @@ class MainLayout extends Component {
           <div className="left-content">
             {showLeftButton ? (
               <IconButton
+                classname={classnames({
+                  'nav-icon': !leftButton
+                })}
                 color="inherit"
                 onClick={
                   leftButton ? leftButton.onClick : this.handleDrawerToggle
                 }
                 icon={leftButton ? leftButton.icon : icons.MENU}
-                className="nav-icon"
               />
             ) : null}
             <div className="page-tittle">{appBarTittle}</div>

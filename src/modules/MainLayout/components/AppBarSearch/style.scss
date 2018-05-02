@@ -1,4 +1,5 @@
 @import '~styles/colors';
+@import '~styles/mixins';
 
 .search-input-plug {
   width: 50px;
@@ -9,7 +10,7 @@
 
   color: white;
   fill: white;
-  background-color: lighten($primary-color, 5%);
+  background-color: lighten($primary-main, 5%);
   transition: transform 1s;
   width: calc(100% - 50px);
   right: calc(-100% + 100px);
@@ -31,6 +32,15 @@
     }
 
     input {
+    }
+  }
+
+  @include mdScreen {
+    width: 50%;
+    right: 0;
+
+    &.expanded {
+      transform: none;
     }
   }
 }

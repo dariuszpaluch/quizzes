@@ -9,6 +9,9 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import icons from 'consts/icons';
+import noop from 'lodash/noop';
+import Avatar from 'libs/ui/Avatar/Avatar';
+import UserMenu from 'modules/MainLayout/components/UserMenu/UserMenu';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -38,11 +41,20 @@ export default class Menu extends Component {
     handleDrawerToggle && handleDrawerToggle();
   };
 
-  renderMenuItems() {
+  renderMenuItems(isMobile) {
     const { path, items, handleDrawerToggle } = this.props;
 
     return items.map((item, index) => {
       const active = item.path === path;
+
+      let onClick = item.onClick;
+      if (isMobile) {
+        onClick = active
+          ? handleDrawerToggle
+          : this.closeMenuAfterClick(item.onClick);
+      } else {
+        onClick = active ? noop : item.onClick;
+      }
 
       const content = (
         <ListItem
@@ -52,9 +64,7 @@ export default class Menu extends Component {
           })}
           button
           disabled={item.disabled}
-          onClick={
-            active ? handleDrawerToggle : this.closeMenuAfterClick(item.onClick)
-          }
+          onClick={onClick}
         >
           {item.icon && (
             <ListItemIcon>
@@ -75,27 +85,28 @@ export default class Menu extends Component {
     });
   }
 
-  renderMenuContent() {
+  renderMenuContent(isMobile) {
     const { handleDrawerToggle, title } = this.props;
 
     return [
-      <IconButton
-        key="nav-close-icon"
-        className="nav-close-icon"
-        icon={icons.CLOSE}
-        onClick={handleDrawerToggle}
-        iconSize={25}
-      />,
+      isMobile ? (
+        <IconButton
+          key="nav-close-icon"
+          className="nav-close-icon"
+          icon={icons.CLOSE}
+          onClick={handleDrawerToggle}
+          iconSize={25}
+        />
+      ) : null,
+      <UserMenu key="user-menu" />,
       <List
         key="nav-list"
         component="nav"
         subheader={
-          <ListSubheader component="div" className="nav-header-title">
-            {title}
-          </ListSubheader>
+          <ListSubheader component="div" className="nav-header-title" />
         }
       >
-        {this.renderMenuItems()}
+        {this.renderMenuItems(isMobile)}
       </List>
     ];
   }
@@ -114,7 +125,7 @@ export default class Menu extends Component {
           keepMounted: true // Better open performance on mobile.
         }}
       >
-        {this.renderMenuContent()}
+        {this.renderMenuContent(true)}
       </Drawer>,
       handleDrawerToggle && (
         <Drawer

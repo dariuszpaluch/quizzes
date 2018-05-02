@@ -1,7 +1,7 @@
 @import '~styles/mixins';
 @import '~styles/colors';
 
-$drawer-width: 230px;
+$drawer-width: 20%;
 $app-bar-height: 50px;
 
 .main-layout {
@@ -69,7 +69,8 @@ $app-bar-height: 50px;
       width: calc(100% - #{$drawer-width});
 
       .nav-icon {
-        display: none;
+        visibility: hidden;
+        pointer-events: none;
       }
     }
   }
@@ -98,12 +99,19 @@ $app-bar-height: 50px;
 
   &.permament-drawer {
     width: $drawer-width;
+    box-shadow: $box-shadow;
+    z-index: 2;
+
+    > div {
+      width: $drawer-width;
+      border: none;
+    }
     display: none;
     background-color: white;
-  }
 
-  .menu-drawer-content {
-    width: $drawer-width;
+    .menu-drawer-content {
+      width: $drawer-width;
+    }
   }
 
   @include mdScreen {

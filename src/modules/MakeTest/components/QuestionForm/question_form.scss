@@ -6,7 +6,8 @@
 
   .question-description {
     padding-bottom: $container-padding;
-    .question, .description {
+    .question,
+    .description {
       text-align: center;
     }
     .description {
@@ -14,10 +15,8 @@
     }
   }
   .answers-options {
-
-
     .answer-selected {
-      background-color: rgba($primary-color, 0.1);
+      background-color: rgba($primary-main, 0.1);
     }
     ul > div {
       transition: background-color 1s;
@@ -28,6 +27,4 @@
       padding: 5px;
     }
   }
-
-
 }

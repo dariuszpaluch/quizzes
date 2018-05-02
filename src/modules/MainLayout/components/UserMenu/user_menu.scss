@@ -1,0 +1,41 @@
+@import '~styles/mixins';
+@import '~styles/variables';
+@import '~styles/colors';
+.user-menu {
+  width: 100%;
+  padding: 1 * $container-padding;
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-light;
+  position: relative;
+
+  .user-avatar {
+    margin: $container-margin auto;
+  }
+
+  .user-avatar-background {
+    width: 100%;
+    position: absolute;
+    height: 120%;
+    opacity: 0.1;
+    top: -20%;
+    left: 0;
+    display: none;
+  }
+
+  .user-details {
+    color: white;
+    text-align: center;
+
+    font-size: 1rem;
+    > p {
+      margin-bottom: 0;
+    }
+  }
+
+  @include mdScreen {
+    .user-avatar-background {
+      display: block;
+    }
+  }
+}
