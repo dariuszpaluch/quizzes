@@ -91,6 +91,7 @@ class MainLayout extends Component {
     const { history } = this.props;
 
     history.push(paths.INDEX);
+    this.props.logout();
   };
 
   handleDrawerToggle = () => {
@@ -131,14 +132,15 @@ class MainLayout extends Component {
     return (
       <AppBar
         className={classnames('app-bar', {
-          'without-left-button': !showLeftButton
+          'without-left-button': !showLeftButton,
+          'with-left-menu': !hideMenu
         })}
       >
         <Toolbar className="toolbar">
           <div className="left-content">
             {showLeftButton ? (
               <IconButton
-                classname={classnames({
+                className={classnames({
                   'nav-icon': !leftButton
                 })}
                 color="inherit"

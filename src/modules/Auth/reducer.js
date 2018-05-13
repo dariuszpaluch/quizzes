@@ -30,7 +30,7 @@ function removeToken(authState) {
 
 function logout() {
   LocalStorageSource.deleteToken();
-  return getInitState();
+  return {};
 }
 
 export default createReducer(getInitState(), {

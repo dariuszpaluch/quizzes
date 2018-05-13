@@ -24,16 +24,18 @@ export default class UserMenu extends Component {
         <div
           className="user-avatar-background"
           style={{
-            backgroundImage: `url(https://avatars1.githubusercontent.com/u/15227876?s=460&v=4)`,
+            // backgroundImage: `url(https://avatars1.githubusercontent.com/u/15227876?s=460&v=4)`,
             backgroundSize: 'cover'
           }}
         />
+
         <Avatar
           className="user-avatar"
           alt="Remy Sharp"
           src="https://avatars1.githubusercontent.com/u/15227876?s=460&v=4"
           size={80}
         />
+
         <div className="user-details">
           <p>Dariusz Paluch</p>
           <p>dariusz@dariuszpaluch.com</p>

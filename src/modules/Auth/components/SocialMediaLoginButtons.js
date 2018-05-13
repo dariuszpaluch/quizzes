@@ -43,16 +43,16 @@ export default class SocialMediaLoginButtons extends Component {
             Login with Google
           </Button>
         </a>
-        <a
-          key="github"
-          href={`https://localhost:3000/auth/github?returnUrl=${encodeURIComponent(
-            returnUrl
-          )}`}
-        >
-          <Button className="social-login login-github">
-            Login with Github
-          </Button>
-        </a>
+        {/*<a*/}
+        {/*key="github"*/}
+        {/*href={`https://localhost:3000/auth/github?returnUrl=${encodeURIComponent(*/}
+        {/*returnUrl*/}
+        {/*)}`}*/}
+        {/*>*/}
+        {/*<Button className="social-login login-github">*/}
+        {/*Login with Github*/}
+        {/*</Button>*/}
+        {/*</a>*/}
       </div>
     );
   }

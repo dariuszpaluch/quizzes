@@ -66,7 +66,9 @@ $app-bar-height: 50px;
       margin: $app-bar-height auto 0 auto;
     }
     .app-bar {
-      width: calc(100% - #{$drawer-width});
+      &.with-left-menu {
+        width: calc(100% - #{$drawer-width});
+      }
 
       .nav-icon {
         visibility: hidden;
