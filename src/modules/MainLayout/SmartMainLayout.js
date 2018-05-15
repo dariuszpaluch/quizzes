@@ -7,12 +7,13 @@ import { isUserLoggedIn } from 'modules/Auth/reducer';
 import { withRouter } from 'react-router-dom';
 
 import MainLayoutContext from './MainLayoutContext';
+import SETTINGS from 'settings';
 
 class SmartMainLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Quizzes',
+      title: SETTINGS.APP_NAME,
       appBarActions: {},
       onSearch: undefined
     };
@@ -77,13 +78,11 @@ class SmartMainLayout extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    title: getAppBarTitle(state),
+    // title: getAppBarTitle(state),
     userLoggedIn: isUserLoggedIn(state)
   };
 };
 
 const mapDispatchToProps = {};
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SmartMainLayout)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SmartMainLayout));

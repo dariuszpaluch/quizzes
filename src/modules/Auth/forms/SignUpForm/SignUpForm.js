@@ -85,12 +85,7 @@ class SignUpForm extends Component {
           type="password"
           validate={this.validations.password}
         />
-        <Button
-          variant="raised"
-          type="submit"
-          color="primary"
-          className="submit-button"
-        >
+        <Button variant="raised" type="submit" color="primary" className="submit-button">
           {intl.formatMessage(messages.SIGN_UP)}
         </Button>
       </form>

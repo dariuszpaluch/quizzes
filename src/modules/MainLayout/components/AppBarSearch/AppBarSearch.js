@@ -42,11 +42,7 @@ export default class AppBarSearch extends Component {
   onInputKeyPress = event => {
     event = event || window.event;
 
-    if (
-      event.key === 'Escape' ||
-      event.key === 'Esc' ||
-      event.keyCode === ESC
-    ) {
+    if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === ESC) {
       this.onFoldSearch();
     }
   };
@@ -96,6 +92,7 @@ export default class AppBarSearch extends Component {
           />
           <IconButton
             color="inherit"
+            className="icon-close"
             icon={icons.CLOSE}
             onClick={this.onFoldSearch}
           />

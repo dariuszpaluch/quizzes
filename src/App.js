@@ -30,10 +30,7 @@ export default class AppComponent extends Component {
       navigator.userLanguage;
 
     const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
-    const messages =
-      localeData[languageWithoutRegionCode] ||
-      localeData[language] ||
-      localeData.en;
+    const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.en;
 
     return (
       <IntlProvider locale={language} messages={messages}>

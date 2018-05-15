@@ -1,7 +1,7 @@
 import { createReducer, updateObject } from 'utils/reducerUtils';
 import filter from 'lodash/filter';
 
-import { FETCH_QUESTIONS, DELETE_QUESTION } from './actionTypes';
+import { FETCH_QUESTIONS, DELETE_QUESTION, ADD_QUESTION } from './actionTypes';
 import { FETCH_QUESTION } from 'modules/Question/utils/actionTypes';
 import normalizeList from 'utils/normalizeList';
 
@@ -23,10 +23,7 @@ function deleteQuestionSuccess(questionState, action) {
     ...questionState,
     questions: {
       ...questionState.questions,
-      allIds: filter(
-        questionState.questions.allIds,
-        questionId => questionId !== action.questionId
-      )
+      allIds: filter(questionState.questions.allIds, questionId => questionId !== action.questionId)
     }
   };
 }
@@ -60,6 +57,19 @@ function setIsLoadingQuestion(questionState, questionId, isFetching = true) {
   });
 }
 
+function addQuestionSuccess(questionState, action) {
+  return updateObject(questionState, {
+    questions: {
+      ...questionState.questions,
+      byId: {
+        ...questionState.questions.byId,
+        [action.data.id]: action.data
+      },
+      allIds: [...questionState.questions.allIds, action.data.id]
+    }
+  });
+}
+
 export default createReducer(getInitState(), {
   [`${FETCH_QUESTIONS}_SUCCESS`]: fetchQuestionsSuccess,
   [`${FETCH_QUESTIONS}_REQUIRE`]: questionState =>
@@ -77,7 +87,9 @@ export default createReducer(getInitState(), {
     setIsLoadingQuestion(questionState, action.questionId),
   [`${FETCH_QUESTION}_FAILURE`]: (questionState, action) =>
     setIsLoadingQuestion(questionState, action.questionId, false),
-  [`${FETCH_QUESTION}_SUCCESS`]: fetchQuestionDetailsSuccess
+  [`${FETCH_QUESTION}_SUCCESS`]: fetchQuestionDetailsSuccess,
+
+  [`${ADD_QUESTION}_SUCCESS`]: addQuestionSuccess
 });
 
 export const getToken = state => state.auth.token;

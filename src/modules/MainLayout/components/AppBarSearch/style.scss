@@ -39,6 +39,10 @@
     width: 50%;
     right: 0;
 
+    .icon-close {
+      display: none;
+    }
+
     &.expanded {
       transform: none;
     }

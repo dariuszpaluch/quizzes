@@ -21,6 +21,8 @@ import { Input } from 'material-ui';
 import * as ReactDOM from 'react-dom';
 import AppBarSearch from 'modules/MainLayout/components/AppBarSearch/AppBarSearch';
 
+import SETTINGS from 'settings';
+
 const buttonPropTypes = PropTypes.shape({
   icon: PropTypes.string,
   onClick: PropTypes.func
@@ -41,7 +43,7 @@ class MainLayout extends Component {
 
   static defaultProps = {
     showAppBar: true,
-    appBarTittle: 'Quizzes',
+    appBarTittle: SETTINGS.APP_NAME,
     hideMenu: false,
     onSearch: undefined
   };
@@ -144,9 +146,7 @@ class MainLayout extends Component {
                   'nav-icon': !leftButton
                 })}
                 color="inherit"
-                onClick={
-                  leftButton ? leftButton.onClick : this.handleDrawerToggle
-                }
+                onClick={leftButton ? leftButton.onClick : this.handleDrawerToggle}
                 icon={leftButton ? leftButton.icon : icons.MENU}
               />
             ) : null}
@@ -189,6 +189,4 @@ const mapDispatchToProps = {
   logout
 };
 
-export default withRouter(
-  connect(null, mapDispatchToProps)(injectIntl(MainLayout))
-);
+export default withRouter(connect(null, mapDispatchToProps)(injectIntl(MainLayout)));

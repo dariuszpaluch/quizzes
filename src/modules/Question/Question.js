@@ -8,6 +8,7 @@ import EditQuestion from 'modules/Question/EditQuestion';
 import { injectIntl } from 'react-intl';
 
 import { questionPaths } from 'consts/paths';
+import Card from 'libs/ui/Card/Card';
 
 class Question extends Component {
   render() {
@@ -19,7 +20,11 @@ class Question extends Component {
         <Route
           exact
           path={`${match.path}${questionPaths.ADD_QUESTION}`}
-          component={QuestionForm}
+          render={() => (
+            <Card>
+              <QuestionForm />
+            </Card>
+          )}
         />
         <Route
           exact

@@ -24,27 +24,25 @@ module.exports = {
     rules: [
       {
         test: /(\.jpg|\.png|\.otf|\.woff|\.woff2|\.ttf|\.eot|\.svg)$/,
-        use: [
-          'file-loader',
-        ],
+        use: ['file-loader']
       },
       {
         test: /\.json$/,
         use: 'json-loader'
       }
-    ],
+    ]
   },
   output: {
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../build')
   },
   plugins: [
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(packageJSON.version),
       PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
-      WEBPACK_API_URL: JSON.stringify(API_URL),
+      WEBPACK_API_URL: JSON.stringify(API_URL)
     }),
     new webpack.ProvidePlugin({
-      moment: 'moment',
+      moment: 'moment'
     }),
     // new webpack.optimize.ModuleConcatenationPlugin(),
     // new FaviconsWebpackPlugin({
@@ -71,11 +69,11 @@ module.exports = {
     // }),
     new Html({
       minify: {
-        collapseWhitespace: true,
+        collapseWhitespace: true
       },
       showErrors: true,
       template: path.resolve(__dirname, '../src/index.html')
-    }),
+    })
     // new ScriptExtHtmlWebpackPlugin({
     //   defaultAttribute: 'defer'
     // }),
@@ -94,7 +92,8 @@ module.exports = {
       utils: path.resolve(__dirname, '../src/utils'),
       config: path.resolve(__dirname, '../src/config'),
       sources: path.resolve(__dirname, '../src/sources'),
-      src: path.resolve(__dirname, '../src'),
+      settings: path.resolve(__dirname, '../src/settings/index.js'),
+      src: path.resolve(__dirname, '../src')
     }
   }
 };

@@ -3,7 +3,7 @@ import './question_form.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { FieldArray, reduxForm } from 'redux-form';
+import { FieldArray, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 
 import values from 'lodash/values';
@@ -53,10 +53,7 @@ class QuestionForm extends Component {
 
     this.validations = {
       question: intlWrapValidation(props.intl, [required, minLength(5)]),
-      answersValidation: intlWrapValidation(
-        props.intl,
-        arrayMinSize(2, item => item.label)
-      )
+      answersValidation: intlWrapValidation(props.intl, arrayMinSize(2, item => item.label))
     };
 
     this.appBarButtons = {
@@ -86,8 +83,9 @@ class QuestionForm extends Component {
   }
 
   updateAppBar() {
-    const { intl, mainLayoutContext } = this.props;
-    if (!!mainLayoutContext) {
+    const { intl, mainLayoutContext, mode } = this.props;
+
+    if (mode !== 'simple' && !!mainLayoutContext) {
       const { setTitle, setAppBarActions } = mainLayoutContext;
 
       setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
@@ -96,7 +94,7 @@ class QuestionForm extends Component {
   }
 
   goBack = () => {
-    this.props.history.push(paths.QUESTIONS);
+    if (this.props.mode !== 'simple') this.props.history.push(paths.QUESTIONS);
   };
 
   submit = ({ question, description, answers }) => {
@@ -107,9 +105,11 @@ class QuestionForm extends Component {
       };
     });
 
-    return this.props
-      .saveQuestion({ question, description, answers: _answers })
-      .then(this.goBack);
+    return this.props.saveQuestion({ question, description, answers: _answers }).then(() => {
+      this.goBack();
+      this.props.resetForm();
+      this.props.afterSuccessAdded && this.props.afterSuccessAdded();
+    });
   };
 
   renderActions() {
@@ -125,41 +125,37 @@ class QuestionForm extends Component {
     const { handleSubmit, submitting, intl } = this.props;
 
     return (
-      <Card className="question-form">
-        <form onSubmit={this.onSubmit}>
-          <div className="row">
-            <div className="col-xs-12">
-              <InputField
-                className="col-xs-12"
-                name="question"
-                label={intl.formatMessage(messages.QUESTION_INPUT_LABEL)}
-                autoFocus
-                validate={this.validations.question}
-              />
-            </div>
-            <div className="col-xs-12">
-              <InputField
-                className="col-xs-12"
-                name="description"
-                label={intl.formatMessage(
-                  messages.QUESTION_DESCRIPTION_INPUT_LABEL
-                )}
-              />
-            </div>
-            <div className="col-xs-12">
-              <FieldArray
-                name="answers"
-                component={ListFields}
-                className={classnames('answer-list', 'col-xs-12')}
-                inputPlaceholder="Answer"
-                addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
-                validate={this.validations.answersValidation}
-              />
-            </div>
+      <form className="question-form" onSubmit={this.onSubmit}>
+        <div className="row">
+          <div className="col-xs-12">
+            <InputField
+              className="col-xs-12"
+              name="question"
+              label={intl.formatMessage(messages.QUESTION_INPUT_LABEL)}
+              autoFocus
+              validate={this.validations.question}
+            />
           </div>
-          <div className="col-xs-12">{this.renderActions()}</div>
-        </form>
-      </Card>
+          <div className="col-xs-12">
+            <InputField
+              className="col-xs-12"
+              name="description"
+              label={intl.formatMessage(messages.QUESTION_DESCRIPTION_INPUT_LABEL)}
+            />
+          </div>
+          <div className="col-xs-12">
+            <FieldArray
+              name="answers"
+              component={ListFields}
+              className={classnames('answer-list', 'col-xs-12')}
+              inputPlaceholder="Answer"
+              addButtonLabel={intl.formatMessage(messages.ADD_ANSWER)}
+              validate={this.validations.answersValidation}
+            />
+          </div>
+        </div>
+        <div className="col-xs-12">{this.renderActions()}</div>
+      </form>
     );
   }
 }
@@ -192,11 +188,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-  saveQuestion: addQuestion
+  saveQuestion: addQuestion,
+  resetForm: reset.bind(null, FORM_NAME)
 };
 
-QuestionForm = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionForm))
-);
+QuestionForm = withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionForm)));
 
 export default MainLayoutContextWrapper(QuestionForm);

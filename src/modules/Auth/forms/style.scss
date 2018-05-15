@@ -1,4 +1,8 @@
 @import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+$auth-max-width: 500px;
+$auth-submit-button-max-width: 300px;
 
 .sign-in-form,
 .sign-up-form {
@@ -8,13 +12,17 @@
   flex-direction: column;
 
   .button[type='submit'] {
-    max-width: 300px;
+    max-width: $auth-submit-button-max-width;
     width: 100%;
     margin: $container-margin auto 0 auto;
   }
 }
 
-.auth {
-  max-width: 500px;
-  margin: $container-margin auto auto;
+.auth-wrapper {
+  margin: 0 auto auto;
+  max-width: $auth-max-width;
+
+  @include mdScreen {
+    padding: $container-padding;
+  }
 }

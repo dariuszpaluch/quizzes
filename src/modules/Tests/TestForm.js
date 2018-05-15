@@ -87,9 +87,7 @@ class TestForm extends Component {
     const { intl, mode, handleSubmit } = this.props;
 
     const pageTitle = intl.formatMessage(
-      mode === MODES.ADD
-        ? messages.TEST_HEADER_ADD_MODE
-        : messages.TEST_HEADER_EDIT_MODE
+      mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE
     );
 
     {
@@ -104,18 +102,13 @@ class TestForm extends Component {
             validate={this.validations.testName}
             autoFocus
           />
-          <InputField
-            name="description"
-            label={intl.formatMessage(messages.TEST_DESCRIPTION)}
-          />
+          <InputField name="description" label={intl.formatMessage(messages.TEST_DESCRIPTION)} />
           <Field
             name="questionsIds"
             component={this.renderQuestionsList}
             label={intl.formatMessage(messages.TEST_QUESTIONS)}
           />
-          <Button type="submit">
-            {intl.formatMessage(globalMessages.SAVE)}
-          </Button>
+          <Button type="submit">{intl.formatMessage(globalMessages.SAVE)}</Button>
         </form>
       </Card>
     );
@@ -141,6 +134,4 @@ const mapDispatchToProps = {
   onSubmit: addTest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(injectIntl(TestForm))
-);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));

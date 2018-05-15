@@ -56,38 +56,31 @@ class Auth extends Component {
   }
 
   onChangeTab = selectedOption => {
-    if (selectedOption && selectedOption.path)
-      this.props.history.push(selectedOption.path);
+    if (selectedOption && selectedOption.path) this.props.history.push(selectedOption.path);
   };
 
   render() {
     const { match, location } = this.props;
 
     return (
-      <Card className="auth">
-        <Tabs
-          className="auth-tabs"
-          tabs={this.tabs}
-          value={location.pathname}
-          onChange={this.onChangeTab}
-          indicatorColor="primary"
-          textColor="primary"
-          fullWidth
-        />
-        <Switch>
-          <Route exact path={match.url} component={SignInForm} />
-          <Route
-            exact
-            path={`${match.url}${authPaths.SIGN_IN}`}
-            component={SignInForm}
+      <div className="auth-wrapper">
+        <Card className="auth">
+          <Tabs
+            className="auth-tabs"
+            tabs={this.tabs}
+            value={location.pathname}
+            onChange={this.onChangeTab}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
           />
-          <Route
-            exact
-            path={`${match.url}${authPaths.SIGN_UP}`}
-            component={SignUpForm}
-          />
-        </Switch>
-      </Card>
+          <Switch>
+            <Route exact path={match.url} component={SignInForm} />
+            <Route exact path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
+            <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
+          </Switch>
+        </Card>
+      </div>
     );
   }
 }

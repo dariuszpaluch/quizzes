@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf *.log build/*",
     "dev": "npm run clean && webpack-dev-server --config webpack/config.dev.js",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
+    "build":
+      "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
     "update-locales": "node intl/updateLocales.js",
     "update-locales-with-build": "npm run clean && npm run build && node intl/updateLocales.js",
     "test": "prettier --version"
@@ -22,6 +23,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
+    "deep-freeze": "0.0.1",
     "es6-promise": "^4.1.1",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",
@@ -39,6 +41,7 @@
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
     "react-keydown": "^1.9.4",
+    "react-modal": "^3.4.4",
     "react-rating": "^1.1.2",
     "react-ratings-declarative": "^3.4.1",
     "react-redux": "^5.0.6",
@@ -86,7 +89,7 @@
     "postcss-loader": "^2.0.6",
     "postcss-smart-import": "^0.7.5",
     "precss": "^2.0.0",
-    "prettier": "1.12.1",
+    "prettier": "^1.12.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "script-ext-html-webpack-plugin": "^1.8.5",

@@ -68,12 +68,7 @@ class SignInForm extends Component {
           type="password"
           validate={this.requiredValidation}
         />
-        <Button
-          variant="raised"
-          type="submit"
-          color="primary"
-          className="submit-button"
-        >
+        <Button variant="raised" type="submit" color="primary" className="submit-button">
           {intl.formatMessage(messages.SIGN_IN)}
         </Button>
 
@@ -94,6 +89,4 @@ const mapDispatchToProps = {
   signIn
 };
 
-export default connect(null, mapDispatchToProps)(
-  withRouter(injectIntl(SignInForm))
-);
+export default connect(null, mapDispatchToProps)(withRouter(injectIntl(SignInForm)));
