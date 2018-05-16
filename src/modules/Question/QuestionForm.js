@@ -105,10 +105,10 @@ class QuestionForm extends Component {
       };
     });
 
-    return this.props.saveQuestion({ question, description, answers: _answers }).then(() => {
+    return this.props.saveQuestion({ question, description, answers: _answers }, data => {
       this.goBack();
       this.props.resetForm();
-      this.props.afterSuccessAdded && this.props.afterSuccessAdded();
+      this.props.afterSuccessAdded && this.props.afterSuccessAdded(data);
     });
   };
 

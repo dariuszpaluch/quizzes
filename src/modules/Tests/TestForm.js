@@ -108,7 +108,9 @@ class TestForm extends Component {
             component={this.renderQuestionsList}
             label={intl.formatMessage(messages.TEST_QUESTIONS)}
           />
-          <Button type="submit">{intl.formatMessage(globalMessages.SAVE)}</Button>
+          <div className="test-form-actions">
+            <Button type="submit">{intl.formatMessage(globalMessages.SAVE)}</Button>
+          </div>
         </form>
       </Card>
     );

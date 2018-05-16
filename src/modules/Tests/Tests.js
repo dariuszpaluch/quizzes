@@ -15,17 +15,8 @@ class Test extends Component {
     return (
       <Switch>
         <Route key="tests" exact path={`${match.path}/`} component={TestList} />,
-        <Route
-          key="tests-add"
-          exact
-          path={`${match.path}/add`}
-          component={TestForm}
-        />,
-        <Route
-          key="test-edit"
-          path={`${match.path}/:testId`}
-          component={TestDetail}
-        />,
+        <Route key="tests-add" exact path={`${match.path}/add`} component={TestForm} />,
+        <Route key="test-edit" path={`${match.path}/:testId`} component={TestDetail} />,
       </Switch>
     );
   }

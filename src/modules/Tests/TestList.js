@@ -95,8 +95,6 @@ const mapDispatchToProps = {
   getTestsRequest
 };
 
-TestList = connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(withRouter(TestList))
-);
+TestList = connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(TestList)));
 
 export default MainLayoutContextWrapper(TestList);

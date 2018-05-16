@@ -6,13 +6,24 @@ form.test-form {
   display: flex;
   flex-direction: column;
 
-  button[type='submit'] {
+  .test-form-actions {
     margin-top: 20px;
     width: 100%;
+    button[type='submit'] {
+      width: 100%;
+    }
   }
 
   @include smScreen {
     min-height: auto;
+
+    .test-form-actions {
+      display: flex;
+      justify-content: center;
+      button[type='submit'] {
+        max-width: 300px;
+      }
+    }
   }
 }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { fetchQuestions } from 'modules/Question/utils/actions';
 
 import { deleteQuestion } from 'modules/Question/utils/actions';
@@ -13,7 +12,6 @@ import reverse from 'lodash/reverse';
 import QuestionForm from 'modules/Question/QuestionForm';
 import Modal from 'libs/ui/Modal/Modal';
 import Button from 'libs/ui/Button/Button';
-import STRINGS from 'modules/Question/utils/strings';
 import { toastr } from 'react-redux-toastr';
 
 class QuestionList extends Component {
@@ -43,8 +41,10 @@ class QuestionList extends Component {
     );
   };
 
-  afterAddNewQuestion = () => {
+  afterAddNewQuestion = data => {
+    const { selectedIds } = this.props;
     toastr.success('pytanie', 'pytanie dodano prawidłowo do testu');
+    this.props.onChangeSelect([...selectedIds, data.id]);
   };
 
   render() {
@@ -64,11 +64,6 @@ class QuestionList extends Component {
 
     return (
       <div className="test-question-list">
-        <ChipList
-          className="selected-question-chips"
-          onDeleteChip={this.onDeleteChip}
-          chips={chips}
-        />
         <Modal
           isOpen={addQuestionModalIsOpen}
           onRequestClose={this.onToogleAddQuestionModal}
@@ -76,6 +71,12 @@ class QuestionList extends Component {
         >
           <QuestionForm mode="simple" afterSuccessAdded={this.afterAddNewQuestion} />
         </Modal>
+        <ChipList
+          className="selected-question-chips"
+          onDeleteChip={this.onDeleteChip}
+          chips={chips}
+        />
+
         <Button onClick={this.onToogleAddQuestionModal}>DODAJ PYTANIE</Button>
         <SimpleQuestionlist
           onChangeSelect={onChangeSelect}
