@@ -4,11 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import MaterialCard, {
-  CardActions,
-  CardContent,
-  CardHeader
-} from 'material-ui/Card';
+import MaterialCard, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import IconButton from 'libs/ui/IconButton/IconButton';
 
 export default class Card extends Component {
@@ -44,9 +40,7 @@ export default class Card extends Component {
 
     if (!headerAction) return null;
 
-    return (
-      <IconButton icon={headerAction.icon} onClick={headerAction.onClick} />
-    );
+    return <IconButton icon={headerAction.icon} onClick={headerAction.onClick} />;
   }
 
   renderHeader() {
@@ -91,13 +85,9 @@ export default class Card extends Component {
     return (
       <MaterialCard className={classes} {...props}>
         {this.renderHeader()}
-        <CardContent className={classnames('card-content', contentClass)}>
-          {children}
-        </CardContent>
+        <CardContent className={classnames('card-content', contentClass)}>{children}</CardContent>
         {!!actions ? (
-          <CardActions className={classnames('card-actions', actionsClass)}>
-            {actions}
-          </CardActions>
+          <CardActions className={classnames('card-actions', actionsClass)}>{actions}</CardActions>
         ) : null}
       </MaterialCard>
     );

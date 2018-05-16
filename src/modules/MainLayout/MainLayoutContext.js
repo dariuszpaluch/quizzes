@@ -13,8 +13,6 @@ export default MainLayoutContext;
 
 export const MainLayoutContextWrapper = WrappedComponent => props => (
   <MainLayoutContext.Consumer>
-    {mainLayoutContext => (
-      <WrappedComponent mainLayoutContext={mainLayoutContext} {...props} />
-    )}
+    {mainLayoutContext => <WrappedComponent mainLayoutContext={mainLayoutContext} {...props} />}
   </MainLayoutContext.Consumer>
 );

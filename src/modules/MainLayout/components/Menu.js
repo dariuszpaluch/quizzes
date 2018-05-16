@@ -49,9 +49,7 @@ export default class Menu extends Component {
 
       let onClick = item.onClick;
       if (isMobile) {
-        onClick = active
-          ? handleDrawerToggle
-          : this.closeMenuAfterClick(item.onClick);
+        onClick = active ? handleDrawerToggle : this.closeMenuAfterClick(item.onClick);
       } else {
         onClick = active ? noop : item.onClick;
       }
@@ -102,9 +100,7 @@ export default class Menu extends Component {
       <List
         key="nav-list"
         component="nav"
-        subheader={
-          <ListSubheader component="div" className="nav-header-title" />
-        }
+        subheader={<ListSubheader component="div" className="nav-header-title" />}
       >
         {this.renderMenuItems(isMobile)}
       </List>

@@ -134,13 +134,7 @@ class MakeTest extends Component {
   }
 
   renderTestForm() {
-    const {
-      questionsIds,
-      questions,
-      testDescription,
-      answers,
-      questionsRating
-    } = this.props;
+    const { questionsIds, questions, testDescription, answers, questionsRating } = this.props;
 
     return (
       <MakeTestForm

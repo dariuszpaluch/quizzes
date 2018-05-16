@@ -71,8 +71,7 @@ class TestDetail extends Component {
 
     let hosturl = window.location.href;
     hosturl = hosturl.replace(location.pathname, '');
-    const makeTestUrl =
-      hosturl + parsePath(paths.MAKE_TEST, { testId: test.id });
+    const makeTestUrl = hosturl + parsePath(paths.MAKE_TEST, { testId: test.id });
 
     copy(makeTestUrl);
     toastr.success(
@@ -107,8 +106,6 @@ const mapDispatchToProps = {
   getTestDetail
 };
 
-TestDetail = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestDetail))
-);
+TestDetail = withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestDetail)));
 
 export default MainLayoutContextWrapper(TestDetail);

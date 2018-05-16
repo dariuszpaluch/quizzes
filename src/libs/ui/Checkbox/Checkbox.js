@@ -25,14 +25,7 @@ export default class Checkbox extends Component {
   };
 
   render() {
-    const {
-      className,
-      checked,
-      color,
-      disabled,
-      onChange,
-      ...props
-    } = this.props;
+    const { className, checked, color, disabled, onChange, ...props } = this.props;
 
     const classes = classnames(
       'checkbox',

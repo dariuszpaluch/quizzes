@@ -26,9 +26,7 @@ import filter from 'lodash/filter';
 class SimpleQuestionlist extends Component {
   static propTypes = {
     className: PropTypes.string,
-    questionsIds: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-    ),
+    questionsIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
     questions: PropTypes.objectOf(PropTypes.object),
     selectedIds: PropTypes.arrayOf(PropTypes.string),
     onChangeSelect: PropTypes.func,
@@ -64,10 +62,7 @@ class SimpleQuestionlist extends Component {
   onChangeSelect = (questionId, checked) => {
     const newValue = checked
       ? [...this.props.selectedIds, questionId]
-      : filter(
-          this.props.selectedIds,
-          _questionId => _questionId !== questionId
-        );
+      : filter(this.props.selectedIds, _questionId => _questionId !== questionId);
 
     this.props.onChangeSelect(newValue);
   };
@@ -93,9 +88,7 @@ class SimpleQuestionlist extends Component {
         <Typography variant="subheading">
           Opis: {description || intl.formatMessage(messages.NO_DESCRIPTION)}
         </Typography>
-        <Typography variant="subheading">
-          {intl.formatMessage(messages.ANSWERS)}:
-        </Typography>
+        <Typography variant="subheading">{intl.formatMessage(messages.ANSWERS)}:</Typography>
         <ul className="answers">
           {answers &&
             answers.map(({ correct, label }, index) => (
@@ -104,9 +97,7 @@ class SimpleQuestionlist extends Component {
               </li>
             ))}
         </ul>
-        {onEdit || onDelete
-          ? this.renderQuestionActions(questionId, onEdit, onDelete)
-          : null}
+        {onEdit || onDelete ? this.renderQuestionActions(questionId, onEdit, onDelete) : null}
       </div>
     );
   }
@@ -141,18 +132,10 @@ class SimpleQuestionlist extends Component {
   }
 
   render() {
-    const {
-      questionsIds,
-      questions,
-      selectedIds,
-      filterQuery,
-      intl
-    } = this.props;
+    const { questionsIds, questions, selectedIds, filterQuery, intl } = this.props;
 
     if (!size(questionsIds))
-      return this.renderInfoLabel(
-        intl.formatMessage(messages.NO_QUESTION_INFORMATION)
-      );
+      return this.renderInfoLabel(intl.formatMessage(messages.NO_QUESTION_INFORMATION));
 
     let _questionsIds = questionsIds;
     if (filterQuery)

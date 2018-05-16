@@ -8,11 +8,7 @@ import classnames from 'classnames';
 import icons from 'consts/icons';
 
 import Collapse from 'material-ui/transitions/Collapse';
-import MaterialList, {
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText
-} from 'material-ui/List';
+import MaterialList, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
 import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import filter from 'lodash/filter';
@@ -22,9 +18,7 @@ import size from 'lodash/size';
 export default class List extends Component {
   static propTypes = {
     className: PropTypes.string,
-    rowsIds: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-    ),
+    rowsIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
     rows: PropTypes.objectOf(
       PropTypes.shape({
         label: PropTypes.string,
@@ -107,23 +101,13 @@ export default class List extends Component {
                 clickable: !!onClick && !this.props.onChangeSelect
               })}
               key={`${rowId}-item`}
-              button={
-                !!onClick && (!this.props.onChangeSelect || selectOnAllContent)
-              }
-              onClick={
-                !this.props.onChangeSelect || selectOnAllContent
-                  ? onClick
-                  : undefined
-              }
+              button={!!onClick && (!this.props.onChangeSelect || selectOnAllContent)}
+              onClick={!this.props.onChangeSelect || selectOnAllContent ? onClick : undefined}
             >
               {this.props.onChangeSelect && (
                 <Checkbox
                   checked={selected}
-                  onChange={
-                    !selectOnClick
-                      ? this.onChangeSelect.bind(null, rowId)
-                      : noop
-                  }
+                  onChange={!selectOnClick ? this.onChangeSelect.bind(null, rowId) : noop}
                 />
               )}
               <ListItemText inset primary={row.label} />
@@ -136,12 +120,7 @@ export default class List extends Component {
             </ListItem>,
 
             row.children ? (
-              <Collapse
-                key={`${rowId}-item-children`}
-                in={open}
-                timeout="auto"
-                unmountOnExit
-              >
+              <Collapse key={`${rowId}-item-children`} in={open} timeout="auto" unmountOnExit>
                 {row.children}
               </Collapse>
             ) : null

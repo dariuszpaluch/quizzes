@@ -7,11 +7,7 @@ import STRINGS from './utils/strings';
 import { deleteQuestion } from 'modules/Question/utils/actions';
 import { toastr } from 'react-redux-toastr';
 import { setAppBarTitle } from 'modules/MainLayout/utils/actions';
-import {
-  getQuestions,
-  getQuestionsIds,
-  getQuestionsLoading
-} from 'modules/Question/utils/getters';
+import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
 import { injectIntl } from 'react-intl';
 import messages from './utils/messages';
 import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
@@ -35,9 +31,7 @@ class QuestionList extends Component {
 
   componentWillMount() {
     const { intl } = this.props;
-    this.props.setAppBarTitle(
-      intl.formatMessage(messages.QUESTION_LIST_HEADER)
-    );
+    this.props.setAppBarTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
     this.props.fetchQuestions();
   }
 
@@ -63,16 +57,10 @@ class QuestionList extends Component {
 
   onDeleteQuestion = questionId => {
     const onSuccess = () => {
-      toastr.success(
-        STRINGS.HEADER.QUESTIONS_LIST,
-        STRINGS.MESSAGES.QUESTION_DELETE_SUCCESS
-      );
+      toastr.success(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_SUCCESS);
     };
     const onFailure = () => {
-      toastr.error(
-        STRINGS.HEADER.QUESTIONS_LIST,
-        STRINGS.MESSAGES.QUESTION_DELETE_FAILURE
-      );
+      toastr.error(STRINGS.HEADER.QUESTIONS_LIST, STRINGS.MESSAGES.QUESTION_DELETE_FAILURE);
     };
 
     this.props.deleteQuestion(questionId, onSuccess, onFailure);
@@ -85,9 +73,7 @@ class QuestionList extends Component {
   goEditQuestion = questionId => {
     const { history, match, intl } = this.props;
 
-    history.push(
-      parsePath(`${match.url}${questionPaths.EDIT_QUESTION}`, { questionId })
-    );
+    history.push(parsePath(`${match.url}${questionPaths.EDIT_QUESTION}`, { questionId }));
   };
 
   render() {
@@ -125,8 +111,6 @@ const mapDispatchToProps = {
   setAppBarTitle
 };
 
-QuestionList = connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(injectIntl(QuestionList))
-);
+QuestionList = connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(QuestionList)));
 
 export default MainLayoutContextWrapper(QuestionList);

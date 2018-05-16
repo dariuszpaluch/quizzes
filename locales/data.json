@@ -19,8 +19,7 @@
     "make-test.description-test": "Test description",
     "make-test.finish-test": "Finish test",
     "make-test.numberOfQuestions": "Number of questions",
-    "make-test.question-stepper-label":
-      "Question {step} of {numberOfQuestions}",
+    "make-test.question-stepper-label": "Question {step} of {numberOfQuestions}",
     "make-test.return-to-test": "Return to test",
     "make-test.start-test.button": "Start test",
     "make-test.test-save-failure": "Test save failure",
@@ -65,10 +64,8 @@
     "forms.input-email": "Niepoprawny adres e0mail",
     "forms.input-is-number": "Wartość wpisana musi być liczbą",
     "forms.input-is-required": "Pole jest wymagane.",
-    "forms.input-max-length":
-      "Pole musi zawięrać maksymalnie {max} znaków lub mniej.",
-    "forms.input-min-length":
-      "Pole musi zawierać minimum {min} znaków lub więcej.",
+    "forms.input-max-length": "Pole musi zawięrać maksymalnie {max} znaków lub mniej.",
+    "forms.input-min-length": "Pole musi zawierać minimum {min} znaków lub więcej.",
     "forms.input-min-value": "Musi być mniejsze niż {min}",
     "login": "Logowanie",
     "make-test.created-test": "Data utworzenia",
@@ -95,8 +92,7 @@
     "sign-in": "Logowanie",
     "sign-up": "Rejestracja",
     "surname": "Nazwisko",
-    "test-url-copied-to-clipboard":
-      "Link do testu został skopiowany do schowka",
+    "test-url-copied-to-clipboard": "Link do testu został skopiowany do schowka",
     "test.detail.header": "Test: {name}",
     "test.detail.share-test": "Udostępnij link do testu",
     "test.header.add.mode": "Dodawanie testu",
