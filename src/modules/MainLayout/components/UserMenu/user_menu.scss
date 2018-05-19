@@ -18,7 +18,7 @@
 
   .rocket-background {
     position: absolute;
-    margin-left: 15px;
+    margin-left: 0;
   }
 
   .user-avatar-background {
@@ -29,6 +29,8 @@
     top: -20%;
     left: 0;
     display: none;
+
+
   }
 
   .user-details {
@@ -43,8 +45,23 @@
   }
 
   @include mdScreen {
-    .user-avatar-background {
-      display: block;
+    .rocket-background {
+      transform: scale(0.6);
+      margin-left: -15px;
     }
   }
+
+  @include lgScreen {
+    .rocket-background {
+      transform: scale(0.8);
+    }
+  }
+
+  @include xlScreen {
+    .rocket-background {
+      transform: scale(1);
+      margin-left: 5px;
+    }
+  }
+
 }

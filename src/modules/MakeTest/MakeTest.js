@@ -108,6 +108,7 @@ class MakeTest extends Component {
       toastr.error(intl.formatMessage(messages.TEST_SAVE_FAILURE_TOASTR));
     };
 
+
     this.props.saveTestAnswers(testId, answers, onSuccess, onFailure);
   };
 

@@ -13,6 +13,7 @@ import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
 import isEqual from 'lodash/isEqual';
 import map from 'lodash/map';
+import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
 
 class TestResult extends Component {
   static propTypes = {
@@ -64,8 +65,12 @@ class TestResult extends Component {
       >
         Oceń test:
         <StarRating rating={testRating} onChange={changeTestRating}/>
-        WYNIK : {result}
-
+        WYNIK : {result}% poprawnych odpowiedzi
+        <PercentageCircle
+          percentage={Math.floor(result * 100)}
+          label="Poprawnych odpowiedzi"
+          labelSize={14}
+        />
         <List
           className="question-result-list"
           rowsIds={questionsIds}

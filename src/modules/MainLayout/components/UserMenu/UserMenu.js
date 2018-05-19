@@ -24,7 +24,7 @@ export default class UserMenu extends Component {
 
     return (
       <div className="user-menu">
-        <Rocket className="rocket-background"/>
+        <div className="rocket-background"><Rocket /></div>
         <Avatar
           className="user-avatar"
           alt="Remy Sharp"

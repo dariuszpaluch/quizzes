@@ -1,0 +1,137 @@
+@import '~styles/fonts';
+@import '~styles/colors';
+//styling
+$borderWidth: 7px;
+$animationTime: 1.5s;
+$border-color-default: #EEE;
+$border-color-fill: $success-color;
+
+//Create how many steps
+$howManySteps: 10; //this needs to be even.
+//for fun try using 20 and changine in the HTML the data-percentage to 15 or 85
+
+.progress {
+  background: none;
+  box-shadow: none;
+  position: relative;
+  margin: 10px;
+
+  &:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: $borderWidth solid $border-color-default;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  > span {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+  .progress-left {
+    left: 0;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: $borderWidth;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+    border-color: $border-color-fill;
+  }
+  .progress-left .progress-bar {
+    left: 100%;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+    //animation: loading-2 1.5s linear forwards 1.8s;
+  }
+  .progress-right {
+    right: 0;
+    .progress-bar {
+      left: -100%;
+      border-right: 0;
+      -webkit-transform-origin: center right;
+      transform-origin: center right;
+    }
+  }
+  .progress-value {
+    display: flex;
+    border-radius: 50%;
+    font-size: 36px;
+    text-align: center;
+    line-height: $header-font-size;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: 300;
+
+    .value {
+      line-height: 36px;
+    }
+
+    label {
+      margin-top: 10px;
+      font-size: $header-font-size;
+    }
+    div {
+    }
+    span {
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+  }
+
+}
+
+@for $i from 1 through $howManySteps {
+  $stepName: ($i*(100 / $howManySteps));
+
+  @if $i <= ($howManySteps/2) {
+    .progress[data-percentage="#{$stepName}"] {
+      .progress-right .progress-bar {
+        animation: loading-#{$i} $animationTime linear forwards;
+      }
+      .progress-left .progress-bar {
+        animation: 0;
+      }
+    }
+  }
+  @if $i > ($howManySteps/2) {
+    .progress[data-percentage="#{$stepName}"] {
+      .progress-right .progress-bar {
+        animation: loading-#{($howManySteps/2)} $animationTime linear forwards; //set the animation to longest animation
+      }
+      .progress-left .progress-bar {
+        animation: loading-#{$i - ($howManySteps/2)} $animationTime linear forwards $animationTime;
+      }
+    }
+  }
+}
+
+@for $i from 1 through ($howManySteps/2) {
+  $degrees: (180/($howManySteps/2));
+  $degrees: ($degrees*$i);
+  @keyframes loading-#{$i}{
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate($degrees);
+      transform: rotate(#{$degrees}deg);
+    }
+  }
+}
+
+
+
+
