@@ -98,10 +98,10 @@ class MakeTest extends Component {
       this.setState({
         questionsWithCorrect: data.questions,
         result: data.result
+      }, () => {
+        toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
+        this.changeViewState(STATES.SUMMARY);
       });
-
-      toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
-      this.changeViewState(STATES.SUMMARY);
     };
 
     const onFailure = () => {

@@ -1,0 +1,15 @@
+@import '~styles/colors';
+
+.test-result {
+  .question-result-list {
+    .question-item {
+      &.correct {
+        background-color: rgba($success-color, 0.8);
+      }
+
+      &.incorrect {
+        background-color: rgba($error-color, 0.5);
+      }
+    }
+  }
+}

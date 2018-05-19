@@ -1,3 +1,5 @@
+import './test_result.scss';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import classnames from 'classnames';
@@ -5,12 +7,19 @@ import { injectIntl } from 'react-intl';
 import Card from 'libs/ui/Card/Card';
 import messages from 'modules/MakeTest/utils/messages';
 import StarRating from 'libs/ui/StarRating/StarRating';
+import List from 'libs/ui/List/List';
+
+import forEach from 'lodash/forEach';
+import filter from 'lodash/filter';
+import isEqual from 'lodash/isEqual';
+import map from 'lodash/map';
 
 class TestResult extends Component {
   static propTypes = {
   };
 
   static defaultProps = {
+    questions: [],
   };
 
   constructor(props) {
@@ -20,11 +29,34 @@ class TestResult extends Component {
     };
   }
 
+  prepareQuestionsRows(questions, answers) {
+    const rows = {};
+    forEach(questions, question => {
+      const userQuestionAnswers = answers &&  answers[question.id];
+      const correctAnswers = map(filter(question.answers, { correct: true }), answer => answer.id);
+
+      const correct = isEqual(correctAnswers, userQuestionAnswers );
+      rows[question.id] = {
+        ...question,
+        label: question.question,
+        children: '',
+        className: classnames('question-item', {
+          correct,
+          incorrect: !correct,
+        }),
+      };
+    });
+
+    return rows;
+  }
+
   render() {
-    const { className, intl, result, changeTestRating, testRating } = this.props;
+    const { className, intl, result, changeTestRating, testRating, questions, answers } = this.props;
 
-    const classes = classnames(className);
+    const classes = classnames('test-result', className);
 
+    const questionsIds = questions.map(question => question.id);
+    console.log(questions, questionsIds, this.prepareQuestionsRows(questions))
     return(
       <Card
         className={classes}
@@ -33,6 +65,12 @@ class TestResult extends Component {
         Oceń test:
         <StarRating rating={testRating} onChange={changeTestRating}/>
         WYNIK : {result}
+
+        <List
+          className="question-result-list"
+          rowsIds={questionsIds}
+          rows={this.prepareQuestionsRows(questions, answers)}
+        />
       </Card>
     );
   }

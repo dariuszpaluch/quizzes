@@ -39,7 +39,7 @@ export default class Rocket extends Component {
           <span></span>
           <span></span>
         </div>
-        <SVGInline className="rocket-background" width={100} svg={rocketSVG} />
+        <SVGInline className="rocket-background" width="100" svg={rocketSVG} />
       </div>
     );
   }
