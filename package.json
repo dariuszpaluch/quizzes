@@ -6,8 +6,7 @@
   "scripts": {
     "clean": "rimraf *.log build/*",
     "dev": "npm run clean && webpack-dev-server --config webpack/config.dev.js",
-    "build":
-      "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack/config.build.js",
     "update-locales": "node intl/updateLocales.js",
     "update-locales-with-build": "npm run clean && npm run build && node intl/updateLocales.js",
     "test": "prettier --version"
@@ -52,6 +51,7 @@
     "react-stickynode": "^1.4.1",
     "react-swipe": "^5.1.1",
     "react-swipeable": "^4.2.0",
+    "recompose": "^0.27.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",

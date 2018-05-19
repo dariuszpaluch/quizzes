@@ -1,25 +1,93 @@
 import './tests.scss';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getTestsRequest } from 'modules/Tests/utils/actions';
+import { getTests, getTestsIds } from 'modules/Tests/utils/getters';
+import { injectIntl } from 'react-intl';
+import messages from 'modules/Tests/utils/messages';
+import TestDescriptionCard from 'modules/Tests/components/TestDescriptionCard/TestDescriptionCard';
+import icons from 'consts/icons';
+import FloatButton from 'libs/ui/FloatButton/FloatButton';
+import MainLayout from 'modules/MainLayout/MainLayout';
+import { Link, withRouter } from 'react-router-dom';
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
+import TestsList from 'modules/Tests/components/TestsList/TestsList';
+import { testsPaths } from 'consts/paths';
+import parsePath from 'utils/parsePath';
 
-import { Route, Switch } from 'react-router-dom';
+class Tests extends Component {
+  static propTypes = {
+    onlyUserTests: PropTypes.bool,
+  };
 
-import TestForm from 'modules/Tests/TestForm';
-import TestList from 'modules/Tests/TestList';
-import TestDetail from 'modules/Tests/TestDetail';
+  static defaultProps = {
+    onlyUserQuizzes: false,
+  };
 
-class Test extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  componentWillMount() {
+    const { onlyUserTests } = this.props;
+    this.props.getTestsRequest(onlyUserTests);
+  }
+
+  componentDidMount() {
+    this.updateAppBar();
+  }
+
+  onChangeFilter = query => {
+    this.setState({
+      questionsQuery: query
+    });
+  };
+
+  updateAppBar() {
+    const { intl, mainLayoutContext } = this.props;
+    if (!!mainLayoutContext) {
+      const { setAppBarData } = mainLayoutContext;
+      setAppBarData({
+        title: intl.formatMessage(messages.TESTS_LIST_HEADER),
+        onSearch: this.onChangeFilter
+      });
+    }
+  }
+
+  onClickAddTest = () => {
+    this.props.history.push(`${this.props.match.path}${testsPaths.TEST_ADD}`);
+  };
+
+  makeItemLinkTo = (testId) => parsePath(`${this.props.match.path}${testsPaths.TEST}`, {
+    testId
+  });
+
   render() {
-    const { match } = this.props;
+    const { intl, tests, testsIds } = this.props;
 
     return (
-      <Switch>
-        <Route key="tests" exact path={`${match.path}/`} component={TestList} />,
-        <Route key="tests-add" exact path={`${match.path}/add`} component={TestForm} />,
-        <Route key="test-edit" path={`${match.path}/:testId`} component={TestDetail} />,
-      </Switch>
+      <div>
+        <TestsList tests={tests} testsIds={testsIds} makeItemLinkTo={this.makeItemLinkTo} />
+        <FloatButton icon={icons.ADD} onClick={this.onClickAddTest} />
+      </div>
     );
   }
 }
 
-export default Test;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    testsIds: getTestsIds(state),
+    tests: getTests(state)
+  };
+};
+
+const mapDispatchToProps = {
+  getTestsRequest
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(Tests)));
+

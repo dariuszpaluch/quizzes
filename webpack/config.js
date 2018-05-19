@@ -92,7 +92,7 @@ module.exports = {
       utils: path.resolve(__dirname, '../src/utils'),
       config: path.resolve(__dirname, '../src/config'),
       sources: path.resolve(__dirname, '../src/sources'),
-      settings: path.resolve(__dirname, '../src/settings/index.js'),
+      settings: path.resolve(__dirname, '../src/settings'),
       src: path.resolve(__dirname, '../src')
     }
   }

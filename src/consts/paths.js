@@ -1,4 +1,3 @@
-
 const paths = {
   INDEX: `${PUBLIC_PATH}`,
   DASHBOARD: `${PUBLIC_PATH}dashboard`,
@@ -11,12 +10,18 @@ const paths = {
 
 export const authPaths = {
   SIGN_IN: `sign-in`,
-  SIGN_UP: `sign-up`,
+  SIGN_UP: `sign-up`
 };
 
 export const questionPaths = {
   ADD_QUESTION: `/add`,
   EDIT_QUESTION: `/:questionId/edit`
+};
+
+export const testsPaths = {
+  TESTS: '/',
+  TEST: '/:testId',
+  TEST_ADD: '/add'
 };
 
 export default paths;

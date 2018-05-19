@@ -20,11 +20,11 @@ import QuestionList from './smarts/QuestionList';
 import Typography from 'libs/ui/Typography';
 
 import { addTest } from 'modules/Tests/utils/actions';
-import MainLayout from 'modules/MainLayout/MainLayout';
 import icons from 'consts/icons';
-import paths from 'consts/paths'; // ES6
+import paths from 'consts/paths';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
+import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
 const MODES = {
   EDIT: 'EDIT',
@@ -90,9 +90,6 @@ class TestForm extends Component {
       mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE
     );
 
-    {
-      /*<MainLayout appBarTittle={pageTitle} appBarButtons={this.appBarButtons}>*/
-    }
     return (
       <Card>
         <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
@@ -136,4 +133,6 @@ const mapDispatchToProps = {
   onSubmit: addTest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));
+TestForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));
+
+export default MainLayoutContextWrapper(TestForm);

@@ -1,6 +1,6 @@
 import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
-import { API_URL } from 'src/settings';
+import { API_URL } from 'settings';
 
 import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER, SET_QUESTION_RATE, SET_TEST_RATING } from 'modules/MakeTest/utils/actionTypes';
 

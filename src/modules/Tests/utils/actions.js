@@ -1,7 +1,7 @@
 import {dispatchPromiseResult} from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 import {ADD_TEST, GET_TESTS, GET_TEST, GET_TEST_DETAILS} from './actionTypes';
-import { API_URL } from 'src/settings';
+import { API_URL } from 'settings';
 
 export function addTest({ name, description, questionsIds}, resolve = null, reject = null) {
   const body = {
