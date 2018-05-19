@@ -1,7 +1,7 @@
 import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 
-import { SIGN_IN, SIGN_UP, LOGOUT } from './actionTypes';
+import { SIGN_IN, SIGN_UP, LOGOUT, USER_INFO } from './actionTypes';
 import { API_URL } from 'settings';
 
 export function signIn({ login, password }, resolve = null, reject = null) {
@@ -31,6 +31,17 @@ export function signUp(body, resolve, reject) {
       }
     });
   };
+}
+
+export function getUserInfo(resolve, reject) {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: USER_INFO,
+      promise: fetchAPI.get.bind(null, `${API_URL}/userinfo`),
+      resolve,
+      reject,
+    })
+  }
 }
 
 export function signInByQuerytoken(token) {

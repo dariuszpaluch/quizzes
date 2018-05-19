@@ -23,8 +23,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /(\.jpg|\.png|\.otf|\.woff|\.woff2|\.ttf|\.eot|\.svg)$/,
+        test: /(\.jpg|\.png|\.otf|\.woff|\.woff2|\.ttf|\.eot)$/,
         use: ['file-loader']
+      },
+      {
+        test: /\.svg$/,
+        loader: 'raw-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.json$/,

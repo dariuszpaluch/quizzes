@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import Avatar from 'libs/ui/Avatar/Avatar';
-import Typography from 'libs/ui/Typography/Typography';
+import avatarMenPlaceholder from 'assets/avatar-men-placeholder.jpg';
+import Rocket from 'components/Rocket/Rocket';
 
 export default class UserMenu extends Component {
   static propTypes = {};
@@ -19,26 +20,20 @@ export default class UserMenu extends Component {
   }
 
   render() {
+    const { userData } = this.props;
+
     return (
       <div className="user-menu">
-        <div
-          className="user-avatar-background"
-          style={{
-            // backgroundImage: `url(https://avatars1.githubusercontent.com/u/15227876?s=460&v=4)`,
-            backgroundSize: 'cover'
-          }}
-        />
-
+        <Rocket className="rocket-background"/>
         <Avatar
           className="user-avatar"
           alt="Remy Sharp"
-          src="https://avatars1.githubusercontent.com/u/15227876?s=460&v=4"
+          src={userData.avatarUrl || avatarMenPlaceholder}
           size={80}
         />
-
         <div className="user-details">
-          <p>Dariusz Paluch</p>
-          <p>dariusz@dariuszpaluch.com</p>
+          <p>{`${userData.firstName} ${userData.surname}`}</p>
+          <p>{userData.email}</p>
         </div>
       </div>
     );

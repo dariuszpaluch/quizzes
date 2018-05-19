@@ -16,6 +16,11 @@
     margin: $container-margin auto;
   }
 
+  .rocket-background {
+    position: absolute;
+    margin-left: 15px;
+  }
+
   .user-avatar-background {
     width: 100%;
     position: absolute;
@@ -27,6 +32,7 @@
   }
 
   .user-details {
+    user-select: none;
     color: white;
     text-align: center;
 

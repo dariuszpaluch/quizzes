@@ -84,7 +84,7 @@ export default class Menu extends Component {
   }
 
   renderMenuContent(isMobile) {
-    const { handleDrawerToggle, title } = this.props;
+    const { handleDrawerToggle, title,  userData, } = this.props;
 
     return [
       isMobile ? (
@@ -96,7 +96,7 @@ export default class Menu extends Component {
           iconSize={25}
         />
       ) : null,
-      <UserMenu key="user-menu" />,
+      userData.email && <UserMenu key="user-menu"  userData={ userData} />,
       <List
         key="nav-list"
         component="nav"

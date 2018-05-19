@@ -2,10 +2,12 @@ import { createReducer } from 'utils/reducerUtils';
 
 import { SIGN_IN, LOGOUT } from './actionTypes';
 import LocalStorageSource from 'sources/LocalStorageSource';
+import { USER_INFO } from 'modules/Auth/actionTypes';
 
 function getInitState() {
   return {
-    token: LocalStorageSource.getToken()
+    token: LocalStorageSource.getToken(),
+    user: {},
   };
 }
 
@@ -33,12 +35,22 @@ function logout() {
   return {};
 }
 
+function getUserInfoSuccess(authState, action) {
+  return {
+    ...authState,
+    user: action.data,
+  }
+}
+
 export default createReducer(getInitState(), {
   [`${SIGN_IN}_SUCCESS`]: signInSuccess,
   [`${SIGN_IN}_REQUEST`]: removeToken,
   [`${SIGN_IN}_FAILURE`]: removeToken,
+
+  [`${USER_INFO}_SUCCESS`]: getUserInfoSuccess,
   [LOGOUT]: logout
 });
 
 export const getToken = state => state.auth.token;
 export const isUserLoggedIn = state => !!state.auth.token;
+export const getUserData = state => state.auth.user;

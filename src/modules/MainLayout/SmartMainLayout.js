@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import { connect } from 'react-redux';
 
-import { isUserLoggedIn } from 'modules/Auth/reducer';
+import { isUserLoggedIn, getUserData } from 'modules/Auth/reducer';
 import { withRouter } from 'react-router-dom';
 
 import MainLayoutContext from './MainLayoutContext';
 import SETTINGS from 'settings';
 import paths, { authPaths } from 'consts/paths';
+import { getUserInfo } from 'modules/Auth/actions';
 
 class SmartMainLayout extends Component {
   constructor(props) {
@@ -29,6 +30,18 @@ class SmartMainLayout extends Component {
 
     if (!this.props.userLoggedIn && !onLoginView) {
       this.props.history.push(paths.INDEX)
+    }
+  }
+
+  componentDidMount() {
+    if(this.props.userLoggedIn) {
+      this.props.getUserInfo();
+    }
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if(nextProps.userLoggedIn && nextProps.userLoggedIn !== this.props.userLoggedIn) {
+      this.props.getUserInfo();
     }
   }
 
@@ -73,7 +86,7 @@ class SmartMainLayout extends Component {
   };
 
   render() {
-    const { userLoggedIn, children } = this.props;
+    const { userLoggedIn, children,  userData } = this.props;
     const { title, appBarActions, onSearch, searchValue } = this.state;
 
     return (
@@ -83,6 +96,7 @@ class SmartMainLayout extends Component {
         hideMenu={!userLoggedIn}
         onSearch={onSearch && this.onChangeSearchValue}
         searchValue={searchValue}
+        userData={ userData}
       >
         <MainLayoutContext.Provider
           value={{
@@ -103,10 +117,13 @@ class SmartMainLayout extends Component {
 const mapStateToProps = (state, props) => {
   return {
     // title: getAppBarTitle(state),
+    userData: getUserData(state),
     userLoggedIn: isUserLoggedIn(state)
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getUserInfo,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SmartMainLayout));

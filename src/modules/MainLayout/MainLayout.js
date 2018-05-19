@@ -164,7 +164,7 @@ class MainLayout extends Component {
   }
 
   renderMenu() {
-    const { intl, location } = this.props;
+    const { intl, location,  userData } = this.props;
 
     return (
       <Menu
@@ -173,6 +173,7 @@ class MainLayout extends Component {
         items={this.navsMenu}
         title={intl.formatMessage(messages.DRAWER_MENU_HEADER_TITLE)}
         path={location.pathname}
+        userData={ userData}
       />
     );
   }

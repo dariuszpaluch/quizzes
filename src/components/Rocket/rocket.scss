@@ -1,0 +1,81 @@
+.rocket {
+  width: 100px;
+  min-height: 100px;
+  position: relative;
+
+  .rocket-background {
+    position: absolute;
+  }
+
+  .smoke span{
+    position: absolute;
+    width: 50px;
+    border-bottom: 2px solid  #fff;
+  }
+
+  .smoke {
+    position: absolute;
+    z-index: 1000;
+    top: calc(50% - 80px);
+    left: calc(50% - 55px);
+    width: 200px;
+    height: 30px;
+    transform: rotateZ(-45deg) translateX(-5px) translateY(15px);
+  }
+
+  .smoke {
+    z-index: 999;
+  }
+
+
+  $background-color: #212526;
+  $particles-color: #fff;
+  $rocket-primarycolor: #ffd700;
+  $rocket-secondarycolor: #F44336;
+  $nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
+  $nbsmoketail : 10;
+
+  @for $i from 0 to $nbsmoketail {
+
+    $top : 5 + (4 * $i) + px;
+    $leftStart : -50 + px;
+    $leftEnd : -50 - random(250) + px;
+    $speed : (random(10)+3)/20;
+
+    .smoke span:nth-child(#{$i + 1}) {
+      top: $top;
+      left: $leftStart;
+      box-shadow: 0px 0px 5px $particles-color;
+      animation: smokeAnim-#{$i} ease-out ($speed +s) infinite;
+    }
+    @keyframes smokeAnim-#{$i} {
+      from {
+        left: $leftStart;
+        opacity: 1;
+      }
+      to {
+        left: $leftEnd;
+        opacity: 0;
+      }
+    }
+  }
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+    animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both infinite;
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 1px, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 2px, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-2px, -2px, 0);
+    }
+    40%, 60% {
+      transform: translate3d(2px, 2px, 0);
+    }
+  }
+
+}
