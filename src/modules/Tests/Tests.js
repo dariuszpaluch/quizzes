@@ -29,7 +29,9 @@ class Tests extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      filterQuery: '',
+    };
   }
 
   componentWillMount() {
@@ -43,7 +45,7 @@ class Tests extends Component {
 
   onChangeFilter = query => {
     this.setState({
-      questionsQuery: query
+      filterQuery: query
     });
   };
 
@@ -68,10 +70,16 @@ class Tests extends Component {
 
   render() {
     const { intl, tests, testsIds } = this.props;
+    const { filterQuery } = this.state;
 
     return (
       <div>
-        <TestsList tests={tests} testsIds={testsIds} makeItemLinkTo={this.makeItemLinkTo} />
+        <TestsList
+          tests={tests}
+          testsIds={testsIds}
+          makeItemLinkTo={this.makeItemLinkTo}
+          filterQuery={filterQuery}
+        />
         <FloatButton icon={icons.ADD} onClick={this.onClickAddTest} />
       </div>
     );
@@ -89,5 +97,6 @@ const mapDispatchToProps = {
   getTestsRequest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(Tests)));
+Tests =  connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(Tests)));
 
+export default MainLayoutContextWrapper(Tests);

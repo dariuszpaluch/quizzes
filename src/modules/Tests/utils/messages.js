@@ -36,7 +36,15 @@ const messages = defineMessages({
   TEST_URL_COPIED_TO_CLIPBOARD: {
     id: 'test-url-copied-to-clipboard',
     defaultMessage: 'Test url has been copied to the clipboard',
-  }
+  },
+  NO_TESTS_INFORMATION: {
+    id: 'tests.no-tests',
+    defaultMessage: 'No tests'
+  },
+  NO_MATCHING_TESTS_TO_QUERY: {
+    id: 'tests.no-matching-test-to-query',
+    defaultMessage: 'No matching tests to query: {query}'
+  },
 });
 
 export default messages;

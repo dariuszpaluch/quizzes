@@ -61,6 +61,27 @@ class TestForm extends Component {
     };
   }
 
+  componentDidMount() {
+    this.updateAppBar();
+  }
+
+  updateAppBar() {
+    const { intl, mainLayoutContext, mode } = this.props;
+    if (!!mainLayoutContext) {
+      const { setAppBarData } = mainLayoutContext;
+
+
+      const pageTitle = intl.formatMessage(
+        mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE
+      );
+
+      setAppBarData({
+        title: pageTitle,
+        appBarActions: this.appBarButtons
+      });
+    }
+  }
+
   onSubmit = values => {
     this.props.onSubmit(values, this.onClickGoBack);
   };
@@ -86,9 +107,7 @@ class TestForm extends Component {
   render() {
     const { intl, mode, handleSubmit } = this.props;
 
-    const pageTitle = intl.formatMessage(
-      mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE
-    );
+
 
     return (
       <Card>

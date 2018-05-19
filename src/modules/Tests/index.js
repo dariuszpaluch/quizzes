@@ -18,6 +18,9 @@ export default class extends Component {
   render() {
     const { match } = this.props;
 
+
+    console.log(`${match.path}${testsPaths.TEST_ADD}`);
+
     return (
       <Switch>
         <Route key="tests" exact path={match.path} component={Tests} />

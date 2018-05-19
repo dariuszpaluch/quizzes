@@ -6,7 +6,7 @@ import AppContainer from 'containers/AppContainer';
 import store from './store/store';
 import Auth from 'modules/Auth';
 import Question from 'modules/Question/Question';
-import Tests from 'modules/Tests/Tests';
+import Tests from 'modules/Tests';
 import Dashboard from 'modules/Dashboard/Dashboard';
 
 import paths from 'consts/paths';

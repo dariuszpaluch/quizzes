@@ -103,11 +103,11 @@ class MainLayout extends Component {
   };
 
   renderRightAppBarAction() {
-    const { appBarButtons, onSearch } = this.props;
+    const { appBarButtons, onSearch, searchValue } = this.props;
     const rightButton = appBarButtons && appBarButtons.right;
 
     if (onSearch) {
-      return <AppBarSearch onChange={onSearch} />;
+      return <AppBarSearch value={searchValue} onChange={onSearch} />;
     }
 
     if (rightButton)
@@ -115,7 +115,6 @@ class MainLayout extends Component {
         <IconButton
           color="inherit"
           onClick={rightButton.onClick}
-          className="nav-icon"
           icon={rightButton.icon}
           iconSize={20}
         />

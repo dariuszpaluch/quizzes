@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import { connect } from 'react-redux';
 
-import { getAppBarTitle } from './utils/getters';
 import { isUserLoggedIn } from 'modules/Auth/reducer';
 import { withRouter } from 'react-router-dom';
 
 import MainLayoutContext from './MainLayoutContext';
 import SETTINGS from 'settings';
+import paths, { authPaths } from 'consts/paths';
 
 class SmartMainLayout extends Component {
   constructor(props) {
@@ -15,8 +15,21 @@ class SmartMainLayout extends Component {
     this.state = {
       title: SETTINGS.APP_NAME,
       appBarActions: {},
-      onSearch: undefined
+      onSearch: undefined,
+      searchValue: '',
     };
+  }
+
+  componentWillMount() {
+    const onLoginView = [paths.INDEX, `${paths.INDEX}${authPaths.SIGN_IN}`, `${paths.INDEX}${authPaths.SIGN_UP}`].indexOf(this.props.location.pathname) >= 0;
+
+    if (this.props.userLoggedIn && onLoginView) {
+      this.props.history.push(paths.DASHBOARD)
+    }
+
+    if (!this.props.userLoggedIn && !onLoginView) {
+      this.props.history.push(paths.INDEX)
+    }
   }
 
   setTitle = title => {
@@ -37,7 +50,8 @@ class SmartMainLayout extends Component {
     this.setState({
       title: undefined,
       appBarActions: {},
-      onSearch: undefined
+      onSearch: undefined,
+      searchValue: '',
     });
   };
 
@@ -45,20 +59,30 @@ class SmartMainLayout extends Component {
     this.setState({
       title,
       appBarActions,
-      onSearch
+      onSearch,
+      searchValue: '',
     });
+  };
+
+  onChangeSearchValue = (searchValue) => {
+    this.setState({
+      searchValue
+    });
+
+    this.state.onSearch && this.state.onSearch(searchValue);
   };
 
   render() {
     const { userLoggedIn, children } = this.props;
-    const { title, appBarActions, onSearch } = this.state;
+    const { title, appBarActions, onSearch, searchValue } = this.state;
 
     return (
       <MainLayout
         appBarTittle={title}
         appBarButtons={appBarActions}
         hideMenu={!userLoggedIn}
-        onSearch={onSearch}
+        onSearch={onSearch && this.onChangeSearchValue}
+        searchValue={searchValue}
       >
         <MainLayoutContext.Provider
           value={{

@@ -48,10 +48,12 @@ class QuestionList extends Component {
   updateAppBar() {
     const { intl, mainLayoutContext } = this.props;
     if (!!mainLayoutContext) {
-      const { setTitle, onSearch } = mainLayoutContext;
+      const { setAppBarData } = mainLayoutContext;
 
-      setTitle(intl.formatMessage(messages.QUESTION_LIST_HEADER));
-      onSearch(this.onChangeFilter);
+      setAppBarData({
+        title: intl.formatMessage(messages.QUESTION_LIST_HEADER),
+        onSearch: this.onChangeFilter,
+      });
     }
   }
 
