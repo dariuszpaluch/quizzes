@@ -21,7 +21,8 @@ export const questionPaths = {
 export const testsPaths = {
   TESTS: '/',
   TEST: '/:testId',
-  TEST_ADD: '/add'
+  TEST_ADD: '/add',
+  SEARCH_TESTS: `/search-tests`,
 };
 
 export default paths;

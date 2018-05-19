@@ -49,5 +49,9 @@ export const pagesTitles = defineMessages({
   SETTINGS: {
     id: 'PAGES_TITLES.SETTINGS',
     defaultMessage: 'Settings',
+  },
+  SEARCH_TESTS: {
+    id: 'PAGES_TITLES.SEARCH_TESTS',
+    defaultMessage: 'Search tests',
   }
 });

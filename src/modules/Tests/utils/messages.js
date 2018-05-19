@@ -21,6 +21,10 @@ const messages = defineMessages({
     id:'test.input.questions',
     defaultMessage: 'Questions',
   },
+  TESTS_SEARCH_TO_COMPLETE_LIST_HEADER: {
+    id: 'test.search-to-complete-list.header',
+    defaultMessage: 'Search test',
+  },
   TESTS_LIST_HEADER: {
     id: 'test.list.header',
     defaultMessage: 'Tests'

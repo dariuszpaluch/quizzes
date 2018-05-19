@@ -11,7 +11,7 @@ import IconButton from 'libs/ui/IconButton/IconButton';
 import Menu from './components/Menu';
 import icons from 'consts/icons';
 import { injectIntl } from 'react-intl';
-import paths from 'consts/paths';
+import paths, { testsPaths } from 'consts/paths';
 import globalMessages, { pagesTitles } from 'utils/globalMessages';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -60,6 +60,11 @@ class MainLayout extends Component {
 
     this.navsMenu = [
       {
+        label: intl.formatMessage(pagesTitles.SEARCH_TESTS),
+        icon: icons.FIND_IN_PAGE,
+        path: `${paths.TESTS}${testsPaths.SEARCH_TESTS}`,
+      },
+      {
         label: intl.formatMessage(pagesTitles.TESTS_RESULTS),
         icon: icons.tests_results,
         path: paths.TESTS_RESULTS,
@@ -81,11 +86,12 @@ class MainLayout extends Component {
         path: paths.SETTINGS,
         disabled: true
       },
+
       {
         label: intl.formatMessage(globalMessages.LOGOUT),
         icon: icons.logout,
         onClick: this.logout
-      }
+      },
     ];
   }
 

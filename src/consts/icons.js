@@ -22,7 +22,8 @@ const icons = {
   DELETE: 'delete',
   STAR_BORDER: 'start_border',
   STAR: 'star',
-  SEARCH: 'search'
+  SEARCH: 'search',
+  FIND_IN_PAGE: 'find_in_page'
 };
 
 export default icons;

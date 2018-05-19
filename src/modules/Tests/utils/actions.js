@@ -31,6 +31,17 @@ export function getTestsRequest(onlyMine, resolve, reject) {
   }
 }
 
+export function getTestsToCompleteRequest(resolve, reject) {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: GET_TESTS,
+      promise: fetchAPI.get.bind(null, `${API_URL}/tests-to-complete`),
+      resolve,
+      reject,
+    });
+  }
+}
+
 export function getTestDetail(testId, resolve, reject) {
   return dispatch => {
     return dispatchPromiseResult(dispatch, {
