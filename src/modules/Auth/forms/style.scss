@@ -1,8 +1,10 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
+@import '~styles/colors.scss';
 
 $auth-max-width: 500px;
 $auth-submit-button-max-width: 300px;
+$nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
 
 .sign-in-form,
 .sign-up-form {
@@ -20,9 +22,59 @@ $auth-submit-button-max-width: 300px;
 
 .auth-wrapper {
   margin: 0 auto auto;
-  max-width: $auth-max-width;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
 
-  @include mdScreen {
+
+.auth-wrapper {
+  background-color: $primary-light;
+  width: 100%;
+  padding: 0 10px;
+
+
+  > div {
+    display: flex;
+    justify-content: center;
+    padding-top: 110px;
+  }
+
+  .auth {
+    position: relative;
+    z-index:9999;
+    width: calc(100vw - 2 * 10px);
+    margin-bottom: auto;
+    max-width: $auth-max-width;
+  }
+
+  .rocket-wrapper {
+    top: 5px;
+    position: absolute;
+    display: flex;
+    margin-left: 0;
+    z-index: 999;
+
+  }
+}
+
+@include mdScreen {
+  .auth-wrapper {
     padding: $container-padding;
+
+    > div {
+      padding-top: 110px;
+      position: relative;
+      margin: auto;
+    }
+
+    .auth {
+      margin: auto;
+    }
+  }
+
+  .rocket-wrapper {
+    display: block;
+    margin-left: -60px;
   }
 }

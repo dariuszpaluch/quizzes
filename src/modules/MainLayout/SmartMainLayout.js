@@ -88,9 +88,11 @@ class SmartMainLayout extends Component {
   render() {
     const { userLoggedIn, children,  userData } = this.props;
     const { title, appBarActions, onSearch, searchValue } = this.state;
+    const onLoginView = [paths.INDEX, `${paths.INDEX}${authPaths.SIGN_IN}`, `${paths.INDEX}${authPaths.SIGN_UP}`].indexOf(this.props.location.pathname) >= 0;
 
     return (
       <MainLayout
+        hideAppBar={onLoginView}
         appBarTittle={title}
         appBarButtons={appBarActions}
         hideMenu={!userLoggedIn}

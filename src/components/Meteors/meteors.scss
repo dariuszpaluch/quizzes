@@ -1,0 +1,49 @@
+$particles-color: #fff;
+$nbmeteors: 50;
+
+.meteors-container {
+  position: absolute;
+  z-index: 998;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &.full-screen {
+    position: fixed;
+    width: 205vw;
+    height: 300vh;
+    left: -45%;
+    top: -125%;
+    transform: rotateZ(-44deg);
+  }
+}
+
+.meteors-container span{
+  position: absolute;
+  width: 75px;
+  border-bottom: 2px solid $particles-color;
+}
+
+@for $i from 0 to $nbmeteors {
+
+  $top : (100 / $nbmeteors) * ($i + 1) + '%';
+  $speed : (random(10)+20)/20;
+
+  .meteors-container span:nth-child(#{$i + 1}) {
+    top: #{$top};
+    left: 100%;
+    box-shadow: 0px 0px 5px $particles-color;
+    animation: meterosAnim-#{$i} linear ($speed +s) infinite;
+  }
+  @keyframes meterosAnim-#{$i} {
+    0% {
+      left: 100%;
+    }
+    75% {
+      left: calc(0% - 75px);
+    }
+    100% {
+      left: calc(0% - 75px);
+    }
+  }
+}

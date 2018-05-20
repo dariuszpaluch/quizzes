@@ -57,11 +57,23 @@ $app-bar-height: 50px;
       width: 100%;
     }
   }
+
+  &.hide-app-bar {
+    .content {
+      margin: 0;
+    }
+  }
   .mobile {
     background-color: red;
   }
 
   @include mdScreen {
+    &.hide-menu {
+      .content {
+        width: 100%;
+      }
+    }
+
     .content {
       margin: $app-bar-height auto 0 auto;
       width: calc(100% - #{$drawer-width});

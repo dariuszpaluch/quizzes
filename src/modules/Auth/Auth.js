@@ -18,6 +18,9 @@ import { authPaths } from 'consts/paths';
 import paths from 'consts/paths';
 
 import { parseQuery } from 'utils/routerHistory';
+import Rocket from 'components/Rocket/Rocket';
+import Logo from 'components/Logo/Logo';
+import Meteors from 'components/Meteors/Meteors';
 
 class Auth extends Component {
   static propTypes = {};
@@ -64,6 +67,8 @@ class Auth extends Component {
 
     return (
       <div className="auth-wrapper">
+        <div>
+        <div className="rocket-wrapper"><Rocket/><Logo/><Meteors fullScreen/></div>
         <Card className="auth">
           <Tabs
             className="auth-tabs"
@@ -80,6 +85,7 @@ class Auth extends Component {
             <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
           </Switch>
         </Card>
+        </div>
       </div>
     );
   }

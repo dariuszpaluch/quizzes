@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import rocketSVG from 'assets/rocket-ship.svg';
 import SVGInline from 'react-svg-inline';
 
-export default class Rocket extends Component {
+export default class  Rocket extends Component {
   static propTypes = {
     withoutAnimation: PropTypes.bool,
   };
