@@ -64,6 +64,7 @@ $app-bar-height: 50px;
   @include mdScreen {
     .content {
       margin: $app-bar-height auto 0 auto;
+      width: calc(100% - #{$drawer-width});
     }
     .app-bar {
       &.with-left-menu {

@@ -1,4 +1,5 @@
 @import '~styles/variables';
+@import '~styles/mixins';
 
 $stepper-height: 70px;
 
@@ -26,6 +27,9 @@ $stepper-height: 70px;
         min-height: $stepper-height;
       }
     }
+
+
+
   }
 
 }
@@ -41,6 +45,18 @@ $stepper-height: 70px;
     > div {
       position: relative;
       transition-property: transform;
+    }
+  }
+}
+
+@include mdScreen {
+  .make-test-form {
+    .test-stepper-wrapper {
+      height: $stepper-height;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
     }
   }
 }

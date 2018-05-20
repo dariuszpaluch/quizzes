@@ -1,4 +1,5 @@
 $space-between-items: 20px;
+@import '~styles/mixins';
 
 .stepper {
   position: relative;
@@ -7,13 +8,19 @@ $space-between-items: 20px;
     .icon {
       min-width: 30px;
     }
+
     &.prev-button {
-      padding: 0 $space-between-items 0 10px;
+      padding: 0 $space-between-items;
+      > span {
+        padding-right: 10px;
+      }
 
     }
     &.next-button {
-      padding: 0 10px 0 $space-between-items;
-
+      padding: 0 $space-between-items;
+      > span {
+        padding-left: 10px;
+      }
     }
   }
 
@@ -23,5 +30,25 @@ $space-between-items: 20px;
     top: 5px;
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+@include mdScreen {
+  .stepper {
+    div[role="progressbar"] {
+      width: 100%;
+    }
+
+    button {
+      &.prev-button, &.next-button {
+        min-width: 120px;
+        width: 15%;
+      }
+      &.prev-button {
+      }
+      &.next-button {
+
+      }
+    }
   }
 }
