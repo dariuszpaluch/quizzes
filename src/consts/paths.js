@@ -23,6 +23,7 @@ export const testsPaths = {
   TEST: '/:testId',
   TEST_ADD: '/add',
   SEARCH_TESTS: `/search-tests`,
+  TEST_RESULT: '/test-result/:testId'
 };
 
 export default paths;

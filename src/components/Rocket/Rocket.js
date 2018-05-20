@@ -8,24 +8,32 @@ import SVGInline from 'react-svg-inline';
 
 export default class Rocket extends Component {
   static propTypes = {
+    withoutAnimation: PropTypes.bool,
   };
 
   static defaultProps = {
+    withoutAnimation: false,
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
-    const { className} = this.props;
+    const { className, withoutAnimation } = this.props;
 
-    const classes = classnames('rocket', className);
+    const classes = classnames('rocket', {'without-animation': withoutAnimation},className);
 
-    return(
+    if (withoutAnimation)
+      return (
+        <div className={classes}>
+          <SVGInline className="rocket-background" width="100" svg={rocketSVG} />
+        </div>
+      );
+
+    return (
       <div className={classes}>
         <div className='smoke'>
           <span></span>

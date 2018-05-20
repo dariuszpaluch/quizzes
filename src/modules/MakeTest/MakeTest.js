@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
+import size from 'lodash/size';
+
 import {
   fetchTestToBeCompleted,
   saveTestAnswers,
@@ -97,7 +99,7 @@ class MakeTest extends Component {
     const onSuccess = data => {
       this.setState({
         questionsWithCorrect: data.questions,
-        result: data.result
+        correctQuestions: data.correctQuestions,
       }, () => {
         toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
         this.changeViewState(STATES.SUMMARY);
@@ -167,16 +169,17 @@ class MakeTest extends Component {
   }
 
   renderTestResult() {
-    const { questionsWithCorrect, result } = this.state;
-    const { answers, testRating } = this.props;
+    const { questionsWithCorrect, correctQuestions } = this.state;
+    const { answers, testRating, questionsIds } = this.props;
 
     return (
-      <TestResult
+      <TestSummary
         questions={questionsWithCorrect}
-        result={result}
         answers={answers}
         changeTestRating={this.changeTestRating}
         testRating={testRating}
+        correctQuestions={correctQuestions}
+        numberOfQuestions={size(questionsIds)}
       />
     );
   }

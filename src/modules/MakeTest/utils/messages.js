@@ -48,6 +48,10 @@ const messages = defineMessages({
   TEST_RATING: {
     id: 'make-test.test-rating',
     defaultMessage: 'Rating'
+  },
+  TEST_SUMMARY_GO_TO_TEST_RESULT: {
+    id: 'make-test.summary-go-to-test-result',
+    defaultMessage: 'See test results'
   }
 });
 

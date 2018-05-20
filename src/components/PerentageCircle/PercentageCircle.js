@@ -11,12 +11,16 @@ export default class PercentageCircle extends Component {
     percentage: PropTypes.number,
     size: PropTypes.number,
     label: PropTypes.string,
+    labelSize: PropTypes.number,
+    valueSize: PropTypes.number,
   };
 
   static defaultProps = {
     percentage: 0,
     size: 150,
     label: '',
+    labelSize: 10,
+    valueSize: 35
   };
 
   constructor(props) {
@@ -26,7 +30,7 @@ export default class PercentageCircle extends Component {
   }
 
   render() {
-    const { className, percentage, size, label, labelSize } = this.props;
+    const { className, percentage, size, label, labelSize, valueSize } = this.props;
 
     const classes = classnames('progress', className);
 
@@ -54,7 +58,10 @@ export default class PercentageCircle extends Component {
     </span>
         <div className="progress-value">
           <div>
-            <div className="value">{percentage}%</div>
+            <div className="value" style={{
+              fontSize: `${valueSize}px`,
+              lineHeight: `${valueSize}px`
+            }}>{percentage}%</div>
             {label ? <label style={{fontSize: `${labelSize}px`}}>{label}</label> : null}
           </div>
         </div>

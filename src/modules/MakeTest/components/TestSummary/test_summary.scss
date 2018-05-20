@@ -1,12 +1,32 @@
-.test-summary {
-  height: 100%;
+@import '~styles/variables';
+@import '~styles/mixins';
+
+$howManySteps: 10; //this needs to be even.
+$animationTime: 1.5s;
+
+div.test-summary {
   display: flex;
   flex-direction: column;
 
+  padding: 2 * $container-padding;
 
+  @include mdScreen {
+    min-width: 500px;
+    width: auto !important;
+    margin: $container-margin auto auto auto;
+  }
 
   .test-summary-content {
     flex: 1;
+
+
+    .test-percentage-result {
+      margin: 2 * $container-margin auto;
+      transition: transform 1s linear;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
 
   .test-summary-actions {
@@ -16,3 +36,4 @@
     }
   }
 }
+

@@ -5,6 +5,10 @@ const globalMessages = defineMessages({
     id: 'save',
     defaultMessage: 'Save',
   },
+  BACK: {
+    id: 'back',
+    defaultMessage: 'Back'
+  },
   CANCEL: {
     id: 'cancel',
     defaultMessage: 'Cancel'

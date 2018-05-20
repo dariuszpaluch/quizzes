@@ -7,83 +7,50 @@ import classnames from 'classnames';
 import Card from 'libs/ui/Card/Card';
 import { injectIntl } from 'react-intl';
 import messages from 'modules/MakeTest/utils/messages';
-import List from 'libs/ui/List/List';
 
-import filter from 'lodash/filter';
-import forEach from 'lodash/forEach';
 import globalMessages from 'utils/globalMessages';
 import Button from 'libs/ui/Button/Button';
-import Icon from 'libs/ui/Icon/Icon';
 import icons from 'consts/icons';
+import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
+import Typography from 'libs/ui/Typography/Typography';
+import { Link } from 'react-router-dom';
+import paths, { testsPaths } from 'consts/paths';
 
 class TestSummary extends Component {
-  static propTypes = {
-  };
-
-  static defaultProps = {
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  renderSelectedAnswers(questionAnswers, selectedAnswersIds) {
-    const answersRows = {};
-    forEach(filter(questionAnswers, answer => selectedAnswersIds.indexOf(answer.id) > -1), answer => {
-      answersRows[answer.id] = {
-        label: answer.label,
-      };
-    });
-
-    return (
-      <List
-        rowsIds={selectedAnswersIds}
-        rows={answersRows}
-      />
-    )
-  }
 
   renderActions() {
-    const { intl, onBackToTest, onSave } = this.props;
-    {/*<Button*/}
-      {/*key="return-to-test"*/}
-      {/*onClick={onBackToTest}*/}
-    {/*>*/}
-      {/*{intl.formatMessage(messages.RETURN_TO_TEST)}*/}
-    {/*</Button>,*/}
+    const { intl } = this.props;
     return [
-
-      <Button
-        key="save"
-        color="primary"
-        onClick={onSave}
-        icon={icons.SAVE}
+      <Link
+        key="return"
+        to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}
       >
-        {intl.formatMessage(globalMessages.SAVE)}
-      </Button>,
+        <Button
+          onClick={() => {}}
+          icon={icons.ARROW_BACK}
+        >
+          {intl.formatMessage(globalMessages.BACK)}
+        </Button>
+      </Link>,
+      <Link
+        key="test-result"
+        to={`${paths.TESTS}${testsPaths.TEST_RESULT}`}
+      >
+        <Button
+          color="primary"
+          onClick={() => {}}
+          icon={icons.tests}
+        >
+          {intl.formatMessage(messages.TEST_SUMMARY_GO_TO_TEST_RESULT)}
+        </Button>
+      </Link>,
     ]
   }
 
   render() {
-    const { className, intl, questionsIds, questions, userAnswers } = this.props;
+    const { className, intl,correctQuestions, numberOfQuestions } = this.props;
 
     const classes = classnames('test-summary', className);
-
-    const answersRows = {};
-
-    questionsIds.forEach(questionId => {
-      const question = questions[questionId];
-      const selectedAnswersIds = userAnswers[questionId];
-
-      answersRows[questionId] = {
-        label: question.question,
-        children: this.renderSelectedAnswers(question.answers, selectedAnswersIds),
-      };
-    });
-
 
     return(
       <Card
@@ -94,13 +61,14 @@ class TestSummary extends Component {
         contentClass="test-summary-content"
         actionsClass="test-summary-actions"
       >
-
-        <List className="questions-list"
-          rowsIds={questionsIds}
-          rows={answersRows}
-        />
-
-
+        <PercentageCircle
+          className="test-percentage-result"
+          percentage={Math.floor(correctQuestions / numberOfQuestions * 100)}
+          label="Wynik testu"
+          labelSize={20}
+          valueSize={60}
+          size={250} />
+        <Typography center variant="headline">{`${correctQuestions}/${numberOfQuestions} Poprawnych odpowiedzi`}</Typography>
       </Card>
     );
   }
