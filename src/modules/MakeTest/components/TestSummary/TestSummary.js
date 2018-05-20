@@ -15,11 +15,12 @@ import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
 import Typography from 'libs/ui/Typography/Typography';
 import { Link } from 'react-router-dom';
 import paths, { testsPaths } from 'consts/paths';
+import parsePath from 'utils/parsePath';
 
 class TestSummary extends Component {
 
   renderActions() {
-    const { intl } = this.props;
+    const { intl, testAnswerId } = this.props;
     return [
       <Link
         key="return"
@@ -34,7 +35,9 @@ class TestSummary extends Component {
       </Link>,
       <Link
         key="test-result"
-        to={`${paths.TESTS}${testsPaths.TEST_RESULT}`}
+        to={parsePath(`${paths.TESTS}${testsPaths.TEST_RESULT}`, {
+          testAnswerId
+        })}
       >
         <Button
           color="primary"

@@ -100,6 +100,8 @@ class MakeTest extends Component {
       this.setState({
         questionsWithCorrect: data.questions,
         correctQuestions: data.correctQuestions,
+        testAnswerId: data.testAnswerId,
+
       }, () => {
         toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
         this.changeViewState(STATES.SUMMARY);
@@ -169,7 +171,7 @@ class MakeTest extends Component {
   }
 
   renderTestResult() {
-    const { questionsWithCorrect, correctQuestions } = this.state;
+    const { questionsWithCorrect, correctQuestions, testAnswerId } = this.state;
     const { answers, testRating, questionsIds } = this.props;
 
     return (
@@ -180,6 +182,7 @@ class MakeTest extends Component {
         testRating={testRating}
         correctQuestions={correctQuestions}
         numberOfQuestions={size(questionsIds)}
+        testAnswerId={testAnswerId}
       />
     );
   }

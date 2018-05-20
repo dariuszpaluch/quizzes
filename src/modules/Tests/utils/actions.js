@@ -1,6 +1,6 @@
 import {dispatchPromiseResult} from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
-import {ADD_TEST, GET_TESTS, GET_TEST, GET_TEST_DETAILS} from './actionTypes';
+import {ADD_TEST, GET_TESTS, GET_TEST, GET_TEST_DETAILS, GET_TEST_RESULT} from './actionTypes';
 import { API_URL } from 'settings';
 
 export function addTest({ name, description, questionsIds}, resolve = null, reject = null) {
@@ -47,6 +47,17 @@ export function getTestDetail(testId, resolve, reject) {
     return dispatchPromiseResult(dispatch, {
       actionType: GET_TEST_DETAILS,
       promise: fetchAPI.get.bind(null, `${API_URL}/tests/${testId}/details`),
+      resolve,
+      reject,
+    })
+  }
+}
+
+export function getTestResult(testAnswerId, resolve, reject) {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: GET_TEST_RESULT,
+      promise: fetchAPI.get.bind(null, `${API_URL}/test-answers/${testAnswerId}`),
       resolve,
       reject,
     })
