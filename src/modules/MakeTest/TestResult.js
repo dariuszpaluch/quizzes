@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { getTestResult } from 'utils/actions';
+import { getTestResult } from './utils/actions';
 
 class TestResult extends Component {
   static propTypes = {};
@@ -21,7 +21,7 @@ class TestResult extends Component {
   }
 
   render() {
-    return <div />;
+    return <div></div>;
   }
 }
 
@@ -29,7 +29,10 @@ const mapStateToProps = (state, ownProps) => {
   const testResultId = ownProps.match.params.testResultId;
 
   return {
-    testResultId
+    testResultId,
+    test: state.makeTest.testData,
+    questions: state.makeTest.questions,
+    answers: state.makeTest.answers,
   };
 };
 

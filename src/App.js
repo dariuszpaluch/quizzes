@@ -13,6 +13,7 @@ import paths from 'consts/paths';
 
 import localeData from '../locales/data.json';
 import MakeTest from 'modules/MakeTest/MakeTest';
+import TestResult from 'modules/MakeTest/TestResult';
 
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
@@ -41,6 +42,7 @@ export default class AppComponent extends Component {
                 <Switch>
                   <Route path={paths.DASHBOARD} component={Dashboard} />
                   <Route path={paths.MAKE_TEST} component={MakeTest} />
+                  <Route path={paths.TESTS_RESULTS} component={TestResult} />
                   <Route path={paths.TESTS} component={Tests} />
                   <Route path={paths.QUESTIONS} component={Question} />
                   <Route path={paths.INDEX} component={Auth} />
