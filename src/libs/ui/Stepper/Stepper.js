@@ -1,13 +1,12 @@
 import './stepper.scss';
 
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import MobileStepper from 'material-ui/MobileStepper';
 import Button from 'libs/ui/Button';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
-
 
 import classnames from 'classnames';
 import icons from 'consts/icons';
@@ -24,7 +23,7 @@ const propTypes = {
   activeStep: PropTypes.number.isRequired,
   prevLabel: PropTypes.string,
   nextLabel: PropTypes.string,
-  stepLabel: PropTypes.string,
+  stepLabel: PropTypes.string
 };
 
 const defaultProps = {
@@ -33,22 +32,21 @@ const defaultProps = {
   disabledPrev: false,
   prevLabel: 'Prev',
   nextLabel: 'Next',
-  stepLabel: '',
+  stepLabel: ''
 };
 
 const Stepper = ({
-                   className,
-                   steps,
-                   onNext,
-                   onPrev,
-                   disabledNext,
-                   disabledPrev,
-                   activeStep,
-                   prevLabel,
-                   nextLabel,
-                   stepLabel
+  className,
+  steps,
+  onNext,
+  onPrev,
+  disabledNext,
+  disabledPrev,
+  activeStep,
+  prevLabel,
+  nextLabel,
+  stepLabel
 }) => {
-
   const classes = classnames('stepper', className);
 
   return (
@@ -64,28 +62,35 @@ const Stepper = ({
           <Button
             className="prev-button"
             size="small"
-            variant='flat'
+            variant="flat"
             onClick={onPrev}
             disabled={disabledPrev}
-          ><Icon className="prev-icon" icon={icons.ARROW_LEFT} size={25}/>{prevLabel}</Button>
+          >
+            <Icon className="prev-icon" icon={icons.ARROW_LEFT} size={25} />
+            {prevLabel}
+          </Button>
         }
         nextButton={
           <Button
             className="next-button"
             size="small"
-            variant='flat'
+            variant="flat"
             onClick={onNext}
             disabled={disabledNext}
-          >{nextLabel}<Icon icon={icons.ARROW_RIGHT} size={25}/></Button>
+          >
+            {nextLabel}
+            <Icon icon={icons.ARROW_RIGHT} size={25} />
+          </Button>
         }
       />
-      <Typography className="stepper-label">{stepLabel || `Step ${activeStep + 1} of ${steps}`}</Typography>
+      <Typography className="stepper-label">
+        {stepLabel || `Step ${activeStep + 1} of ${steps}`}
+      </Typography>
     </div>
-  )
+  );
 };
 
 Stepper.propTypes = propTypes;
 Stepper.defaultProps = defaultProps;
 
 export default Stepper;
-

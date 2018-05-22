@@ -68,23 +68,27 @@ class Auth extends Component {
     return (
       <div className="auth-wrapper">
         <div>
-        <div className="rocket-wrapper"><Rocket/><Logo/><Meteors fullScreen/></div>
-        <Card className="auth">
-          <Tabs
-            className="auth-tabs"
-            tabs={this.tabs}
-            value={location.pathname}
-            onChange={this.onChangeTab}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
-          />
-          <Switch>
-            <Route exact path={match.url} component={SignInForm} />
-            <Route exact path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
-            <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
-          </Switch>
-        </Card>
+          <div className="rocket-wrapper">
+            <Rocket />
+            <Logo />
+            <Meteors fullScreen />
+          </div>
+          <Card className="auth">
+            <Tabs
+              className="auth-tabs"
+              tabs={this.tabs}
+              value={location.pathname}
+              onChange={this.onChangeTab}
+              indicatorColor="primary"
+              textColor="primary"
+              fullWidth
+            />
+            <Switch>
+              <Route exact path={match.url} component={SignInForm} />
+              <Route exact path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
+              <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
+            </Switch>
+          </Card>
         </div>
       </div>
     );

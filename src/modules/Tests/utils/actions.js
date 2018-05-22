@@ -1,21 +1,21 @@
-import {dispatchPromiseResult} from 'actions/actionsUtils';
+import { dispatchPromiseResult } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
-import {ADD_TEST, GET_TESTS, GET_TEST, GET_TEST_DETAILS, GET_TEST_RESULT} from './actionTypes';
+import { ADD_TEST, GET_TESTS, GET_TEST, GET_TEST_DETAILS, GET_TEST_RESULT } from './actionTypes';
 import { API_URL } from 'settings';
 
-export function addTest({ name, description, questionsIds}, resolve = null, reject = null) {
+export function addTest({ name, description, questionsIds }, resolve = null, reject = null) {
   const body = {
     name,
     description,
-    questions: questionsIds,
+    questions: questionsIds
   };
 
   return dispatch => {
     dispatchPromiseResult(dispatch, {
       actionType: ADD_TEST,
-      promise: fetchAPI.post.bind(null, `${API_URL}/tests`, {body}),
+      promise: fetchAPI.post.bind(null, `${API_URL}/tests`, { body }),
       resolve,
-      reject,
+      reject
     });
   };
 }
@@ -26,9 +26,9 @@ export function getTestsRequest(onlyMine, resolve, reject) {
       actionType: GET_TESTS,
       promise: fetchAPI.get.bind(null, `${API_URL}/tests`),
       resolve,
-      reject,
+      reject
     });
-  }
+  };
 }
 
 export function getTestsToCompleteRequest(resolve, reject) {
@@ -37,9 +37,9 @@ export function getTestsToCompleteRequest(resolve, reject) {
       actionType: GET_TESTS,
       promise: fetchAPI.get.bind(null, `${API_URL}/tests-to-complete`),
       resolve,
-      reject,
+      reject
     });
-  }
+  };
 }
 
 export function getTestDetail(testId, resolve, reject) {
@@ -48,9 +48,9 @@ export function getTestDetail(testId, resolve, reject) {
       actionType: GET_TEST_DETAILS,
       promise: fetchAPI.get.bind(null, `${API_URL}/tests/${testId}/details`),
       resolve,
-      reject,
-    })
-  }
+      reject
+    });
+  };
 }
 
 export function getTestResult(testAnswerId, resolve, reject) {
@@ -59,7 +59,7 @@ export function getTestResult(testAnswerId, resolve, reject) {
       actionType: GET_TEST_RESULT,
       promise: fetchAPI.get.bind(null, `${API_URL}/test-answers/${testAnswerId}`),
       resolve,
-      reject,
-    })
-  }
+      reject
+    });
+  };
 }

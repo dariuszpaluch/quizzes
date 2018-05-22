@@ -97,21 +97,22 @@ class MakeTest extends Component {
     const { history, intl, answers, testId } = this.props;
 
     const onSuccess = data => {
-      this.setState({
-        questionsWithCorrect: data.questions,
-        correctQuestions: data.correctQuestions,
-        testAnswerId: data.testAnswerId,
-
-      }, () => {
-        toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
-        this.changeViewState(STATES.SUMMARY);
-      });
+      this.setState(
+        {
+          questionsWithCorrect: data.questions,
+          correctQuestions: data.correctQuestions,
+          testAnswerId: data.testAnswerId
+        },
+        () => {
+          toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
+          this.changeViewState(STATES.SUMMARY);
+        }
+      );
     };
 
     const onFailure = () => {
       toastr.error(intl.formatMessage(messages.TEST_SAVE_FAILURE_TOASTR));
     };
-
 
     this.props.saveTestAnswers(testId, answers, onSuccess, onFailure);
   };

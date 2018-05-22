@@ -24,30 +24,33 @@ class MakeTestForm extends Component {
   static propTypes = {
     questionsIds: PropTypes.array,
     questions: PropTypes.object,
-    testName: PropTypes.string,
+    testName: PropTypes.string
   };
 
   static defaultProps = {
-    testName: '',
+    testName: ''
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      activeStep: 0,
+      activeStep: 0
     };
   }
 
   changeStep(activeStep) {
     if (activeStep !== this.state.activeStep) {
-      this.setState({
-        activeStep
-      }, () => {
-        if (this.swipeList) {
-          this.swipeList.slide(activeStep, ANIMATION_DURATION);
+      this.setState(
+        {
+          activeStep
+        },
+        () => {
+          if (this.swipeList) {
+            this.swipeList.slide(activeStep, ANIMATION_DURATION);
+          }
         }
-      });
+      );
     }
   }
 
@@ -69,25 +72,24 @@ class MakeTestForm extends Component {
     return this.props.questionsIds[this.state.activeStep];
   }
 
-  onChangeQuestionAnswer = (answer) => {
+  onChangeQuestionAnswer = answer => {
     const questionId = this.getActiveQuestionId();
 
     this.props.onChangeQuestionAnswer(questionId, answer);
   };
 
-  onChangeQuestionRate = (rating) => {
+  onChangeQuestionRate = rating => {
     const questionId = this.getActiveQuestionId();
 
     this.props.onChangeQuestionRate(questionId, rating);
   };
 
-  onTransitionEnd = (index) => {
+  onTransitionEnd = index => {
     const { values, questionsIds } = this.props;
 
     if (index > this.state.activeStep && !size(values[questionsIds[index - 1]])) {
       this.swipeList.prev();
-    }
-    else {
+    } else {
       this.changeStep(index);
     }
   };
@@ -123,7 +125,8 @@ class MakeTestForm extends Component {
 
     const numberOfSteps = size(questionsIds);
 
-    const nextLabelMessage = activeStep === numberOfSteps - 1 ? messages.FINISH_TEST : globalMessages.NEXT;
+    const nextLabelMessage =
+      activeStep === numberOfSteps - 1 ? messages.FINISH_TEST : globalMessages.NEXT;
 
     return (
       <Paper className="test-stepper-wrapper">
@@ -139,26 +142,24 @@ class MakeTestForm extends Component {
           prevLabel={intl.formatMessage(globalMessages.PREV)}
           stepLabel={intl.formatMessage(messages.QUESTION_STEPPER_LABEL, {
             step: activeStep + 1,
-            numberOfQuestions: numberOfSteps,
+            numberOfQuestions: numberOfSteps
           })}
         />
       </Paper>
-    )
+    );
   }
 
   render() {
     return (
-      <Card
-        className="make-test-form"
-      >
+      <Card className="make-test-form">
         <ReactSwipe
           key="mobile-streams-list"
           className="mobile-streams-list"
           swipeOptions={{
             continuous: false,
-            transitionEnd: this.onTransitionEnd,
+            transitionEnd: this.onTransitionEnd
           }}
-          ref={(el) => {
+          ref={el => {
             this.swipeList = el;
           }}
         >
@@ -166,7 +167,6 @@ class MakeTestForm extends Component {
         </ReactSwipe>
         {this.renderStepper()}
       </Card>
-
     );
   }
 }

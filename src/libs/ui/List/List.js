@@ -93,14 +93,17 @@ export default class List extends Component {
               ? this.onToggleItemCollapse.bind(null, rowId)
               : null;
 
-
           return [
             <ListItem
-              className={classnames('list-item', {
-                [selectedClass]: selected,
-                'have-children': !!row.children,
-                clickable: !!onClick && !this.props.onChangeSelect,
-              }, row.className)}
+              className={classnames(
+                'list-item',
+                {
+                  [selectedClass]: selected,
+                  'have-children': !!row.children,
+                  clickable: !!onClick && !this.props.onChangeSelect
+                },
+                row.className
+              )}
               key={`${rowId}-item`}
               button={!!onClick && (!this.props.onChangeSelect || selectOnAllContent)}
               onClick={!this.props.onChangeSelect || selectOnAllContent ? onClick : undefined}

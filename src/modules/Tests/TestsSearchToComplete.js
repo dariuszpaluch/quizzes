@@ -15,18 +15,18 @@ import parsePath from 'utils/parsePath';
 
 class TestsSearchToComplete extends Component {
   static propTypes = {
-    onlyUserTests: PropTypes.bool,
+    onlyUserTests: PropTypes.bool
   };
 
   static defaultProps = {
-    onlyUserQuizzes: false,
+    onlyUserQuizzes: false
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      filterQuery: '',
+      filterQuery: ''
     };
   }
 
@@ -56,9 +56,10 @@ class TestsSearchToComplete extends Component {
     }
   }
 
-  makeItemLinkTo = (testId) => parsePath(paths.MAKE_TEST, {
-    testId
-  });
+  makeItemLinkTo = testId =>
+    parsePath(paths.MAKE_TEST, {
+      testId
+    });
 
   render() {
     const { intl, tests, testsIds } = this.props;
@@ -83,9 +84,11 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-  getTestsRequest: getTestsToCompleteRequest,
+  getTestsRequest: getTestsToCompleteRequest
 };
 
-TestsSearchToComplete =  connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(TestsSearchToComplete)));
+TestsSearchToComplete = connect(mapStateToProps, mapDispatchToProps)(
+  injectIntl(withRouter(TestsSearchToComplete))
+);
 
 export default MainLayoutContextWrapper(TestsSearchToComplete);

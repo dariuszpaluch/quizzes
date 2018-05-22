@@ -6,17 +6,14 @@ import { connect } from 'react-redux';
 import { getTestResult } from 'utils/actions';
 
 class TestResult extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentWillMount() {
@@ -24,9 +21,7 @@ class TestResult extends Component {
   }
 
   render() {
-    return(
-      <div></div>
-    );
+    return <div />;
   }
 }
 
@@ -34,8 +29,8 @@ const mapStateToProps = (state, ownProps) => {
   const testResultId = ownProps.match.params.testResultId;
 
   return {
-    testResultId,
-  }
+    testResultId
+  };
 };
 
 const mapDispatchToProps = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -18,14 +18,14 @@ class TestsList extends Component {
     testsIds: PropTypes.array,
     tests: PropTypes.object,
     makeItemLinkTo: PropTypes.func,
-    filterQuery: PropTypes.string,
+    filterQuery: PropTypes.string
   };
 
   static defaultProps = {
     testsIds: [],
     tests: {},
     makeItemLinkTo: null,
-    filterQuery: '',
+    filterQuery: ''
   };
 
   renderInfoLabel(content) {
@@ -45,10 +45,8 @@ class TestsList extends Component {
       return this.renderInfoLabel(intl.formatMessage(messages.NO_TESTS_INFORMATION));
 
     let _testsIds = testsIds;
-    if(filterQuery) {
-      _testsIds = filter(_testsIds, testId =>
-        stringInclude(tests[testId].name, filterQuery)
-      );
+    if (filterQuery) {
+      _testsIds = filter(_testsIds, testId => stringInclude(tests[testId].name, filterQuery));
     }
 
     if (filterQuery && !size(_testsIds))
@@ -58,21 +56,20 @@ class TestsList extends Component {
         })
       );
 
-    return(
+    return (
       <div className={classes}>
-          {_testsIds.map((testId, index) => {
-            const test = tests[testId];
-            const content = <TestDescriptionCard test={test} />;
+        {_testsIds.map((testId, index) => {
+          const test = tests[testId];
+          const content = <TestDescriptionCard test={test} />;
 
-            if (!makeItemLinkTo)
-              return content;
+          if (!makeItemLinkTo) return content;
 
-            return (
-              <Link key={test.id || index} to={makeItemLinkTo(testId)}>
-                {content}
-              </Link>
-            );
-          })}
+          return (
+            <Link key={test.id || index} to={makeItemLinkTo(testId)}>
+              {content}
+            </Link>
+          );
+        })}
       </div>
     );
   }

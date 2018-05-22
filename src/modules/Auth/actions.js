@@ -39,9 +39,9 @@ export function getUserInfo(resolve, reject) {
       actionType: USER_INFO,
       promise: fetchAPI.get.bind(null, `${API_URL}/userinfo`),
       resolve,
-      reject,
-    })
-  }
+      reject
+    });
+  };
 }
 
 export function signInByQuerytoken(token) {

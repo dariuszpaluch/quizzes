@@ -1,7 +1,7 @@
 import './test_summary.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import Card from 'libs/ui/Card/Card';
@@ -18,18 +18,11 @@ import paths, { testsPaths } from 'consts/paths';
 import parsePath from 'utils/parsePath';
 
 class TestSummary extends Component {
-
   renderActions() {
     const { intl, testAnswerId } = this.props;
     return [
-      <Link
-        key="return"
-        to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}
-      >
-        <Button
-          onClick={() => {}}
-          icon={icons.ARROW_BACK}
-        >
+      <Link key="return" to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}>
+        <Button onClick={() => {}} icon={icons.ARROW_BACK}>
           {intl.formatMessage(globalMessages.BACK)}
         </Button>
       </Link>,
@@ -39,23 +32,19 @@ class TestSummary extends Component {
           testAnswerId
         })}
       >
-        <Button
-          color="primary"
-          onClick={() => {}}
-          icon={icons.tests}
-        >
+        <Button color="primary" onClick={() => {}} icon={icons.tests}>
           {intl.formatMessage(messages.TEST_SUMMARY_GO_TO_TEST_RESULT)}
         </Button>
-      </Link>,
-    ]
+      </Link>
+    ];
   }
 
   render() {
-    const { className, intl,correctQuestions, numberOfQuestions } = this.props;
+    const { className, intl, correctQuestions, numberOfQuestions } = this.props;
 
     const classes = classnames('test-summary', className);
 
-    return(
+    return (
       <Card
         className={classes}
         title={intl.formatMessage(messages.TEST_SUMMARY)}
@@ -70,8 +59,12 @@ class TestSummary extends Component {
           label="Wynik testu"
           labelSize={20}
           valueSize={60}
-          size={250} />
-        <Typography center variant="headline">{`${correctQuestions}/${numberOfQuestions} Poprawnych odpowiedzi`}</Typography>
+          size={250}
+        />
+        <Typography
+          center
+          variant="headline"
+        >{`${correctQuestions}/${numberOfQuestions} Poprawnych odpowiedzi`}</Typography>
       </Card>
     );
   }

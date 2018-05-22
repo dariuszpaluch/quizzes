@@ -1,7 +1,7 @@
 import './test_result.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { injectIntl } from 'react-intl';
 import Card from 'libs/ui/Card/Card';
@@ -16,35 +16,33 @@ import map from 'lodash/map';
 import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
 
 class TestResult extends Component {
-  static propTypes = {
-  };
+  static propTypes = {};
 
   static defaultProps = {
-    questions: [],
+    questions: []
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   prepareQuestionsRows(questions, answers) {
     const rows = {};
     forEach(questions, question => {
-      const userQuestionAnswers = answers &&  answers[question.id];
+      const userQuestionAnswers = answers && answers[question.id];
       const correctAnswers = map(filter(question.answers, { correct: true }), answer => answer.id);
 
-      const correct = isEqual(correctAnswers, userQuestionAnswers );
+      const correct = isEqual(correctAnswers, userQuestionAnswers);
       rows[question.id] = {
         ...question,
         label: question.question,
         children: '',
         className: classnames('question-item', {
           correct,
-          incorrect: !correct,
-        }),
+          incorrect: !correct
+        })
       };
     });
 
@@ -52,19 +50,24 @@ class TestResult extends Component {
   }
 
   render() {
-    const { className, intl, result, changeTestRating, testRating, questions, answers } = this.props;
+    const {
+      className,
+      intl,
+      result,
+      changeTestRating,
+      testRating,
+      questions,
+      answers
+    } = this.props;
 
     const classes = classnames('test-result', className);
 
     const questionsIds = questions.map(question => question.id);
-    console.log(questions, questionsIds, this.prepareQuestionsRows(questions))
-    return(
-      <Card
-        className={classes}
-        title={intl.formatMessage(messages.TEST_SUMMARY_HEADER)}
-      >
+    console.log(questions, questionsIds, this.prepareQuestionsRows(questions));
+    return (
+      <Card className={classes} title={intl.formatMessage(messages.TEST_SUMMARY_HEADER)}>
         Oceń test:
-        <StarRating rating={testRating} onChange={changeTestRating}/>
+        <StarRating rating={testRating} onChange={changeTestRating} />
         WYNIK : {result}% poprawnych odpowiedzi
         <PercentageCircle
           percentage={Math.floor(result * 100)}

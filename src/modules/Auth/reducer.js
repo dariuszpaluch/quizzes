@@ -7,7 +7,7 @@ import { USER_INFO } from 'modules/Auth/actionTypes';
 function getInitState() {
   return {
     token: LocalStorageSource.getToken(),
-    user: {},
+    user: {}
   };
 }
 
@@ -38,8 +38,8 @@ function logout() {
 function getUserInfoSuccess(authState, action) {
   return {
     ...authState,
-    user: action.data,
-  }
+    user: action.data
+  };
 }
 
 export default createReducer(getInitState(), {

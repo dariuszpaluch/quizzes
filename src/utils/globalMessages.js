@@ -3,7 +3,7 @@ import { defineMessages } from 'react-intl';
 const globalMessages = defineMessages({
   SAVE: {
     id: 'save',
-    defaultMessage: 'Save',
+    defaultMessage: 'Save'
   },
   BACK: {
     id: 'back',
@@ -40,22 +40,22 @@ export default globalMessages;
 export const pagesTitles = defineMessages({
   TESTS_RESULTS: {
     id: 'PAGES_TITLES.TESTS_RESULTS',
-    defaultMessage: 'Tests results',
+    defaultMessage: 'Tests results'
   },
   YOUR_TESTS: {
     id: 'PAGES_TITLES.YOUR_TESTS',
-    defaultMessage: 'Your tests',
+    defaultMessage: 'Your tests'
   },
   YOUR_QUESTIONS: {
     id: 'PAGES_TITLES.YOUR_QUESTIONS',
-    defaultMessage: 'Questions',
+    defaultMessage: 'Questions'
   },
   SETTINGS: {
     id: 'PAGES_TITLES.SETTINGS',
-    defaultMessage: 'Settings',
+    defaultMessage: 'Settings'
   },
   SEARCH_TESTS: {
     id: 'PAGES_TITLES.SEARCH_TESTS',
-    defaultMessage: 'Search tests',
+    defaultMessage: 'Search tests'
   }
 });

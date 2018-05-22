@@ -19,7 +19,6 @@ div.test-summary {
   .test-summary-content {
     flex: 1;
 
-
     .test-percentage-result {
       margin: 2 * $container-margin auto;
       transition: transform 1s linear;
@@ -36,4 +35,3 @@ div.test-summary {
     }
   }
 }
-

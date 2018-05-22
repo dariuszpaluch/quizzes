@@ -62,7 +62,7 @@ class MainLayout extends Component {
       {
         label: intl.formatMessage(pagesTitles.SEARCH_TESTS),
         icon: icons.FIND_IN_PAGE,
-        path: `${paths.TESTS}${testsPaths.SEARCH_TESTS}`,
+        path: `${paths.TESTS}${testsPaths.SEARCH_TESTS}`
       },
       {
         label: intl.formatMessage(pagesTitles.TESTS_RESULTS),
@@ -91,7 +91,7 @@ class MainLayout extends Component {
         label: intl.formatMessage(globalMessages.LOGOUT),
         icon: icons.logout,
         onClick: this.logout
-      },
+      }
     ];
   }
 
@@ -164,7 +164,7 @@ class MainLayout extends Component {
   }
 
   renderMenu() {
-    const { intl, location,  userData } = this.props;
+    const { intl, location, userData } = this.props;
 
     return (
       <Menu
@@ -173,7 +173,7 @@ class MainLayout extends Component {
         items={this.navsMenu}
         title={intl.formatMessage(messages.DRAWER_MENU_HEADER_TITLE)}
         path={location.pathname}
-        userData={ userData}
+        userData={userData}
       />
     );
   }
@@ -182,10 +182,12 @@ class MainLayout extends Component {
     const { children, hideMenu, hideAppBar } = this.props;
 
     return (
-      <div className={classnames("main-layout", {
-        'hide-menu': hideMenu,
-        'hide-app-bar': hideAppBar,
-      })}>
+      <div
+        className={classnames('main-layout', {
+          'hide-menu': hideMenu,
+          'hide-app-bar': hideAppBar
+        })}
+      >
         {!hideAppBar && this.renderAppBar()}
         {!hideMenu && this.renderMenu()}
         <main className="content">{children}</main>

@@ -17,30 +17,35 @@ class SmartMainLayout extends Component {
       title: SETTINGS.APP_NAME,
       appBarActions: {},
       onSearch: undefined,
-      searchValue: '',
+      searchValue: ''
     };
   }
 
   componentWillMount() {
-    const onLoginView = [paths.INDEX, `${paths.INDEX}${authPaths.SIGN_IN}`, `${paths.INDEX}${authPaths.SIGN_UP}`].indexOf(this.props.location.pathname) >= 0;
+    const onLoginView =
+      [
+        paths.INDEX,
+        `${paths.INDEX}${authPaths.SIGN_IN}`,
+        `${paths.INDEX}${authPaths.SIGN_UP}`
+      ].indexOf(this.props.location.pathname) >= 0;
 
     if (this.props.userLoggedIn && onLoginView) {
-      this.props.history.push(paths.DASHBOARD)
+      this.props.history.push(paths.DASHBOARD);
     }
 
     if (!this.props.userLoggedIn && !onLoginView) {
-      this.props.history.push(paths.INDEX)
+      this.props.history.push(paths.INDEX);
     }
   }
 
   componentDidMount() {
-    if(this.props.userLoggedIn) {
+    if (this.props.userLoggedIn) {
       this.props.getUserInfo();
     }
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    if(nextProps.userLoggedIn && nextProps.userLoggedIn !== this.props.userLoggedIn) {
+    if (nextProps.userLoggedIn && nextProps.userLoggedIn !== this.props.userLoggedIn) {
       this.props.getUserInfo();
     }
   }
@@ -64,7 +69,7 @@ class SmartMainLayout extends Component {
       title: undefined,
       appBarActions: {},
       onSearch: undefined,
-      searchValue: '',
+      searchValue: ''
     });
   };
 
@@ -73,11 +78,11 @@ class SmartMainLayout extends Component {
       title,
       appBarActions,
       onSearch,
-      searchValue: '',
+      searchValue: ''
     });
   };
 
-  onChangeSearchValue = (searchValue) => {
+  onChangeSearchValue = searchValue => {
     this.setState({
       searchValue
     });
@@ -86,9 +91,14 @@ class SmartMainLayout extends Component {
   };
 
   render() {
-    const { userLoggedIn, children,  userData } = this.props;
+    const { userLoggedIn, children, userData } = this.props;
     const { title, appBarActions, onSearch, searchValue } = this.state;
-    const onLoginView = [paths.INDEX, `${paths.INDEX}${authPaths.SIGN_IN}`, `${paths.INDEX}${authPaths.SIGN_UP}`].indexOf(this.props.location.pathname) >= 0;
+    const onLoginView =
+      [
+        paths.INDEX,
+        `${paths.INDEX}${authPaths.SIGN_IN}`,
+        `${paths.INDEX}${authPaths.SIGN_UP}`
+      ].indexOf(this.props.location.pathname) >= 0;
 
     return (
       <MainLayout
@@ -98,7 +108,7 @@ class SmartMainLayout extends Component {
         hideMenu={!userLoggedIn}
         onSearch={onSearch && this.onChangeSearchValue}
         searchValue={searchValue}
-        userData={ userData}
+        userData={userData}
       >
         <MainLayoutContext.Provider
           value={{
@@ -125,7 +135,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = {
-  getUserInfo,
+  getUserInfo
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SmartMainLayout));

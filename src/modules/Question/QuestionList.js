@@ -52,7 +52,7 @@ class QuestionList extends Component {
 
       setAppBarData({
         title: intl.formatMessage(messages.QUESTION_LIST_HEADER),
-        onSearch: this.onChangeFilter,
+        onSearch: this.onChangeFilter
       });
     }
   }

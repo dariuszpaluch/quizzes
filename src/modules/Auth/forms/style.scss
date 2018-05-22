@@ -4,7 +4,7 @@
 
 $auth-max-width: 500px;
 $auth-submit-button-max-width: 300px;
-$nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
+$nbmeteors: 6; // Don't forget to change the number of loop in the haml !
 
 .sign-in-form,
 .sign-up-form {
@@ -27,12 +27,10 @@ $nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
   height: 100%;
 }
 
-
 .auth-wrapper {
   background-color: $primary-light;
   width: 100%;
   padding: 0 10px;
-
 
   > div {
     display: flex;
@@ -42,7 +40,7 @@ $nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
 
   .auth {
     position: relative;
-    z-index:9999;
+    z-index: 9999;
     width: calc(100vw - 2 * 10px);
     margin-bottom: auto;
     max-width: $auth-max-width;
@@ -54,7 +52,6 @@ $nbmeteors : 6;     // Don't forget to change the number of loop in the haml !
     display: flex;
     margin-left: 0;
     z-index: 999;
-
   }
 }
 

@@ -14,7 +14,6 @@ $space-between-items: 20px;
       > span {
         padding-right: 10px;
       }
-
     }
     &.next-button {
       padding: 0 $space-between-items;
@@ -35,19 +34,19 @@ $space-between-items: 20px;
 
 @include mdScreen {
   .stepper {
-    div[role="progressbar"] {
+    div[role='progressbar'] {
       width: 100%;
     }
 
     button {
-      &.prev-button, &.next-button {
+      &.prev-button,
+      &.next-button {
         min-width: 120px;
         width: 15%;
       }
       &.prev-button {
       }
       &.next-button {
-
       }
     }
   }

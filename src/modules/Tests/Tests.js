@@ -19,18 +19,18 @@ import parsePath from 'utils/parsePath';
 
 class Tests extends Component {
   static propTypes = {
-    onlyUserTests: PropTypes.bool,
+    onlyUserTests: PropTypes.bool
   };
 
   static defaultProps = {
-    onlyUserQuizzes: false,
+    onlyUserQuizzes: false
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      filterQuery: '',
+      filterQuery: ''
     };
   }
 
@@ -64,9 +64,10 @@ class Tests extends Component {
     this.props.history.push(`${this.props.match.path}${testsPaths.TEST_ADD}`);
   };
 
-  makeItemLinkTo = (testId) => parsePath(`${this.props.match.path}${testsPaths.TEST}`, {
-    testId
-  });
+  makeItemLinkTo = testId =>
+    parsePath(`${this.props.match.path}${testsPaths.TEST}`, {
+      testId
+    });
 
   render() {
     const { intl, tests, testsIds } = this.props;
@@ -97,6 +98,6 @@ const mapDispatchToProps = {
   getTestsRequest
 };
 
-Tests =  connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(Tests)));
+Tests = connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(Tests)));
 
 export default MainLayoutContextWrapper(Tests);

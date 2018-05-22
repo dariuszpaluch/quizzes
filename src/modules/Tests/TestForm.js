@@ -70,7 +70,6 @@ class TestForm extends Component {
     if (!!mainLayoutContext) {
       const { setAppBarData } = mainLayoutContext;
 
-
       const pageTitle = intl.formatMessage(
         mode === MODES.ADD ? messages.TEST_HEADER_ADD_MODE : messages.TEST_HEADER_EDIT_MODE
       );
@@ -106,8 +105,6 @@ class TestForm extends Component {
 
   render() {
     const { intl, mode, handleSubmit } = this.props;
-
-
 
     return (
       <Card>

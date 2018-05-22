@@ -2,7 +2,13 @@ import { dispatchPromiseResult, storeAction } from 'actions/actionsUtils';
 import fetchAPI from 'utils/fetch';
 import { API_URL } from 'settings';
 
-import { FETCH_TEST_TO_BE_COMPLETED, SAVE_TEST_ANSWERS, SET_QUESTION_ANSWER, SET_QUESTION_RATE, SET_TEST_RATING } from 'modules/MakeTest/utils/actionTypes';
+import {
+  FETCH_TEST_TO_BE_COMPLETED,
+  SAVE_TEST_ANSWERS,
+  SET_QUESTION_ANSWER,
+  SET_QUESTION_RATE,
+  SET_TEST_RATING
+} from 'modules/MakeTest/utils/actionTypes';
 
 export function fetchTestToBeCompleted(testId, resolve, reject) {
   return dispatch => {
@@ -10,21 +16,21 @@ export function fetchTestToBeCompleted(testId, resolve, reject) {
       actionType: FETCH_TEST_TO_BE_COMPLETED,
       promise: fetchAPI.get.bind(null, `${API_URL}/tests/${testId}/toCompleted`),
       resolve,
-      reject,
+      reject
     });
-  }
+  };
 }
 
 export function setQuestionAnswer(questionId, answer) {
   return storeAction(SET_QUESTION_ANSWER, null, {
     answer,
-    questionId,
-  })
+    questionId
+  });
 }
 
 export function saveTestAnswers(testId, answers, resolve, reject) {
   const body = {
-    answers,
+    answers
   };
 
   return dispatch => {
@@ -32,16 +38,16 @@ export function saveTestAnswers(testId, answers, resolve, reject) {
       actionType: SAVE_TEST_ANSWERS,
       promise: fetchAPI.post.bind(null, `${API_URL}/tests/${testId}/answers`, { body }),
       resolve,
-      reject,
+      reject
     });
-  }
+  };
 }
 
 export function onChangeQuestionRate(questionId, rating) {
   return storeAction(SET_QUESTION_RATE, null, {
     questionId,
-    rating,
-  })
+    rating
+  });
 }
 
 // export const changeTestRating = (testRating) => storeAction(CHANGE_TEST_RATING, null, { testRating });
@@ -51,13 +57,12 @@ export const changeTestRating = (testId, testRating) => {
       actionType: SET_TEST_RATING,
       promise: fetchAPI.put.bind(null, `${API_URL}/tests/${testId}/rating`, {
         body: {
-          rating: testRating,
+          rating: testRating
         }
       }),
       payload: {
-        testRating,
+        testRating
       }
     });
-  }
-}
-
+  };
+};

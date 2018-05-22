@@ -4,11 +4,7 @@ import { ADD_QUESTION, FETCH_QUESTIONS, DELETE_QUESTION } from './actionTypes';
 import { FETCH_QUESTION } from 'modules/Question/utils/actionTypes';
 import { API_URL } from 'settings';
 
-export function addQuestion(
-  { question, description, answers },
-  resolve = null,
-  reject = null
-) {
+export function addQuestion({ question, description, answers }, resolve = null, reject = null) {
   const body = {
     question,
     description,

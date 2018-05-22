@@ -1,7 +1,7 @@
 import './percentage_circle.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Circle from 'react-circle';
 import Typography from 'libs/ui/Typography/Typography';
@@ -12,7 +12,7 @@ export default class PercentageCircle extends Component {
     size: PropTypes.number,
     label: PropTypes.string,
     labelSize: PropTypes.number,
-    valueSize: PropTypes.number,
+    valueSize: PropTypes.number
   };
 
   static defaultProps = {
@@ -35,34 +35,43 @@ export default class PercentageCircle extends Component {
     const classes = classnames('progress', className);
 
     const progressBarLeftStyle = {
-      borderTopRightRadius: `${size/2}px`,
-      borderBottomRightRadius: `${size/2}px`,
+      borderTopRightRadius: `${size / 2}px`,
+      borderBottomRightRadius: `${size / 2}px`
     };
 
     const progressBarRightStyle = {
-      borderTopLeftRadius: `${size/2}px`,
-      borderBottomLeftRadius: `${size/2}px`,
+      borderTopLeftRadius: `${size / 2}px`,
+      borderBottomLeftRadius: `${size / 2}px`
     };
 
     return (
-      <div className={classes} data-percentage={percentage} style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        lineHeight: `${size}px`
-      }}>
-    <span className="progress-left">
-      <span className="progress-bar" style={progressBarLeftStyle}/>
-    </span>
+      <div
+        className={classes}
+        data-percentage={percentage}
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          lineHeight: `${size}px`
+        }}
+      >
+        <span className="progress-left">
+          <span className="progress-bar" style={progressBarLeftStyle} />
+        </span>
         <span className="progress-right">
-      <span className="progress-bar" style={progressBarRightStyle} />
-    </span>
+          <span className="progress-bar" style={progressBarRightStyle} />
+        </span>
         <div className="progress-value">
           <div>
-            <div className="value" style={{
-              fontSize: `${valueSize}px`,
-              lineHeight: `${valueSize}px`
-            }}>{percentage}%</div>
-            {label ? <label style={{fontSize: `${labelSize}px`}}>{label}</label> : null}
+            <div
+              className="value"
+              style={{
+                fontSize: `${valueSize}px`,
+                lineHeight: `${valueSize}px`
+              }}
+            >
+              {percentage}%
+            </div>
+            {label ? <label style={{ fontSize: `${labelSize}px` }}>{label}</label> : null}
           </div>
         </div>
       </div>
