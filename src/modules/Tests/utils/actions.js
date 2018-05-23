@@ -53,13 +53,3 @@ export function getTestDetail(testId, resolve, reject) {
   };
 }
 
-export function getTestResult(testAnswerId, resolve, reject) {
-  return dispatch => {
-    return dispatchPromiseResult(dispatch, {
-      actionType: GET_TEST_RESULT,
-      promise: fetchAPI.get.bind(null, `${API_URL}/test-answers/${testAnswerId}`),
-      resolve,
-      reject
-    });
-  };
-}

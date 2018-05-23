@@ -7,7 +7,8 @@ import {
   SAVE_TEST_ANSWERS,
   SET_QUESTION_ANSWER,
   SET_QUESTION_RATE,
-  SET_TEST_RATING
+  SET_TEST_RATING,
+  GET_TEST_RESULT
 } from 'modules/MakeTest/utils/actionTypes';
 
 export function fetchTestToBeCompleted(testId, resolve, reject) {
@@ -66,3 +67,15 @@ export const changeTestRating = (testId, testRating) => {
     });
   };
 };
+
+export function getTestResult(testAnswerId, resolve, reject) {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: GET_TEST_RESULT,
+      promise: fetchAPI.get.bind(null, `${API_URL}/test-answers/${testAnswerId}`),
+      resolve,
+      reject
+    });
+  };
+}
+

@@ -5,7 +5,7 @@ const paths = {
   QUESTIONS: `${PUBLIC_PATH}question`,
   TESTS: `${PUBLIC_PATH}tests`,
   SETTINGS: `${PUBLIC_PATH}settings`,
-  TESTS_RESULTS: `${PUBLIC_PATH}tests-results`
+  TESTS_RESULTS: `${PUBLIC_PATH}test-result/:testResultId`
 };
 
 export const authPaths = {
@@ -23,7 +23,6 @@ export const testsPaths = {
   TEST: '/:testId',
   TEST_ADD: '/add',
   SEARCH_TESTS: `/search-tests`,
-  TEST_RESULT: '/test-result/:testAnswerId'
 };
 
 export default paths;

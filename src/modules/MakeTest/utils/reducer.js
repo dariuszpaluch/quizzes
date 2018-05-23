@@ -5,11 +5,13 @@ import normalizeList from 'utils/normalizeList';
 import {
   SET_QUESTION_ANSWER,
   SET_QUESTION_RATE,
-  SET_TEST_RATING
+  SET_TEST_RATING,
+  GET_TEST_RESULT,
 } from 'modules/MakeTest/utils/actionTypes';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
 import randomizeArray from 'modules/MakeTest/utils/randomizeArray';
+import forEach from 'lodash/forEach';
 
 function getInitState() {
   return {
@@ -42,6 +44,24 @@ function fetchTestToBeCompletedSuccess(state, action) {
     questions: normalizeList(questions),
     fetching: false
   });
+}
+
+function fetchTestResultSuccess(state, action) {
+  const test = action.data.test;
+
+  const answers = {};
+  forEach(action.data.answers, answer => {
+    answers[answer.questionId] = answer.selectedAnswers;
+  });
+  return updateObject(state, {
+    testData: {
+      ...omit(test, 'questions'),
+      created: test.created && new Date(test.created)
+    },
+    questions: normalizeList(test.questions),
+    answers,
+    fetching: false
+  })
 }
 
 function fetchTestToBeCompletedFailure(state) {
@@ -90,5 +110,6 @@ export default createReducer(getInitState(), {
   [`${FETCH_TEST_TO_BE_COMPLETED}_FAILURE`]: fetchTestToBeCompletedFailure,
   [SET_QUESTION_ANSWER]: setQuestionAnswer,
   [SET_QUESTION_RATE]: setQuestionRate,
-  [`${SET_TEST_RATING}_SUCCESS`]: changeTestRating
+  [`${SET_TEST_RATING}_SUCCESS`]: changeTestRating,
+  [`${GET_TEST_RESULT}_SUCCESS`]: fetchTestResultSuccess,
 });
