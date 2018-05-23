@@ -21,7 +21,7 @@ class TestResult extends Component {
   }
 
   render() {
-    return <div />;
+    return <div>TEST RESULT</div>;
   }
 }
 
