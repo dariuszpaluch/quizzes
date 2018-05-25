@@ -12,6 +12,7 @@ const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 
 module.exports = merge(config, {
+  mode: 'production',
   module: {
     rules: [
       {
@@ -36,34 +37,34 @@ module.exports = merge(config, {
   },
   plugins: [
     new Extract('[name].[chunkhash].css'),
-    new Webpack.optimize.ModuleConcatenationPlugin(),
+    // new Webpack.optimize.ModuleConcatenationPlugin(),
     // new Webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendors',
     //   minChunks: function(module) {
     //     return isExternal(module);
     //   }
     // }),
-    new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
+    // new Webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production'),
+    // }),
     new Webpack.optimize.OccurrenceOrderPlugin(),
-    new Webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        booleans: true,
-        collapse_vars: true,
-        comparisons: true,
-        dead_code: true,
-        drop_console: true,
-        drop_debugger: true,
-        if_return: true,
-        join_vars: true,
-        loops: true,
-        properties: true,
-        sequences: true,
-        unused: true,
-        warnings: false,
-      },
-    }),
+    // new Webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     booleans: true,
+    //     collapse_vars: true,
+    //     comparisons: true,
+    //     dead_code: true,
+    //     drop_console: true,
+    //     drop_debugger: true,
+    //     if_return: true,
+    //     join_vars: true,
+    //     loops: true,
+    //     properties: true,
+    //     sequences: true,
+    //     unused: true,
+    //     warnings: false,
+    //   },
+    // }),
   ],
 });

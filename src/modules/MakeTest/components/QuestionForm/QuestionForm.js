@@ -8,8 +8,14 @@ import Typography from 'libs/ui/Typography/Typography';
 import List from 'libs/ui/List/List';
 import normalizeList from 'utils/normalizeList';
 import StarRating from 'libs/ui/StarRating/StarRating';
+import { injectIntl } from 'react-intl';
+import messages from 'modules/MakeTest/utils/messages';
+import IconButton from 'libs/ui/IconButton/IconButton';
+import icons from 'consts/icons';
+import Button from 'libs/ui/Button/Button';
+import Icon from 'libs/ui/Icon/Icon';
 
-export default class QuestionForm extends Component {
+class QuestionForm extends Component {
   static propTypes = {
     question: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -43,7 +49,7 @@ export default class QuestionForm extends Component {
   }
 
   render() {
-    const { className, question, onChangeQuestionRate, rating } = this.props;
+    const { className, question, onChangeQuestionRate, rating, intl } = this.props;
 
     const classes = classnames('question-form', className);
 
@@ -51,6 +57,7 @@ export default class QuestionForm extends Component {
 
     return (
       <div className={classes}>
+
         <div className="question-description">
           <Typography variant="headline" className="question">
             {question.question}
@@ -58,10 +65,24 @@ export default class QuestionForm extends Component {
           <Typography variant="caption" className="description">
             {description}
           </Typography>
-          <StarRating rating={rating} onChange={onChangeQuestionRate} />
+
+          <div className="actions">
+            <Button>
+              <Icon size={25} icon={icons.SAVE} />
+              Zapisz pytanie
+            </Button>
+          </div>
+
+          <div className="question-rating">
+            <label>{ intl.formatMessage(messages.MAKE_TEST_QUESTION_RATE)}</label>
+            <StarRating rating={rating} onChange={onChangeQuestionRate} />
+
+          </div>
         </div>
         {this.renderAnswers(question.answers)}
       </div>
     );
   }
 }
+
+export default injectIntl(QuestionForm);

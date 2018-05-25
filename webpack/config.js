@@ -11,6 +11,7 @@ const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 const API_URL = process.env.API_URL || packageJSON.config.api_url;
 
 module.exports = {
+  mode: 'none',
   context: path.resolve(__dirname, '../'),
   entry: [
     'babel-polyfill',
@@ -30,10 +31,6 @@ module.exports = {
         test: /\.svg$/,
         loader: 'raw-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader'
       }
     ]
   },

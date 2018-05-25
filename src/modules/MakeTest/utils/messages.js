@@ -52,6 +52,10 @@ const messages = defineMessages({
   TEST_SUMMARY_GO_TO_TEST_RESULT: {
     id: 'make-test.summary-go-to-test-result',
     defaultMessage: 'See test results'
+  },
+  MAKE_TEST_QUESTION_RATE: {
+    id: 'make-test.question-rate',
+    defaultMessage: 'Rate te question',
   }
 });
 

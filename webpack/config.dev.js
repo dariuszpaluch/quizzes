@@ -12,6 +12,7 @@ const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 const port = packageJSON.config.port;
 
 module.exports = merge(config, {
+  mode: 'development',
   devtool: '#eval-source-map',
   devServer: {
     contentBase: 'build',
@@ -91,9 +92,6 @@ module.exports = merge(config, {
       }),
     new Webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
-
-    new Webpack.NamedModulesPlugin(),
-    // prints more readable module names in the browser console on HMR updates
 
     new Webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors

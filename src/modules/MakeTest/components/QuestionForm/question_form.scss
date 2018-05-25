@@ -1,14 +1,27 @@
 @import '~styles/variables';
 @import '~styles/colors';
+@import '~styles/mixins';
 
 .question-form {
+  position: relative;
   padding: 2 * $container-padding $container-padding;
 
+  .actions {
+    padding: $container-padding;
+    display: flex;
+
+  }
   .question-description {
     padding-bottom: $container-padding;
     .question,
     .description {
       text-align: center;
+    }
+
+    .question-rating {
+      label {
+        margin-bottom: 0;
+      }
     }
     .description {
       min-height: 1rem;
@@ -27,4 +40,14 @@
       padding: 5px;
     }
   }
+
+  @include mdScreen() {
+    .actions {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
 }
+
+

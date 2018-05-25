@@ -23,7 +23,8 @@ const icons = {
   STAR_BORDER: 'start_border',
   STAR: 'star',
   SEARCH: 'search',
-  FIND_IN_PAGE: 'find_in_page'
+  FIND_IN_PAGE: 'find_in_page',
+  SAVE_ALT: 'save_alt',
 };
 
 export default icons;
