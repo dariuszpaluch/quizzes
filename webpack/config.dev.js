@@ -13,7 +13,7 @@ const port = packageJSON.config.port;
 
 module.exports = merge(config, {
   mode: 'development',
-  devtool: '#eval-source-map',
+  devtool: '#cheap-module-eval-source-map',
   devServer: {
     contentBase: 'build',
     hot: true,
