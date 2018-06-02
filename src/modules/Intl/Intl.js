@@ -12,11 +12,7 @@ class Intl extends Component {
     const _locale = locale === 'dev' ? 'pl' : locale;
 
     return (
-      <IntlProvider
-        locale={_locale}
-        defaultLocale="pl"
-        messages={messages}
-      >
+      <IntlProvider locale={_locale} defaultLocale="pl" messages={messages}>
         {children}
       </IntlProvider>
     );

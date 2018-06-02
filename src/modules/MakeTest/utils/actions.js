@@ -78,4 +78,3 @@ export function getTestResult(testAnswerId, resolve, reject) {
     });
   };
 }
-

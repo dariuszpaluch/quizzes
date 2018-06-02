@@ -1,1 +1,1 @@
-export const getAppBarTitle = (state) => state.mainLayout.title;
+export const getAppBarTitle = state => state.mainLayout.title;

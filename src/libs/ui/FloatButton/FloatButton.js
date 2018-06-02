@@ -1,7 +1,7 @@
 import './float_button.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import Icon from 'libs/ui/Icon/Icon';
@@ -11,7 +11,7 @@ export default class FloatButton extends Component {
   static propTypes = {
     ...Button.propTypes,
     iconSize: PropTypes.number,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -26,14 +26,8 @@ export default class FloatButton extends Component {
     const classes = classnames(className, 'float-button');
 
     return (
-      <Button
-        {...props}
-        className={classes}
-        variant={variant}
-        color={color}
-        onClick={onClick}
-      >
-        <Icon icon={icon} size={iconSize}/>
+      <Button {...props} className={classes} variant={variant} color={color} onClick={onClick}>
+        <Icon icon={icon} size={iconSize} />
       </Button>
     );
   }

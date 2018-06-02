@@ -30,9 +30,7 @@ function getTestDetailsSuccess(state, action) {
   });
 }
 
-
-
 export default createReducer(getInitState(), {
   [`${GET_TESTS}_SUCCESS`]: getTestsSuccess,
-  [`${GET_TEST_DETAILS}_SUCCESS`]: getTestDetailsSuccess,
+  [`${GET_TEST_DETAILS}_SUCCESS`]: getTestDetailsSuccess
 });

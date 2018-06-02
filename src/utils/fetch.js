@@ -22,11 +22,7 @@ const getResponse = response => {
   }
 };
 
-function fetch(
-  method,
-  url,
-  { body, header, customResponseHandler, submissionError } = {}
-) {
+function fetch(method, url, { body, header, customResponseHandler, submissionError } = {}) {
   return isomorphicFetch(`${url}`, {
     method,
     body: body && JSON.stringify(body),

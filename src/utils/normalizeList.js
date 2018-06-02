@@ -1,10 +1,10 @@
 export default function normalizeList(list) {
   const data = {
     byId: {},
-    allIds: [],
+    allIds: []
   };
 
-  list.forEach((item) => {
+  list.forEach(item => {
     data.byId[item.id] = item;
     data.allIds.push(item.id);
   });

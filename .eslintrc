@@ -1,0 +1,31 @@
+{
+    "extends": [
+        "airbnb",
+        "prettier",
+        "prettier/flowtype",
+        "prettier/react",
+        "prettier/standard"
+    ],
+    "parser": "babel-eslint",
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack/config.dev.js"
+            } 
+        }
+    },
+    "plugins": [
+        "react", 
+        "jsx-a11y", 
+        "import"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "rules": {
+        "react/jsx-filename-extension": [0],
+        "react/forbid-prop-types": [0],
+    }
+}

@@ -57,7 +57,6 @@ class QuestionForm extends Component {
 
     return (
       <div className={classes}>
-
         <div className="question-description">
           <Typography variant="headline" className="question">
             {question.question}
@@ -74,9 +73,8 @@ class QuestionForm extends Component {
           </div>
 
           <div className="question-rating">
-            <label>{ intl.formatMessage(messages.MAKE_TEST_QUESTION_RATE)}</label>
+            <label>{intl.formatMessage(messages.MAKE_TEST_QUESTION_RATE)}</label>
             <StarRating rating={rating} onChange={onChangeQuestionRate} />
-
           </div>
         </div>
         {this.renderAnswers(question.answers)}

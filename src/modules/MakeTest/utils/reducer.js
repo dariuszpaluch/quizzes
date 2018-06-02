@@ -6,7 +6,7 @@ import {
   SET_QUESTION_ANSWER,
   SET_QUESTION_RATE,
   SET_TEST_RATING,
-  GET_TEST_RESULT,
+  GET_TEST_RESULT
 } from 'modules/MakeTest/utils/actionTypes';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -61,7 +61,7 @@ function fetchTestResultSuccess(state, action) {
     questions: normalizeList(test.questions),
     answers,
     fetching: false
-  })
+  });
 }
 
 function fetchTestToBeCompletedFailure(state) {
@@ -111,5 +111,5 @@ export default createReducer(getInitState(), {
   [SET_QUESTION_ANSWER]: setQuestionAnswer,
   [SET_QUESTION_RATE]: setQuestionRate,
   [`${SET_TEST_RATING}_SUCCESS`]: changeTestRating,
-  [`${GET_TEST_RESULT}_SUCCESS`]: fetchTestResultSuccess,
+  [`${GET_TEST_RESULT}_SUCCESS`]: fetchTestResultSuccess
 });

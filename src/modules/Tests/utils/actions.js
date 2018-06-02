@@ -52,4 +52,3 @@ export function getTestDetail(testId, resolve, reject) {
     });
   };
 }
-

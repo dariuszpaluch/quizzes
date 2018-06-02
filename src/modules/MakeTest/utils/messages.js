@@ -55,7 +55,7 @@ const messages = defineMessages({
   },
   MAKE_TEST_QUESTION_RATE: {
     id: 'make-test.question-rate',
-    defaultMessage: 'Rate te question',
+    defaultMessage: 'Rate te question'
   }
 });
 

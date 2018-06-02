@@ -5,45 +5,40 @@ export const storeAction = (type, payload = {}, data = {}, error = false, hash) 
     hash,
     error,
     ...payload
-  }
+  };
 };
 
 const firedAction = (actionType, payload, data = {}) => {
-  return storeAction(`${ actionType }_REQUEST`, payload, data);
+  return storeAction(`${actionType}_REQUEST`, payload, data);
 };
 
 const receivedData = (actionType, payload, data, hash) => {
-  return storeAction(`${ actionType }_SUCCESS`, payload, data, false, hash);
+  return storeAction(`${actionType}_SUCCESS`, payload, data, false, hash);
 };
 
 const receivedError = (actionType, payload, error, hash) => {
-  return storeAction(`${ actionType }_FAILURE`, payload, error, true, hash);
+  return storeAction(`${actionType}_FAILURE`, payload, error, true, hash);
 };
 
 const dispatchResponse = (dispatch, resolve, actionType, payload, data, hash) => {
   return dispatch(receivedData(actionType, payload, data, hash));
 };
 
-export const dispatchPromiseResult = (dispatch, {
-  actionType,
-  promise,
-  resolve,
-  reject,
-  hash,
-  payload,
-}) => {
+export const dispatchPromiseResult = (
+  dispatch,
+  { actionType, promise, resolve, reject, hash, payload }
+) => {
   dispatch(firedAction(actionType, payload));
 
-  return promise()
-    .then(
-      response => {
-        dispatchResponse(dispatch, resolve, actionType, payload, response, hash);
-        resolve && resolve(response);
-      },
+  return promise().then(
+    response => {
+      dispatchResponse(dispatch, resolve, actionType, payload, response, hash);
+      resolve && resolve(response);
+    },
 
-      error => {
-        dispatch(receivedError(actionType, payload, error, hash));
-        reject && reject(error);
-      }
-    )
+    error => {
+      dispatch(receivedError(actionType, payload, error, hash));
+      reject && reject(error);
+    }
+  );
 };

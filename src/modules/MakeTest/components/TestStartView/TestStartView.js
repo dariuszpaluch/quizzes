@@ -1,7 +1,7 @@
 import './test_start_view.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from 'libs/ui/Button/Button';
 import messages from 'modules/MakeTest/utils/messages';
@@ -14,17 +14,17 @@ class TestStartView extends Component {
     testDescription: PropTypes.shape({
       created: PropTypes.instanceOf(Date),
       name: PropTypes.string,
-      description: PropTypes.string,
+      description: PropTypes.string
     }),
     numberOfQuestions: PropTypes.number.isRequired,
-    onClickStart: PropTypes.func.isRequired,
+    onClickStart: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     testDescription: {
       name: '',
       description: '',
-      created: null,
+      created: null
     }
   };
 
@@ -35,7 +35,6 @@ class TestStartView extends Component {
 
     const { description, name, created, meta } = testDescription;
 
-
     const _descriptionItems = [
       {
         intlMessage: messages.DESCRIPTION_TEST,
@@ -43,27 +42,23 @@ class TestStartView extends Component {
       },
       {
         intlMessage: messages.NUMBER_OF_QUESTIONS,
-        value: numberOfQuestions,
+        value: numberOfQuestions
       },
       {
         intlMessage: messages.CREATED_TEST_DATE,
-        value: intl.formatDate(created),
+        value: intl.formatDate(created)
       },
       {
         intlMessage: messages.TEST_RATING,
         // value: meta && meta.rating,
-        value: meta && meta.rating && (<StarRating rating={meta.rating} disabled/>),
+        value: meta && meta.rating && <StarRating rating={meta.rating} disabled />
       }
     ];
 
     return (
-      <Card
-        className={classes}
-        title={name}
-        centerHeader
-      >
+      <Card className={classes} title={name} centerHeader>
         <div className="test-description">
-          {_descriptionItems.map(({intlMessage, value}, index) => {
+          {_descriptionItems.map(({ intlMessage, value }, index) => {
             return (
               <div key={index}>
                 <label>{intl.formatMessage(intlMessage)}</label>
@@ -72,10 +67,9 @@ class TestStartView extends Component {
             );
           })}
         </div>
-        <Button
-          className="start-test-button"
-          onClick={onClickStart}
-        >{intl.formatMessage(messages.START_TEST_BUTTON)}</Button>
+        <Button className="start-test-button" onClick={onClickStart}>
+          {intl.formatMessage(messages.START_TEST_BUTTON)}
+        </Button>
       </Card>
     );
   }

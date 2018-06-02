@@ -1,15 +1,15 @@
 export const INPUTS = {
-  QUESTION: "Question",
-  DESCRIPTION: "Description",
+  QUESTION: 'Question',
+  DESCRIPTION: 'Description',
   HINTS: 'Hints',
   ANSWERS: 'Answers',
   ANSWER: 'Answer',
-  PUBLIC: 'Public',
+  PUBLIC: 'Public'
 };
 
 export const BUTTONS = {
   ADD_ANSWER: 'Add answer',
-  ADD_QUESTION: 'Add question',
+  ADD_QUESTION: 'Add question'
 };
 
 export const MESSAGES = {
@@ -21,9 +21,9 @@ export default {
   HEADER: {
     EDIT: 'Question Edit',
     ADD: 'Add question',
-    QUESTIONS_LIST: 'Questions',
+    QUESTIONS_LIST: 'Questions'
   },
   INPUTS,
   BUTTONS,
-  MESSAGES,
-}
+  MESSAGES
+};

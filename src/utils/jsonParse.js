@@ -1,6 +1,5 @@
 export default function jsonParse(data) {
-
-  while(!(typeof data === 'object')) {
+  while (!(typeof data === 'object')) {
     data = JSON.parse(data);
   }
 

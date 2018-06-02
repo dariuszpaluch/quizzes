@@ -22,14 +22,7 @@ export default class Input extends Component {
   };
 
   render() {
-    const {
-      children,
-      className,
-      error,
-      warning,
-      helperText,
-      ...props
-    } = this.props;
+    const { children, className, error, warning, helperText, ...props } = this.props;
 
     const classes = classnames('material-ui-input', className, {
       'have-error': !!error

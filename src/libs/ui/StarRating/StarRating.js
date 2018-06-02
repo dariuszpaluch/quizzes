@@ -1,7 +1,7 @@
 import './star_rating.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import icons from 'consts/icons';
 import IconButton from 'libs/ui/IconButton/IconButton';
@@ -12,7 +12,7 @@ export default class StarRating extends Component {
     maxRating: PropTypes.number,
     showLabel: PropTypes.bool,
     rating: PropTypes.number,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {
@@ -20,22 +20,22 @@ export default class StarRating extends Component {
     size: 25,
     showLabel: true,
     rating: null,
-    disabled: false,
+    disabled: false
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      hover: {},
+      hover: {}
     };
   }
 
   onMouseEnter = (index, enter) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       hover: {
         ...prevState.hover,
-        [index]: enter,
+        [index]: enter
       }
     }));
   };
@@ -44,7 +44,6 @@ export default class StarRating extends Component {
     const { onChange, size, disabled } = this.props;
 
     return (
-
       <IconButton
         className={classnames('star', {
           selected,
@@ -58,8 +57,7 @@ export default class StarRating extends Component {
         onMouseEnter={this.onMouseEnter.bind(null, starIndex, true)}
         onMouseLeave={this.onMouseEnter.bind(null, starIndex, false)}
       />
-    )
-
+    );
   };
 
   render() {
@@ -79,7 +77,7 @@ export default class StarRating extends Component {
 
     for (let starIndex = 0; starIndex < maxRating; starIndex++) {
       const hovered = starIndex <= maxHovered;
-      stars.push(this.renderStar(starIndex, (maxHovered < 0 && starIndex < rating), hovered))
+      stars.push(this.renderStar(starIndex, maxHovered < 0 && starIndex < rating, hovered));
     }
 
     return (

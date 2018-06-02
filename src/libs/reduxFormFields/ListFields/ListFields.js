@@ -64,9 +64,7 @@ const ListFields = ({
         {addButtonLabel || 'Add'}
       </Button>
 
-      {error && (dirty || submitFailed) ? (
-        <FormLabel error>{error}</FormLabel>
-      ) : null}
+      {error && (dirty || submitFailed) ? <FormLabel error>{error}</FormLabel> : null}
 
       {fields.map((name, index) => {
         return (

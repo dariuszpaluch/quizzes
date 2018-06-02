@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
     testResultId,
     test: state.makeTest.testData,
     questions: state.makeTest.questions,
-    answers: state.makeTest.answers,
+    answers: state.makeTest.answers
   };
 };
 

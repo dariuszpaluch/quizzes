@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchQuestion } from 'modules/Question/utils/actions';
 import QuestionForm, { MODES } from 'modules/Question/QuestionForm';
-import {
-  getQuestion,
-  getQuestionLoading
-} from 'modules/Question/utils/getters';
+import { getQuestion, getQuestionLoading } from 'modules/Question/utils/getters';
 
 class EditQuestion extends Component {
   componentWillMount() {
@@ -39,6 +36,4 @@ const mapDispatchToProps = {
   fetchQuestion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(EditQuestion)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditQuestion));

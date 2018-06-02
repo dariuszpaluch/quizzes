@@ -13,11 +13,11 @@ export default function validation(values) {
   // if (!values.password) {
   //   errors.password = 'Password is required'
   // }
-  if(values.password !== values.repeatPassword) {
+  if (values.password !== values.repeatPassword) {
     errors.repeatPassword = 'The repeated password is not identical to the password';
   }
 
-  return errors
+  return errors;
 }
 
 export const minPasswordLength = minLength(MIN_PASSWORD_LENGTH);

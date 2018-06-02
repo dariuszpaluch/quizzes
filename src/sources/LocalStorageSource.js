@@ -10,7 +10,7 @@ export default class LocalStorageSource {
 
   static deleteToken() {
     localStorage.removeItem('token');
-    localStorage.removeItem("lastTokenUpdateDate");
+    localStorage.removeItem('lastTokenUpdateDate');
     return true;
   }
 }

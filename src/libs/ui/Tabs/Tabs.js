@@ -1,27 +1,31 @@
-import './tabs.scss';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import MaterialTabs, {Tab} from 'material-ui/Tabs';
+import MaterialTabs, { Tab } from 'material-ui/Tabs';
 
 import findIndex from 'lodash/findIndex';
 import isArray from 'lodash/isArray';
 
+import './tabs.scss';
+
 export default class Tabs extends Component {
   static propTypes = {
     value: PropTypes.any,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     tabs: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
       })
-    )
+    ),
+    children: PropTypes.any,
   };
 
   static defaultProps = {
     value: null,
+    tabs: [],
+    children: null,
   };
 
   constructor(props) {
@@ -30,22 +34,17 @@ export default class Tabs extends Component {
     this.getSelectedIndex = ::this.getSelectedIndex;
   }
 
-  renderTabs() {
-    const {
-      tabs
-    } = this.props;
+  onChange = (event, value) => {
+    const { tabs } = this.props;
 
-    return tabs.map(tab => <Tab label={tab.label} key={tab.value}/>);
-  }
+    this.props.onChange(tabs[value]);
+  };
 
   getSelectedIndex() {
-    const {
-      tabs,
-      value,
-    } = this.props;
+    const { tabs, value } = this.props;
 
     return findIndex(tabs, ({ value: tabValue }) => {
-      if(isArray(tabValue)) {
+      if (isArray(tabValue)) {
         return tabValue.indexOf(value) > -1;
       }
 
@@ -53,33 +52,25 @@ export default class Tabs extends Component {
     });
   }
 
-  onChange = (event, value) => {
-    const {
-      tabs
-    } = this.props;
+  renderTabs() {
+    const { tabs } = this.props;
 
-    this.props.onChange(tabs[value]);
-  };
+    return tabs.map(tab => <Tab label={tab.label} key={tab.value} />);
+  }
 
   render() {
-    const {
-      value,
-      onChange,
-      children,
-      tabs,
-      ...props,
-    } = this.props;
+    const { value, onChange, children, tabs, ...props } = this.props;
 
     return (
       <MaterialTabs
         className="tabs"
         {...props}
-        value={ this.getSelectedIndex() }
-        onChange={ this.onChange }
+        value={this.getSelectedIndex()}
+        onChange={this.onChange}
       >
         {this.renderTabs()}
         {children}
       </MaterialTabs>
-    )
+    );
   }
 }

@@ -1,7 +1,7 @@
 import './test_description_card.scss';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Card from 'libs/ui/Card/Card';
 import Icon from 'libs/ui/Icon/Icon';
@@ -11,35 +11,35 @@ import { FormattedDate } from 'react-intl';
 class TestDescriptionCard extends Component {
   static propTypes = {
     test: PropTypes.object.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string
   };
 
   static defaultProps = {
-    description: '',
+    description: ''
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
-    const { className, test: {name, description, created} } = this.props;
+    const {
+      className,
+      test: { name, description, created }
+    } = this.props;
 
     const classes = classnames(className, 'test-description-card');
 
-    return(
+    return (
       <Card
         className={classes}
         title={name}
         subheader={created && <FormattedDate value={created} />}
-      >
-      </Card>
+      />
     );
   }
 }
 
 export default TestDescriptionCard;
-

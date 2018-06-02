@@ -23,14 +23,7 @@ export default class IconButton extends Component {
   };
 
   render() {
-    const {
-      className,
-      icon,
-      onClick,
-      iconSize,
-      loading,
-      ...props
-    } = this.props;
+    const { className, icon, onClick, iconSize, loading, ...props } = this.props;
 
     const classes = classnames('icon-button', className);
 

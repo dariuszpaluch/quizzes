@@ -4,8 +4,7 @@ import isArray from 'lodash/isArray';
 
 import messages from 'modules/_forms/messages';
 
-export const required = value =>
-  value ? undefined : messages.VALIDATION_INPUT_REQUIRED;
+export const required = value => (value ? undefined : messages.VALIDATION_INPUT_REQUIRED);
 
 export const maxLength = max => value =>
   value && value.length > max
@@ -39,9 +38,7 @@ export const email = value =>
     : undefined;
 
 export const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? messages.VALIDATION_INPUT_ALPHANUMERIC
-    : undefined;
+  value && /[^a-zA-Z0-9 ]/i.test(value) ? messages.VALIDATION_INPUT_ALPHANUMERIC : undefined;
 
 export const arrayMinSize = (min, validItem) => value => {
   let items = value;
