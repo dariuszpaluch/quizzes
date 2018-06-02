@@ -13,7 +13,7 @@
   },
   "config": {
     "page_title": "Quizzes",
-    "port": 8000,
+    "port": 5000,
     "public_path": "/",
     "api_url": "https://localhost:3000"
   },

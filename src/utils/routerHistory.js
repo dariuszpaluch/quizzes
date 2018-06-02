@@ -7,10 +7,12 @@ export function parseQuery(query) {
   });
 
   forEach(query, (value, key) => {
-    if (!isNaN(value)) {
+    if (!Number.isNaN(value)) {
       result[key] = parseInt(value);
     }
   });
 
   return result;
 }
+
+export default parseQuery;

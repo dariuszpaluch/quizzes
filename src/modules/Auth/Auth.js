@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -6,42 +7,38 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Tabs from 'libs/ui/Tabs';
 import Card from 'libs/ui/Card/Card';
 
-import { signIn, signInByQuerytoken } from './actions';
-
-import SignInForm from './forms/SignInForm';
-import SignUpForm from './forms/SignUpForm';
-import MainLayout from 'modules/MainLayout/MainLayout';
 import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
-import classnames from 'classnames';
-import { authPaths } from 'consts/paths';
-import paths from 'consts/paths';
+import paths, { authPaths } from 'consts/paths';
 
 import { parseQuery } from 'utils/routerHistory';
 import Rocket from 'components/Rocket/Rocket';
 import Logo from 'components/Logo/Logo';
 import Meteors from 'components/Meteors/Meteors';
 
-class Auth extends Component {
-  static propTypes = {};
+import { signInByQuerytoken } from './actions';
 
-  static defaultProps = {};
+import SignInForm from './forms/SignInForm';
+import SignUpForm from './forms/SignUpForm';
+
+class Auth extends Component {
+  static propTypes = {
+    signInByQuerytoken: PropTypes.func.isRequired
+  };
 
   constructor(props) {
     super(props);
 
-    this.state = {};
-
-    const { match } = props;
+    const { match, intl } = props;
 
     this.tabs = [
       {
-        label: props.intl.formatMessage(messages.SIGN_IN),
+        label: intl.formatMessage(messages.SIGN_IN),
         value: [match.url, `${match.url}${authPaths.SIGN_IN}`],
         path: `${match.url}${authPaths.SIGN_IN}`
       },
       {
-        label: props.intl.formatMessage(messages.SIGN_UP),
+        label: intl.formatMessage(messages.SIGN_UP),
         value: `${match.url}${authPaths.SIGN_UP}`,
         path: `${match.url}${authPaths.SIGN_UP}`
       }
@@ -96,7 +93,6 @@ class Auth extends Component {
 }
 
 const mapDispatchToProps = {
-  signIn,
   signInByQuerytoken
 };
 

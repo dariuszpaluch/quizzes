@@ -1,8 +1,11 @@
 import { createReducer } from 'utils/reducerUtils';
 
-import { SIGN_IN, LOGOUT } from './actionTypes';
 import LocalStorageSource from 'sources/LocalStorageSource';
-import { USER_INFO } from 'modules/Auth/actionTypes';
+
+import { SIGN_IN, LOGOUT,    USER_INFO } from './actionTypes';
+
+
+
 
 function getInitState() {
   return {

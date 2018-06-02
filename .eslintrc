@@ -28,11 +28,27 @@
         "react/forbid-prop-types": 0,
         "linebreak-style": 0,
         "prettier/prettier": [
-            "error",
+            1,
             {
                 "singleQuote": true,
                 "printWidth": 100
             }
+        ],
+        "react/prop-types": [
+            1,
+            {
+                "ignore": [
+                    "children",
+                    "location",
+                    "match",
+                    "intl",
+                    "history"
+                ]
+            }
+        ],
+        "radix": [
+            1,
+            "as-needed"
         ]
     }
 }
