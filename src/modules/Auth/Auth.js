@@ -100,4 +100,7 @@ const mapDispatchToProps = {
   signInByQuerytoken
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(injectIntl(Auth)));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(injectIntl(Auth)));

@@ -1,16 +1,19 @@
+const TOKEN_KEY = 'token';
+const LAST_TOKEN_UPDATE_DATE = 'lastTokenUpdateDate';
+
 export default class LocalStorageSource {
   static getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   static setToken(token) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('lastTokenUpdateDate', new Date());
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(LAST_TOKEN_UPDATE_DATE, new Date());
   }
 
   static deleteToken() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('lastTokenUpdateDate');
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(LAST_TOKEN_UPDATE_DATE);
     return true;
   }
 }

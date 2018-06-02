@@ -4,27 +4,41 @@ const Sync = require('browser-sync-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
 
-const config = require('./config');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
+const compress = require('compression');
+const webpackServeWaitpage = require('webpack-serve-waitpage');
+const internalIp = require('internal-ip');
 
+const config = require('./config');
 
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
 const port = packageJSON.config.port;
+const publicPath =  packageJSON.config.public_path;
 
 module.exports = merge(config, {
   mode: 'development',
-  devtool: '#cheap-module-eval-source-map',
-  devServer: {
-    contentBase: 'build',
-    hot: true,
-    inline: true,
-    port: parseInt(port) - 1,
+  devtool: '#eval-source-map',
+  serve: {
+    content: 'build',
     host: '0.0.0.0',
-    disableHostCheck: true,
-    headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true" },
-    historyApiFallback: {
-      disableDotRule: true
-    }
+    hot: {
+      host: {
+        server: '0.0.0.0',
+        client: internalIp.v4.sync()
+      }
+    },
+    port: port,
+    add: (app, middleware, options) => {
+      app.use(webpackServeWaitpage(options, {
+        theme: 'dark',
+        title: packageJSON.name,
+      }));
+      app.use(convert(compress()));
+      app.use(convert(history({})));
+    },
+    clipboard: false
   },
   module: {
     rules: [
@@ -69,33 +83,17 @@ module.exports = merge(config, {
     ]
   },
   output: {
+    publicPath: 'http://localhost:' + port + publicPath,
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
-    publicPath: PUBLIC_PATH,
   },
 
   plugins: [
     new Webpack.DefinePlugin({
       'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),
     }),
-    new Sync({
-      host: 'localhost',
-      logLevel: 'silent',
-      notify: false,
-      open: false,
-      ghostMode: false,
-      port: parseInt(port),
-      proxy: 'http://localhost:' + (parseInt(port) - 1) + PUBLIC_PATH,
-      ui: false,
-    }, {
-        reload: false,
-      }),
-    new Webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
-
     new Webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors
-
     new Webpack.LoaderOptionsPlugin({
       debug: true
     })
