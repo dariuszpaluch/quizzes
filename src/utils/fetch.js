@@ -1,8 +1,7 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
 import LocalStorageSource from 'sources/LocalStorageSource';
-import size from 'lodash/size';
-import customException from '../exceptions/CustomException';
+import CustomException from '../exceptions/CustomException';
 
 const getResponse = response => {
   const contentType = response.headers.get('content-type');
@@ -31,7 +30,7 @@ function fetch(method, url, { body, header, customResponseHandler, submissionErr
       }
       const result = await response.json();
 
-      throw new customException(result, response.status);
+      throw new CustomException(result, response.status);
     } else {
       return getResponse(response);
     }

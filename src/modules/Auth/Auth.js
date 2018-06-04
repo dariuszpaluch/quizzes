@@ -11,6 +11,8 @@ import { injectIntl } from 'react-intl';
 import messages from 'modules/Auth/utils/messages';
 import paths, { authPaths } from 'consts/paths';
 
+import SignInForm from './forms/SignInForm';
+
 import { parseQuery } from 'utils/routerHistory';
 import Rocket from 'components/Rocket/Rocket';
 import Logo from 'components/Logo/Logo';
@@ -18,7 +20,6 @@ import Meteors from 'components/Meteors/Meteors';
 
 import { signInByQuerytoken } from './actions';
 
-import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
 
 class Auth extends Component {
@@ -80,6 +81,7 @@ class Auth extends Component {
               textColor="primary"
               fullWidth
             />
+
             <Switch>
               <Route exact path={match.url} component={SignInForm} />
               <Route exact path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />

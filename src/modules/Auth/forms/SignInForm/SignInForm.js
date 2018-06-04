@@ -20,6 +20,7 @@ import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
 import paths from 'consts/paths';
 import SocialMediaLoginButtons from 'modules/Auth/components/SocialMediaLoginButtons';
+
 class SignInForm extends Component {
   static propTypes = {};
 
@@ -71,7 +72,6 @@ class SignInForm extends Component {
         <Button variant="raised" type="submit" color="primary" className="submit-button">
           {intl.formatMessage(messages.SIGN_IN)}
         </Button>
-
         <SocialMediaLoginButtons />
       </form>
     );
@@ -89,4 +89,7 @@ const mapDispatchToProps = {
   signIn
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(injectIntl(SignInForm)));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(injectIntl(SignInForm)));
