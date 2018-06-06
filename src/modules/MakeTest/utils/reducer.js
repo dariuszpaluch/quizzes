@@ -29,12 +29,10 @@ function getInitState() {
 function fetchTestToBeCompletedSuccess(state, action) {
   const test = action.data;
 
-  const questions = map(test.questions, question => {
-    return {
+  const questions = map(test.questions, question => ({
       ...question,
       answers: randomizeArray(question.answers)
-    };
-  });
+    }));
 
   return updateObject(state, {
     testData: {
@@ -47,7 +45,7 @@ function fetchTestToBeCompletedSuccess(state, action) {
 }
 
 function fetchTestResultSuccess(state, action) {
-  const test = action.data.test;
+  const { test } = action.data;
 
   const answers = {};
   forEach(action.data.answers, answer => {
@@ -55,7 +53,7 @@ function fetchTestResultSuccess(state, action) {
   });
   return updateObject(state, {
     testData: {
-      ...omit(test, 'questions'),
+      ...omit(test, 'questions', 'userAnswers'),
       created: test.created && new Date(test.created)
     },
     questions: normalizeList(test.questions),

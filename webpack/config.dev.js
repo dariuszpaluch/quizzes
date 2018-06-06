@@ -1,6 +1,5 @@
 const path = require('path');
 
-const Sync = require('browser-sync-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
 
