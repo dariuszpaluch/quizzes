@@ -12,7 +12,7 @@ export default class PercentageCircle extends Component {
     size: PropTypes.number,
     label: PropTypes.string,
     labelSize: PropTypes.number,
-    valueSize: PropTypes.number
+    valueSize: PropTypes.number,
   };
 
   static defaultProps = {
@@ -20,7 +20,7 @@ export default class PercentageCircle extends Component {
     size: 150,
     label: '',
     labelSize: 10,
-    valueSize: 35
+    valueSize: 35,
   };
 
   constructor(props) {
@@ -30,7 +30,7 @@ export default class PercentageCircle extends Component {
   }
 
   render() {
-    const { className, percentage, size, label, labelSize, valueSize } = this.props;
+    const { className, percentage, size, label, labelSize, valueSize, lineWidth } = this.props;
 
     const classes = classnames('progress', className);
 
