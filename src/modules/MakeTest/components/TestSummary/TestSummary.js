@@ -31,8 +31,9 @@ class TestSummary extends Component {
         to={parsePath(`${paths.TESTS}${testsPaths.TEST_RESULT}`, {
           testAnswerId
         })}
+        disabled
       >
-        <Button color="primary" onClick={() => {}} icon={icons.tests}>
+        <Button disabled color="primary" onClick={() => {}} icon={icons.tests}>
           {intl.formatMessage(messages.TEST_SUMMARY_GO_TO_TEST_RESULT)}
         </Button>
       </Link>
@@ -55,7 +56,7 @@ class TestSummary extends Component {
       >
         <PercentageCircle
           className="test-percentage-result"
-          percentage={Math.floor(correctQuestions / numberOfQuestions * 100)}
+          percentage={Math.floor((correctQuestions / numberOfQuestions) * 100)}
           label="Wynik testu"
           labelSize={20}
           valueSize={60}
