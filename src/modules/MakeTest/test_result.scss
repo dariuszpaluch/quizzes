@@ -17,6 +17,7 @@
   }
 
   .question-item {
+    margin-top: 5px;
     &.correct {
       background-color: rgba($success-color, 0.8);
     }

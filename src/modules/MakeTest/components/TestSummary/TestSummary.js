@@ -1,5 +1,3 @@
-import './test_summary.scss';
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -16,6 +14,8 @@ import Typography from 'libs/ui/Typography/Typography';
 import { Link } from 'react-router-dom';
 import paths, { testsPaths } from 'consts/paths';
 import parsePath from 'utils/parsePath';
+
+import './test_summary.scss';
 
 class TestSummary extends Component {
   renderActions() {

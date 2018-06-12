@@ -1,5 +1,3 @@
-import './test_result.scss';
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -7,16 +5,18 @@ import { connect } from 'react-redux';
 
 import List from 'libs/ui/List/List';
 
-import { getTestResult } from './utils/actions';
-
 import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
 import map from 'lodash/map';
 import size from 'lodash/size';
-import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
+import PercentageCircle from 'components/PerentageCircle/PercentageCircle.js';
 import Card from 'libs/ui/Card/Card';
 import every from 'lodash/every';
 import Typography from 'libs/ui/Typography/Typography';
+
+import { getTestResult } from './utils/actions';
+
+import './test_result.scss';
 
 class TestResult extends Component {
   static propTypes = {};
@@ -34,7 +34,10 @@ class TestResult extends Component {
   }
 
   questionIsCorrect(allCorrectAnswers, userAnswers) {
-    return every(allCorrectAnswers, answer => userAnswers.indexOf(answer) >= 0) && size(allCorrectAnswers) === size(userAnswers);
+    return (
+      every(allCorrectAnswers, answer => userAnswers.indexOf(answer) >= 0) &&
+      size(allCorrectAnswers) === size(userAnswers)
+    );
   }
 
   renderAnswers(answers, userAnswers) {
@@ -42,15 +45,19 @@ class TestResult extends Component {
       <div>
         {answers.map(answer => {
           const correct = userAnswers.indexOf(answer.id) >= 0;
-          return <p
-            key={answer.id}
-            className={classnames('answer', {
-              correct
-            })}
-          >{answer.label}</p>
+          return (
+            <p
+              key={answer.id}
+              className={classnames('answer', {
+                correct
+              })}
+            >
+              {answer.label}
+            </p>
+          );
         })}
       </div>
-    )
+    );
   }
 
   renderQuestions() {
@@ -60,7 +67,10 @@ class TestResult extends Component {
     let corrects = 0;
 
     forEach(questions.byId, question => {
-      const allCorrectAnswers = map(filter(question.answers, { correct: true }), answer => answer.id);
+      const allCorrectAnswers = map(
+        filter(question.answers, { correct: true }),
+        answer => answer.id
+      );
       const correct = this.questionIsCorrect(allCorrectAnswers, answers[question.id]);
 
       if (correct) corrects += 1;
@@ -68,16 +78,15 @@ class TestResult extends Component {
         label: question.question,
         className: classnames('question-item', {
           correct,
-          'wrong': !correct,
+          wrong: !correct
         }),
         children: this.renderAnswers(question.answers, answers[question.id])
-      }
+      };
     });
-
 
     return {
       questionsRendered,
-      corrects,
+      corrects
     };
   }
 
@@ -97,12 +106,11 @@ class TestResult extends Component {
             valueSize={15}
             size={50}
           />
-          <Typography variant="subheading">Poprawnych odpowiedzi {corrects} z {size(questions.allIds)}</Typography>
+          <Typography variant="subheading">
+            Poprawnych odpowiedzi {corrects} z {size(questions.allIds)}
+          </Typography>
         </div>
-        <List
-          rowsIds={questions.allIds}
-          rows={questionsRendered}
-        />
+        <List rowsIds={questions.allIds} rows={questionsRendered} />
       </Card>
     );
   }

@@ -3,8 +3,6 @@ import './percentage_circle.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Circle from 'react-circle';
-import Typography from 'libs/ui/Typography/Typography';
 
 export default class PercentageCircle extends Component {
   static propTypes = {
@@ -30,7 +28,7 @@ export default class PercentageCircle extends Component {
   }
 
   render() {
-    const { className, percentage, size, label, labelSize, valueSize, lineWidth } = this.props;
+    const { className, percentage, size, label, labelSize, valueSize } = this.props;
 
     const classes = classnames('progress', className);
 
