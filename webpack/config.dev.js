@@ -1,6 +1,5 @@
 const path = require('path');
 
-const Sync = require('browser-sync-webpack-plugin');
 const merge = require('webpack-merge');
 const Webpack = require('webpack');
 
@@ -43,7 +42,7 @@ module.exports = merge(config, {
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /(\.js|\.jsx)$/,
         use: [
           {
             loader: 'babel-loader',
@@ -87,7 +86,6 @@ module.exports = merge(config, {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
   },
-
   plugins: [
     new Webpack.DefinePlugin({
       'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),

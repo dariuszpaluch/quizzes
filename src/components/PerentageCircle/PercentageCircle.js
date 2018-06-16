@@ -3,8 +3,6 @@ import './percentage_circle.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Circle from 'react-circle';
-import Typography from 'libs/ui/Typography/Typography';
 
 export default class PercentageCircle extends Component {
   static propTypes = {
@@ -12,7 +10,7 @@ export default class PercentageCircle extends Component {
     size: PropTypes.number,
     label: PropTypes.string,
     labelSize: PropTypes.number,
-    valueSize: PropTypes.number
+    valueSize: PropTypes.number,
   };
 
   static defaultProps = {
@@ -20,7 +18,7 @@ export default class PercentageCircle extends Component {
     size: 150,
     label: '',
     labelSize: 10,
-    valueSize: 35
+    valueSize: 35,
   };
 
   constructor(props) {

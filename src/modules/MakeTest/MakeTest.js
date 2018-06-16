@@ -24,10 +24,11 @@ import {
   getQuestionRating,
   getTestRating
 } from 'modules/MakeTest/utils/getters';
+
 import MainLayout from 'modules/MainLayout/MainLayout';
 import Loading from 'libs/ui/Loading/Loading';
 import MakeTestForm from 'modules/MakeTest/components/MakeTestForm/MakeTestForm';
-import TestSummary from 'modules/MakeTest/components/TestSummary/TestSummary';
+import TestSummary from './components/TestSummary/TestSummary';
 import messages from 'modules/MakeTest/utils/messages';
 import paths from 'consts/paths';
 import { injectIntl } from 'react-intl';
@@ -50,12 +51,17 @@ class MakeTest extends Component {
     super(props);
 
     this.state = {
-      viewState: STATES.START
+      viewState: STATES.START,
+      testResultId: ''
     };
   }
 
   componentWillMount() {
     this.props.fetchTestToBeCompleted(this.props.testId);
+  }
+
+  componentDidMount() {
+    this.updateAppBar();
   }
 
   componentWillUpdate(nextProps, nextState, nextContext) {
@@ -64,13 +70,9 @@ class MakeTest extends Component {
     }
   }
 
-  componentDidMount() {
-    this.updateAppBar();
-  }
-
   updateAppBar(props) {
     const { mainLayoutContext, testDescription } = props || this.props;
-    if (!!mainLayoutContext) {
+    if (mainLayoutContext) {
       const { setAppBarData } = mainLayoutContext;
 
       setAppBarData({
@@ -97,11 +99,13 @@ class MakeTest extends Component {
     const { history, intl, answers, testId } = this.props;
 
     const onSuccess = data => {
+      console.log(data);
+
       this.setState(
         {
           questionsWithCorrect: data.questions,
           correctQuestions: data.correctQuestions,
-          testAnswerId: data.testAnswerId
+          testResultId: data.testAnswerId
         },
         () => {
           toastr.success(intl.formatMessage(messages.TEST_SAVE_SUCCESS_TOASTR));
@@ -172,7 +176,7 @@ class MakeTest extends Component {
   }
 
   renderTestResult() {
-    const { questionsWithCorrect, correctQuestions, testAnswerId } = this.state;
+    const { questionsWithCorrect, correctQuestions, testResultId } = this.state;
     const { answers, testRating, questionsIds } = this.props;
 
     return (
@@ -183,21 +187,19 @@ class MakeTest extends Component {
         testRating={testRating}
         correctQuestions={correctQuestions}
         numberOfQuestions={size(questionsIds)}
-        testAnswerId={testAnswerId}
+        testResultId={testResultId}
       />
     );
   }
 
   renderContent() {
     switch (this.state.viewState) {
-      case STATES.START:
-        return this.renderStartView();
       case STATES.ANSWER:
         return this.renderTestForm();
-      case STATES.SUMMARY: {
+      case STATES.SUMMARY:
         return this.renderTestResult();
-      }
-      // return this.renderTestSummary();
+      default:
+        return this.renderStartView();
     }
   }
 

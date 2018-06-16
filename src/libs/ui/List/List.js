@@ -17,10 +17,10 @@ import size from 'lodash/size';
 
 export default class List extends Component {
   static propTypes = {
-    className: PropTypes.string,
     rowsIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
     rows: PropTypes.objectOf(
       PropTypes.shape({
+        className: PropTypes.string,
         label: PropTypes.string,
         children: PropTypes.any
       })

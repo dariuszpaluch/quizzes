@@ -1,0 +1,33 @@
+@import '~styles/colors';
+
+.test-result {
+
+  .test-result-stats {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+
+    .test-percentage-result {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    > h3 {
+      margin: auto 0;
+    }
+  }
+
+  .question-item {
+    margin-top: 5px;
+    &.correct {
+      background-color: rgba($success-color, 0.8);
+    }
+
+    &.wrong {
+      background-color: rgba($error-color, 0.6);
+    }
+  }
+
+  p.answer {
+    padding-left: 30px;
+  }
+}

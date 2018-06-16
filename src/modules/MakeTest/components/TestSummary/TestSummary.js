@@ -19,7 +19,7 @@ import parsePath from 'utils/parsePath';
 
 class TestSummary extends Component {
   renderActions() {
-    const { intl, testAnswerId } = this.props;
+    const { intl, testResultId } = this.props;
     return [
       <Link key="return" to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}>
         <Button onClick={() => {}} icon={icons.ARROW_BACK}>
@@ -28,8 +28,8 @@ class TestSummary extends Component {
       </Link>,
       <Link
         key="test-result"
-        to={parsePath(`${paths.TESTS}${testsPaths.TEST_RESULT}`, {
-          testAnswerId
+        to={parsePath(paths.TESTS_RESULTS, {
+          testResultId
         })}
         disabled
       >
@@ -56,7 +56,7 @@ class TestSummary extends Component {
       >
         <PercentageCircle
           className="test-percentage-result"
-          percentage={Math.floor((correctQuestions / numberOfQuestions) * 100)}
+          percentage={Math.floor(correctQuestions / numberOfQuestions * 100)}
           label="Wynik testu"
           labelSize={20}
           valueSize={60}
