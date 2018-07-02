@@ -29,7 +29,7 @@ import localeData from '../locales/data.json';
 addLocaleData([...en, ...pl]);
 const history = createHistory();
 
-openWebSocket(store, history);
+// openWebSocket(store, history);
 
 const AppComponent = () => {
   const language =

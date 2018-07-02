@@ -22,6 +22,7 @@ div.test-summary {
     .test-percentage-result {
       margin: 2 * $container-margin auto;
       transition: transform 1s linear;
+
       &:hover {
         transform: scale(1.1);
       }
