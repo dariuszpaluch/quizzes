@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+
 import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader';
 
@@ -20,10 +22,14 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 
 import SmartMainLayout from 'modules/MainLayout/SmartMainLayout';
 import store from './store';
+import openWebSocket from './webSocket/webSocket';
 
 import localeData from '../locales/data.json';
 
 addLocaleData([...en, ...pl]);
+const history = createHistory();
+
+openWebSocket(store, history);
 
 const AppComponent = () => {
   const language =
@@ -35,7 +41,7 @@ const AppComponent = () => {
   return (
     <IntlProvider locale={language} messages={messages}>
       <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
           <AppContainer>
             <SmartMainLayout>
               <Switch>
@@ -48,7 +54,7 @@ const AppComponent = () => {
               </Switch>
             </SmartMainLayout>
           </AppContainer>
-        </BrowserRouter>
+        </Router>
       </Provider>
     </IntlProvider>
   );

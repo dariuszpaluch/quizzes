@@ -105,6 +105,7 @@ module.exports = {
       config: path.resolve(__dirname, '../src/config'),
       sources: path.resolve(__dirname, '../src/sources'),
       settings: path.resolve(__dirname, '../src/settings'),
+      webSocket: path.resolve(__dirname, '../src/webSocket'),
       src: path.resolve(__dirname, '../src')
     }
   }
