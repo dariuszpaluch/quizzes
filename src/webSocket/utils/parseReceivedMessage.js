@@ -6,13 +6,13 @@ export default function parseReceivedMessage(msg) {
   let parsedData = JSON.parse(msg.data);
 
   return {
-    type: parsedData.Type,
-    data: omit(parsedData, 'Type')
+    type: parsedData.type,
+    data: omit(parsedData, 'type')
   };
   }
   catch (err) {
     console.group('WebSocket');
-    console.warn(`Message ommited, wrong structure of message: ${msg}`);
+    console.warn(`Message ommited, wrong structure of message: ${JSON.stringify(msg)}`);
     console.groupEnd();
     return {};
   }

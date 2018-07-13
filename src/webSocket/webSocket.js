@@ -3,12 +3,16 @@ import parseReceivedMessage from './utils/parseReceivedMessage';
 import handleMessage from './handleMessage';
 import { SIGN_IN } from 'modules/Auth/actionTypes';
 
-const MAX_RECONNECT_NUMBER_OF_TRIALS = 5;
-let webSocket = null;
+const MAX_RECONNECT_NUMBER_OF_TRIALS = 10;
 let reconnectNumber = 0;
 
+let webSocket = null;
+let reconnectTimeout = null;
+
 export function _webSocketLog(...args) {
-  console.info(`[Websocket]`, ...args);
+  console.group('WebSocket');
+  console.info(...args);
+  console.groupEnd();
 }
 
 export function getWebsocketIsOpen() {
@@ -22,9 +26,10 @@ export function webSocketMiddleware(store) {
     if (getWebsocketIsOpen()) {
       transmissionReduxActions(webSocket, action, store);
     } else if(action.type === `${SIGN_IN}_SUCCESS`) {
-      console.log(action, action.data.token);
-
       openWebSocket(store, null, action.data.token)
+    } else if(action.type === `LOGOUT`) {
+      webSocket.close();
+      reconnectTimeout && clearTimeout(reconnectTimeout);
     }
 
     return result;
@@ -32,17 +37,17 @@ export function webSocketMiddleware(store) {
 }
 
 export default function openWebSocket(store, history, token) {
-  console.log('token', token);
   webSocket = new WebSocket(`ws://localhost:3001?token=${token}`);
   _webSocketLog('Try to connect to ws://localhost:3001');
 
   webSocket.onopen = _onOpenConnection;
-  // webSocket.onclose = _onCloseConnection.bind(null, store);
+  webSocket.onclose = _onCloseConnection.bind(null, store);
   webSocket.onmessage = _onMessage.bind(null, store, history);
   webSocket.onerror = _onError;
 }
 
 function _onOpenConnection() {
+  reconnectTimeout = null;
   _webSocketLog('Open connection');
   reconnectNumber = 0;
 
@@ -63,9 +68,9 @@ function _onCloseConnection(store, event) {
 
   if (reconnectNumber < MAX_RECONNECT_NUMBER_OF_TRIALS) {
     reconnectNumber += 1;
-    setTimeout(function() {
+    reconnectTimeout = setTimeout(function() {
       openWebSocket(store);
-    }, reconnectNumber * 1000);
+    }, reconnectNumber * 2000);
   } else {
     alert('Problem z połączeniem się z serwerem webSocket');
   }
@@ -74,3 +79,5 @@ function _onCloseConnection(store, event) {
 function _onError() {
   _webSocketLog('Some error in communication.');
 }
+
+

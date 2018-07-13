@@ -25,6 +25,7 @@ import store from './store';
 import openWebSocket from './webSocket/webSocket';
 
 import localeData from '../locales/data.json';
+import RootAppComponent from 'src/RootAppComponent';
 
 addLocaleData([...en, ...pl]);
 const history = createHistory();
@@ -43,16 +44,7 @@ const AppComponent = () => {
       <Provider store={store}>
         <Router history={history}>
           <AppContainer>
-            <SmartMainLayout>
-              <Switch>
-                <Route path={paths.DASHBOARD} component={Dashboard} />
-                <Route path={paths.MAKE_TEST} component={MakeTest} />
-                <Route path={paths.TESTS_RESULTS} component={TestResult} />
-                <Route path={paths.TESTS} component={Tests} />
-                <Route path={paths.QUESTIONS} component={Question} />
-                <Route path={paths.INDEX} component={Auth} />
-              </Switch>
-            </SmartMainLayout>
+            <RootAppComponent />
           </AppContainer>
         </Router>
       </Provider>

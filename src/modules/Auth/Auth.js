@@ -45,16 +45,16 @@ class Auth extends Component {
       }
     ];
   }
-
-  componentDidMount() {
-    const { history, location } = this.props;
-    const query = parseQuery(location.search);
-
-    if (query.token) {
-      this.props.signInByQuerytoken(query.token);
-      history.push(paths.DASHBOARD);
-    }
-  }
+  //
+  // componentDidMount() {
+  //   const { history, location } = this.props;
+  //   const query = parseQuery(location.search);
+  //
+  //   if (query.token) {
+  //     this.props.signInByQuerytoken(query.token);
+  //     history.push(paths.DASHBOARD);
+  //   }
+  // }
 
   onChangeTab = selectedOption => {
     if (selectedOption && selectedOption.path) this.props.history.push(selectedOption.path);
