@@ -45,16 +45,6 @@ class Auth extends Component {
       }
     ];
   }
-  //
-  // componentDidMount() {
-  //   const { history, location } = this.props;
-  //   const query = parseQuery(location.search);
-  //
-  //   if (query.token) {
-  //     this.props.signInByQuerytoken(query.token);
-  //     history.push(paths.DASHBOARD);
-  //   }
-  // }
 
   onChangeTab = selectedOption => {
     if (selectedOption && selectedOption.path) this.props.history.push(selectedOption.path);
@@ -83,8 +73,8 @@ class Auth extends Component {
             />
 
             <Switch>
-              <Route exact path={match.url} component={SignInForm} />
-              <Route exact path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
+              <Route path={match.url} component={SignInForm} />
+              <Route path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
               <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
             </Switch>
           </Card>

@@ -36,7 +36,6 @@ import { parseQuery } from 'utils/routerHistory';
 import { signInByQuerytoken } from 'modules/Auth/actions';
 import { logout } from 'modules/Auth/actions';
 
-
 class RootAppComponent extends Component {
   static propTypes = {};
 
@@ -49,35 +48,30 @@ class RootAppComponent extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('storage',this.onChangeLocalStorage);
+    window.addEventListener('storage', this.onChangeLocalStorage);
 
-      const { history, location } = this.props;
-      const query = parseQuery(location.search);
+    const { history, location } = this.props;
+    const query = parseQuery(location.search);
     const localStorageToken = LocalStorageSource.getToken();
 
     const token = query.token || localStorageToken;
 
-      if (token) {
-        this.props.signInByQuerytoken(token );
-        this.props.history.push(location.pathname);
-
-        console.log(location);
-      }
+    if (token) {
+      this.props.signInByQuerytoken(token);
+      history.push(location.pathname)
+    }
   }
 
   onChangeLocalStorage = () => {
-    const { location, history} = this.props;
-
     const token = LocalStorageSource.getToken();
-    if(!!token && (!this.props.token || token !== this.props.token)) {
+    if (!!token && (!this.props.token || token !== this.props.token)) {
       this.props.signInByQuerytoken(token);
     }
 
-    if(!token) {
+    if (!token) {
       this.props.logout();
     }
   };
-
 
   renderAuthenticatedContent() {
     return (
@@ -90,7 +84,7 @@ class RootAppComponent extends Component {
           <Route path={paths.QUESTIONS} component={Question} />
         </Switch>
       </SmartMainLayout>
-    )
+    );
   }
 
   render() {
@@ -100,19 +94,24 @@ class RootAppComponent extends Component {
       return this.renderAuthenticatedContent();
     }
 
-    return <Route path={paths.INDEX} component={Auth} />
+    return <Route path={paths.INDEX} component={Auth} />;
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    token: getToken(state),
-  }
+    token: getToken(state)
+  };
 };
 
 const mapDispatchToProps = {
   signInByQuerytoken,
-  logout,
+  logout
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RootAppComponent));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(RootAppComponent)
+);
