@@ -34,6 +34,7 @@ import { getToken } from 'modules/Auth/reducer';
 import LocalStorageSource from 'sources/LocalStorageSource';
 import { parseQuery } from 'utils/routerHistory';
 import { signInByQuerytoken } from 'modules/Auth/actions';
+import { logout } from 'modules/Auth/actions';
 
 
 class RootAppComponent extends Component {
@@ -52,20 +53,30 @@ class RootAppComponent extends Component {
 
       const { history, location } = this.props;
       const query = parseQuery(location.search);
+    const localStorageToken = LocalStorageSource.getToken();
 
-      console.log(query);
+    const token = query.token || localStorageToken;
 
-      if (query.token) {
-        this.props.signInByQuerytoken(query.token);
+      if (token) {
+        this.props.signInByQuerytoken(token );
+        this.props.history.push(location.pathname);
+
+        console.log(location);
       }
   }
 
   onChangeLocalStorage = () => {
+    const { location, history} = this.props;
+
     const token = LocalStorageSource.getToken();
-    if(!!token) {
-      LocalStorageSource.getToken();
+    if(!!token && (!this.props.token || token !== this.props.token)) {
+      this.props.signInByQuerytoken(token);
     }
-  }
+
+    if(!token) {
+      this.props.logout();
+    }
+  };
 
 
   renderAuthenticatedContent() {
@@ -101,6 +112,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   signInByQuerytoken,
+  logout,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RootAppComponent));

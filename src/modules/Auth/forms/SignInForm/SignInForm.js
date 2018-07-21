@@ -33,16 +33,7 @@ class SignInForm extends Component {
   }
 
   signIn = values => {
-    this.props.signIn(values, this.onSignInSuccess, this.onSignInFailure);
-  };
-
-  onSignInSuccess = () => {
-    const { intl, history } = this.props;
-    // const content = intl.formatMessage(toastrMessages.TOASTR_SIGN_IN_SUCCESS);
-    // const title = intl.formatMessage(messages.SIGN_IN);
-
-    // toastr.success(content, title);
-    history.push(paths.DASHBOARD);
+    this.props.signIn(values, null, this.onSignInFailure);
   };
 
   onSignInFailure = () => {
@@ -51,8 +42,6 @@ class SignInForm extends Component {
 
   render() {
     const { handleSubmit, intl, location } = this.props;
-
-    const returnUrl = window.document.location.href + location.search;
 
     return (
       <form className="sign-in-form" onSubmit={handleSubmit(this.signIn)}>
