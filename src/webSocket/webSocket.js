@@ -26,6 +26,8 @@ export function webSocketMiddleware(store) {
     if (getWebsocketIsOpen()) {
       transmissionReduxActions(webSocket, action, store);
     } else if(action.type === `${SIGN_IN}_SUCCESS`) {
+      console.log(action);
+
       openWebSocket(store, null, action.data.token)
     } else if(action.type === `LOGOUT`) {
       webSocket.close();
@@ -38,10 +40,10 @@ export function webSocketMiddleware(store) {
 
 export default function openWebSocket(store, history, token) {
   webSocket = new WebSocket(`ws://localhost:3001?token=${token}`);
-  _webSocketLog('Try to connect to ws://localhost:3001');
+  _webSocketLog(`Try to connect to ws://localhost:3001?token=${token}`);
 
   webSocket.onopen = _onOpenConnection;
-  webSocket.onclose = _onCloseConnection.bind(null, store);
+  webSocket.onclose = _onCloseConnection.bind(null, store, history, token);
   webSocket.onmessage = _onMessage.bind(null, store, history);
   webSocket.onerror = _onError;
 }
@@ -63,13 +65,13 @@ function _onMessage(store, history, evt) {
   handleMessage(store, history, message);
 }
 
-function _onCloseConnection(store, event) {
+function _onCloseConnection(store, history, token, event) {
   _webSocketLog('Connection has been closed.', event);
 
   if (reconnectNumber < MAX_RECONNECT_NUMBER_OF_TRIALS) {
     reconnectNumber += 1;
     reconnectTimeout = setTimeout(function() {
-      openWebSocket(store);
+      openWebSocket(store, history, token);
     }, reconnectNumber * 2000);
   } else {
     alert('Problem z połączeniem się z serwerem webSocket');

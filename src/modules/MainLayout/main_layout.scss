@@ -52,6 +52,7 @@ $app-bar-height: 50px;
     width: 100%;
     min-height: calc(100vh - #{$app-bar-height});
     display: flex;
+    background-color: $background-primary-color;
 
     > div {
       width: 100%;

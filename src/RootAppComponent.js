@@ -77,11 +77,11 @@ class RootAppComponent extends Component {
     return (
       <SmartMainLayout>
         <Switch>
-          <Route path={paths.INDEX} component={Dashboard} />
           <Route path={paths.MAKE_TEST} component={MakeTest} />
           <Route path={paths.TESTS_RESULTS} component={TestResult} />
           <Route path={paths.TESTS} component={Tests} />
           <Route path={paths.QUESTIONS} component={Question} />
+          <Route path={paths.INDEX} component={Dashboard} />
         </Switch>
       </SmartMainLayout>
     );
