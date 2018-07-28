@@ -73,9 +73,9 @@ class Auth extends Component {
             />
 
             <Switch>
-              <Route path={match.url} component={SignInForm} />
+              <Route path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
               <Route path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
-              <Route exact path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
+              <Route path={match.url} component={SignInForm} />
             </Switch>
           </Card>
         </div>
