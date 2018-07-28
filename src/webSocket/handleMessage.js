@@ -10,8 +10,8 @@ export default function handleMessage(store, history, { type, data }) {
   switch (type) {
     case GET_TEST_TO_COMPLETED: {
       toastr.success(
-        `Użytkownik ${data.users[0].details.firstName} ${
-          data.users[0].details.surname
+        `Użytkownik ${data.users[0].firstName} ${
+          data.users[0].surname
         } otworzył twój test: ${data.test.name}`
       );
 

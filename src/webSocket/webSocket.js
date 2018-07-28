@@ -23,16 +23,16 @@ export function webSocketMiddleware(store) {
   return next => action => {
     const result = next(action);
 
-    if (getWebsocketIsOpen()) {
-      transmissionReduxActions(webSocket, action, store);
-    } else if(action.type === `${SIGN_IN}_SUCCESS`) {
-      console.log(action);
-
-      openWebSocket(store, null, action.data.token)
-    } else if(action.type === `LOGOUT`) {
-      webSocket.close();
-      reconnectTimeout && clearTimeout(reconnectTimeout);
-    }
+    // if (getWebsocketIsOpen()) {
+    //   transmissionReduxActions(webSocket, action, store);
+    // } else if(action.type === `${SIGN_IN}_SUCCESS`) {
+    //   console.log(action);
+    //
+    //   openWebSocket(store, null, action.data.token)
+    // } else if(action.type === `LOGOUT`) {
+    //   webSocket.close();
+    //   reconnectTimeout && clearTimeout(reconnectTimeout);
+    // }
 
     return result;
   };

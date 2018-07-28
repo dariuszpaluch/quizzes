@@ -13,9 +13,11 @@ import validate, { minPasswordLength } from './signUpValidation';
 import { signUp } from 'modules/Auth/actions';
 import { connect } from 'react-redux';
 import { email, required } from 'modules/_forms/validations';
-import messages from 'modules/Auth/utils/messages';
+import messages, { toastrMessages } from 'modules/Auth/utils/messages';
 import { injectIntl } from 'react-intl';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
+import { toastr } from 'react-redux-toastr';
+import paths from 'consts/paths';
 
 class SignUpForm extends Component {
   static propTypes = {};
@@ -43,8 +45,19 @@ class SignUpForm extends Component {
   }
 
   onSubmit = values => {
-    const { login, firstName, surname, email, password } = values;
-    this.props.signUp({ login, password, firstName, surname, email });
+    const { login, firstName, lastName, email, password} = values;
+    const { intl, history  } = this.props;
+
+    const onSuccess = () => {
+      toastr.success(intl.formatMessage(toastrMessages.SIGN_UP_SUCCESS));
+      history.push(paths.INDEX);
+    };
+
+    const onError = () => {
+      toastr.error(intl.formatMessage(toastrMessages.SIGN_UP_FAILURE))
+    };
+
+    this.props.signUp({ login, password, firstName, lastName, email }, onSuccess, onError );
   };
 
   render() {
@@ -63,7 +76,7 @@ class SignUpForm extends Component {
           validate={this.validations.firstName}
         />
         <InputField
-          name="surname"
+          name="lastName"
           label={intl.formatMessage(messages.SURNAME)}
           validate={this.validations.surname}
         />

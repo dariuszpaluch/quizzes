@@ -21,16 +21,13 @@ export function signIn({ login, password }, resolve = null, reject = null) {
 }
 
 export function signUp(body, resolve, reject) {
-  return dispatch => {
-    return dispatchPromiseResult(dispatch, {
+  return dispatch =>
+    dispatchPromiseResult(dispatch, {
       actionType: SIGN_UP,
       promise: fetchAPI.post.bind(null, `${API_URL}/signup`, { body }),
       resolve,
-      reject: () => {
-        // toastr.error('Wystąpił problem z wyszukaniem segmentów')
-      }
+      reject,
     });
-  };
 }
 
 export function getUserInfo(resolve, reject) {

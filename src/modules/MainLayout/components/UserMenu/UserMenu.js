@@ -34,7 +34,7 @@ export default class UserMenu extends Component {
           size={80}
         />
         <div className="user-details">
-          <p>{`${userData.firstName} ${userData.surname}`}</p>
+          <p>{`${userData.firstName} ${userData.lastName}`}</p>
           <p>{userData.email}</p>
         </div>
       </div>
