@@ -105,11 +105,7 @@ class QuestionForm extends Component {
       };
     });
 
-    return this.props.saveQuestion({ question, description, answers: _answers }, data => {
-      this.goBack();
-      this.props.resetForm();
-      this.props.afterSuccessAdded && this.props.afterSuccessAdded(data);
-    });
+    return this.props.onSave({ question, description, answers: _answers });
   };
 
   renderActions() {
@@ -188,7 +184,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-  saveQuestion: addQuestion,
   resetForm: reset.bind(null, FORM_NAME)
 };
 

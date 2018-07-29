@@ -21,6 +21,24 @@ export function addQuestion({ question, description, answers }, resolve = null, 
   };
 }
 
+export function saveQuestion(questionId, { question, description, answers }, resolve = null, reject = null) {
+  const body = {
+    question,
+    description,
+    answers
+  };
+
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: ADD_QUESTION,
+      promise: fetchAPI.put.bind(null, `${API_URL}/questions/${questionId}`, { body }),
+      resolve,
+      reject
+    });
+  };
+}
+
+
 export function fetchQuestions(resolve = null, reject = null) {
   return dispatch => {
     return dispatchPromiseResult(dispatch, {

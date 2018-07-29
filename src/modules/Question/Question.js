@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import QuestionForm from 'modules/Question/QuestionForm';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import QuestionList from './QuestionList';
 import EditQuestion from 'modules/Question/EditQuestion';
+import AddQuestion from 'modules/Question/AddQuestion';
+
 
 import { injectIntl } from 'react-intl';
 
 import { questionPaths } from 'consts/paths';
-import Card from 'libs/ui/Card/Card';
 
 class Question extends Component {
   render() {
@@ -20,11 +20,7 @@ class Question extends Component {
         <Route
           exact
           path={`${match.path}${questionPaths.ADD_QUESTION}`}
-          render={() => (
-            <Card>
-              <QuestionForm />
-            </Card>
-          )}
+          component={AddQuestion}
         />
         <Route
           exact
