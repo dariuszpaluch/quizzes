@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import RowActions from 'libs/ui/Table/RowActions';
+import { get } from 'lodash';
 
 class Table extends Component {
   static propTypes = {
@@ -15,6 +16,12 @@ class Table extends Component {
     onClickEditRow: null,
     onClickDeleteRow: null
   };
+
+  renderCellValue = (row, column) => {
+    const value = get(row, column.id);
+
+    return column.render ? column.render(value) : value;
+  } ;
 
   render() {
     const { columns, rows, onClickEditRow, onClickDeleteRow } = this.props;
@@ -34,7 +41,7 @@ class Table extends Component {
             return (
               <TableRow key={row.id}>
                 {columns.map(column => {
-                  return <TableCell key={column.id}>{row[column.id]}</TableCell>;
+                  return <TableCell key={column.id}>{this.renderCellValue(row, column)}</TableCell>;
                 })}
                 <RowActions
                   row={row}
