@@ -1,0 +1,36 @@
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1,1);
+  }
+  50% {
+    transform: scale(1.1,1.1);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+.user-results-table {
+  padding: 10px 0;
+
+  .user-answer-row {
+    transition: background-color ease 3s;
+    background-color: white;
+
+    &.new {
+      animation: zoominoutsinglefeatured 3s forwards;
+      background: greenyellow;
+      transition: background-color ease 3s;
+    }
+
+
+    .in-progress {
+      font-weight: bold;
+      color: forestgreen;
+    }
+
+    .not-finished {
+      color: red;
+    }
+  }
+}

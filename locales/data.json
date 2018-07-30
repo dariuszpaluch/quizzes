@@ -116,6 +116,9 @@
     "test.search-to-complete-list.header": "Wyszukaj testu",
     "tests.no-matching-test-to-query": "Żaden test nie pasuje do wyszukania: {query}",
     "tests.no-tests": "Brak testów",
-    "toastr.sign-in-success": "Logowanie zakończone sukcesem"
+    "tests.number-of-user-answers": "Liczba odpowiedzi: {userAnswersNumber}",
+    "toastr.sign-in-success": "Logowanie zakończone sukcesem",
+    "toastr.sign-up-success-toastr": "Konto zostało prawidłowo utworzone. Możesz się teraz zalogować w portalu",
+    "toastr.sign-up-toastr-failure": "Rejestracja się nie powiodła, spóboj ponownie"
   }
 }

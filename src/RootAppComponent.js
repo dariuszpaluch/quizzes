@@ -81,7 +81,7 @@ class RootAppComponent extends Component {
           <Route path={paths.TESTS_RESULTS} component={TestResult} />
           <Route path={paths.TESTS} component={Tests} />
           <Route path={paths.QUESTIONS} component={Question} />
-          <Route path={paths.INDEX} component={Dashboard} />
+          <Route exact path={paths.INDEX} component={Dashboard} />
         </Switch>
       </SmartMainLayout>
     );

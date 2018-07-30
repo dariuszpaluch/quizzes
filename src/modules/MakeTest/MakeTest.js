@@ -104,7 +104,7 @@ class MakeTest extends Component {
       this.setState(
         {
           questionsWithCorrect: data.questions,
-          correctQuestions: data.correctQuestions,
+          result: data.result,
           testResultId: data.testAnswerId
         },
         () => {
@@ -119,6 +119,12 @@ class MakeTest extends Component {
     };
 
     this.props.saveTestAnswers(testId, answers, onSuccess, onFailure);
+  };
+
+  onSaveStep = () => {
+    const {  answers, testId } = this.props;
+
+    this.props.saveTestAnswers(testId, answers);
   };
 
   onChangeAnswer = (questionId, answers) => {
@@ -148,6 +154,7 @@ class MakeTest extends Component {
 
     return (
       <MakeTestForm
+        onChangeStep={this.onSaveStep}
         questionsIds={questionsIds}
         questions={questions}
         testName={testDescription.name}
@@ -160,23 +167,8 @@ class MakeTest extends Component {
     );
   }
 
-  renderTestSummary() {
-    const { questionsIds, questions, testDescription, answers } = this.props;
-
-    return (
-      <TestSummary
-        questionsIds={questionsIds}
-        questions={questions}
-        testDescription={testDescription}
-        userAnswers={answers}
-        onSave={this.onSave}
-        onBackToTest={this.changeViewState.bind(null, STATES.ANSWER)}
-      />
-    );
-  }
-
   renderTestResult() {
-    const { questionsWithCorrect, correctQuestions, testResultId } = this.state;
+    const { questionsWithCorrect, result, testResultId } = this.state;
     const { answers, testRating, questionsIds } = this.props;
 
     return (
@@ -185,7 +177,7 @@ class MakeTest extends Component {
         answers={answers}
         changeTestRating={this.changeTestRating}
         testRating={testRating}
-        correctQuestions={correctQuestions}
+        result={result}
         numberOfQuestions={size(questionsIds)}
         testResultId={testResultId}
       />

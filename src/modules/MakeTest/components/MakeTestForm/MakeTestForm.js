@@ -24,11 +24,13 @@ class MakeTestForm extends Component {
   static propTypes = {
     questionsIds: PropTypes.array,
     questions: PropTypes.object,
-    testName: PropTypes.string
+    testName: PropTypes.string,
+    onChangeStep: PropTypes.func,
   };
 
   static defaultProps = {
-    testName: ''
+    testName: '',
+    onChangeStep: null,
   };
 
   constructor(props) {
@@ -46,9 +48,8 @@ class MakeTestForm extends Component {
           activeStep
         },
         () => {
-          if (this.swipeList) {
-            this.swipeList.slide(activeStep, ANIMATION_DURATION);
-          }
+          this.swipeList && this.swipeList.slide(activeStep, ANIMATION_DURATION);
+          this.props.onChangeStep && this.props.onChangeStep();
         }
       );
     }

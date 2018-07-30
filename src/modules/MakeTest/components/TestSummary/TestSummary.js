@@ -41,7 +41,7 @@ class TestSummary extends Component {
   }
 
   render() {
-    const { className, intl, correctQuestions, numberOfQuestions } = this.props;
+    const { className, intl, result, numberOfQuestions } = this.props;
 
     const classes = classnames('test-summary', className);
 
@@ -56,7 +56,7 @@ class TestSummary extends Component {
       >
         <PercentageCircle
           className="test-percentage-result"
-          percentage={Math.floor(correctQuestions / numberOfQuestions * 100)}
+          percentage={Math.floor(result * 100)}
           label="Wynik testu"
           labelSize={20}
           valueSize={60}
@@ -65,7 +65,7 @@ class TestSummary extends Component {
         <Typography
           center
           variant="headline"
-        >{`${correctQuestions}/${numberOfQuestions} Poprawnych odpowiedzi`}</Typography>
+        >{`${Math.floor(result * 100)}% poprawnych odpowiedzi`}</Typography>
       </Card>
     );
   }

@@ -15,7 +15,8 @@ import { toastr } from 'react-redux-toastr';
 
 import { SIGN_IN as STRINGS } from '../../strings';
 import { injectIntl } from 'react-intl';
-import messages, { toastrMessages } from 'modules/Auth/utils/messages';
+import messages  from 'modules/Auth/utils/messages';
+import toastrMessages  from 'modules/Auth/utils/toastrMessages';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
 import paths from 'consts/paths';

@@ -44,19 +44,4 @@ const messages = defineMessages({
 
 });
 
-export const toastrMessages = defineMessages({
-  TOASTR_SIGN_IN_SUCCESS: {
-    id: 'toastr.sign-in-success',
-    defaultMessage: 'Sign in success'
-  },
-  SIGN_UP_SUCCESS: {
-    id: 'sign-up-success-toastr',
-    defaultMessage: 'Konto zostało prawidłowo utworzone. Możesz się teraz zalogować w portalu.'
-  },
-  SIGN_UP_FAILURE: {
-    id: 'sign-up-toastr-failure',
-    defaultMessage: 'Rejestracja się nie powiodła, spóboj ponownie.'
-  }
-});
-
 export default messages;

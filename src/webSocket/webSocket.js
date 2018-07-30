@@ -2,6 +2,7 @@ import transmissionReduxActions from './transmissionReduxActions';
 import parseReceivedMessage from './utils/parseReceivedMessage';
 import handleMessage from './handleMessage';
 import { SIGN_IN } from 'modules/Auth/actionTypes';
+import { getToken } from 'modules/Auth/reducer';
 
 const MAX_RECONNECT_NUMBER_OF_TRIALS = 10;
 let reconnectNumber = 0;
@@ -29,7 +30,9 @@ export function webSocketMiddleware(store) {
       console.log(action);
 
       openWebSocket(store, null, action.data.token)
-    } else if(action.type === `LOGOUT`) {
+    }
+
+    if(action.type === `LOGOUT`) {
       webSocket.close();
       reconnectTimeout && clearTimeout(reconnectTimeout);
     }
@@ -68,11 +71,14 @@ function _onMessage(store, history, evt) {
 function _onCloseConnection(store, history, token, event) {
   _webSocketLog('Connection has been closed.', event);
 
+  if(!getToken(store.getState()))
+    return null;
+
   if (reconnectNumber < MAX_RECONNECT_NUMBER_OF_TRIALS) {
     reconnectNumber += 1;
     reconnectTimeout = setTimeout(function() {
       openWebSocket(store, history, token);
-    }, reconnectNumber * 2000);
+    }, reconnectNumber * 1000);
   } else {
     alert('Problem z połączeniem się z serwerem webSocket');
   }

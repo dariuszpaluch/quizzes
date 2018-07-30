@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import RowActions from 'libs/ui/Table/RowActions';
-import { get } from 'lodash';
+import { get, pick } from 'lodash';
 
 class Table extends Component {
   static propTypes = {
@@ -20,18 +20,24 @@ class Table extends Component {
   renderCellValue = (row, column) => {
     const value = get(row, column.id);
 
-    return column.render ? column.render(value) : value;
+    return column.render ? column.render(value, row) : value;
   } ;
+
+  static getColumnProps(column) {
+    return pick(column, ["component", "numeric", "padding", "scrope", "sortDirection"])
+  }
 
   render() {
     const { columns, rows, onClickEditRow, onClickDeleteRow } = this.props;
+
+    console.log(rows);
 
     return (
       <MaterialTable className="table">
         <TableHead>
           <TableRow>
             {columns.map(column => {
-              return <TableCell key={column.id}>{column.content}</TableCell>;
+              return <TableCell {...Table.getColumnProps(column)} key={column.id} variant="head" >{column.content}</TableCell>;
             })}
             <RowActions onDelete={onClickDeleteRow} onEdit={onClickEditRow} header />
           </TableRow>
@@ -39,9 +45,9 @@ class Table extends Component {
         <TableBody>
           {rows.map(row => {
             return (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} className={row.className}>
                 {columns.map(column => {
-                  return <TableCell key={column.id}>{this.renderCellValue(row, column)}</TableCell>;
+                  return <TableCell {...Table.getColumnProps(column)} key={column.id} padding={column.padding}>{this.renderCellValue(row, column)}</TableCell>;
                 })}
                 <RowActions
                   row={row}

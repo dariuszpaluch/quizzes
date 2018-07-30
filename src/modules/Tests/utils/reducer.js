@@ -19,6 +19,8 @@ function getTestsSuccess(state, action) {
 function getTestDetailsSuccess(state, action) {
   const test = action.data;
 
+  console.log('test', test);
+
   return updateObject(state, {
     testsList: {
       ...state.testsList,
@@ -32,5 +34,6 @@ function getTestDetailsSuccess(state, action) {
 
 export default createReducer(getInitState(), {
   [`${GET_TESTS}_SUCCESS`]: getTestsSuccess,
-  [`${GET_TEST_DETAILS}_SUCCESS`]: getTestDetailsSuccess
+  [`${GET_TEST_DETAILS}_SUCCESS`]: getTestDetailsSuccess,
+  [`UPDATE_TEST_DETAILS_SUCCESS`]: getTestDetailsSuccess,
 });

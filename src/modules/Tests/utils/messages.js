@@ -48,6 +48,18 @@ const messages = defineMessages({
   NO_MATCHING_TESTS_TO_QUERY: {
     id: 'tests.no-matching-test-to-query',
     defaultMessage: 'No matching tests to query: {query}'
+  },
+  NUMBER_OF_USER_ANSWERS: {
+    id: 'tests.number-of-user-answers',
+    defaultMessage: 'Number of user answers: {userAnswersNumber}'
+  },
+  USER_ANSWER_IN_PROGRESS_STATUS: {
+    id: 'tests.user-answer-in-progress-status',
+    defaultMessage: 'In progress'
+  },
+  USER_ANSWER_NOT_FINISHED_STATUS: {
+    id: 'tests.user-answer-not-finished-status',
+    defaultMessage: 'Not finished'
   }
 });
 

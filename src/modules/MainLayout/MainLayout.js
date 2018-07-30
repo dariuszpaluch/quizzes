@@ -179,16 +179,16 @@ class MainLayout extends Component {
   }
 
   render() {
-    const { children, hideMenu, hideAppBar } = this.props;
+    const { children, hideMenu} = this.props;
+
 
     return (
       <div
         className={classnames('main-layout', {
           'hide-menu': hideMenu,
-          'hide-app-bar': hideAppBar
         })}
       >
-        {!hideAppBar && this.renderAppBar()}
+        {this.renderAppBar()}
         {!hideMenu && this.renderMenu()}
         <main className="content">{children}</main>
       </div>

@@ -21,27 +21,8 @@ class SmartMainLayout extends Component {
     };
   }
 
-  componentWillMount() {
-    const onLoginView =
-      [
-        paths.INDEX,
-        `${paths.INDEX}${authPaths.SIGN_IN}`,
-        `${paths.INDEX}${authPaths.SIGN_UP}`
-      ].indexOf(this.props.location.pathname) >= 0;
-
-    if (this.props.userLoggedIn && onLoginView) {
-      this.props.history.push(paths.DASHBOARD);
-    }
-
-    if (!this.props.userLoggedIn && !onLoginView) {
-      this.props.history.push(paths.INDEX);
-    }
-  }
-
   componentDidMount() {
-    if (this.props.userLoggedIn) {
-      this.props.getUserInfo();
-    }
+    this.props.getUserInfo();
   }
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -102,7 +83,6 @@ class SmartMainLayout extends Component {
 
     return (
       <MainLayout
-        hideAppBar={onLoginView}
         appBarTittle={title}
         appBarButtons={appBarActions}
         hideMenu={!userLoggedIn}

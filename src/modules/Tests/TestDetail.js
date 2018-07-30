@@ -16,9 +16,8 @@ import parsePath from 'utils/parsePath';
 import { withRouter } from 'react-router-dom';
 import { toastr } from 'react-redux-toastr';
 
-import { size } from 'lodash';
-import Table from 'libs/ui/Table/Table';
 import Loading from 'libs/ui/Loading/Loading';
+import UserResultsTable from 'modules/Tests/components/UserResultsTable/UserResultsTable';
 
 class TestDetail extends Component {
   static propTypes = {};
@@ -28,8 +27,6 @@ class TestDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
     this.appBarButtons = {
       left: {
         onClick: this.onClickGoBack,
@@ -38,11 +35,8 @@ class TestDetail extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.getTestDetail(this.props.testId);
-  }
-
   componentDidMount() {
+    this.props.getTestDetail(this.props.testId);
     this.updateAppBar();
   }
 
@@ -88,47 +82,14 @@ class TestDetail extends Component {
     const { intl, test } = this.props;
 
     if(!test.id)
-      return <Loading center/>
+      return <Loading center/>;
 
     return (
-      <Card>
+      <Card >
         <Button icon={icons.SHARE} onClick={this.copyTestUrlToClipboard}>
           {intl.formatMessage(messages.TEST_DETAIL_SHARE_TEST_BY_URL)}
         </Button>
-        <div>Liczba odp {size(test.userAnswers)}</div>
-        <Table columns={[
-          {
-            id: 'created',
-            content: 'Data',
-            render: date => {
-              console.log(date);
-              return intl.formatDate(new Date(date))
-            }
-          },
-          {
-            id: 'author.firstName',
-            content: 'Imię',
-            default: '-'
-          },
-          {
-            id: 'author.lastName',
-            content: 'Nazwisko',
-            default: '-',
-          },
-          {
-            id: 'author.email',
-            content: 'Email',
-            default: '-',
-            render: (email) => <a href={`mailto:${ email}`} target="_top">{email}</a>
-          },
-          {
-            id: 'result',
-            content: 'Wynik',
-            render: (result) => `${Math.floor(result * 100)}%`
-          }
-        ]} rows={test.userAnswers}>
-
-        </Table>
+        <UserResultsTable userAnswers={test.userAnswers}/>
       </Card>
     );
   }
