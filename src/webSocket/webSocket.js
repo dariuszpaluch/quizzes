@@ -42,8 +42,8 @@ export function webSocketMiddleware(store) {
 }
 
 export default function openWebSocket(store, history, token) {
-  webSocket = new WebSocket(`ws://localhost:3001?token=${token}`);
-  _webSocketLog(`Try to connect to ws://localhost:3001?token=${token}`);
+  webSocket = new WebSocket(`ws://localhost:3000?token=${token}`);
+  _webSocketLog(`Try to connect to ws://localhost:3000?token=${token}`);
 
   webSocket.onopen = _onOpenConnection;
   webSocket.onclose = _onCloseConnection.bind(null, store, history, token);

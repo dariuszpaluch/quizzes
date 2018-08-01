@@ -14,7 +14,7 @@
     "page_title": "Quizzes",
     "port": 5000,
     "public_path": "/",
-    "api_url": "http://localhost:3001"
+    "api_url": "http://localhost:3000"
   },
   "author": "Dariusz Paluch",
   "license": "ISC",
