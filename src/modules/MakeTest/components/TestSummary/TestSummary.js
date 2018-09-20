@@ -20,20 +20,20 @@ import parsePath from 'utils/parsePath';
 class TestSummary extends Component {
   renderActions() {
     const { intl, testResultId } = this.props;
+    {/*<Link key="return" to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}>*/}
+      {/*<Button onClick={() => {}} icon={icons.ARROW_BACK}>*/}
+        {/*{intl.formatMessage(globalMessages.BACK)}*/}
+      {/*</Button>*/}
+    {/*</Link>,*/}
+
     return [
-      <Link key="return" to={`${paths.TESTS}${testsPaths.SEARCH_TESTS}`}>
-        <Button onClick={() => {}} icon={icons.ARROW_BACK}>
-          {intl.formatMessage(globalMessages.BACK)}
-        </Button>
-      </Link>,
       <Link
         key="test-result"
         to={parsePath(paths.TESTS_RESULTS, {
           testResultId
         })}
-        disabled
       >
-        <Button disabled color="primary" onClick={() => {}} icon={icons.tests}>
+        <Button color="primary" onClick={() => {}} icon={icons.tests}>
           {intl.formatMessage(messages.TEST_SUMMARY_GO_TO_TEST_RESULT)}
         </Button>
       </Link>

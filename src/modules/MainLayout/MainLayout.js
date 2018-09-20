@@ -68,7 +68,6 @@ class MainLayout extends Component {
         label: intl.formatMessage(pagesTitles.TESTS_RESULTS),
         icon: icons.tests_results,
         path: paths.TESTS_RESULTS,
-        disabled: true
       },
       {
         label: intl.formatMessage(pagesTitles.YOUR_TESTS),
@@ -84,7 +83,6 @@ class MainLayout extends Component {
         label: intl.formatMessage(pagesTitles.SETTINGS),
         icon: icons.settings,
         path: paths.SETTINGS,
-        disabled: true
       },
 
       {
