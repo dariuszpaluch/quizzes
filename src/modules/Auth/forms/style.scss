@@ -52,7 +52,7 @@ $nbmeteors: 6; // Don't forget to change the number of loop in the haml !
   }
 }
 
-@include mdScreen {
+//@include mdScreen {
   .auth-wrapper {
     padding: $container-padding;
 
@@ -71,4 +71,4 @@ $nbmeteors: 6; // Don't forget to change the number of loop in the haml !
     display: block;
     margin-left: -60px;
   }
-}
+//}

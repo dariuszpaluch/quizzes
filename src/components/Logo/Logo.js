@@ -3,6 +3,7 @@ import './logo.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Typography from 'libs/ui/Typography/Typography';
 
 export default class Logo extends Component {
   static propTypes = {};
@@ -22,7 +23,7 @@ export default class Logo extends Component {
 
     return (
       <div className={classes}>
-        <h1>Rocket quizz</h1>
+        <Typography variant="display3">Rocket quizz</Typography>
       </div>
     );
   }
