@@ -36,8 +36,6 @@ class TestResult extends Component {
   }
 
   questionIsCorrect(allCorrectAnswers, userAnswers) {
-    console.log(allCorrectAnswers, userAnswers);
-
     return (
       every(allCorrectAnswers, answer => userAnswers.indexOf(answer) >= 0) &&
       size(allCorrectAnswers) === size(userAnswers)
@@ -45,8 +43,6 @@ class TestResult extends Component {
   }
 
   renderAnswers(answers, userAnswers) {
-    console.log(userAnswers);
-
     return (
       <div className="question-answer-list">
         {answers.map((answer, index) => {
@@ -74,8 +70,6 @@ class TestResult extends Component {
 
     const questionsRendered = {};
     let corrects = 0;
-
-    console.log('question', 'answers', questions, answers);
 
     let index = 0;
     forEach(questions.byId, question => {
@@ -119,7 +113,7 @@ class TestResult extends Component {
         <div className="test-result-stats">
           <PercentageCircle
             className="test-percentage-result"
-            percentage={Math.floor(corrects / size(questions.allIds) * 100)}
+            percentage={Math.floor(corrects / size(questions.allIds) * 100) || 0}
             valueSize={15}
             size={50}
           />

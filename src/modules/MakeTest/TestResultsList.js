@@ -60,12 +60,8 @@ class TestResultsList extends Component {
 
     const rows = {};
 
-    console.log(data);
-
     forEach(data.allIds, testAnswerId => {
       const testAnswer = tests[testAnswerId];
-
-      console.log(testAnswer);
 
       rows[testAnswerId] = {
         className: 'list-item',
@@ -73,7 +69,7 @@ class TestResultsList extends Component {
           <div className="test-result-list-item">
             <div>
               <span className="date">{intl.formatDate(testAnswer.createdAt)}</span>
-              <span>{testAnswer.test.name}</span>
+              <span className="test-title">{testAnswer.test.name}</span>
             </div>
             <div>
               <PercentageCircle

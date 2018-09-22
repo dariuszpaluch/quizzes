@@ -6,6 +6,9 @@
 
   .list-item {
     height: auto !important;
+    .test-title {
+      font-size: 18px;
+    }
     &:hover {
       .progress:after {
         border-color: white;

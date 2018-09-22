@@ -46,8 +46,6 @@ class UserResultsTable extends Component {
       })
     }));
 
-    console.log(_userAnwers);
-
     return (
       <div className={classes}>
         <Typography variant="display1">
