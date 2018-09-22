@@ -60,6 +60,8 @@ class TestResultsList extends Component {
 
     const rows = {};
 
+    console.log(data);
+
     forEach(data.allIds, testAnswerId => {
       const testAnswer = tests[testAnswerId];
 
@@ -76,7 +78,7 @@ class TestResultsList extends Component {
             <div>
               <PercentageCircle
                 className="test-percentage-result"
-                percentage={30}
+                percentage={Math.floor(testAnswer.result * 100)}
                 valueSize={10}
                 size={40}
               />
@@ -95,8 +97,6 @@ class TestResultsList extends Component {
     if (!this.state.fetched) return <Loading center />;
 
     const { data } = this.state;
-
-    console.log(this.state.data);
 
     return (
       <List className="test-results-list" rowsIds={data.allIds} rows={this.getTestAnswersRows()} />
