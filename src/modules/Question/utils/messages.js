@@ -13,6 +13,10 @@ const messages = defineMessages({
     id: 'question.list.header',
     defaultMessage: 'Question'
   },
+  EDIT_QUESTION: {
+    id: 'question.edit-question',
+    defaultMessage: 'Edit question'
+  },
   ADD_QUESTION: {
     id: 'question.list.addQuestion',
     defaultMessage: 'Add question'

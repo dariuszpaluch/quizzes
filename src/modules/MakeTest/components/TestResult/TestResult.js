@@ -63,7 +63,6 @@ class TestResult extends Component {
     const classes = classnames('test-result', className);
 
     const questionsIds = questions.map(question => question.id);
-    console.log(questions, questionsIds, this.prepareQuestionsRows(questions));
     return (
       <Card className={classes} title={intl.formatMessage(messages.TEST_SUMMARY_HEADER)}>
         Oceń test:

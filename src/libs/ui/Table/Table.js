@@ -30,8 +30,6 @@ class Table extends Component {
   render() {
     const { columns, rows, onClickEditRow, onClickDeleteRow } = this.props;
 
-    console.log(rows);
-
     return (
       <MaterialTable className="table">
         <TableHead>

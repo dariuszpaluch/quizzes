@@ -8,3 +8,5 @@ export const getQuestionIsFetching = (state) => state.question.isFetching;
 export const getQuestionsLoading = state => state.question.questions.loading || {};
 export const getQuestionLoading = (state, questionId) =>
   getQuestionsLoading(state)[questionId] || false;
+
+export const getQuestionIsLoading = (state, questionId) => state.question.questions.loading && state.question.questions.loading[questionId];

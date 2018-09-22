@@ -19,10 +19,21 @@ const language =
 const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
 const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.en;
 
+
+if (process.env.NODE_ENV !== 'production') {
+  const originalConsoleError = console.error
+  if (console.error === originalConsoleError) {
+    console.error = (...args) => {
+      if (args[0].indexOf('[React Intl] Missing message:') === 0) {
+        return
+      }
+      originalConsoleError.call(console, ...args)
+    }
+  }
+}
+
 export default class AppComponent extends Component {
   render() {
-    console.log(this.props.history);
-
     return (
       <IntlProvider locale={language} messages={messages}>
         <Router history={this.props.history}>

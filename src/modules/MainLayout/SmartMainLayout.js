@@ -19,6 +19,8 @@ class SmartMainLayout extends Component {
       onSearch: undefined,
       searchValue: ''
     };
+
+    this.timeout = null;
   }
 
   componentDidMount() {
@@ -31,30 +33,46 @@ class SmartMainLayout extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+    }
+  }
+
   setTitle = title => {
+    this.timeout && clearTimeout(this.timeout);
+
     this.setState({ title });
   };
 
   setAppBarActions = appBarActions => {
+    this.timeout && clearTimeout(this.timeout);
+
     this.setState({ appBarActions });
   };
 
   setOnSearch = searchCallBack => {
+    this.timeout && clearTimeout(this.timeout);
+
     this.setState({
       onSearch: searchCallBack
     });
   };
 
   restoreDefaultAppBar = () => {
-    this.setState({
-      title: undefined,
-      appBarActions: {},
-      onSearch: undefined,
-      searchValue: ''
-    });
+    this.timeout && clearTimeout(this.timeout);
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        title: undefined,
+        appBarActions: {},
+        onSearch: undefined,
+        searchValue: ''
+      });
+    }, 100);
   };
 
   setAppBarData = ({ title, appBarActions, onSearch }) => {
+    this.timeout && clearTimeout(this.timeout);
     this.setState({
       title,
       appBarActions,

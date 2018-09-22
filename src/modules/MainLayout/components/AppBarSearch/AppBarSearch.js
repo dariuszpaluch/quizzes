@@ -7,11 +7,12 @@ import icons from 'consts/icons';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import { Input } from '@material-ui/core';
 import ReactDOM from 'react-dom';
+import onClickOutside from 'react-onclickoutside';
 
 import { Keys } from 'react-keydown';
 const { ESC } = Keys; // optionally get key codes from Keys lib to check against later
 
-export default class AppBarSearch extends Component {
+class AppBarSearch extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -26,7 +27,8 @@ export default class AppBarSearch extends Component {
     super(props);
 
     this.state = {
-      expandSearch: false
+      expandSearch: false,
+      focused: false
     };
   }
 
@@ -47,13 +49,25 @@ export default class AppBarSearch extends Component {
     }
   };
 
+  handleClickOutside = () => {
+    this.onFoldSearch();
+  };
+
   onFoldSearch = () => {
-    this.setState({
-      expandSearch: false
-    });
+    if (this.state.expandSearch && !this.props.value) {
+      this.setState({
+        expandSearch: false
+      });
+    }
+  };
+
+  cleanAndFold = () => {
     this.props.onChange('');
     const node = ReactDOM.findDOMNode(this.searchInputRef).firstChild;
     node.value = '';
+    this.setState({
+      expandSearch: false
+    });
   };
 
   onChange = event => {
@@ -72,7 +86,7 @@ export default class AppBarSearch extends Component {
         <label
           key="search-input"
           className={classnames('search-input', {
-            expanded: expandSearch
+            expanded: expandSearch || value
           })}
         >
           <IconButton
@@ -94,10 +108,12 @@ export default class AppBarSearch extends Component {
             color="inherit"
             className="icon-close"
             icon={icons.CLOSE}
-            onClick={this.onFoldSearch}
+            onClick={this.cleanAndFold}
           />
         </label>
       </div>
     );
   }
 }
+
+export default onClickOutside(AppBarSearch);

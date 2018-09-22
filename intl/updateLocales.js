@@ -44,8 +44,6 @@ for(let messageKey in defaultMessages) {
   }
 }
 
-console.log(defaultMessages);
-
 const updatedData = {
   en: filterKeys(data.en || {}, Object.keys(defaultMessages))
 };

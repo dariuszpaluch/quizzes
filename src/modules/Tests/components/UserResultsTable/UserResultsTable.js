@@ -32,8 +32,6 @@ class UserResultsTable extends Component {
     const classes = classnames('user-results-table', className);
 
     const numberOfAnswers = size(userAnswers);
-console.log(userAnswers);
-
     const _userAnwers = userAnswers.map((userAnswer, index) => ({
 
       ...userAnswer,
@@ -61,8 +59,6 @@ console.log(userAnswers);
             id: 'updatedAt',
             content: 'Data',
             render: (date, row) => {
-              console.log(date);
-
               switch(row.status) {
                 case 'in-progress': {
                   return <span className="in-progress">{intl.formatMessage(messages.USER_ANSWER_IN_PROGRESS_STATUS)}</span>

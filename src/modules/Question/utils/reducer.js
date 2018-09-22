@@ -7,7 +7,10 @@ import normalizeList from 'utils/normalizeList';
 
 function getInitState() {
   return {
-    questions: []
+    questions: {
+      byId: {},
+      allIds: [],
+    }
   };
 }
 
@@ -59,7 +62,8 @@ function setIsLoadingQuestion(questionState, questionId, isFetching = true) {
 }
 
 function addQuestionSuccess(questionState, action) {
-  return updateObject(questionState, {
+  return {
+    ...questionState,
     questions: {
       ...questionState.questions,
       byId: {
@@ -68,7 +72,7 @@ function addQuestionSuccess(questionState, action) {
       },
       allIds: [...questionState.questions.allIds, action.data.id]
     }
-  });
+  };
 }
 
 export default createReducer(getInitState(), {

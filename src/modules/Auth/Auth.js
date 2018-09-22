@@ -33,8 +33,6 @@ class Auth extends Component {
 
     const { match, intl } = props;
 
-    console.log(match.url, authPaths.SIGN_IN);
-
     this.tabs = [
       {
         label: intl.formatMessage(messages.SIGN_IN),

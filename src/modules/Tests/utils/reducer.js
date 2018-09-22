@@ -19,8 +19,6 @@ function getTestsSuccess(state, action) {
 function getTestDetailsSuccess(state, action) {
   const test = action.data;
 
-  console.log('test', test);
-
   return updateObject(state, {
     testsList: {
       ...state.testsList,

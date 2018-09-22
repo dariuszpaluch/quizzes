@@ -39,7 +39,8 @@ export const MODES = {
 class QuestionForm extends Component {
   static propTypes = {
     mode: PropTypes.oneOf(values(MODES)),
-    onSave: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired,
+    initialValues: PropTypes.object
   };
 
   static defaultProps = {
@@ -108,18 +109,8 @@ class QuestionForm extends Component {
     return this.props.onSave({ question, description, answers: _answers });
   };
 
-  renderActions() {
-    const { intl, submitting } = this.props;
-    return (
-      <Button type="submit" color="primary" loading={submitting}>
-        {intl.formatMessage(globalMessages.SAVE)}
-          <Icon type="save" theme="outlined" />
-      </Button>
-    );
-  }
-
   render() {
-    const { handleSubmit, submitting, intl } = this.props;
+    const { submitting, intl } = this.props;
 
     return (
       <form className="question-form" onSubmit={this.onSubmit}>
@@ -151,7 +142,10 @@ class QuestionForm extends Component {
             />
           </div>
         </div>
-        <div className="col-xs-12">{this.renderActions()}</div>
+        <Button type="submit" color="primary" loading={submitting}>
+          {intl.formatMessage(globalMessages.SAVE)}
+        </Button>
+
       </form>
     );
   }
@@ -186,6 +180,7 @@ const INIT_DATA = {
 // };
 
 export default compose(
+  withRouter,
   MainLayoutContextWrapper,
   injectIntl,
   reduxForm({

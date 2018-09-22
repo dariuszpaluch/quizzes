@@ -18,19 +18,19 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-class-properties",
-    [
-      "react-intl",
-      {
-        "messagesDir": "./build/messages",
-        "enforceDescriptions": false
-      }
-    ]
+    "transform-class-properties"
   ],
   "env": {
     "development": {
       "plugins": [
-        "react-hot-loader/babel"
+        "react-hot-loader/babel",
+        [
+          "react-intl",
+          {
+            "messagesDir": "./build/messages",
+            "enforceDescriptions": false
+          }
+        ]
       ]
     }
   }

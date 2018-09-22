@@ -99,8 +99,6 @@ class MakeTest extends Component {
     const { history, intl, answers, testId } = this.props;
 
     const onSuccess = data => {
-      console.log(data);
-
       this.setState(
         {
           questionsWithCorrect: data.questions,

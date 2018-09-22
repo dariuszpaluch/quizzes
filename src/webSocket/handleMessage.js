@@ -27,8 +27,6 @@ export default function handleMessage(store, history, { type, data }) {
 
       if (size(newTest.userAnswers) !== size(oldTest.userAnswers)) {
         newTest.userAnswers = newTest.userAnswers.map(userAnswer => {
-          console.log(oldTest.userAnswers, userAnswer.id);
-
           if (!find(oldTest.userAnswers, { id: userAnswer.id })) {
             return {
               ...userAnswer,
