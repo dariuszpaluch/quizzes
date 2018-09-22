@@ -8,16 +8,17 @@ import { injectIntl } from 'react-intl';
 import { getTestDetail } from 'modules/Tests/utils/actions';
 import Card from 'libs/ui/Card/Card';
 import icons from 'consts/icons';
-import paths from 'consts/paths';
+import paths, { testsPaths } from 'consts/paths';
 import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 import Button from 'libs/ui/Button/Button';
 import copy from 'copy-to-clipboard';
 import parsePath from 'utils/parsePath';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { toastr } from 'react-redux-toastr';
 
 import Loading from 'libs/ui/Loading/Loading';
 import UserResultsTable from 'modules/Tests/components/UserResultsTable/UserResultsTable';
+import globalMessages from 'utils/globalMessages';
 
 class TestDetail extends Component {
   static propTypes = {};
@@ -79,17 +80,22 @@ class TestDetail extends Component {
   };
 
   render() {
-    const { intl, test } = this.props;
+    const { intl, test, match } = this.props;
 
-    if(!test.id)
-      return <Loading center/>;
+    if (!test.id) return <Loading center />;
 
     return (
-      <Card >
+      <Card>
         <Button icon={icons.SHARE} onClick={this.copyTestUrlToClipboard}>
           {intl.formatMessage(messages.TEST_DETAIL_SHARE_TEST_BY_URL)}
         </Button>
-        <UserResultsTable userAnswers={test.userAnswers}/>
+        <Link to={parsePath(`${match.url}${testsPaths.TEST_EDIT}`, { testId: test.id })}>
+          <Button >
+            {intl.formatMessage(globalMessages.EDIT)}
+          </Button>
+        </Link>
+
+        <UserResultsTable userAnswers={test.userAnswers} />
       </Card>
     );
   }

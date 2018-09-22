@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { addQuestion, fetchQuestions } from 'modules/Question/utils/actions';
 
 import { deleteQuestion } from 'modules/Question/utils/actions';
-import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
+import {
+  getQuestionIsFetching,
+  getQuestions,
+  getQuestionsIds,
+  getQuestionsLoading
+} from 'modules/Question/utils/getters';
 import { injectIntl } from 'react-intl';
 import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
 import ChipList from 'libs/ui/ChipList';
@@ -13,6 +18,7 @@ import QuestionForm from 'modules/Question/forms/QuestionForm';
 import Modal from 'libs/ui/Modal/Modal';
 import Button from 'libs/ui/Button/Button';
 import { toastr } from 'react-redux-toastr';
+import Loading from 'libs/ui/Loading/Loading';
 
 class QuestionList extends Component {
   constructor(props) {
@@ -48,19 +54,26 @@ class QuestionList extends Component {
   };
 
   render() {
-    const { intl, onChangeSelect, selectedIds, questions, questionsIds } = this.props;
+    const { intl, onChangeSelect, selectedIds, questions, questionsIds, loading } = this.props;
+
+    if (loading) {
+      return <Loading center />;
+    }
 
     const { addQuestionModalIsOpen } = this.state;
 
-    const chips = reverse(
-      selectedIds.map(questionId => {
-        const question = questions[questionId];
-        return {
+    let chips = [];
+    selectedIds.map(questionId => {
+      const question = questions[questionId];
+      if (question) {
+        chips.push({
           label: question.question,
           id: question.id
-        };
-      })
-    );
+        });
+      }
+    });
+
+    chips = reverse(chips);
 
     return (
       <div className="test-question-list">
@@ -80,7 +93,6 @@ class QuestionList extends Component {
           onDeleteChip={this.onDeleteChip}
           chips={chips}
         />
-
         <Button onClick={this.onToogleAddQuestionModal}>DODAJ PYTANIE</Button>
         <SimpleQuestionlist
           onChangeSelect={onChangeSelect}
@@ -97,14 +109,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     questions: getQuestions(state),
     questionsIds: getQuestionsIds(state),
-    questionsLoading: getQuestionsLoading(state)
+    loading: getQuestionIsFetching(state)
   };
 };
 
 const mapDispatchToProps = {
   fetchQuestions,
   deleteQuestion,
-  addQuestion,
+  addQuestion
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionList));

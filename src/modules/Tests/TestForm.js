@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import values from 'lodash/values';
 
@@ -26,7 +27,7 @@ import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
 import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
 
-const MODES = {
+export const MODES = {
   EDIT: 'EDIT',
   ADD: 'ADD'
 };
@@ -82,7 +83,7 @@ class TestForm extends Component {
   }
 
   onSubmit = values => {
-    this.props.onSubmit(values, this.onClickGoBack);
+    this.props.onSave(values);
   };
 
   renderQuestionsList = ({
@@ -107,48 +108,45 @@ class TestForm extends Component {
     const { intl, mode, handleSubmit } = this.props;
 
     return (
-      <Card>
-        <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
-          <InputField
-            name="name"
-            label={intl.formatMessage(messages.TEST_NAME)}
-            validate={this.validations.testName}
-            autoFocus
-          />
-          <InputField name="description" label={intl.formatMessage(messages.TEST_DESCRIPTION)} />
-          <Field
-            name="questionsIds"
-            component={this.renderQuestionsList}
-            label={intl.formatMessage(messages.TEST_QUESTIONS)}
-          />
-          <div className="test-form-actions">
-            <Button type="submit">{intl.formatMessage(globalMessages.SAVE)}</Button>
-          </div>
-        </form>
-      </Card>
+      <form className="test-form" onSubmit={handleSubmit(this.onSubmit)}>
+        <InputField
+          name="name"
+          label={intl.formatMessage(messages.TEST_NAME)}
+          validate={this.validations.testName}
+          autoFocus
+        />
+        <InputField name="description" label={intl.formatMessage(messages.TEST_DESCRIPTION)} />
+        <Field
+          name="questionsIds"
+          component={this.renderQuestionsList}
+          label={intl.formatMessage(messages.TEST_QUESTIONS)}
+        />
+        <div className="test-form-actions">
+          <Button type="submit">{intl.formatMessage(globalMessages.SAVE)}</Button>
+        </div>
+      </form>
     );
   }
 }
 
 const FORM_NAME = 'TestForm';
 
-TestForm = reduxForm({
-  form: FORM_NAME,
-  initialValues: {
-    name: '',
-    description: '',
-    questionsIds: []
-  }
-})(TestForm);
-
-const mapStateToProps = (state, ownProps) => {
-  return {};
+const INITIAL_VALUES = {
+  name: '',
+  description: '',
+  questionsIds: []
 };
 
 const mapDispatchToProps = {
-  onSubmit: addTest
 };
 
-TestForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(TestForm)));
-
-export default MainLayoutContextWrapper(TestForm);
+export default compose(
+  MainLayoutContextWrapper,
+  withRouter,
+  injectIntl,
+  connect(null, mapDispatchToProps),
+  reduxForm({
+    form: FORM_NAME,
+    initialValues: INITIAL_VALUES
+  })
+)(TestForm);
