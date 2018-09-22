@@ -1,4 +1,3 @@
-import './sign_up.scss';
 import '../style.scss';
 
 import React, { Component } from 'react';
@@ -46,8 +45,8 @@ class SignUpForm extends Component {
   }
 
   onSubmit = values => {
-    const { login, firstName, lastName, email, password} = values;
-    const { intl, history  } = this.props;
+    const { login, firstName, lastName, email, password } = values;
+    const { intl, history } = this.props;
 
     const onSuccess = () => {
       toastr.success(intl.formatMessage(toastrMessages.SIGN_UP_SUCCESS));
@@ -55,14 +54,14 @@ class SignUpForm extends Component {
     };
 
     const onError = () => {
-      toastr.error(intl.formatMessage(toastrMessages.SIGN_UP_FAILURE))
+      toastr.error(intl.formatMessage(toastrMessages.SIGN_UP_FAILURE));
     };
 
-    this.props.signUp({ login, password, firstName, lastName, email }, onSuccess, onError );
+    return this.props.signUp({ login, password, firstName, lastName, email }, onSuccess, onError);
   };
 
   render() {
-    const { handleSubmit, intl } = this.props;
+    const { handleSubmit, intl, submitting } = this.props;
 
     return (
       <form className="sign-up-form" onSubmit={handleSubmit(this.onSubmit)}>
@@ -99,7 +98,14 @@ class SignUpForm extends Component {
           type="password"
           validate={this.validations.password}
         />
-        <Button variant="raised" type="submit" color="primary" className="submit-button">
+        <Button
+          variant="raised"
+          type="submit"
+          color="primary"
+          className="submit-button"
+          loading={submitting}
+          fullWidth
+        >
           {intl.formatMessage(messages.SIGN_UP)}
         </Button>
       </form>

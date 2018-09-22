@@ -58,7 +58,7 @@ class SignInForm extends Component {
           type="password"
           validate={this.requiredValidation}
         />
-        <Button variant="raised" type="submit" color="primary" className="submit-button" loading={submitting}>
+        <Button variant="raised" type="submit" color="primary" className="submit-button" loading={submitting} fullWidth>
           {intl.formatMessage(messages.SIGN_IN)}
         </Button>
         <SocialMediaLoginButtons />

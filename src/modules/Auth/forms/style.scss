@@ -8,14 +8,11 @@ $nbmeteors: 6; // Don't forget to change the number of loop in the haml !
 
 .sign-in-form,
 .sign-up-form {
-  padding-top: 15px;
   height: 100%;
   display: flex;
   flex-direction: column;
 
   .button[type='submit'] {
-    max-width: $auth-submit-button-max-width;
-    width: 100%;
     margin: $container-margin auto 0 auto;
   }
 }
