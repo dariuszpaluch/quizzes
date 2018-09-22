@@ -35,37 +35,13 @@ class EditQuestion extends Component {
   };
 
   getInitValues() {
-
-    // console.log(this.props.test);
-    // return {};
-    //
-    // const INITIAL_VALUES = {
-    //   name: '',
-    //   description: '',
-    //   questionsIds: []
-    // };
-
     const { name, description, questions} = this.props.test;
-
-    console.log(questions);
 
     return {
       name,
       description,
       questionsIds: questions.map( question => question.id)
     }
-    // const { question } = this.props;
-    //
-    // const data = question && {
-    //   ...pick(question, ['question', 'description', 'answers'])
-    // };
-    //
-    // data.answers = map(data.answers, answer => ({
-    //   ...answer,
-    //   select: answer.correct
-    // }));
-    //
-    // return data;
   }
 
   render() {

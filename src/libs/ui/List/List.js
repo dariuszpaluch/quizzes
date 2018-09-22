@@ -8,12 +8,10 @@ import classnames from 'classnames';
 import icons from 'consts/icons';
 
 import Collapse from '@material-ui/core/Collapse';
-import  { List as MaterialList, ListItem, ListItemText } from '@material-ui/core';
+import { List as MaterialList, ListItem, ListItemText } from '@material-ui/core';
 import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
-import filter from 'lodash/filter';
-import noop from 'lodash/noop';
-import size from 'lodash/size';
+import { isString, noop, size, filter } from 'lodash';
 
 export default class List extends Component {
   static propTypes = {
@@ -21,7 +19,7 @@ export default class List extends Component {
     rows: PropTypes.objectOf(
       PropTypes.shape({
         className: PropTypes.string,
-        label: PropTypes.string,
+        label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
         children: PropTypes.any
       })
     ),
@@ -87,11 +85,13 @@ export default class List extends Component {
           const open = this.state.openItems[rowId];
           const selected = selectedRowsIds.indexOf(rowId) > -1;
 
-          const onClick = selectOnClick
-            ? this.onChangeSelect.bind(null, rowId, !selected)
-            : row.children
-              ? this.onToggleItemCollapse.bind(null, rowId)
-              : null;
+          const onClick =
+            row.onClick ||
+            (selectOnClick
+              ? this.onChangeSelect.bind(null, rowId, !selected)
+              : row.children
+                ? this.onToggleItemCollapse.bind(null, rowId)
+                : null);
 
           return [
             <ListItem
@@ -114,7 +114,7 @@ export default class List extends Component {
                   onChange={!selectOnClick ? this.onChangeSelect.bind(null, rowId) : noop}
                 />
               )}
-              <ListItemText inset primary={row.label} />
+              {isString(row.label) ? <ListItemText inset primary={row.label} /> : row.label}
               {row.children ? (
                 <IconButton
                   icon={open ? icons.ARROW_UP : icons.ARROW_DOWN}

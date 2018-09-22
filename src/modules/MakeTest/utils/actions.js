@@ -22,6 +22,17 @@ export function fetchTestToBeCompleted(testId, resolve, reject) {
   };
 }
 
+export function fetchUserTestAnswers(resolve, reject) {
+  return dispatch => {
+    return dispatchPromiseResult(dispatch, {
+      actionType: FETCH_TEST_TO_BE_COMPLETED,
+      promise: fetchAPI.get.bind(null, `${API_URL}/test-answers/user`),
+      resolve,
+      reject
+    });
+  };
+}
+
 export function setQuestionAnswer(questionId, answer) {
   return storeAction(SET_QUESTION_ANSWER, null, {
     answer,

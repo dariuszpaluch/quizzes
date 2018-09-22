@@ -17,6 +17,8 @@ import Typography from 'libs/ui/Typography/Typography';
 import { getTestResult } from './utils/actions';
 
 import './test_result.scss';
+import Checkbox from 'libs/ui/Checkbox';
+import noop from 'lodash/noop';
 
 class TestResult extends Component {
   static propTypes = {};
@@ -34,6 +36,8 @@ class TestResult extends Component {
   }
 
   questionIsCorrect(allCorrectAnswers, userAnswers) {
+    console.log(allCorrectAnswers, userAnswers);
+
     return (
       every(allCorrectAnswers, answer => userAnswers.indexOf(answer) >= 0) &&
       size(allCorrectAnswers) === size(userAnswers)
@@ -41,17 +45,22 @@ class TestResult extends Component {
   }
 
   renderAnswers(answers, userAnswers) {
+    console.log(userAnswers);
+
     return (
-      <div>
-        {answers.map(answer => {
-          const correct = userAnswers.indexOf(answer.id) >= 0;
+      <div className="question-answer-list">
+        {answers.map((answer, index) => {
+          const userSelected = userAnswers.indexOf(answer._id) >= 0;
+
           return (
             <p
-              key={answer.id}
+              key={answer._id}
               className={classnames('answer', {
-                correct
+                correct: answer.correct && userSelected,
+                wrong: (answer.correct && !userSelected) || (!answer.correct && userSelected)
               })}
             >
+              <Checkbox checked={userSelected} onChange={() => {}} />
               {answer.label}
             </p>
           );
@@ -66,21 +75,29 @@ class TestResult extends Component {
     const questionsRendered = {};
     let corrects = 0;
 
+    console.log('question', 'answers', questions, answers);
+
+    let index = 0;
     forEach(questions.byId, question => {
       const allCorrectAnswers = map(
         filter(question.answers, { correct: true }),
-        answer => answer.id
+        answer => answer._id
       );
-      const correct = this.questionIsCorrect(allCorrectAnswers, answers[question.id]);
+
+      const userAnswers = answers[question.id] || [];
+
+      const correct = this.questionIsCorrect(allCorrectAnswers, userAnswers);
 
       if (correct) corrects += 1;
+
+      index += 1;
       questionsRendered[question.id] = {
-        label: question.question,
+        label: `${index}. ${question.question}`,
         className: classnames('question-item', {
           correct,
           wrong: !correct
         }),
-        children: this.renderAnswers(question.answers, answers[question.id])
+        children: this.renderAnswers(question.answers, userAnswers)
       };
     });
 
@@ -98,7 +115,7 @@ class TestResult extends Component {
     const { questionsRendered, corrects } = this.renderQuestions();
 
     return (
-      <Card className="test-result" noSpace title="Wynik testu">
+      <Card className="test-result" noSpace title="Wynik testu" centerHeader>
         <div className="test-result-stats">
           <PercentageCircle
             className="test-percentage-result"

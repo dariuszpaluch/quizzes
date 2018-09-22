@@ -1,0 +1,32 @@
+@import '~styles/colors';
+
+.test-results-list {
+  background-color: white;
+  width: 100%;
+
+  .list-item {
+    height: auto !important;
+    &:hover {
+      .progress:after {
+        border-color: white;
+      }
+    }
+  }
+  .test-result-list-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    div:first-child {
+      display: flex;
+      > span {
+        margin: auto;
+      }
+    }
+
+    .date {
+      color: rgba(black, 0.4);
+      padding-right: 15px;
+    }
+  }
+}

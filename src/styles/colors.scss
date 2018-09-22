@@ -5,21 +5,33 @@ $error-color: #c4312b;
 
 $darken-percentage: 10%;
 
+$url-color: #2196F3;
+
 $background-primary-color: #f6f6f6;
 $border-color: rgba(grey, 0.2);
 
 $box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
   0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
-$primary-light: #ef5350;
-$primary-main: #e53935;
-$primary-dark: #c62828;
+//$primary-light: #ef5350;
+//$primary-main: #e53935;
+//$primary-dark: #c62828;
+//$primary-text: #fff;
+
+
+$primary-light: #2196F3;
+$primary-main: #1976D2;
+$primary-dark: #0D47A1;
 $primary-text: #fff;
+
+
 
 $secondary-light: #ffa726;
 $secondary-main: #fb8c00;
 $secondary-dark: #ef6c00;
 $secondary-text: white;
+
+$auth-background-color: $primary-dark;
 
 :export {
   primaryLight: $primary-light;

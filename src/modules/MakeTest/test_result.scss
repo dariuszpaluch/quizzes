@@ -25,6 +25,23 @@
     &.wrong {
       background-color: rgba($error-color, 0.6);
     }
+
+
+  }
+
+  .question-answer-list {
+    .answer {
+      pointer-events: none;
+      cursor: default !important;
+
+      &.correct {
+        background-color: rgba($success-color, 0.1);
+      }
+
+      &.wrong {
+        background-color: rgba($error-color, 0.1);
+      }
+    }
   }
 
   p.answer {

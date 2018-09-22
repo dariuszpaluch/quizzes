@@ -1,3 +1,5 @@
+@import '~styles/colors';
+
 @keyframes zoominoutsinglefeatured {
   0% {
     transform: scale(1,1);
@@ -12,6 +14,22 @@
 
 .user-results-table {
   padding: 10px 0;
+
+  a.email-address {
+    color: $url-color;
+    font-weight: 500;
+  }
+
+  table {
+    margin-top: 15px;
+    thead {
+      background-color: #EEEEEE;
+      tr {
+        height: 30px !important;
+      }
+    }
+  }
+
 
   .user-answer-row {
     transition: background-color ease 3s;

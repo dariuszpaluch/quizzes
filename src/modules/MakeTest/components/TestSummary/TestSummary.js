@@ -29,7 +29,7 @@ class TestSummary extends Component {
     return [
       <Link
         key="test-result"
-        to={parsePath(paths.TESTS_RESULTS, {
+        to={parsePath(paths.TESTS_RESULT, {
           testResultId
         })}
       >

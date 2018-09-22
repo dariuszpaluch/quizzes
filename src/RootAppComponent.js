@@ -35,6 +35,7 @@ import LocalStorageSource from 'sources/LocalStorageSource';
 import { parseQuery } from 'utils/routerHistory';
 import { signInByQuerytoken } from 'modules/Auth/actions';
 import { logout } from 'modules/Auth/actions';
+import TestResultsList from 'modules/MakeTest/TestResultsList';
 
 class RootAppComponent extends Component {
   static propTypes = {};
@@ -78,7 +79,8 @@ class RootAppComponent extends Component {
       <SmartMainLayout>
         <Switch>
           <Route path={paths.MAKE_TEST} component={MakeTest} />
-          <Route path={paths.TESTS_RESULTS} component={TestResult} />
+          <Route path={paths.TESTS_RESULT} component={TestResult} />
+          <Route path={paths.TESTS_RESULTS} component={TestResultsList} />
           <Route path={paths.TESTS} component={Tests} />
           <Route path={paths.QUESTIONS} component={Question} />
           <Route exact path={paths.INDEX} component={Dashboard} />

@@ -5,7 +5,8 @@ const paths = {
   QUESTIONS: `${PUBLIC_PATH}question`,
   TESTS: `${PUBLIC_PATH}tests`,
   SETTINGS: `${PUBLIC_PATH}settings`,
-  TESTS_RESULTS: `${PUBLIC_PATH}test-result/:testResultId`
+  TESTS_RESULT: `${PUBLIC_PATH}test-results/:testResultId`,
+  TESTS_RESULTS: `${PUBLIC_PATH}test-results`
 };
 
 export const authPaths = {

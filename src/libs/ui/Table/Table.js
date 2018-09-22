@@ -2,7 +2,13 @@ import './table.scss';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core/Table';
+import {
+  Table as MaterialTable,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from '@material-ui/core';
 import RowActions from 'libs/ui/Table/RowActions';
 import { get, pick } from 'lodash';
 
@@ -21,10 +27,10 @@ class Table extends Component {
     const value = get(row, column.id);
 
     return column.render ? column.render(value, row) : value;
-  } ;
+  };
 
   static getColumnProps(column) {
-    return pick(column, ["component", "numeric", "padding", "scrope", "sortDirection"])
+    return pick(column, ['component', 'numeric', 'padding', 'scrope', 'sortDirection']);
   }
 
   render() {
@@ -35,7 +41,11 @@ class Table extends Component {
         <TableHead>
           <TableRow>
             {columns.map(column => {
-              return <TableCell {...Table.getColumnProps(column)} key={column.id} variant="head" >{column.content}</TableCell>;
+              return (
+                <TableCell {...Table.getColumnProps(column)} key={column.id} variant="head">
+                  {column.content}
+                </TableCell>
+              );
             })}
             <RowActions onDelete={onClickDeleteRow} onEdit={onClickEditRow} header />
           </TableRow>
@@ -45,7 +55,15 @@ class Table extends Component {
             return (
               <TableRow key={row.id} className={row.className}>
                 {columns.map(column => {
-                  return <TableCell {...Table.getColumnProps(column)} key={column.id} padding={column.padding}>{this.renderCellValue(row, column)}</TableCell>;
+                  return (
+                    <TableCell
+                      {...Table.getColumnProps(column)}
+                      key={column.id}
+                      padding={column.padding}
+                    >
+                      {this.renderCellValue(row, column)}
+                    </TableCell>
+                  );
                 })}
                 <RowActions
                   row={row}
