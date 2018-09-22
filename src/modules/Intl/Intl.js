@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
-
-import en from 'react-intl/locale-data/en';
-import pl from 'react-intl/locale-data/pl';
+import { getActiveLanguage, getMessages } from 'modules/Intl/reducer';
 
 class Intl extends Component {
   render() {
     const { children, locale, messages } = this.props;
 
-    const _locale = locale === 'dev' ? 'pl' : locale;
+    console.log(locale, messages);
 
     return (
-      <IntlProvider locale={_locale} defaultLocale="pl" messages={messages}>
+      <IntlProvider
+        locale={locale}
+        defaultLocale="en"
+        messages={messages}
+        key={locale}
+        textComponent={React.Fragment}
+      >
         {children}
       </IntlProvider>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { activeLanguage, messages } = state.intl;
-
-  return {
-    locale: activeLanguage || 'pl',
-    messages: messages[activeLanguage] || {}
-  };
-}
+const mapStateToProps = state => ({
+  locale: getActiveLanguage(state),
+  messages: getMessages(state)
+});
 
 export default connect(mapStateToProps, null)(Intl);

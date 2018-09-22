@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import Input, { InputLabel } from '@material-ui/core/Input';
-import { MenuItem } from '@material-ui/core/Menu';
-import { FormControl, FormHelperText } from '@material-ui/core/Form';
+import  { Input, InputLabel } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
+import { FormControl, FormHelperText } from '@material-ui/core';
 import MaterialSelect from '@material-ui/core/Select';
 
 export default class Select extends Component {
@@ -42,10 +42,10 @@ export default class Select extends Component {
   };
 
   render() {
-    const { value, name, label } = this.props;
+    const { value, name, label, className } = this.props;
 
     return (
-      <FormControl>
+      <FormControl className={className}>
         {!!label ? <InputLabel htmlFor={name}>{label}</InputLabel> : null}
         <MaterialSelect
           value={value}

@@ -7,6 +7,7 @@ import QuestionsReducer from 'modules/Question/utils/reducer';
 import TestsReducer from 'modules/Tests/utils/reducer';
 import MakeTestReducer from 'modules/MakeTest/utils/reducer';
 import MainLayoutReducer from 'modules/MainLayout/utils/reducer';
+import IntlReducer from 'modules/Intl/reducer';
 
 const appReducer = combineReducers({
   form: FormReducer,
@@ -15,7 +16,8 @@ const appReducer = combineReducers({
   tests: TestsReducer,
   makeTest: MakeTestReducer,
   toastr: toastrReducer,
-  mainLayout: MainLayoutReducer
+  mainLayout: MainLayoutReducer,
+  intl: IntlReducer,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

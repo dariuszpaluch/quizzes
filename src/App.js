@@ -4,38 +4,37 @@ import { hot } from 'react-hot-loader';
 
 import AppContainer from 'containers/AppContainer';
 
-import en from 'react-intl/locale-data/en';
-import pl from 'react-intl/locale-data/pl';
-import { addLocaleData, IntlProvider } from 'react-intl';
+// import { addLocaleData, IntlProvider } from 'react-intl';
 
-import localeData from '../locales/data.json';
+// import localeData from '../locales/data.json';
 import RootAppComponent from 'src/RootAppComponent';
 
-addLocaleData([...en, ...pl]);
+// addLocaleData([...en, ...pl]);
 
-const language =
-  (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage;
+// const language =
+//   (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage;
 
-const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
-const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.en;
+// const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+// const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.en;
 
+import IntlProvider from 'modules/Intl/Intl';
 
 if (process.env.NODE_ENV !== 'production') {
-  const originalConsoleError = console.error
+  const originalConsoleError = console.error;
   if (console.error === originalConsoleError) {
     console.error = (...args) => {
       if (args[0].indexOf('[React Intl] Missing message:') === 0) {
-        return
+        return;
       }
-      originalConsoleError.call(console, ...args)
-    }
+      originalConsoleError.call(console, ...args);
+    };
   }
 }
 
 export default class AppComponent extends Component {
   render() {
     return (
-      <IntlProvider locale={language} messages={messages}>
+      <IntlProvider>
         <Router history={this.props.history}>
           <AppContainer>
             <RootAppComponent />

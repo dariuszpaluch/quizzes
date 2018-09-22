@@ -1,0 +1,10 @@
+.language-switch {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .language-select {
+    min-width: 150px;
+    max-width: 80%;
+  }
+}

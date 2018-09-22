@@ -101,7 +101,7 @@ $app-bar-height: 50px;
 
     .nav-close-icon {
       position: absolute;
-      right: 0;
+      right: 20px;
       padding: 10px;
       top: 0;
       z-index: 2;
@@ -131,4 +131,16 @@ $app-bar-height: 50px;
       display: block;
     }
   }
+}
+
+.menu-drawer, .mobile-drawer {
+  max-height: 100vh;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+.menu-bottom {
+  min-height: 60px;
+  padding: 20px 0;
 }

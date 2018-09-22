@@ -12,6 +12,7 @@ import icons from 'consts/icons';
 import noop from 'lodash/noop';
 import Avatar from 'libs/ui/Avatar/Avatar';
 import UserMenu from 'modules/MainLayout/components/UserMenu/UserMenu';
+import LanguageSwitch from 'modules/Intl/LanguageSwitch';
 
 export default class Menu extends Component {
   static propTypes = {
@@ -97,13 +98,18 @@ export default class Menu extends Component {
         />
       ) : null,
       userData && userData.email && <UserMenu key="user-menu" userData={userData} />,
-      <List
-        key="nav-list"
-        component="nav"
-        subheader={<ListSubheader component="div" className="nav-header-title" />}
-      >
-        {this.renderMenuItems(isMobile)}
-      </List>
+      <div className="scrollable">
+        <List
+          key="nav-list"
+          component="nav"
+          subheader={<ListSubheader component="div" className="nav-header-title" />}
+        >
+          {this.renderMenuItems(isMobile)}
+        </List>
+        <div className="menu-bottom">
+          <LanguageSwitch key="language-switch" />
+        </div>
+      </div>
     ];
   }
 
