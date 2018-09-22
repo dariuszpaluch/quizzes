@@ -1,11 +1,32 @@
 @import './reset';
 @import './colors';
 @import './fonts';
+@import './mixins.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&subset=latin-ext');
 @import '../../node_modules/react-star-rating/dist/css/react-star-rating.min.css';
 
 @import '~flexboxgrid';
+
+.no-space-xs.row {
+  margin-left: 0;
+  margin-right: 0;
+
+  > div {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @include smScreen {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    > div {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+}
 
 body {
   overflow-y: scroll;

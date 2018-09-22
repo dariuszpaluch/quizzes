@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions } from 'modules/Question/utils/actions';
+import { addQuestion, fetchQuestions } from 'modules/Question/utils/actions';
 
 import { deleteQuestion } from 'modules/Question/utils/actions';
 import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
@@ -9,7 +9,7 @@ import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
 import ChipList from 'libs/ui/ChipList';
 import filter from 'lodash/filter';
 import reverse from 'lodash/reverse';
-import QuestionForm from 'modules/Question/QuestionForm';
+import QuestionForm from 'modules/Question/forms/QuestionForm';
 import Modal from 'libs/ui/Modal/Modal';
 import Button from 'libs/ui/Button/Button';
 import { toastr } from 'react-redux-toastr';
@@ -69,7 +69,11 @@ class QuestionList extends Component {
           onRequestClose={this.onToogleAddQuestionModal}
           title="Add question"
         >
-          <QuestionForm mode="simple" afterSuccessAdded={this.afterAddNewQuestion} />
+          <QuestionForm
+            mode="simple"
+            afterSuccessAdded={this.afterAddNewQuestion}
+            onSave={this.props.addQuestion}
+          />
         </Modal>
         <ChipList
           className="selected-question-chips"
@@ -99,7 +103,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   fetchQuestions,
-  deleteQuestion
+  deleteQuestion,
+  addQuestion,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(QuestionList));

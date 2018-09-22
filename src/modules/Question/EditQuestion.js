@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 import { fetchQuestion, saveQuestion } from 'modules/Question/utils/actions';
-import QuestionForm, { MODES } from 'modules/Question/QuestionForm';
+import QuestionForm, { MODES } from 'modules/Question/forms/QuestionForm';
 import { getQuestion, getQuestionLoading } from 'modules/Question/utils/getters';
 import paths from 'consts/paths';
 
