@@ -3,9 +3,9 @@ import './app_container.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReduxToastr from 'react-redux-toastr';
-import { MuiThemeProvider } from 'material-ui/styles/index';
+import { MuiThemeProvider } from '@material-ui/core/styles/index';
 
-import { createMuiTheme } from 'material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import colors from 'styles/colors.scss';
 

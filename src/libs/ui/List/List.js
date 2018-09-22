@@ -7,8 +7,8 @@ import classnames from 'classnames';
 
 import icons from 'consts/icons';
 
-import Collapse from 'material-ui/transitions/Collapse';
-import MaterialList, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import Collapse from '@material-ui/core/Collapse';
+import  { List as MaterialList, ListItem, ListItemText } from '@material-ui/core';
 import Checkbox from 'libs/ui/Checkbox';
 import IconButton from 'libs/ui/IconButton/IconButton';
 import filter from 'lodash/filter';

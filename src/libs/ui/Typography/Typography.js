@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import MaterialTypography from 'material-ui/Typography';
+import MaterialTypography from '@material-ui/core/Typography';
 const propTypes = {
   className: PropTypes.string,
   variant: PropTypes.oneOf([

@@ -3,10 +3,8 @@ import './stepper.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MobileStepper from 'material-ui/MobileStepper';
+import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from 'libs/ui/Button';
-import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 import classnames from 'classnames';
 import icons from 'consts/icons';

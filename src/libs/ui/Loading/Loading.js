@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
-import { CircularProgress } from 'material-ui/Progress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const propTypes = {
   className: PropTypes.string,
@@ -21,7 +21,11 @@ const defaultProps = {
 const Loading = ({ className, size, center }) => {
   const classes = classnames('loading', { center }, className);
 
-  return <CircularProgress className={classes} size={size} />;
+  return (
+    <div className={classes}>
+      <CircularProgress size={size} />
+    </div>
+  );
 };
 
 Loading.propTypes = propTypes;

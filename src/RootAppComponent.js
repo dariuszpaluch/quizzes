@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 
-import { Route, Switch, Router, withRouter } from 'react-router-dom';
+import { Route, Switch, Router, withRouter, Redirect } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import { Provider } from 'react-redux';
@@ -82,6 +82,7 @@ class RootAppComponent extends Component {
           <Route path={paths.TESTS} component={Tests} />
           <Route path={paths.QUESTIONS} component={Question} />
           <Route exact path={paths.INDEX} component={Dashboard} />
+          <Redirect path={paths.INDEX} to={paths.INDEX} />
         </Switch>
       </SmartMainLayout>
     );

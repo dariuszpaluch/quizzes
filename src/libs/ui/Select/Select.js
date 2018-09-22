@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import Input, { InputLabel } from 'material-ui/Input';
-import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import MaterialSelect from 'material-ui/Select';
+import Input, { InputLabel } from '@material-ui/core/Input';
+import { MenuItem } from '@material-ui/core/Menu';
+import { FormControl, FormHelperText } from '@material-ui/core/Form';
+import MaterialSelect from '@material-ui/core/Select';
 
 export default class Select extends Component {
   static propTypes = {

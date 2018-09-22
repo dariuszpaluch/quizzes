@@ -2,7 +2,7 @@ import './table.scss';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import MaterialTable, { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core/Table';
 import RowActions from 'libs/ui/Table/RowActions';
 import { get, pick } from 'lodash';
 

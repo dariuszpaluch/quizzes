@@ -1,8 +1,9 @@
-import './sign_in.scss';
 import '../style.scss';
 
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { compose } from 'recompose';
+
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import Button from 'libs/ui/Button/Button';
 
@@ -15,11 +16,9 @@ import { toastr } from 'react-redux-toastr';
 
 import { SIGN_IN as STRINGS } from '../../strings';
 import { injectIntl } from 'react-intl';
-import messages  from 'modules/Auth/utils/messages';
-import toastrMessages  from 'modules/Auth/utils/toastrMessages';
+import messages from 'modules/Auth/utils/messages';
 import intlWrapValidation from 'modules/_forms/intlWrapValidation';
 import { withRouter } from 'react-router-dom';
-import paths from 'consts/paths';
 import SocialMediaLoginButtons from 'modules/Auth/components/SocialMediaLoginButtons';
 
 class SignInForm extends Component {
@@ -34,7 +33,7 @@ class SignInForm extends Component {
   }
 
   signIn = values => {
-    this.props.signIn(values, null, this.onSignInFailure);
+    return this.props.signIn(values, null, this.onSignInFailure);
   };
 
   onSignInFailure = () => {
@@ -42,7 +41,7 @@ class SignInForm extends Component {
   };
 
   render() {
-    const { handleSubmit, intl, location } = this.props;
+    const { handleSubmit, intl, submitting } = this.props;
 
     return (
       <form className="sign-in-form" onSubmit={handleSubmit(this.signIn)}>
@@ -59,7 +58,7 @@ class SignInForm extends Component {
           type="password"
           validate={this.requiredValidation}
         />
-        <Button variant="raised" type="submit" color="primary" className="submit-button">
+        <Button variant="raised" type="submit" color="primary" className="submit-button" loading={submitting}>
           {intl.formatMessage(messages.SIGN_IN)}
         </Button>
         <SocialMediaLoginButtons />
@@ -68,18 +67,18 @@ class SignInForm extends Component {
   }
 }
 
-const FORM_NAME = 'signIn';
-
-SignInForm = reduxForm({
-  form: FORM_NAME,
-  validate
-})(SignInForm);
-
 const mapDispatchToProps = {
   signIn
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(injectIntl(SignInForm)));
+const FORM_NAME = 'signIn';
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  withRouter,
+  injectIntl,
+  reduxForm({
+    form: FORM_NAME,
+    validate
+  })
+)(SignInForm);

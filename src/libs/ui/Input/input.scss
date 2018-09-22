@@ -4,5 +4,9 @@
 
   &.have-error {
     padding-bottom: 5px !important;
+
+    p {
+      margin-top: 9.5px !important;
+    }
   }
 }

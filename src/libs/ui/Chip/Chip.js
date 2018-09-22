@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
-import MaterialChip from 'material-ui/Chip';
+import MaterialChip from '@material-ui/core/Chip';
 
 const propTypes = {
   className: PropTypes.string,

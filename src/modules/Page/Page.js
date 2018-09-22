@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 export default class Page extends Component {
   static propTypes = {};

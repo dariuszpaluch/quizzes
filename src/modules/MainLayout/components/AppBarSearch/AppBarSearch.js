@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import icons from 'consts/icons';
 import IconButton from 'libs/ui/IconButton/IconButton';
-import { Input } from 'material-ui';
+import { Input } from '@material-ui/core';
 import ReactDOM from 'react-dom';
 
 import { Keys } from 'react-keydown';

@@ -13,7 +13,7 @@ import globalMessages from 'utils/globalMessages';
 import { injectIntl } from 'react-intl';
 import QuestionForm from 'modules/MakeTest/components/QuestionForm/QuestionForm';
 import { setQuestionAnswer } from 'modules/MakeTest/utils/actions';
-import { Paper } from 'material-ui';
+import Paper from '@material-ui/core/Paper';
 import messages from 'modules/MakeTest/utils/messages';
 import ReactSwipe from 'react-swipe';
 import Carousel from 'nuka-carousel';

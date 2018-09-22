@@ -21,6 +21,7 @@ import Meteors from 'components/Meteors/Meteors';
 import { signInByQuerytoken } from './actions';
 
 import SignUpForm from './forms/SignUpForm';
+import Tab from '@material-ui/core/Tab/Tab';
 
 class Auth extends Component {
   static propTypes = {
@@ -31,6 +32,8 @@ class Auth extends Component {
     super(props);
 
     const { match, intl } = props;
+
+    console.log(match.url, authPaths.SIGN_IN);
 
     this.tabs = [
       {
@@ -62,21 +65,18 @@ class Auth extends Component {
             <Meteors fullScreen />
           </div>
           <Card className="auth">
-            <Tabs
-              className="auth-tabs"
-              tabs={this.tabs}
-              value={location.pathname}
-              onChange={this.onChangeTab}
-              indicatorColor="primary"
-              textColor="primary"
-              fullWidth
-            />
+              <Tabs
+                tabs={this.tabs}
+                value={location.pathname}
+                onChange={this.onChangeTab}
+                fullWidth
+              />
 
-            <Switch>
-              <Route path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
-              <Route path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
-              <Route path={match.url} component={SignInForm} />
-            </Switch>
+              <Switch>
+                <Route path={`${match.url}${authPaths.SIGN_UP}`} component={SignUpForm} />
+                <Route path={`${match.url}${authPaths.SIGN_IN}`} component={SignInForm} />
+                <Route path={match.url} component={SignInForm} />
+              </Switch>
           </Card>
         </div>
       </div>
@@ -88,7 +88,4 @@ const mapDispatchToProps = {
   signInByQuerytoken
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(injectIntl(Auth)));
+export default connect(null, mapDispatchToProps)(withRouter(injectIntl(Auth)));

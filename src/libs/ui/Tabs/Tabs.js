@@ -1,11 +1,11 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import MaterialTabs, { Tab } from 'material-ui/Tabs';
+import { Tabs as MaterialTabs, Tab } from '@material-ui/core';
 
 import findIndex from 'lodash/findIndex';
 import isArray from 'lodash/isArray';
+import * as classnames from 'classnames';
 
 import './tabs.scss';
 
@@ -19,13 +19,13 @@ export default class Tabs extends Component {
         value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
       })
     ),
-    children: PropTypes.any,
+    children: PropTypes.any
   };
 
   static defaultProps = {
     value: null,
     tabs: [],
-    children: null,
+    children: null
   };
 
   constructor(props) {
@@ -59,18 +59,21 @@ export default class Tabs extends Component {
   }
 
   render() {
-    const { value, onChange, children, tabs, ...props } = this.props;
+    const { fullWidth } = this.props;
 
     return (
-      <MaterialTabs
-        className="tabs"
-        {...props}
-        value={this.getSelectedIndex()}
-        onChange={this.onChange}
-      >
-        {this.renderTabs()}
-        {children}
-      </MaterialTabs>
+      <div className={classnames('tabs', {
+        'full-width': fullWidth,
+      })}>
+        <MaterialTabs
+          value={this.getSelectedIndex() || 0}
+          onChange={this.onChange}
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          {this.renderTabs()}
+        </MaterialTabs>
+      </div>
     );
   }
 }

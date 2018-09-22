@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import MaterialButton from 'material-ui/Button';
+import MaterialButton from '@material-ui/core/Button';
 import noop from 'lodash/noop';
 import Icon from 'libs/ui/Icon/Icon';
 import Loading from 'libs/ui/Loading';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
-import { ListItem } from 'material-ui';
+import { ListItem } from '@material-ui/core';
 import Checkbox from 'libs/ui/Checkbox/Checkbox';
 import InputField from 'libs/reduxFormFields/InputField/InputField';
 import IconButton from 'libs/ui/IconButton/IconButton';

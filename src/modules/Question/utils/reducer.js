@@ -14,7 +14,8 @@ function getInitState() {
 function fetchQuestionsSuccess(questionState, action) {
   return {
     ...questionState,
-    questions: normalizeList(action.data)
+    questions: normalizeList(action.data),
+    isFetching: false,
   };
 }
 
@@ -72,7 +73,7 @@ function addQuestionSuccess(questionState, action) {
 
 export default createReducer(getInitState(), {
   [`${FETCH_QUESTIONS}_SUCCESS`]: fetchQuestionsSuccess,
-  [`${FETCH_QUESTIONS}_REQUIRE`]: questionState =>
+  [`${FETCH_QUESTIONS}_REQUEST`]: questionState =>
     updateObject(questionState, { isFetching: true }),
   [`${FETCH_QUESTIONS}_FAILURE`]: questionState =>
     updateObject(questionState, { isFetching: false }),

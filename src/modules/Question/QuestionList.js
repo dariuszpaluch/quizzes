@@ -7,7 +7,12 @@ import STRINGS from './utils/strings';
 import { deleteQuestion } from 'modules/Question/utils/actions';
 import { toastr } from 'react-redux-toastr';
 import { setAppBarTitle } from 'modules/MainLayout/utils/actions';
-import { getQuestions, getQuestionsIds, getQuestionsLoading } from 'modules/Question/utils/getters';
+import {
+  getQuestionIsFetching,
+  getQuestions,
+  getQuestionsIds,
+  getQuestionsLoading
+} from 'modules/Question/utils/getters';
 import { injectIntl } from 'react-intl';
 import messages from './utils/messages';
 import SimpleQuestionlist from 'modules/Question/components/SimpleQuestionList';
@@ -17,9 +22,7 @@ import parsePath from 'utils/parsePath';
 import paths, { questionPaths } from 'consts/paths';
 import { withRouter } from 'react-router-dom';
 import { MainLayoutContextWrapper } from 'modules/MainLayout/MainLayoutContext';
-
-import filter from 'lodash/filter';
-import stringInclude from 'utils/stringInclude';
+import Loading from 'libs/ui/Loading/Loading';
 
 class QuestionList extends Component {
   constructor(props) {
@@ -79,8 +82,12 @@ class QuestionList extends Component {
   };
 
   render() {
-    const { onChangeSelect, selectedIds, questions, questionsIds } = this.props;
+    const { onChangeSelect, selectedIds, questions, questionsIds, isLoading } = this.props;
     const { questionsQuery } = this.state;
+
+    if(isLoading) {
+      return <Loading center/>
+    }
 
     return (
       <Card className="question-list" noSpace>
@@ -103,7 +110,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     questions: getQuestions(state),
     questionsIds: getQuestionsIds(state),
-    questionsLoading: getQuestionsLoading(state)
+    isLoading: getQuestionIsFetching(state)
   };
 };
 

@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import Button from 'libs/ui/Button/Button';
-import MaterialList, { ListItem } from 'material-ui/List/index';
+import MaterialList, { ListItem } from '@material-ui/core/List/index';
 import { Field, Fields } from 'redux-form';
 
 import ListField from './ListField';
 import Icon from 'libs/ui/Icon/Icon';
 import icons from 'consts/icons';
 import size from 'lodash/size';
-import { FormLabel } from 'material-ui';
+import { FormLabel } from '@material-ui/core';
 
 const propTypes = {
   className: PropTypes.string

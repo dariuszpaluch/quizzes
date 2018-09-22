@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import filter from 'lodash/filter';
 
-import TableCell from 'material-ui/Table/TableCell';
+import TableCell from '@material-ui/core/TableCell';
 import IconButton from 'libs/ui/IconButton/IconButton';
 
 const propTypes = {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ListSubheader from 'material-ui/List/ListSubheader';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Drawer from 'material-ui/Drawer';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
 
-import Icon from 'material-ui/Icon';
+import Icon from '@material-ui/core/Icon';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import IconButton from 'libs/ui/IconButton/IconButton';

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import MaterialIcon from 'material-ui/Icon';
+import MaterialIcon from '@material-ui/core/Icon';
 
 const propTypes = {
   className: PropTypes.string,

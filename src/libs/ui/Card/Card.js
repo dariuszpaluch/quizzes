@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import MaterialCard, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
+import  { Card as MaterialCard, CardActions, CardContent, CardHeader } from '@material-ui/core';
 import IconButton from 'libs/ui/IconButton/IconButton';
 
 export default class Card extends Component {

@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from 'libs/ui/IconButton/IconButton';
 
 import Menu from './components/Menu';
@@ -17,8 +17,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from 'modules/Auth/actions';
 import messages from 'modules/MainLayout/consts/messages';
-import { Input } from 'material-ui';
-import * as ReactDOM from 'react-dom';
 import AppBarSearch from 'modules/MainLayout/components/AppBarSearch/AppBarSearch';
 
 import SETTINGS from 'settings';

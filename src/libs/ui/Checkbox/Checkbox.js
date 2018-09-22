@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import MaterialCheckbox from 'material-ui/Checkbox';
+import MaterialCheckbox from '@material-ui/core/Checkbox';
 
 export default class Checkbox extends Component {
   static propTypes = {
