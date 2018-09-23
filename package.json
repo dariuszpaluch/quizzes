@@ -54,6 +54,7 @@
     "react-svg-inline": "^2.1.0",
     "react-swipe": "^5.1.1",
     "react-swipeable": "^4.3.0",
+    "recharts": "^1.2.0",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
     "redux-form": "^7.3.0",

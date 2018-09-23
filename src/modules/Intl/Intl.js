@@ -7,8 +7,6 @@ class Intl extends Component {
   render() {
     const { children, locale, messages } = this.props;
 
-    console.log(locale, messages);
-
     return (
       <IntlProvider
         locale={locale}

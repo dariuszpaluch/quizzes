@@ -61,7 +61,7 @@ class UserResultsTable extends Component {
             columns={[
               {
                 id: 'index',
-                content: 'Lp.',
+                content: '',
                 style: {
                   width: '10px'
                 },
@@ -70,7 +70,7 @@ class UserResultsTable extends Component {
               },
               {
                 id: 'updatedAt',
-                content: 'Data',
+                content: intl.formatMessage(messages.TABLE_HEADER_DATA),
                 render: (date, row) => {
                   switch (row.status) {
                     case 'in-progress': {
@@ -97,17 +97,17 @@ class UserResultsTable extends Component {
               },
               {
                 id: 'author.firstName',
-                content: 'Imię',
+                content: intl.formatMessage(messages.TABLE_HEADER_NAME),
                 default: '-'
               },
               {
                 id: 'author.lastName',
-                content: 'Nazwisko',
+                content: intl.formatMessage(messages.TABLE_HEADER_SURNAME),
                 default: '-'
               },
               {
                 id: 'author.email',
-                content: 'Email',
+                content: intl.formatMessage(messages.TABLE_HEADER_EMAIL),
                 default: '-',
                 render: email => (
                   <a className="email-address" href={`mailto:${email}`} target="_top">
@@ -117,7 +117,7 @@ class UserResultsTable extends Component {
               },
               {
                 id: 'result',
-                content: 'Wynik',
+                content: intl.formatMessage(messages.TABLE_HEADER_RESULT),
                 render: result => (
                   <div className="test-result-percentage">
                     <PercentageCircle
@@ -132,7 +132,7 @@ class UserResultsTable extends Component {
               },
               {
                 id: 'id',
-                content: 'Id',
+                content: intl.formatMessage(messages.TABLE_HEADER_EDIT),
                 render: testResultId => (
                   <Link
                     to={parsePath(paths.TESTS_RESULT, {

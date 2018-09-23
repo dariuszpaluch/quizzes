@@ -1,0 +1,23 @@
+@import '~styles/colors';
+
+.test-details {
+  .actions-buttons {
+    > button, > a {
+      margin: 0 20px;
+    }
+  }
+
+  .tabs {
+    margin-top: 30px;
+    //background-color: $primary-main;
+    //color: white;
+
+    button {
+      padding: 10px 30px;
+    }
+
+    //> div > div >div > span {
+    //  background-color: white;
+    //}
+  }
+}

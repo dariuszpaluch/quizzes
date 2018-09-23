@@ -34,6 +34,8 @@ $secondary-text: white;
 $auth-background-color: $primary-dark;
 
 :export {
+  successColor: $success-color;
+  errorColor: $error-color;
   primaryLight: $primary-light;
   primaryMain: $primary-main;
   primaryDark: $primary-dark;

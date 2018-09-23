@@ -19,13 +19,17 @@ export default class Tabs extends Component {
         value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
       })
     ),
-    children: PropTypes.any
+    children: PropTypes.any,
+    indicatorColor: PropTypes.string,
+    textColor: PropTypes.string
   };
 
   static defaultProps = {
     value: null,
     tabs: [],
-    children: null
+    children: null,
+    indicatorColor: 'primary',
+    textColor: 'primary'
   };
 
   constructor(props) {
@@ -59,17 +63,19 @@ export default class Tabs extends Component {
   }
 
   render() {
-    const { fullWidth } = this.props;
+    const { fullWidth, indicatorColor, textColor } = this.props;
 
     return (
-      <div className={classnames('tabs', {
-        'full-width': fullWidth,
-      })}>
+      <div
+        className={classnames('tabs', {
+          'full-width': fullWidth
+        })}
+      >
         <MaterialTabs
           value={this.getSelectedIndex() || 0}
           onChange={this.onChange}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor={indicatorColor}
+          textColor={textColor}
         >
           {this.renderTabs()}
         </MaterialTabs>

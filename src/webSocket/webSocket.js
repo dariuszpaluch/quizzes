@@ -27,8 +27,6 @@ export function webSocketMiddleware(store) {
     if (getWebsocketIsOpen()) {
       transmissionReduxActions(webSocket, action, store);
     } else if(action.type === `${SIGN_IN}_SUCCESS`) {
-      console.log(action);
-
       openWebSocket(store, null, action.data.token)
     }
 

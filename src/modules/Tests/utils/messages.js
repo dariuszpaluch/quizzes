@@ -60,7 +60,39 @@ const messages = defineMessages({
   USER_ANSWER_NOT_FINISHED_STATUS: {
     id: 'tests.user-answer-not-finished-status',
     defaultMessage: 'Not finished'
-  }
+  },
+  TEST_SUMMARY_TAB_RESULT: {
+    id: 'TEST_SUMMARY_TAB_RESULT',
+    defaultMessage: 'Results'
+  },
+  TEST_SUMMARY_TAB_STATISTICS: {
+    id: 'TEST_SUMMARY_TAB_STATISTICS',
+    defaultMessage: 'statistics'
+  },
+  TABLE_HEADER_RESULT: {
+    id: 'TABLE_HEADER_RESULT',
+    defaultMessage: 'Result'
+  },
+  TABLE_HEADER_EMAIL: {
+    id: 'TABLE_HEADER_EMAIL',
+    defaultMessage: 'Email'
+  },
+  TABLE_HEADER_SURNAME: {
+    id: 'TABLE_HEADER_SURNAME',
+    defaultMessage: 'Surname'
+  },
+  TABLE_HEADER_NAME: {
+    id: 'TABLE_HEADER_NAME',
+    defaultMessage: 'Name'
+  },
+  TABLE_HEADER_DATA: {
+    id: 'TABLE_HEADER_DATA',
+    defaultMessage: 'Date'
+  },
+  TABLE_HEADER_EDIT: {
+    id: 'TABLE_HEADER_EDIT',
+    defaultMessage: 'Edit'
+  },
 });
 
 export default messages;

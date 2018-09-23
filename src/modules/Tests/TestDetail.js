@@ -1,3 +1,5 @@
+import './test_details.scss';
+
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
@@ -19,7 +21,10 @@ import { toastr } from 'react-redux-toastr';
 import Loading from 'libs/ui/Loading/Loading';
 import UserResultsTable from 'modules/Tests/components/UserResultsTable/UserResultsTable';
 import globalMessages from 'utils/globalMessages';
+import Tabs from 'libs/ui/Tabs/Tabs';
 
+import { TabContainer } from '@material-ui/core'
+import TestResultsStatistics from 'modules/Tests/components/TestResultsStatistics/TestResultsStatistics';
 class TestDetail extends Component {
   static propTypes = {};
 
@@ -27,6 +32,23 @@ class TestDetail extends Component {
 
   constructor(props) {
     super(props);
+
+    const { intl } = this.props;
+
+    this.tabs = [
+      {
+        label: intl.formatMessage(messages.TEST_SUMMARY_TAB_RESULT),
+        value: 'results'
+      },
+      {
+        label: intl.formatMessage(messages.TEST_SUMMARY_TAB_STATISTICS),
+        value: 'statistics'
+      }
+    ];
+
+    this.state = {
+      activeTabValue: this.tabs[0].value
+    };
 
     this.appBarButtons = {
       left: {
@@ -79,23 +101,36 @@ class TestDetail extends Component {
     );
   };
 
+  onChangeActiveTab = selectedTab => {
+    this.setState({
+      activeTabValue: selectedTab.value
+    });
+  };
   render() {
     const { intl, test, match } = this.props;
 
     if (!test.id) return <Loading center />;
 
     return (
-      <Card>
-        <Button icon={icons.SHARE} onClick={this.copyTestUrlToClipboard}>
-          {intl.formatMessage(messages.TEST_DETAIL_SHARE_TEST_BY_URL)}
-        </Button>
-        <Link to={parsePath(`${match.url}${testsPaths.TEST_EDIT}`, { testId: test.id })}>
-          <Button >
-            {intl.formatMessage(globalMessages.EDIT)}
+      <Card className="test-details">
+        <div className="actions-buttons">
+          <Button icon={icons.SHARE} onClick={this.copyTestUrlToClipboard}>
+            {intl.formatMessage(messages.TEST_DETAIL_SHARE_TEST_BY_URL)}
           </Button>
-        </Link>
+          <Link to={parsePath(`${match.url}${testsPaths.TEST_EDIT}`, { testId: test.id })}>
+            <Button>{intl.formatMessage(globalMessages.EDIT)}</Button>
+          </Link>
+        </div>
+        <Tabs
 
-        <UserResultsTable userAnswers={test.userAnswers} />
+          tabs={this.tabs}
+          value={this.state.activeTabValue}
+          onChange={this.onChangeActiveTab}
+          indicatorColor="primary"
+          textColor="inherit"
+        />
+        { this.state.activeTabValue === this.tabs[0].value && <UserResultsTable userAnswers={test.userAnswers} /> }
+        { this.state.activeTabValue === this.tabs[1].value && <TestResultsStatistics test={test}/> }
       </Card>
     );
   }
