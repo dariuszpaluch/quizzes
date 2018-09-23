@@ -112,7 +112,6 @@ class TestResult extends Component {
       <Card className="test-result" noSpace title="Wynik testu" centerHeader>
         <div className="test-result-stats">
           <PercentageCircle
-            className="test-percentage-result"
             percentage={Math.floor(corrects / size(questions.allIds) * 100) || 0}
             valueSize={15}
             size={50}

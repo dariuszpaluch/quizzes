@@ -10,7 +10,7 @@ $border-color-fill: $success-color;
 $howManySteps: 10; //this needs to be even.
 //for fun try using 20 and changine in the HTML the data-percentage to 15 or 85
 
-.progress {
+.percentage-progress {
   background: none;
   box-shadow: none;
   position: relative;
@@ -95,7 +95,7 @@ $howManySteps: 10; //this needs to be even.
   $stepName: ($i*(100 / $howManySteps));
 
   @if $i <= ($howManySteps/2) {
-    .progress[data-percentage="#{$stepName}"] {
+    .percentage-progress[data-percentage="#{$stepName}"] {
       .progress-right .progress-bar {
         animation: loading-#{$i} $animationTime linear forwards;
       }
@@ -105,7 +105,7 @@ $howManySteps: 10; //this needs to be even.
     }
   }
   @if $i > ($howManySteps/2) {
-    .progress[data-percentage="#{$stepName}"] {
+    .percentage-progress[data-percentage="#{$stepName}"] {
       .progress-right .progress-bar {
         animation: loading-#{($howManySteps/2)} $animationTime linear forwards; //set the animation to longest animation
       }

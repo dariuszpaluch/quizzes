@@ -30,7 +30,7 @@ export default class PercentageCircle extends Component {
   render() {
     const { className, percentage, size, label, labelSize, valueSize } = this.props;
 
-    const classes = classnames('progress', className);
+    const classes = classnames('percentage-progress', className);
 
     const progressBarLeftStyle = {
       borderTopRightRadius: `${size / 2}px`,

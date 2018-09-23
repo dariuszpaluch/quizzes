@@ -47,6 +47,7 @@
     "toastr.sign-in-success": "Sign in success"
   },
   "pl": {
+    "ENGLISH_LANGUAGE": "Angielski",
     "LOGOUT": "Wyloguj",
     "Next": "Następne",
     "PAGES_TITLES.SEARCH_TESTS": "Wyszukaj testu",
@@ -54,6 +55,7 @@
     "PAGES_TITLES.TESTS_RESULTS": "Wyniki testów",
     "PAGES_TITLES.YOUR_QUESTIONS": "Pytania",
     "PAGES_TITLES.YOUR_TESTS": "Własne testy",
+    "POLISH_LANGUAGE": "POLSKI",
     "Prev": "Poprzednie",
     "back": "Wróć",
     "cancel": "Anuluj",
@@ -91,6 +93,7 @@
     "question.add-answer": "Dodaj odpowiedź",
     "question.answers": "Odpowiedzi",
     "question.description.table.header.cell": "Opis pytania",
+    "question.edit-question": "Edytuj pytanie",
     "question.empty-description": "Brak opisu ",
     "question.list.addQuestion": "Dodaj pytanie",
     "question.list.header": "Pytania",
@@ -101,6 +104,7 @@
     "question.table.header.cell": "Pytanie",
     "repeat-password": "Powtórz hasło",
     "save": "Zapisz",
+    "search": "Szukaj",
     "sign-in": "Logowanie",
     "sign-up": "Rejestracja",
     "surname": "Nazwisko",
@@ -117,6 +121,8 @@
     "tests.no-matching-test-to-query": "Żaden test nie pasuje do wyszukania: {query}",
     "tests.no-tests": "Brak testów",
     "tests.number-of-user-answers": "Liczba odpowiedzi: {userAnswersNumber}",
+    "tests.user-answer-in-progress-status": "Wypełnianie...",
+    "tests.user-answer-not-finished-status": "Niedokończony",
     "toastr.sign-in-success": "Logowanie zakończone sukcesem",
     "toastr.sign-up-success-toastr": "Konto zostało prawidłowo utworzone. Możesz się teraz zalogować w portalu",
     "toastr.sign-up-toastr-failure": "Rejestracja się nie powiodła, spóboj ponownie"

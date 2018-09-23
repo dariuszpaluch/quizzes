@@ -66,10 +66,10 @@ class QuestionForm extends Component {
           </Typography>
 
           <div className="actions">
-            <Button>
-              <Icon size={25} icon={icons.SAVE} />
-              Zapisz pytanie
-            </Button>
+            {/*<Button>*/}
+              {/*<Icon size={25} icon={icons.SAVE} />*/}
+              {/*Zapisz pytanie*/}
+            {/*</Button>*/}
           </div>
 
           <div className="question-rating">

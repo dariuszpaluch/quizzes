@@ -16,6 +16,7 @@ import icons from 'consts/icons';
 import parsePath from 'utils/parsePath';
 import paths from 'consts/paths';
 import IconButton from 'libs/ui/IconButton/IconButton';
+import PercentageCircle from 'components/PerentageCircle/PercentageCircle';
 
 class UserResultsTable extends Component {
   static propTypes = {
@@ -34,6 +35,8 @@ class UserResultsTable extends Component {
 
   render() {
     const { className, userAnswers, intl } = this.props;
+
+    console.log('darek', userAnswers);
 
     const classes = classnames('user-results-table', className);
 
@@ -115,8 +118,17 @@ class UserResultsTable extends Component {
               {
                 id: 'result',
                 content: 'Wynik',
-                render: result => `${Math.floor(result * 100)}%`,
-                numeric: true
+                render: result => (
+                  <div className="test-result-percentage">
+                    <PercentageCircle
+                      className="test-percentage-result"
+                      percentage={Math.floor(result * 100)}
+                      valueSize={10}
+                      size={35}
+                    />
+                  </div>
+                ),
+                headCenter: true
               },
               {
                 id: 'id',

@@ -6,8 +6,10 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from 'libs/ui/Button/Button';
 import { API_URL } from 'settings';
+import { injectIntl } from 'react-intl';
+import authMessages from 'modules/Auth/utils/messages';
 
-export default class SocialMediaLoginButtons extends Component {
+class SocialMediaLoginButtons extends Component {
   static propTypes = {};
 
   static defaultProps = {};
@@ -19,19 +21,21 @@ export default class SocialMediaLoginButtons extends Component {
   }
 
   render() {
+    const { intl } = this.props;
+
     return (
       <div className="social-media-buttons">
         <a
           key="facebook"
           href={`${API_URL}/auth/facebook?returnUrl=${encodeURIComponent(this.returnUrl)}`}
         >
-          <Button className="social-login login-facebook">Login with Facebook</Button>
+          <Button className="social-login login-facebook">{intl.formatMessage(authMessages.LOGIN_WITH_FACEBOOK)}</Button>
         </a>
         <a
           key="google"
           href={`${API_URL}/auth/google?returnUrl=${encodeURIComponent(this.returnUrl)}`}
         >
-          <Button className="social-login login-google">Login with Google</Button>
+          <Button className="social-login login-google">{intl.formatMessage(authMessages.LOGIN_WITH_GOOGLE)}</Button>
         </a>
         {/*<a*/}
           {/*key="github"*/}
@@ -43,3 +47,5 @@ export default class SocialMediaLoginButtons extends Component {
     );
   }
 }
+
+export default injectIntl(SocialMediaLoginButtons);

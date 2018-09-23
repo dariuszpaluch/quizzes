@@ -32,6 +32,10 @@ const globalMessages = defineMessages({
   DELETE: {
     id: 'delete',
     defaultMessage: 'Delete'
+  },
+  SEARCH: {
+    id: 'search',
+    defaultMessage: 'Search'
   }
 });
 

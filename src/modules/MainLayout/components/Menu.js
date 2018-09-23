@@ -98,7 +98,7 @@ export default class Menu extends Component {
         />
       ) : null,
       userData && userData.email && <UserMenu key="user-menu" userData={userData} />,
-      <div className="scrollable">
+      <div className="scrollable" key="content">
         <List
           key="nav-list"
           component="nav"

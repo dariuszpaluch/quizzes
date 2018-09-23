@@ -105,11 +105,11 @@ class MainLayout extends Component {
   };
 
   renderRightAppBarAction() {
-    const { appBarButtons, onSearch, searchValue } = this.props;
+    const { appBarButtons, onSearch, searchValue, intl } = this.props;
     const rightButton = appBarButtons && appBarButtons.right;
 
     if (onSearch) {
-      return <AppBarSearch value={searchValue} onChange={onSearch} />;
+      return <AppBarSearch value={searchValue} onChange={onSearch} placeholder={intl.formatMessage(globalMessages.SEARCH)}/>;
     }
 
     if (rightButton)

@@ -14,19 +14,34 @@
 
 .user-results-table {
   padding: 10px 0;
+  overflow-y: auto;
 
   a.email-address {
     color: $url-color;
     font-weight: 500;
   }
 
+  .test-result-percentage {
+    display: flex;
+    justify-content: center;
+  }
+
+
   table {
     margin-top: 15px;
+    min-width: 700px;
+
     thead {
       background-color: #EEEEEE;
       tr {
         height: 30px !important;
       }
+    }
+
+    td,th {
+      padding-left: 10px;
+      padding-right: 5px;
+      //padding: 4px 4px 4px 4px !important;
     }
   }
 

@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import RowActions from 'libs/ui/Table/RowActions';
 import { get, pick } from 'lodash';
+import * as classnames from 'classnames';
 
 class Table extends Component {
   static propTypes = {
@@ -42,7 +43,9 @@ class Table extends Component {
           <TableRow>
             {columns.map(column => {
               return (
-                <TableCell {...Table.getColumnProps(column)} key={column.id} variant="head">
+                <TableCell {...Table.getColumnProps(column)} key={column.id} variant="head" className={classnames({
+                  'center': column.headCenter,
+                })}>
                   {column.content}
                 </TableCell>
               );
