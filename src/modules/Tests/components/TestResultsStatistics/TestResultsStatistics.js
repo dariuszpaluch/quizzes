@@ -46,8 +46,6 @@ class TestResultsStatistics extends Component {
   renderContent() {
     const { test, intl } = this.props;
 
-    console.log('darek', test);
-
     let numberOfCorrectQuestions = 0;
     let numberOfFailureQuestions = 0;
 

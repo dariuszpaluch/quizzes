@@ -3,7 +3,7 @@ import parseReceivedMessage from './utils/parseReceivedMessage';
 import handleMessage from './handleMessage';
 import { SIGN_IN } from 'modules/Auth/actionTypes';
 import { getToken } from 'modules/Auth/reducer';
-
+import { API_URL } from 'settings';
 const MAX_RECONNECT_NUMBER_OF_TRIALS = 10;
 let reconnectNumber = 0;
 
@@ -40,8 +40,8 @@ export function webSocketMiddleware(store) {
 }
 
 export default function openWebSocket(store, history, token) {
-  webSocket = new WebSocket(`ws://localhost:3000?token=${token}`);
-  _webSocketLog(`Try to connect to ws://localhost:3000?token=${token}`);
+  webSocket = new WebSocket(`${API_URL}?token=${token}`.replace('http', 'ws'));
+  _webSocketLog(`Try to connect to ${API_URL}?token=${token}`.replace('http', 'ws'));
 
   webSocket.onopen = _onOpenConnection;
   webSocket.onclose = _onCloseConnection.bind(null, store, history, token);

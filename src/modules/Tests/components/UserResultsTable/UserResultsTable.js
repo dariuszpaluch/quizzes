@@ -36,8 +36,6 @@ class UserResultsTable extends Component {
   render() {
     const { className, userAnswers, intl } = this.props;
 
-    console.log('darek', userAnswers);
-
     const classes = classnames('user-results-table', className);
 
     const numberOfAnswers = size(userAnswers);
