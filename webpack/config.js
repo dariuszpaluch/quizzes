@@ -7,8 +7,11 @@ const webpack = require('webpack');
 
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
-
+const WEBSOCKET_URL = process.env.WEBSOCKET_URL;
 const API_URL = process.env.API_URL || packageJSON.config.api_url;
+
+console.info('WEBSOCKET_URL:', WEBSOCKET_URL);
+console.info('PUBLIC_PATH:', PUBLIC_PATH);
 
 module.exports = {
   mode: 'none',
@@ -42,7 +45,8 @@ module.exports = {
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(packageJSON.version),
       PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
-      WEBPACK_API_URL: JSON.stringify(API_URL)
+      WEBPACK_API_URL: JSON.stringify(API_URL),
+      WEBPACK_WEBSOCKET_URL: JSON.stringify(WEBSOCKET_URL),
     }),
     new webpack.ProvidePlugin({
       moment: 'moment'

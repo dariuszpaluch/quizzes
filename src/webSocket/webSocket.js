@@ -40,8 +40,8 @@ export function webSocketMiddleware(store) {
 }
 
 export default function openWebSocket(store, history, token) {
-  webSocket = new WebSocket(`${API_URL}?token=${token}`.replace('http', 'ws'));
-  _webSocketLog(`Try to connect to ${API_URL}?token=${token}`.replace('http', 'ws'));
+  webSocket = new WebSocket(`${WEBSOCKET_URL}?token=${token}`.replace('http', 'ws'));
+  _webSocketLog(`Try to connect to ${WEBSOCKET_URL}?token=${token}`.replace('http', 'ws'));
 
   webSocket.onopen = _onOpenConnection;
   webSocket.onclose = _onCloseConnection.bind(null, store, history, token);

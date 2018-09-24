@@ -89,6 +89,7 @@ module.exports = merge(config, {
   plugins: [
     new Webpack.DefinePlugin({
       'WEBPACK_API_URL': JSON.stringify('http://localhost:3000'),
+      'WEBPACK_WEBSOCKET_URL': JSON.stringify('ws://localhost:3000'),
     }),
     new Webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors
