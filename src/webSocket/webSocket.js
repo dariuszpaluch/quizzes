@@ -3,7 +3,7 @@ import parseReceivedMessage from './utils/parseReceivedMessage';
 import handleMessage from './handleMessage';
 import { SIGN_IN } from 'modules/Auth/actionTypes';
 import { getToken } from 'modules/Auth/reducer';
-import { API_URL } from 'settings';
+import { API_URL, WEBSOCKET_URL } from 'settings';
 const MAX_RECONNECT_NUMBER_OF_TRIALS = 10;
 let reconnectNumber = 0;
 
