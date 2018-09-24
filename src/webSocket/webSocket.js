@@ -78,7 +78,7 @@ function _onCloseConnection(store, history, token, event) {
       openWebSocket(store, history, token);
     }, reconnectNumber * 1000);
   } else {
-    alert('Problem z połączeniem się z serwerem webSocket');
+    console.error('Problem z połączeniem się z serwerem webSocket');
   }
 }
 
