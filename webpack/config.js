@@ -22,6 +22,14 @@ module.exports = {
   stats: {
     children: false
   },
+  
+  
+  
+  
+  
+  
+  
+  
   module: {
     rules: [
       {
@@ -86,10 +94,23 @@ module.exports = {
       showErrors: true,
       template: path.resolve(__dirname, '../src/index.html')
     })
-    // new ScriptExtHtmlWebpackPlugin({
-    //   defaultAttribute: 'defer'
-    // }),
   ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   resolve: {
     alias: {
       actions: path.resolve(__dirname, '../src/actions'),
