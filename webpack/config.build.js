@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const Webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 
 
@@ -65,7 +65,7 @@ module.exports = merge(config, {
       WEBPACK_API_URL: JSON.stringify(API_URL),
       WEBPACK_WEBSOCKET_URL: JSON.stringify(WEBSOCKET_URL),
     }),
-    new Webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

@@ -1,7 +1,7 @@
 const path = require('path');
 
 const merge = require('webpack-merge');
-const Webpack = require('webpack');
+const webpack = require('webpack');
 
 const history = require('connect-history-api-fallback');
 const convert = require('koa-connect');
@@ -87,13 +87,13 @@ module.exports = merge(config, {
     chunkFilename: '[name].chunk.js',
   },
   plugins: [
-    new Webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       WEBPACK_API_URL: JSON.stringify('http://localhost:3000'),
       WEBPACK_WEBSOCKET_URL: JSON.stringify('ws://localhost:3000'),
     }),
-    new Webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors
-    new Webpack.LoaderOptionsPlugin({
+    new webpack.LoaderOptionsPlugin({
       debug: true
     })
   ],
