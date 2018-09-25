@@ -94,9 +94,6 @@ module.exports = {
     //   defaultAttribute: 'defer'
     // }),
   ],
-  
-  
-  
   resolve: {
     alias: {
       actions: path.resolve(__dirname, '../src/actions'),
