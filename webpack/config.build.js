@@ -10,6 +10,8 @@ const config = require('./config');
 
 const packageJSON = require(path.resolve(__dirname, '../package.json'));
 const PUBLIC_PATH = process.env.PUBLIC_URL || packageJSON.config.public_path;
+const WEBSOCKET_URL = process.env.WEBSOCKET_URL;
+const API_URL = process.env.API_URL || packageJSON.config.api_url;
 
 module.exports = merge(config, {
   mode: 'production',
@@ -58,6 +60,10 @@ module.exports = merge(config, {
       // both options are optional
       filename: '[name].[chunkhash].css',
       chunkFilename: '[name].[chunkhash].css'
+    }),
+    new webpack.DefinePlugin({
+      WEBPACK_API_URL: JSON.stringify(API_URL),
+      WEBPACK_WEBSOCKET_URL: JSON.stringify(WEBSOCKET_URL),
     }),
     new Webpack.optimize.OccurrenceOrderPlugin(),
     new CompressionPlugin({

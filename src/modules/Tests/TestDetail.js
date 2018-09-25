@@ -7,7 +7,7 @@ import { getTest } from 'modules/Tests/utils/getters';
 import MainLayout from 'modules/MainLayout/MainLayout';
 import messages from 'modules/Tests/utils/messages';
 import { injectIntl } from 'react-intl';
-import { getTestDetail } from 'modules/Tests/utils/actions';
+import { deleteTest, getTestDetail } from 'modules/Tests/utils/actions';
 import Card from 'libs/ui/Card/Card';
 import icons from 'consts/icons';
 import paths, { testsPaths } from 'consts/paths';
@@ -23,7 +23,7 @@ import UserResultsTable from 'modules/Tests/components/UserResultsTable/UserResu
 import globalMessages from 'utils/globalMessages';
 import Tabs from 'libs/ui/Tabs/Tabs';
 
-import { TabContainer } from '@material-ui/core'
+import { TabContainer } from '@material-ui/core';
 import TestResultsStatistics from 'modules/Tests/components/TestResultsStatistics/TestResultsStatistics';
 class TestDetail extends Component {
   static propTypes = {};
@@ -106,6 +106,17 @@ class TestDetail extends Component {
       activeTabValue: selectedTab.value
     });
   };
+
+  deleteTest = () => {
+    const { testId } = this.props;
+    const onSuccess = () => {
+      this.props.history.push(paths.TESTS);
+    };
+
+    this.props.deleteTest(testId, onSuccess);
+
+  };
+
   render() {
     const { intl, test, match } = this.props;
 
@@ -120,17 +131,19 @@ class TestDetail extends Component {
           <Link to={parsePath(`${match.url}${testsPaths.TEST_EDIT}`, { testId: test.id })}>
             <Button>{intl.formatMessage(globalMessages.EDIT)}</Button>
           </Link>
+          <Button onClick={this.deleteTest}>{intl.formatMessage(globalMessages.DELETE)}</Button>
         </div>
         <Tabs
-
           tabs={this.tabs}
           value={this.state.activeTabValue}
           onChange={this.onChangeActiveTab}
           indicatorColor="primary"
           textColor="inherit"
         />
-        { this.state.activeTabValue === this.tabs[0].value && <UserResultsTable userAnswers={test.userAnswers} /> }
-        { this.state.activeTabValue === this.tabs[1].value && <TestResultsStatistics test={test}/> }
+        {this.state.activeTabValue === this.tabs[0].value && (
+          <UserResultsTable userAnswers={test.userAnswers} />
+        )}
+        {this.state.activeTabValue === this.tabs[1].value && <TestResultsStatistics test={test} />}
       </Card>
     );
   }
@@ -146,7 +159,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-  getTestDetail
+  getTestDetail,
+  deleteTest
 };
 
 TestDetail = withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(TestDetail)));

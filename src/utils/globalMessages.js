@@ -36,7 +36,7 @@ const globalMessages = defineMessages({
   SEARCH: {
     id: 'search',
     defaultMessage: 'Search'
-  }
+  },
 });
 
 export default globalMessages;

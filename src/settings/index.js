@@ -1,4 +1,6 @@
 import paths from 'consts/paths';
+console.log(WEBPACK_WEBSOCKET_URL, WEBPACK_API_URL);
+
 export const API_URL = WEBPACK_API_URL;
 export const WEBSOCKET_URL = WEBPACK_WEBSOCKET_URL;
 
