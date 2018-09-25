@@ -83,6 +83,10 @@ module.exports = merge(config, {
   },
 
 
+
+
+
+
   output: {
     publicPath: 'http://localhost:' + port + publicPath,
     filename: '[name].js',
