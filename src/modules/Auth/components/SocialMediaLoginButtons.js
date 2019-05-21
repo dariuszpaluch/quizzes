@@ -20,17 +20,18 @@ class SocialMediaLoginButtons extends Component {
     this.returnUrl = window.document.location.href + location.search;
   }
 
+//         <a
+//           key="facebook"
+//           href={`${API_URL}/auth/facebook?returnUrl=${encodeURIComponent(this.returnUrl)}`}
+//         >
+//           <Button className="social-login login-facebook">{intl.formatMessage(authMessages.LOGIN_WITH_FACEBOOK)}</Button>
+//         </a>
+
   render() {
     const { intl } = this.props;
 
     return (
       <div className="social-media-buttons">
-        <a
-          key="facebook"
-          href={`${API_URL}/auth/facebook?returnUrl=${encodeURIComponent(this.returnUrl)}`}
-        >
-          <Button className="social-login login-facebook">{intl.formatMessage(authMessages.LOGIN_WITH_FACEBOOK)}</Button>
-        </a>
         <a
           key="google"
           href={`${API_URL}/auth/google?returnUrl=${encodeURIComponent(this.returnUrl)}`}
